@@ -1,0 +1,20 @@
+---
+title: Blueprints
+description: 把 node 绑定到 Agent 预设的可视化工作流图。
+---
+
+Blueprint 是 workflow 的图结构。
+
+Node 表示 Agent 执行点。Edge 表示路由、handoff 和执行顺序。
+
+## Blueprint 应该包含什么
+
+- Agent node。
+- Agent 之间的 edge。
+- Handoff 点。
+- 并行分支。
+- 运行时编排能力。
+
+## 不应该包含什么
+
+不要把重要的工作流逻辑藏在超长 prompt 里。如果路由重要，就应该在图里可见。
