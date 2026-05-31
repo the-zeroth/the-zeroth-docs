@@ -1,0 +1,22 @@
+---
+title: From Single Agent to Multi-Agent
+description: Why complex tasks need multiple Agents with clear roles and clean context.
+---
+
+## Why Multi-Agent is inevitable
+
+A single Agent is mainly a context engineering problem. For complex tasks, Multi-Agent architecture is necessary because it keeps each Agent's context clean.
+
+For example, software development includes product thinking, architecture, implementation, testing, operations, and review. One Agent should not carry all these identities at once. That violates the basic requirement that an Agent must know clearly who it is.
+
+Complex tasks also contain independent subtasks. Each subtask should be handled by an Agent that only sees the information needed for that subtask. Letting one Agent read everything and do everything pollutes context and wastes capacity.
+
+Agents are not real people. You can create more Agents by copying and shaping context. For decomposable work, this improves execution efficiency and reduces unnecessary token consumption.
+
+## Concept mapping
+
+### From ReAct to paired Agents
+
+ReAct asks one Agent to review the current state after every action and reason again.
+
+In Multi-Agent architecture, another Agent can take the reviewer role. This creates a paired-Agent pattern. In practice, the structure does not need to be rigid: a reviewer can continue the next part of the work and communicate with other Agents as the Graph evolves.

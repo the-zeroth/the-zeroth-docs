@@ -1,0 +1,15 @@
+---
+title: Graph
+description: 用节点和边搭建可运行、可观察的 Multi-Agent Graph。
+---
+
+在 Graph 上添加的每一个节点都是一个活生生的 LLM Agent，需要绑定之前创建好的 Agent 预设
+
+节点之间相连的边并不是固定的工作流程途径，而是 Agent 之间可被允许的通讯通路，未被边相连的 Agent 之间是无法直接通讯和转交工作的，被相连的 Agent 之间可以通讯并转移状态，但也可以不那么做，一切基于运行过程中 Agent 自身的判断或用户的指示；对边的文本描述都将被 Agent 看到并让他明白对面的箭头对面的 Agent 负责什么工作。
+
+<figure>
+  <video controls preload="metadata" aria-label="Graph 编辑演示" style={{ width: "100%", borderRadius: 12 }}>
+    <source src="/docs-assets/videos/Graph%20Editing%20Demonstration.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Graph 编辑演示</figcaption>
+</figure>

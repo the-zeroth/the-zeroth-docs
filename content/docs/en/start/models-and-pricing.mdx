@@ -1,0 +1,91 @@
+---
+title: Models and Pricing
+description: Understand official model service, third-party providers, subscriptions, and top-ups.
+---
+
+The One is The Zeroth's AI Agent desktop application. You can use The Zeroth official model service directly, or connect model accounts that you already own.
+
+The One supports two usage modes:
+
+1. Use The Zeroth official model service.
+2. Connect your own third-party model provider.
+
+## Official model service
+
+This is the simplest and recommended path.
+
+After signing in with a The Zeroth account, you can use the official model service in The One without preparing API keys or configuring model providers manually.
+
+The Zeroth official model service is powered through OpenRouter. It gives you two practical advantages.
+
+### Broader model selection and more stable service
+
+OpenRouter aggregates many mainstream and frontier models. In The One, that means you can choose from model ecosystems such as OpenAI, Anthropic, Google, Meta, Mistral, DeepSeek, and others.
+
+Compared with connecting to a single model vendor, the official service gives you more flexibility when choosing models for different Agents and tasks.
+
+The Zeroth also maintains the integration for you, reducing the operational mess of managing several provider accounts and API keys.
+
+### Better official-account pricing
+
+The Zeroth accesses model services through official accounts, which usually gives users a lower operational barrier and more favorable pricing than opening and maintaining several model accounts independently.
+
+Official model service is recommended for first-time users, users who do not want to configure API keys, users who want unified billing, and users who want to quickly test many models.
+
+## Third-party model providers
+
+If you already have model provider accounts, you can add your own API keys or complete OAuth authorization in The One.
+
+Supported third-party channels include:
+
+| Provider | Connection method |
+| --- | --- |
+| OpenAI | API Key |
+| Anthropic Claude | API Key / Claude Code OAuth |
+| Google Gemini | API Key / Gemini Code Assist OAuth |
+| OpenAI Codex | OAuth |
+| Custom compatible service | API Key |
+
+Custom compatible services are useful for teams with an internal model gateway, private deployment, or any provider compatible with OpenAI-style APIs.
+
+When you use a third-party provider, calls do not consume The Zeroth official model service quota. Cost, quota, rate limits, and model availability are decided by that provider.
+
+## Pricing modes
+
+The Zeroth official model service supports subscriptions and top-up packages.
+
+### Subscription
+
+Subscriptions are for users who keep using The One continuously. Each tier includes a different amount of official model service capacity.
+
+| Plan | Price | Best for |
+| --- | --- | --- |
+| Starter | $20 / month | Light usage, personal exploration, low-frequency Agent workflows |
+| Pro | $60 / month | Daily usage, Multi-Agent workflows, higher task frequency |
+| Max | $200 / month | Heavy usage, complex workflows, high-frequency automation |
+
+Every plan includes the core capabilities of The One: desktop app, Agent presets, Blueprint / Graph workflows, local execution, runtime observation, official model service, and third-party provider connection.
+
+The main difference between plans is official model service capacity.
+
+### Top-up package
+
+If your current subscription capacity is not enough, you can purchase an additional top-up package.
+
+| Package | Price | Description |
+| --- | --- | --- |
+| Top-up | $20 / purchase | Adds extra official model service capacity |
+
+Top-ups do not change your subscription tier. They only increase your available official model service capacity.
+
+## How third-party providers charge
+
+If you use your own OpenAI, Anthropic, Gemini, or custom model service, the related cost is charged by that provider or by your organization.
+
+The Zeroth does not deduct official model service capacity for third-party model calls.
+
+## How to choose
+
+For most users, official model service is the easiest path: less configuration, broader model choice, better pricing, and unified management.
+
+If you already have provider accounts, or your company requires model calls to go through internal accounts, use third-party providers.

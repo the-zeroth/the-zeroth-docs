@@ -1,0 +1,17 @@
+---
+title: Graph
+description: Build a runnable and observable Multi-Agent Graph with nodes and edges.
+---
+
+Every node you add to a Graph is a live LLM Agent and must be bound to an Agent preset.
+
+Edges are not fixed pipeline routes. They represent permitted communication channels between Agents. Agents not connected by an edge cannot directly communicate or hand off work. Connected Agents can communicate and transfer state, but they do not have to do so. The actual behavior depends on Agent judgment and user instruction during runtime.
+
+Edge descriptions are visible to Agents, helping them understand what the Agent on the other side is responsible for.
+
+<figure>
+  <video controls preload="metadata" aria-label="Graph editing demo" style={{ width: "100%", borderRadius: 12 }}>
+    <source src="/docs-assets/videos/Graph%20Editing%20Demonstration.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Graph editing demo</figcaption>
+</figure>

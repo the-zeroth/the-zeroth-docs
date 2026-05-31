@@ -1,0 +1,140 @@
+---
+title: The One 0.2.0 Release Notes
+description: 0.2.0 adds provider integration, Definition Spaces, sharing, and Graph terminology.
+---
+
+The One 0.2.0 is a major update: you can now connect to more LLM Providers, manage multiple fully independent Definition Spaces, and exchange your own Agent / Skill / Graph combinations through the sharing platform.
+
+At the same time, we are officially changing the user-facing term “Workflow” to “Graph.” This is not just a rename. It is a correction of The One’s product philosophy: our Multi-Agent architecture is not a linear process, but a collaborative graph where multiple Agents communicate freely through defined relationships.
+
+## Core Changes
+
+### More Open LLM Provider Integration
+
+0.2.0 significantly expands The One’s model integration capabilities.
+
+In addition to The One’s official subscription-based model path, The One now supports a richer set of third-party LLM APIs and connection methods, including:
+
+- OpenAI
+- OpenAI Codex
+- Anthropic
+- Claude Code
+- Google Gemini
+- Gemini CLI Code Assist
+- Gemini Antigravity Code Assist
+- OpenRouter
+- Custom OpenAI-compatible Providers
+
+This means users can choose more suitable model sources for different Agent roles. Architect Agents, executor Agents, tool-testing Agents, and research Agents no longer have to share the same model strategy.
+
+0.2.0 also introduces a more complete Provider configuration experience:
+
+- Centrally manage model service connections in Settings.
+- Support both API Key and OAuth-based connection methods.
+- View and filter available models by Provider.
+- Refresh model catalogs and select models with connection-aware filtering.
+- Configure custom Base URLs for broader OpenAI-compatible service support.
+
+This matters. The ceiling of a Multi-Agent system is not only determined by how the Graph is connected, but also by what model, what capability, and what invocation path sits behind each Agent. With 0.2.0, the model layer of The One starts to become truly composable.
+
+### Multiple Definition Spaces
+
+0.2.0 introduces Definition Spaces.
+
+A Definition Space is a complete, independent collection of multi-agent resources, including:
+
+- Agents
+- Prompts / Profiles
+- Skills
+- MCP configurations
+- Graph Blueprints
+- Requests
+
+You can think of it as a complete “Multi-Agent architecture package.” Different Spaces do not contaminate each other, and can be created, duplicated, switched, imported, and exported independently.
+
+This addresses an obvious limitation in 0.1.0: all definition resources lived in one repository. That was fine for early exploration, but not enough for long-term maintenance of multiple completely different Agent systems. Now you can maintain separate Spaces for different purposes, such as:
+
+- An Agent Graph collection for software development.
+- An Agent Graph collection for research and document analysis.
+- An Agent Graph collection for office automation.
+- A sandbox Space for experimenting with new Skill / MCP combinations.
+
+When switching Spaces, The One switches the active definitions for you, allowing you to move quickly between different Multi-Agent architectures without manually moving files, editing configs, or worrying about cross-contamination. Manual management of this kind of state is a classic breeding ground for low-level mistakes. In 0.2.0, it starts becoming a product-level capability.
+
+### Sharing Platform and Space Exchange
+
+Definition Spaces are not just local isolation. 0.2.0 also connects them to the official sharing platform.
+
+You can now:
+
+- Export a local Space as a `.zerospace` package.
+- Upload a Space to the official sharing platform.
+- Set sharing visibility.
+- Add tags to shared content.
+- Download Spaces from the sharing platform.
+- Import shared Spaces through deep links.
+- Preview Space contents and potential risks before import.
+
+This moves The One from a personal Multi-Agent workbench toward a Multi-Agent architecture community. What users share in the future should not be just a prompt, but a complete Agent Graph system that can be run, observed, and further modified.
+
+We also added necessary safety handling: when exporting a Space, The One scrubs obviously sensitive MCP configuration fields; when importing an external Space, it shows suspicious scripts and structural validation information before anything is written locally. Importing someone else’s Skill is, in practice, placing someone else’s executable resources into your local environment. We cannot pretend that is harmless. Users need to see the risk clearly.
+
+### Workflow Is Now Graph
+
+0.2.0 changes the user-facing term “Workflow” to “Graph.”
+
+The reason is simple: “Workflow” can mislead users into thinking The One runs a linear, step-by-step automation flow. But The One is not built around linear automation. Its core is the Multi-Agent Graph.
+
+In The One:
+
+- Agents can establish communication permissions through edges.
+- Agents can wake other nodes.
+- Agents can enter waiting states.
+- Agents can form subGraphs.
+- Agents can expand collaboration relationships during execution.
+- The whole system is closer to a dynamic collaboration network than a one-way pipeline.
+
+So “Graph” is more accurate than “Workflow.”
+
+In 0.2.0, the main user interface has been reframed around Graph terminology:
+
+- Graph Preset
+- Graph Blueprint
+- Graph Orchestrator
+- New Graph
+- Graph inventory
+- Runtime Graph
+- subGraph
+
+This rename is not cosmetic. It prevents the wrong mental model. If the name is wrong, users understand the product in the wrong way. This had to be fixed early; delaying it would only create product debt.
+
+## Experience Improvements
+
+### Settings Redesign
+
+0.2.0 reorganizes Settings into clearer desktop configuration areas:
+
+- General settings
+- Provider / API configuration
+- Definition Spaces management
+- Desktop runtime status
+- Updates, diagnostics, and backend controls
+
+This keeps the new LLM Provider and Space capabilities from turning into a messy pile of options. If Settings kept growing without structure, it would become a configuration junk drawer. This split was necessary.
+
+### Better Model Selection
+
+Model selection inside Agent Presets is now more aware of Provider connection state. The model list is no longer just a static set of candidates; it reflects the configured model services and connection information.
+
+This is critical for Multi-Agent architecture: different Agents need different models, and different models may come from different Providers. 0.2.0 makes that selection process clearer.
+
+## Summary
+
+The key word for The One 0.2.0 is openness.
+
+It lets The One connect to more model services, manage multiple independent Multi-Agent architectures, and package these architectures for sharing with a broader community.
+
+0.1.0 proved that The One can build, run, and observe Multi-Agent Graphs.  
+0.2.0 starts proving that these Graphs can be switched, reused, distributed, and connected to the broader LLM ecosystem.
+
+The One is moving from a Multi-Agent desktop application toward a Multi-Agent architecture platform.

@@ -1,0 +1,8 @@
+{
+  "title": "设置",
+  "pages": [
+    "index",
+    "space-management",
+    "api-configuration"
+  ]
+}

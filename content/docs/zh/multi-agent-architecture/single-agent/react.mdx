@@ -1,0 +1,8 @@
+---
+title: ReAct
+description: The One 中 Agent 默认采用推理、行动、观察再推理的运行方式。
+---
+
+The One 中的所有 Agent 默认使用 ReAct 架构运行：
+
+Agent 在激活状态下将会不停地进行“推理，调用工具，积累上下文继续推理”的循环，直到 Agent 自发调用 Tool 令自己停下，或者由用户强制让他停下。

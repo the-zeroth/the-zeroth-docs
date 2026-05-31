@@ -1,4 +1,8 @@
 {
   "title": "Start",
-  "pages": ["install-the-one", "first-blueprint"]
+  "pages": [
+    "quick-start",
+    "models-and-pricing",
+    "release-notes"
+  ]
 }

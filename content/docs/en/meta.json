@@ -1,4 +1,12 @@
 {
   "title": "The Zeroth Docs",
-  "pages": ["---Start---", "index", "...start", "---Concepts---", "...concepts", "---Workflows---", "...workflows", "---Reference---", "...reference"]
+  "pages": [
+    "---Start---",
+    "index",
+    "start",
+    "---The One App---",
+    "the-one-app",
+    "---Multi-Agent Architecture---",
+    "multi-agent-architecture"
+  ]
 }

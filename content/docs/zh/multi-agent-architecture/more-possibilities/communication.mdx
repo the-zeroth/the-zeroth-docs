@@ -1,0 +1,11 @@
+---
+title: 通讯方式
+description: The One 中 Agent 之间的三种主要通讯方式。
+---
+
+在 The One 中，我们提供三种 Agent 之间通讯的方式：  
+1. Agent 主动调用 handoff Tool，可将任务移交给与该 Agent 节点连接了边的其他 Agent。
+
+2. 所有 Agent 通过读写同一工作区中的文件，被动地完成彼此的沟通。
+
+3. 通过调用 task board Tool，Agent 可以并行地拉起一系列子 Agent 并让他们同时运行，在全部完成任务后再唤醒主 Agent。

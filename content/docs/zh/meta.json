@@ -1,4 +1,12 @@
 {
-  "title": "The Zeroth 文档",
-  "pages": ["---开始---", "index", "...start", "---核心概念---", "...concepts", "---工作流---", "...workflows", "---参考---", "...reference"]
+  "title": "The Zeroth Docs",
+  "pages": [
+    "---开始---",
+    "index",
+    "start",
+    "---The One 应用操作---",
+    "the-one-app",
+    "---Multi-Agent 工程思想---",
+    "multi-agent-architecture"
+  ]
 }
