@@ -1,0 +1,51 @@
+---
+title: The One 0.4.x Release Notes
+description: 0.4.0 through 0.4.28 add Plugins and the Plugin catalog and change how shared Spaces carry them; the next release removes three third-party sign-ins.
+---
+
+These notes cover The One 0.4.0 through 0.4.28.
+
+0.3.0 let Agents grow their own capabilities at runtime. 0.4.x gives those capabilities a package of their own: a **Plugin** can be built, shared, installed, and added to an Agent as one unit, and a Definition Space refers to the Plugins it uses instead of copying them.
+
+## Core Changes
+
+### Plugins
+
+A Plugin packages capabilities an Agent can use. One Plugin can combine any number of five kinds of components: Skills, scripts, MCP servers, applications, and connectors to remote services.
+
+- A new **Extensions** page in the sidebar holds **Plugins** next to your Definition Spaces. Browse the **Plugin library**, check what is **Installed**, and add a whole Plugin to an Agent without opening the full Agent editor.
+- Each Plugin has its own settings: ordinary values such as models and endpoints, and **connections** for API tokens, OAuth sign-ins, and shared accounts. Tokens and account sessions are never part of a Plugin package or a Definition Space.
+- Plugins that include an application open it from the new **Apps** page, where it runs isolated from The One.
+- Agents can build Plugins too. The `plugin_authoring` tools let an Agent combine Skills, scripts, and MCP servers into a Plugin, validate it, and add it to an Agent.
+
+Executable Plugin components run with your own user permissions: while they run, they can read and change files, use the network, and start processes. A Plugin's signed declarations describe what it expects to do; they are not a sandbox. Installing a Plugin or adding it to a Space does not by itself run its code.
+
+### The Plugin catalog
+
+- The website's [Plugin catalog](https://the-zeroth.com/en/extensions) lists published Plugins. **Open in The One** hands a Plugin to the desktop app, which verifies the signed release and then asks you to choose a Definition Space and confirm permissions. Downloading, approving full local access, and writing to the Space are each confirmed separately.
+- You can share a Plugin you made from the desktop app: choose **Share Plugin**, pick a visibility — public (listed after review), unlisted (available by link), or private — and add tags. The One packages, signs, uploads, and submits it in one step. The names and descriptions of its settings are shared; your API tokens, account credentials, and configured values are not uploaded.
+- The web console shows the Plugins you have shared and their review status.
+
+A publisher's signature shows who published a Plugin and that its files have not changed since. It does not certify that the code is safe.
+
+### Spaces and Plugins
+
+- Definition Spaces moved from Settings to **Extensions**, next to Plugins.
+- A shared or exported Space (`.zerospace`) carries the definitions written in that Space — including its own Skills, scripts, and MCP servers — plus references to the Plugins its Agents use. It never includes the Plugins themselves.
+- When you import a Space, The One works out from those references which Plugins its Agents need, so you can install the ones supported on your device separately.
+- Importing a `.zerospace` file from disk now shows the same preview as importing from the sharing platform, before anything is written.
+- A later 0.4.x update also makes duplicating a Space copy its installed Plugins; previously the copy came without them.
+
+## Coming next: three sign-ins removed
+
+The next release after 0.4.28 removes three ways of connecting a model provider:
+
+- Claude Code sign-in
+- Gemini CLI Code Assist sign-in
+- Gemini Antigravity Code Assist sign-in
+
+The terms of Claude Code, Gemini CLI, and Antigravity do not allow third-party apps to use their sign-ins, so The One will no longer offer them. Connections created with them stop working after the update and are not migrated. Anthropic and Gemini remain available with API keys, and OpenAI Codex keeps Sign in with ChatGPT. See [Models and Pricing](../models-and-pricing) for the connection methods that remain.
+
+## Summary
+
+0.3.0 made Agents self-sustaining. 0.4.x gives the capabilities they use a proper home: Plugins that can be built, shared, installed, and reviewed as one unit, and Spaces that refer to them instead of copying them.

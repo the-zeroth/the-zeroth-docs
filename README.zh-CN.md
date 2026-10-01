@@ -16,7 +16,7 @@
   <p>
     <a href="https://the-zeroth.com">官网</a>
     |
-    <a href="https://github.com/rainyflash/the-zeroth-docs/releases">发布记录</a>
+    <a href="https://github.com/the-zeroth/the-zeroth-docs/releases">发布记录</a>
   </p>
 </div>
 
@@ -67,15 +67,11 @@ content/docs
 - `public/docs-assets/images`：文档页面使用的截图资源。
 - `public/docs-assets/videos`：文档页面使用的演示视频资源。
 
-## 生成方式
+## 编辑方式
 
-文档由 `scripts/migrate_docs_md.py` 从 `docs_md` 迁移生成：
+文档页面直接在 `content/docs/en` 与 `content/docs/zh` 中编写，两种语言需要一起更新。官网会从本仓库同步 `content/docs` 与 `public/docs-assets`。
 
-```powershell
-python scripts\migrate_docs_md.py
-```
-
-脚本会删除旧的 `content/docs` 占位内容，重新生成 `zh` / `en` 双语文档树，复制截图和视频到 `public/docs-assets`，并把草稿中的图片与视频占位替换为可部署访问的 `/docs-assets/...` 引用。
+曾用于从 `docs_md` 生成首版页面的 `scripts/migrate_docs_md.py` 已移除：它会先删除 `content/docs` 再重新生成，且早已与已发布的页面不一致。如有需要，可以在 Git 历史中找到它。
 
 ## 维护原则
 

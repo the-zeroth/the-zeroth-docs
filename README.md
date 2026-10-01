@@ -16,7 +16,7 @@
   <p>
     <a href="https://the-zeroth.com">Website</a>
     |
-    <a href="https://github.com/rainyflash/the-zeroth-docs/releases">Releases</a>
+    <a href="https://github.com/the-zeroth/the-zeroth-docs/releases">Releases</a>
   </p>
 </div>
 
@@ -67,15 +67,11 @@ content/docs
 - `public/docs-assets/images`: screenshots used by documentation pages.
 - `public/docs-assets/videos`: demo videos used by documentation pages.
 
-## Generation
+## Editing
 
-Documentation is generated from `docs_md` by `scripts/migrate_docs_md.py`:
+Pages are written directly in `content/docs/en` and `content/docs/zh`; update both languages together. The website syncs `content/docs` and `public/docs-assets` from this repository.
 
-```powershell
-python scripts\migrate_docs_md.py
-```
-
-The script removes the old `content/docs` placeholder content, regenerates the `en` / `zh` bilingual documentation trees, copies screenshots and videos into `public/docs-assets`, and rewrites draft image and video placeholders into deployable `/docs-assets/...` references.
+`scripts/migrate_docs_md.py`, which generated the first version of these pages from `docs_md`, has been removed. It deleted `content/docs` before regenerating it and no longer matched the published pages. It remains in the Git history.
 
 ## Maintenance Rules
 

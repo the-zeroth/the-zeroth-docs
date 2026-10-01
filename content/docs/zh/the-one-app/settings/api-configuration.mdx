@@ -1,17 +1,19 @@
 ---
 title: API 配置
-description: 配置官方模型服务、第三方 API Key、OAuth 和 OpenAI-compatible Provider。
+description: 配置官方模型服务、第三方 API Key、Codex 的 ChatGPT 账号登录和 OpenAI-compatible Provider。
 ---
 
 The One 支持两类模型来源，可以同时配置、按 Agent 混用：
 
 - **官方模型服务**：登录 The Zeroth 账号即可使用，无需自备任何 key。收费方式见[模型与价格](../../start/models-and-pricing)。
 - **第三方 Provider**，按你已有的账号选择接入方式：
-  - OpenAI——API key，或 Codex 订阅 OAuth 登录
-  - Anthropic——API key，或 Claude Code 订阅 OAuth 登录
-  - Google Gemini——API key，或 Gemini CLI / Antigravity Code Assist 订阅 OAuth 登录
+  - OpenAI——API key，或用 ChatGPT 账号登录使用 OpenAI Codex
+  - Anthropic——API key
+  - Google Gemini——API key
   - 任意 OpenAI-compatible 的自定义 Provider——填写以 `/v1` 结尾的 Base URL（自备 key 的 OpenRouter 也走这条路，如 `https://openrouter.ai/api/v1`；列表里内置的 OpenRouter 条目是账号托管的官方连接，不可手动编辑）
+
+The One 0.4.28 及更早的版本还会显示 Claude Code、Gemini CLI 与 Antigravity 登录选项。下一个版本会移除它们，因为这些产品的条款不允许第三方应用使用它们的登录，详见 [0.4.x 发布记录](../../start/release-notes/0-4-x)。请改用 API key 接入 Anthropic 或 Gemini。
 
 改动会热生效，无需重启。删除一条连接时，引用它的 Agent 预设会被引导迁移到其他连接，不会留下悬空引用。
 
-![API 配置页面](/docs-assets/images/api-config.png)
+{/* TODO: new screenshot of Settings › API configuration (0.4.x) */}

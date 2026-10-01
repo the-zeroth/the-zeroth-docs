@@ -1,17 +1,19 @@
 ---
 title: API Configuration
-description: Configure the official model service, third-party API keys, OAuth, and OpenAI-compatible providers.
+description: Configure the official model service, third-party API keys, ChatGPT sign-in for Codex, and OpenAI-compatible providers.
 ---
 
 The One supports two kinds of model sources — configure both and mix them per Agent:
 
 - **The official model service**: sign in with your The Zeroth account and use it directly, no keys of your own required. See [Models and Pricing](../../start/models-and-pricing) for billing.
 - **Third-party providers**, connected however you already hold an account:
-  - OpenAI — API key, or Codex subscription OAuth
-  - Anthropic — API key, or Claude Code subscription OAuth
-  - Google Gemini — API key, or Gemini CLI / Antigravity Code Assist subscription OAuth
+  - OpenAI — API key, or Sign in with ChatGPT for OpenAI Codex
+  - Anthropic — API key
+  - Google Gemini — API key
   - Any custom OpenAI-compatible provider — a Base URL ending in `/v1` (OpenRouter with your own key goes through this path too, e.g. `https://openrouter.ai/api/v1`; the built-in OpenRouter entry is the account-managed official connection and cannot be edited manually)
+
+The One 0.4.28 and earlier also show Claude Code, Gemini CLI, and Antigravity sign-in options. The next release removes them because those products' terms do not allow third-party apps to use their sign-ins; see the [0.4.x release notes](../../start/release-notes/0-4-x). Connect Anthropic or Gemini with an API key instead.
 
 Changes hot-apply without a restart. Deleting a connection guides the Agent presets that reference it onto another connection, so nothing is left dangling.
 
-![The API configuration page](/docs-assets/images/api-config.png)
+{/* TODO: new screenshot of Settings › API configuration (0.4.x) */}
