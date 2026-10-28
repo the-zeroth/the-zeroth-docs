@@ -1,63 +1,80 @@
 ---
 title: A-Genetic Engineering
-description: Writing a Multi-Agent crew down in full as a reusable, editable, heritable definition — where experience and structure fuse into an Agent's genes.
+description: How The One writes a multi-agent team down as a reusable, heritable gene, and how working groups, the main assistant and evolution express and improve it.
 ---
 
-**A-Genetic Engineering** is the name for how a Multi-Agent system gets *written down* in The One. [Prolifera Engineering](../prolifera-engineering) describes how the system **grows** at runtime; A-Genetic Engineering describes what it grows **from** — the complete, reusable, editable definition. The A stands for Agent: Agent-Genetic, abbreviated.
+**A-Genetic Engineering** is the name for how The One writes a multi-agent team down: in full, as files in a Definition Space that you can reuse, edit and pass on. [Prolifera Engineering](../prolifera-engineering) describes how the system **grows** while it works; A-Genetic Engineering describes what it grows **from**. The A stands for Agent: Agent-Genetic, abbreviated.
 
 ## Two half-answers
 
 The previous generation of Agent products each held half of the answer:
 
-- Single-body Agents like Claude Code and Codex use Skills to record verified experience and procedures. That is **experience** — but with no structure to carry it. In each new conversation a Skill lands in a different context, executed by a different implicit role, so the experience drifts.
-- Their multi-agent stories are ephemeral sub-agents: spawned for chores, discarded when done. That is **structure** — but with no heredity. However sound the division of labor, it dissolves when the run ends, and the next run starts from zero.
+- Single-body Agents like Claude Code and Codex use Skills to record verified experience and procedures. That is **experience**, but with no structure to carry it. In each new conversation a Skill lands in a different context, executed by a different implicit role, so the experience drifts.
+- Their multi-agent stories are ephemeral sub-agents: spawned for chores, discarded when done. That is **structure**, but with no heredity. However sound the division of labour, it dissolves when the run ends, and the next run starts from zero.
 
 Experience without structure drifts; structure without heredity dissolves.
 
-## The gene: experience fused with structure
+## The genotype: what a Space writes down
 
-In The One, a working crew is written down **in full** inside the [Definition Space](../../the-one-app/definition-space):
+In The One, a team is written down **in full** in a Definition Space, and you find each part of it under **Capabilities**:
 
-- **Graph templates** (`workflows/*.yaml`) — nodes and edges. Each node binds an Agent preset and can layer on a node-level contract of responsibilities; each edge's description *is* the handoff instruction: when to hand off, what to pass, what the other side should produce. This is the crew's **body plan**.
-- **Agent presets** (`agents/*.yaml`) — each member's system prompt, model, temperature, tool surface, Skills, Profiles, and lifecycle budget, defined independently of every other member. These are the **cell types**.
-- **Skills and Profiles** — distilled, reusable *how-to* and identity fragments, mounted onto any member as needed.
-- **A per-Space [memory](../../the-one-app/definition-space/memory)** — a journal the Agents maintain themselves, recording why each stretch of the genome is shaped the way it is.
+- **Working-group templates** (`workflows/*.yaml`, the Graphs): nodes and edges. Each node binds a role and can add instructions for that node alone; each edge's text *is* the handoff instruction: when to hand off, what to pass, what the other side should produce. This is the team's **body plan**.
+- **Roles** (`agents/*.yaml`, the Agent presets): each member's instructions, its model preset or the default model, reasoning, built-in tools and MCP servers, Skills, prompts and Plugins, defined independently of every other member. These are the **cell types**.
+- **Skills** and **Prompts**: written-down ways of working and shared instructions, mounted on whichever roles need them.
+- **Plugin references**: a role can name the Plugins it uses. The Space keeps only the reference; the Plugin itself is installed on each computer, outside every Space.
+- **Memory**: lessons and the reasons behind the Space's design, written by Agents and by the nightly review. Each turn, an Agent that holds the memory tools sees up to 20 entries, the ones most relevant to its latest messages. See [Memory and recall](../../the-one-app/capabilities/memory).
 
-Taken separately, the previous generation had prototypes of all of these. The fusion is what matters: when an experiential Skill lands in a **fixed position** — a role with an explicit prompt, explicit tools, explicit superiors and communication edges — rather than in a random conversation context, experience stops drifting for the first time. When the structure, along with every member's full configuration, is written to files rather than scattered across one run's memory, structure becomes heritable for the first time. A genuinely reusable, mature working crew is the fusion of the two — and this complete record is its **gene**.
+Taken separately, the previous generation had prototypes of all of these. The fusion is what matters. When an experiential Skill lands in a **fixed position** (a role with explicit instructions, explicit tools, an explicit place in the team and explicit handoff edges) rather than in whatever conversation happens to load it, experience stops drifting. When the structure and every member's full configuration are written to files rather than scattered across one run's memory, structure becomes heritable. A mature, reusable team is the fusion of the two, and this complete record is its **gene**.
 
-Genotype and phenotype come apart. The definition is the genotype; `create_subgraph` expresses it as a running Graph instance — the phenotype. Instances sleep and get torn down; the gene remains, and the next expression reproduces the structure and configuration verbatim. (Faithful means the *configuration* is reproduced, not the behavior — LLM output is still stochastic, and one gene does not guarantee two identical runs.)
+## The phenotype: a working group on a matter
 
-## Gene editing
+Genotype and phenotype come apart. The template is the genotype. When the **main assistant** gives the work of a **matter** to a template, The One starts a new run of it: a **working group**, the phenotype, at work on that matter's board. One template can be at work for several matters at once; the Capabilities page lists them under **Templates at work for matters**.
 
-The editing bench is the `definition_editor`: dry-run previews, non-blocking semantic warnings (unknown tools, missing Skills, names that don't match filenames), and versioning, audit, and rollback that do not depend on git. Editing YAML by hand, dragging in the Graph editor, or letting the [Atlas](../../the-one-app/definition-space/atlas) director do the work — all of it goes through the same safe, reversible path.
+{/* screenshot pending: ![The Capabilities page with templates at work for matters](/docs-assets/images/0.5/en/capabilities-overview.png) */}
 
-And none of this complexity has to land on you. The built-in chat assistant is your genetic engineer:
+Expression can continue inside a group: with `create_subgraph` an Agent runs another template as a sub-Graph of its group, and can open that part of the work as a sub-matter with its own board. Groups sleep, pause and end; the gene remains, and the next expression reproduces the structure and configuration verbatim. (Faithful means the *configuration* is reproduced, not the behaviour: model output is still stochastic, and one gene does not guarantee two identical runs.)
 
-- You describe what you need; it hands the job to atlas — the graph-authoring crew that specializes in creating and editing definitions — to define a whole new Graph template, and reviews the result itself before putting it to use.
-- At any moment it can instantiate a Multi-Agent crew from a template with `create_subgraph`, act as that crew's human, assign it work, and answer its questions on its own judgment.
-- Watching how the crew actually performs, it goes back and adjusts the template's structure, Skills, and prompts — observing the phenotype, editing the genotype. That is the full gene-editing loop.
+The environment can change without touching the gene. The main assistant can give one group's run other models for that piece of work alone. Binding a model preset to a role or a template changes every later run, so it is kept for when that is the point.
 
-At the deepest point of that loop sits the [Self-Evolution Lab](../more-possibilities/self-evolution): an Agent-only workshop that observes recurring failures, diagnoses them, and applies the *smallest durable* fix at the right layer — a memory, a Skill, a prompt, a workflow — then reviews, tests, and decides to promote or roll back. In this page's vocabulary: **directed evolution**.
+## The main assistant is the genetic engineer
 
-<figure>
-  <video controls preload="metadata" aria-label="A-Genetic Engineering demo" style={{ width: "100%", borderRadius: 12 }}>
-    <source src="/docs-assets/videos/a-genetic-engineering-demo.mp4" type="video/mp4" />
-  </video>
-  <figcaption>The full gene-editing loop: ask the assistant, atlas authors a new Graph template, it is instantiated and run, then edited based on how it performs</figcaption>
-</figure>
+None of this has to land on you. [The main assistant](../../the-one-app/main-assistant) of your Space decides which gene to express and when one should change:
+
+- **Selection.** For each matter it picks the template that fits from the Space's templates, which are listed in its context with what each is for, and prefers one that has done this kind of work well.
+- **Authoring.** When no template fits and the work will come back, it has a new one written: it gives the authoring to the `atlas` working group, or edits the definitions itself with the definition-authoring Skill.
+- **Observation.** It holds each delivery against what you asked for, answers a group's questions or leaves them to you, and hears when a group stops. The verdict on a delivery stays yours: **Accept**, **Rework** or **Give up**.
+- **Directed evolution.** When you ask the Space to get better at its own work, it opens the evolution matter (below).
+
+The editing bench underneath is the same for every Agent. It reads the whole Space at its exact revision, composes a batch of changes, can dry-run the batch and validate it against the schemas, the references between definitions, tool and MCP bindings and Plugin availability, and then commits it as one change. Every edit an Agent makes is recorded in the **Action log** and can be undone. The editors under Capabilities and the [Atlas](../../the-one-app/capabilities/atlas) change the same files.
+
+## Directed evolution
+
+Gene editing driven by evidence is **directed evolution**, and The One runs two loops of it in each Space:
+
+- **The evolution matter.** You ask the main assistant to improve the Space. It opens a matter called Evolution and gives it to the lab working group: Director, Patcher and Verifier. Each round starts from a census of real failures, tests at most one hypothesis, with its bar written down before the first reading, changes the smallest layer that failed, and ships only what clears that bar, with the old version frozen so it can be taken back. A weekly census keeps the matter going and skips weeks with nothing new.
+- **The nightly review.** Every night at 03:30, when real use shows new friction, a Reviewer turns what repeats into a lesson in memory or a better Skill, at most three changes a night. Each change is measured against the friction it targets, before and after; the Reviewer undoes or improves a change that made things worse or did nothing, and you see every change in the morning report, where you can undo it.
+
+[Self-Evolution](../more-possibilities/self-evolution) describes the two loops as an idea; [Evolution: the lab and the nightly review](../../the-one-app/evolution) shows how to start and follow them in the app.
 
 ## Heredity
 
-Genes matter because they are passed on. A Space can be copied, exported, and imported (`.zerospace`), and its accumulated definitions and memory travel with it — a crew you bred on one machine expresses identically on another. The factory Default Space is the read-only baseline genome; you breed variants in your own copy.
+Genes matter because they are passed on. A Space can be copied, exported, imported and shared (`.zerospace`), and its definitions travel with it:
+
+- **Memory** travels when you choose: export includes agent memory unless you untick it, and sharing leaves it out unless you tick **Include agent memory**.
+- **Plugins** travel as references; the computer that receives the Space installs them separately.
+- **Secrets** never travel.
+- **Models** stay on each computer too: roles name model presets, which live in the app, so a Space from elsewhere may need its roles pointed at your own presets.
+
+The official Space is the read-only baseline genome: in it, what the main assistant and the evolution lab find stays a proposal. Copy it into a Space of your own to breed variants; later updates to the official Space do not reach your copy by themselves. See [Definition Spaces](../../the-one-app/capabilities/definition-spaces).
 
 ## Boundaries
 
-Like Prolifera, the analogy is borrowed from biology as plain vocabulary for the mechanisms — not a claim that Agents are alive. Some boundaries worth stating directly:
+Like Prolifera, the analogy is borrowed from biology as plain vocabulary for the mechanisms, not a claim that Agents are alive. Some boundaries worth stating directly:
 
-- **The framework never edits genes on its own.** Every definition edit is some Agent's (or your) decision, audited and reversible; there is no background "optimizer."
-- **Genes do not guarantee performance.** They fix structure, configuration, and where experience lands, eliminating drift across reproductions; the quality of any single run still depends on the model.
-- **An edit is not a validation.** After the assistant changes a template, whether the change is actually better is established by running it again and observing, or by the Self-Evolution Lab's review and test stages — not assumed.
+- **The host does not edit genes by itself.** Apart from adding built-in definitions a Space is missing (it never overwrites a file), every definition change is an Agent's decision or yours. The nightly review runs in the background, but what it changes is the Reviewer's decision, recorded, measured and undoable like any other edit.
+- **Genes do not guarantee performance.** They fix structure, configuration and where experience lands, removing drift between expressions; the quality of any single run still depends on the model.
+- **An edit is not a validation.** Whether a change helps is settled by readings: the lab's bar written down beforehand, the nightly review's before-and-after counts, or running the work again and looking. It is never assumed.
 
 ## The concept map
 
-Start from a [single Agent](../single-agent): [Evolution](../evolution) explains why complex work needs multiple Agents with clean roles; this page explains how that collaboration is written down as heritable genes; [Prolifera Engineering](../prolifera-engineering) explains how genes are expressed and proliferate at runtime; [Self-Evolution](../more-possibilities/self-evolution) explains how genes are improved, deliberately, out of failure.
+Start from [Single Agent](../single-agent): [From Single Agent to Multi-Agent](../evolution) explains why complex work needs several Agents with clean roles; this page explains how that collaboration is written down as heritable genes; [Prolifera Engineering](../prolifera-engineering) explains how genes are expressed and grow at runtime; [Self-Evolution](../more-possibilities/self-evolution) explains how they are improved, deliberately, from failure.

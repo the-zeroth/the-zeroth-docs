@@ -1,32 +1,33 @@
 ---
 title: Welcome
-description: Understand why The One exists for Multi-Agent architecture and where to start.
+description: The One is a desktop app where one main assistant takes your requests and hands the work to teams of AI agents on your own computer.
 ---
 
-The One is a desktop application built for Multi-Agent architecture. It helps you build, run, observe, and iterate on your own multi-agent systems.
+The One is a desktop app for macOS and Windows by The Zeroth. You tell its **main assistant** what you need. Anything bigger than one answer becomes a **matter** with its own board, and the assistant hands it to a **working group**, a team of AI agents that does the work on your own computer.
 
-## Core idea
+## How the work is organised
 
-Multi-Agent systems are the future of AI Agents, but most exploration today is still stuck at the stage of writing a few Agents by hand and hard-coding a few call chains. That workflow is slow, fragile, hard to reuse, and difficult to observe.
+- **The main assistant.** Every Space has one permanent assistant, and it is the first place to go. It answers what it can, opens matters for the rest and follows them up.
+- **Matters.** A matter is a board of cards: what waits for you, what happened day by day, and the matter itself with its goal, working groups, checklists, links and files.
+- **Working groups.** A working group is a team of agents built from a working-group template, a Graph. Its questions and deliveries arrive on the board as cards, and you can also talk to it directly.
+- **Needs you and the morning report.** Questions only you can settle and deliveries to judge wait in **Needs you**. Each morning the **Morning report** sums up what was delivered, what still waits for you and what it cost.
+- **Triggers.** Schedules, webhooks and new mail, orders, files or pages keep recurring work going while you are away.
+- **Capabilities.** The working-group templates, roles, Skills, prompts, external tools (MCP), models and Plugins your Space holds. In a Space of your own, the main assistant and the evolution lab can improve them too.
 
-The One has a direct goal: let people build any Multi-Agent architecture they can imagine with one piece of software.
+## Nothing is a black box
 
-This turns Multi-Agent architecture from a hidden code path into a visible system design that can be discussed, modified, and improved.
-
-The One is explicitly against black-box Agent execution. In The One, you can observe a Graph run from a system-level view: how Agents communicate, how they call tools, how state moves, and what context each Agent currently has.
-
-That transparency is not decoration. It is infrastructure for Multi-Agent exploration. If you cannot see how Agents collaborate, you cannot improve the architecture systematically.
+Multi-agent work is only worth trusting if you can see it. In The One you can watch a matter's working groups in **Theater**, read every Agent's messages, tool calls and context, and review each change block by block. Agents do not stop to ask permission for each step. Instead, everything they do is recorded in the **Action log**, and files they changed or deleted can be put back.
 
 ## Start here
 
-- [Quick Start](./start/quick-start): Install The One and run your first Multi-Agent Graph.
-- [Models and Pricing](./start/models-and-pricing): Understand official model service, third-party providers, subscriptions, and quota packs.
-- [Single Agent](./multi-agent-architecture/single-agent): Understand one Agent before moving into Multi-Agent systems.
-- [A-Genetic Engineering](./multi-agent-architecture/a-genetic-engineering): How The One writes a working crew down as reusable, editable, heritable genes.
-- [Definition Space](./the-one-app/definition-space): Learn how The One manages Prompts, Skills, MCP, Agents, and Graphs.
-- [Release Notes](./start/release-notes/0-4-x): Read the latest public version notes.
+- [Quick Start](./start/quick-start): install The One and give the main assistant its first matter.
+- [The main assistant](./the-one-app/main-assistant) and [Matters and boards](./the-one-app/matters): how everyday work flows.
+- [Models and Pricing](./start/models-and-pricing): the official model service, your own providers, membership and quota packs.
+- [Capabilities](./the-one-app/capabilities): what a Space is made of and how to change it.
+- [Single Agent](./multi-agent-architecture/single-agent), [A-Genetic Engineering](./multi-agent-architecture/a-genetic-engineering) and [Prolifera Engineering](./multi-agent-architecture/prolifera-engineering): the ideas underneath.
+- [The One 0.5.0 Release Notes](./start/release-notes/0-5-0): what changed in the latest version.
 
 ## More resources
 
-- Download The One from the official website.
+- Download The One: [the-zeroth.com/en/download](https://the-zeroth.com/en/download)
 - Support: support@the-zeroth.com

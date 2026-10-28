@@ -56,7 +56,7 @@ Graph 不再只是你事先画好的东西。在 0.3.0 中，Agent 可以在运�
 - `create_agent_node` 直接把一个 preset 实例化成 Graph 里的对等 Agent 节点；`clone_agent_node` 把一个正在运行的 Agent——连同配置、上下文和工具——克隆成一个全新身份。
 - 内置的聊天助手被重新定位为**路由器**：它发现、拉起、指挥并汇报各个专精子 Graph 团队，而不是自己一个人全干；配合 `record_agent_knowledge`，可以在交接点声明自己掌握的信息，而不必把整个上下文搬来搬去。
 
-把这些合起来——一个 Agent 在运行时构建、指挥并拆除自己的 Multi-Agent 团队——就是我们如今所称的 **Prolifera Engineering（增殖式工程）**。其概念与诚实的边界，见 [Prolifera Engineering](../../multi-agent-architecture/prolifera-engineering)。
+把这些合起来——一个 Agent 在运行时构建、指挥并拆除自己的 Multi-Agent 团队——就是我们如今所称的 **Prolifera Engineering（增殖式工程）**。其概念与诚实的边界，见 [Prolifera Engineering（增殖式工程）](../../multi-agent-architecture/prolifera-engineering)。
 
 为了让概念对齐，graph 工具集的命名也跟着改了：`workflow_tools` 现在叫 `graph_tools`，`add_workflow_edge` 改为 `add_edge`，`list_workflow_nodes` 改为 `list_nodes`（旧名字仍作为别名继续可用）。
 
@@ -92,7 +92,7 @@ Default Space 现在由安装器托管，并且是**只读**的，每次启动�
 - thinking 现在会在**每一个** Provider 上流式呈现到 UI——Anthropic、OpenAI Responses 与 chat、Gemini、Codex——而不再只有 Anthropic。
 - Codex 与 Anthropic / Claude Code 的按 Provider 模型列表被补齐；上下文窗口现在按模型**和**连接共同解析，所以显示的上限和真实情况一致；新增的全局 **Main Model**（在顶栏设置、热更新、无需重启）会作为所有没有指定自己模型的 Agent 的兜底。
 
-> **补充说明（0.4.x）：** 上文提到的 Claude Code 连接将在 0.4.28 之后的版本中移除；Anthropic 模型仍可通过 API Key 使用。详见 [0.4.x 发布记录](./0-4-x)。
+> **补充说明（0.5.0）：** 上文提到的 Claude Code 连接已在 0.5.0 中移除；Anthropic 模型仍可通过 API Key 使用。详见 [0.5.0 发布记录](./0-5-0)。
 
 ## 体验改进
 
@@ -131,3 +131,15 @@ Agent 编辑器围绕“真正重要的东西”重新组织：核心字段保�
 0.3.0 证明了它们可以续航：Agent 自己管理上下文、自己扩展能力、自己搭建并运行子 Graph、跨对话记忆、并自我改进——而且这一切都可见、可回退。
 
 The One 正在从一个 Multi-Agent 平台，走向一个让 Multi-Agent 系统能长时间运行、自己生长能力、并随时间变得更好的环境。
+
+## 此后的变化
+
+上面记的是 0.3.0 发布时的样子。之后的版本改动了其中一些内容：
+
+- **Meditation 与记忆**：summarizer 不再写记忆，只负责压缩历史；持有记忆工具的 Agent 仍可以自己用 `remember` 留下教训。Agent 每一轮看到的也不再是全部记忆，而是按相关度挑出的最多 20 条。
+- **Desktop Control**：官方空间现在内置的是 Chrome DevTools MCP server；操作电脑改由 Computer Use 插件提供。
+- **作为路由器的聊天助手**：0.5.0 起由[主助手](../../the-one-app/main-assistant)取代——每个空间一个，开事项并交给工作组。
+- **Self-Evolution Lab**：现在是三个角色（总监、改动员、验证员），负责进化事项；0.5.0 还加入了夜间复盘。见[进化：实验室和夜间复盘](../../the-one-app/evolution)。
+- **temperature**：0.4.14 移除；全局 Main Model 变成了[模型预设](../../the-one-app/capabilities/models)，其中一套是默认模型（设置 › 默认模型）。
+- **内置定义**：新建、导入和复制的空间，如今还会补上主助手、夜间复盘和进化实验室。
+- **Sessions**：现在是[设置 › 所有运行](../../the-one-app/settings/all-runs)（开发者视图）。

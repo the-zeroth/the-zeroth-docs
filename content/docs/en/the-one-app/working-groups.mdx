@@ -1,0 +1,114 @@
+---
+title: Working groups
+description: A working group is a team of Agents doing a matter's work, which you follow on its board, talk to directly, pause and review.
+---
+
+A working group is a team of Agents doing the work of one of your matters: a run of a working-group template, started when the main assistant hands it the work. You follow it on the matter's board, talk to it whenever you like, and review what it changed before you accept it.
+
+## From template to working group
+
+A working-group template describes how one kind of work is shared out: which roles, in what order, and how the result is checked (see [Working-group templates](./capabilities/working-group-templates)). A working group is that template at work on a matter. When the main assistant gives a matter's work to a template, The One starts a new run of it in the folder the work belongs in, and the matter's board gets a **Working group** card for it.
+
+The official Space comes with templates for common kinds of work, among them:
+
+| Template | What it is for |
+| --- | --- |
+| `polished_software_dev` | Software work in a code project. Its lead and checkers turn the requirements into tests as it builds. |
+| `deep_research` | Research and synthesis, with branches that gather evidence independently. |
+| `chat` | Ordinary multi-step work done directly with tools. |
+| `frontend_design_studio`, `image_generation_studio`, `video_production_studio`, `blender_scene_studio` | Studios for designed web pages, images, video and 3D scenes. |
+| `storefront_studio`, `store_operator`, `store_reviewer` | A one-person company: the storefront, the day-to-day operations and the weekly review. |
+| `site_deployment_ops` | Launching a website, with an independent final check. |
+| `atlas` | Writing new templates, roles, Skills and Plugins. |
+| `self_evolution_lab` | The lab that works the evolution matter. See [Evolution: the lab and the nightly review](./evolution). |
+
+A group can take more than one piece of work. When you want something else on the same matter, the main assistant gives it to the group already there, which keeps what it has learned. A group at work on one matter can also take another matter's work after its current work is handed back (see below). **Capabilities** lists the **Templates at work for matters**.
+
+## The working group card
+
+Each group on a matter has a card in the board's **Working groups** area. It shows:
+
+- Its state: **Working**, **Asking**, **Delivered**, **Failed**, **Not started** or **Queued**.
+- **Asked for**: the work it was given.
+- **Folder**: where it works. Relative paths in its messages and deliveries open from there.
+- Who talked to it last, such as **You talked to it last** or **The main assistant talked to it last**.
+- Messages from other groups, such as "The working group … asked it something".
+- Where its work waits when it serves several matters, and which members keep failing.
+
+Its buttons are **Talk to this group** and **Pause** or **Resume**, and, when they apply, **Do this first** and **Retry now**.
+
+## The Working groups page
+
+The Working groups page, in the sidebar, lists the groups on the Space's open matters, by matter, with the matters that wait for you first. Groups on sub-matters show only on their boards. For each group you see its name, its state, what it was asked for and who talked to it last, with the buttons Talk to this group and **Open board**. The page reads the same cards as the boards, so the two always agree.
+
+{/* screenshot pending: ![The Working groups page: the groups on each open matter](/docs-assets/images/0.5/en/working-groups-page.png) */}
+
+## Talking to a group
+
+Talk to this group opens, on the right of the window, the conversation of the Agent the work was given to. What you write goes straight to that group, as your own words, and the board then says you talked to it last. The main assistant sees that too: from then on it leaves that group's questions to you instead of answering them itself.
+
+In the conversation, your messages show as yours. Messages that reached the group from elsewhere show as cards that name their source: **Main assistant** for the work it handed over, **Another working group**, **Trigger** and so on. You can tell at a glance who asked the group for what.
+
+A question card's **Answer** and a delivery card's **Open the conversation** open the conversation of the Agent that asked or delivered, which can be another member of the group. Opening it counts as having seen what the group handed back.
+
+If the group is busy with another matter's work when you write, your message is **Kept for its turn**: the group hears it when it comes back to this matter's work.
+
+## Pause, resume and retry
+
+- Pause stops the group cooperatively: each member finishes the step at hand, then stops. Its work for other matters stops too. Resume lets it go on.
+- Agents that hit an error do not give up. They retry by themselves, waiting longer each time, up to ten minutes between tries, or longer when the provider says when to try again. The card says which member is failing, what it ran into, since when, and when it tries next. Retry now asks the failing members to go on at once.
+- When only you can fix the problem (a refused key, no access, a plan without that usage), the card offers **Open this connection** instead. When the connection's key or sign-in was refused, the failing members retry within seconds of you replacing it there.
+- To stop everything at once, use **Stop All Agents** in the app menu or the tray. See [Action log, undo and stopping](./action-log).
+
+If a group's card still says Working but nothing in it has moved for two minutes, or its members have only retried errors for ten, the main assistant is told and decides what happens next. See [The main assistant](./main-assistant).
+
+## One group, several matters
+
+A group that knows a kind of work well can serve more than one matter. It works on one matter at a time; work for the others waits in its queue, and their boards say so on the group's card:
+
+| The card says | What it means |
+| --- | --- |
+| **Next in line**, or how many pieces of work are ahead of it | The work waits its turn. The line also names the matter the group works on now. |
+| **A message waits for it** or **An answer waits for it** | Words for this matter reach the group when it comes back to this matter. |
+| **Set aside until you answer** | The group asked you something here and works on another matter while it waits. Your answer moves this work to the front of its queue. |
+| **Paused at the limit you set on this matter until you resume it** | This matter's work waits at its usage limit; meanwhile the group works on other matters. |
+| **Goes first** | You chose Do this first. |
+
+Do this first shows when this matter's work, words or answer wait while the group works on another matter. The group finishes the step it is at, does this matter's work, then goes back to what it was doing.
+
+## Groups working together
+
+A group reads and writes the board of its matter, and of the matters above, under and beside it. Facts, decisions and checklists that others need go on cards rather than through the main assistant. Groups can also write to each other directly: ask a question, ask for work, reply, or say that a reply left something undone. The card of the group written to shows it, for example "The working group … asked it something", and in its conversation the message is marked "Another working group". A request for work reaches the other group when it comes to rest, never in the middle of its own work. The main assistant is not woken for any of this.
+
+## Inside a group
+
+Larger templates have a lead who can split the work further: a TaskBoard that hands parts to workers, or a sub-Graph, a smaller team for one part. All of it is the group's own work. What it spends, changes and asks counts toward the group's matter, and Theater shows it inside the group. A part with its own goal and delivery can become a sub-matter with a board of its own; see [Matters and boards](./matters).
+
+## Theater
+
+Once a group works on a matter, the switch above the board flips to **Theater**: what every working group's Agents are doing, on one screen. Each group has a section named like its card, with its sub-Graphs inside. A bar on top shows each TaskBoard's progress and how many Agents are working, waiting for you, waiting on others, in error, idle or stopped.
+
+- Each Agent has a lane on a timeline that ends at now (**5 min**, **15 min** or **1 hour** back), in one of these states: **Thinking**, **Calling a tool**, **Waiting for you**, **Waiting on others**, **Error**, **Idle** or **Stopped**. Beside it, one line says what it is doing right now. Handoffs between Agents are drawn as arrows.
+- Click a stretch of a lane for its start and end, each tool call in plain words, the raw tool name and its arguments.
+- **Live tiles** show what an Agent is writing, the tail of the command it runs and the latest image it saw: two by default, picked from the Agents at work, and up to four pinned.
+- Click an Agent to open its conversation, as from the group card.
+
+Theater only watches: it adds no approvals, pauses or limits.
+
+{/* screenshot pending: ![Theater: every working group's Agents on one timeline, with live tiles](/docs-assets/images/0.5/en/working-groups-theater.png) */}
+
+## Review
+
+**Review**, in the matter's header, shows what each working group did, one group at a time; with several groups, pick one at the top. Accepting, rejecting and reverting touch only that group's run.
+
+- **Changes** lists the files the group's Agents changed, block by block, with who made each block: by default since this piece of work started (**This mission**), or since the run started (**Whole session**). **Accept**, **Reject** or **Comment** on each block (keys: **j** and **k** to move, **a**, **x** and **c** to mark). **Submit review** then does one of three things: **Comment only**, **Accept the delivery** or **Ask for rework**. Rejected blocks are written back to the files on disk, and that write-back can itself be undone. The Agents that made the changes get your review as a message, and with a rework the group's lead does too.
+- **Outputs** lists the files the group made and opens Markdown, PDF, web pages, images, audio, video and code right in the app. Web pages run in a sandbox.
+- **Visual checks** shows the visual checks its Agents ran, round by round.
+
+Review comes after the fact: it never stops the Agents, and they keep working while you read.
+
+{/* screenshot pending: ![Review: a working group's changes, block by block](/docs-assets/images/0.5/en/working-groups-review.png) */}
+
+## Other models for one piece of work
+
+Say so when you want a piece of work done on other models, for example "use the strongest preset for this". The main assistant can start that group's run with other model presets, for the whole group or for one of its members, without changing the template (see [Models](./capabilities/models)). The choice applies to that run only, and a group already at work keeps its models. To change the models that every later run uses, bind a preset to the role or to the template instead (see [Roles](./capabilities/roles)).

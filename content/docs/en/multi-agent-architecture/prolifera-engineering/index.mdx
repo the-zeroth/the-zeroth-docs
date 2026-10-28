@@ -1,35 +1,62 @@
 ---
 title: Prolifera Engineering
-description: How The One grows a Multi-Agent system at runtime — one chat Agent that clones, creates, and tears down Agents, modeled on cell proliferation.
+description: "How The One grows multi-agent teams while the work runs: who may create and clone Agents, what the host does by itself, and how you limit or stop it."
 ---
 
-**Prolifera Engineering** is the name for how The One builds and runs Multi-Agent systems at runtime. The authority to create Agents and Graphs is held mainly by a single human-facing chat Agent. As it works, that Agent can clone itself, instantiate Agents from presets, stand up whole Graphs as sub-Graphs, and tear them down — growing the system it needs as it goes, instead of running a fixed one wired in advance.
+**Prolifera Engineering** is the name for how The One grows its multi-agent system while the work runs. Instead of one fixed team wired in advance, Agents open working groups, clone and create members, and run whole templates as sub-Graphs as the work needs them; the parts that finish go to sleep.
 
-The name is borrowed from biology — *cell proliferation* — as plain vocabulary for what the mechanisms already do. It describes the shape of the work, not a claim that Agents behave like living cells.
+The name is borrowed from biology, *cell proliferation*, as plain vocabulary for what the mechanisms already do. It describes the shape of the work, not a claim that Agents behave like living cells.
 
-Proliferation does not create from nothing: every Graph stood up and every Agent instantiated expresses a definition already written in the Definition Space — the reusable, editable gene. How genes are written, edited, and inherited is [A-Genetic Engineering](../a-genetic-engineering): that page describes the gene, this one describes its expression.
+Proliferation does not create from nothing: every working group started and every Agent created expresses a definition already written in the Definition Space, the reusable, editable gene. How genes are written, edited and inherited is [A-Genetic Engineering](../a-genetic-engineering): that page describes the gene, this one describes its expression.
 
 ## The four-stage analogy
 
 Each term maps to a mechanism documented elsewhere in this section:
 
-- **Replication** — instantiating a Graph, or `clone_agent_node`, copies an Agent's config, context snapshot, and tools into a fresh identity. The copy is born disconnected and inactive. See [Dynamic Graph](../more-possibilities/dynamic-graph).
-- **Division** — one Agent becomes several to parallelize bounded work, via `clone_agent_node` or a TaskBoard. An Agent overloaded with context does *not* divide — it compresses its memory in place; that is [Meditation](../more-possibilities/meditation), a separate mechanism.
-- **Differentiation** — a created Agent is a specialist because its prompt, profiles, skills, and tools are set at creation from its preset. It can extend its own tools mid-run through the Capability Manager.
-- **Apoptosis** — on completion an Agent reports up to its parent and is put to sleep. It is not freed; its resources are reclaimed only when a parent explicitly tears it down with `delete_subgraph` or `delete_agent`.
+- **Replication.** `clone_agent_node` copies a running Agent (its configuration, its context and its tools) into a new identity; `clone_graph` copies a whole graph, every sub-Graph included. A cloned Agent is born with no edges and inactive, and a cloned graph starts dormant. See [Dynamic Graph](../more-possibilities/dynamic-graph).
+- **Division.** One Agent becomes several to work on bounded parts in parallel: cloned workers, or a TaskBoard whose tasks run in layers, each with a worker and a reviewer. An Agent overloaded with context does *not* divide: it compresses its own history in place, which is [Meditation](../more-possibilities/meditation), a separate mechanism.
+- **Differentiation.** A new Agent is a specialist because its role sets its instructions, prompts, Skills, tools, Plugins and model when it is created. While it works it can add to its own tools through the Capability Manager.
+- **Apoptosis.** When its part is done, an Agent hands back and goes to sleep. It is not freed: its context stays readable, and new input wakes it again. A parent removes it for good with `delete_agent` or `delete_subgraph`.
 
 ## Where the authority lives
 
-The founding tools — `create_subgraph`, `clone_agent_node`, `create_agent_node`, `create_task_board` — are concentrated by default in the human-facing chat Agent. The Agents and Graphs it creates usually are **not** granted those tools, so they typically do their work without proliferating further. This is a per-preset configuration choice, not a hard rule: a created Agent can be granted the tools and proliferate in turn.
+Since 0.5.0 the authority to grow the system is split in two.
 
-## What is automatic, and what is not
+**The main assistant holds your work.** Each Space has one, and everything you ask reaches it. It opens **matters** and gives each matter's work to a **working group**: a new run of a template that starts at once. A group is not the assistant's own sub-Graph, so a group's questions and results never hold up its turns. It passes on your follow-ups, answers a group's questions or leaves them to you, can pause, resume or retry a group and close a matter, and sets or resumes a matter's limit only on your word. It has full authority over your work and no action waits for approval; cancelling, interrupting and stopping everything stay with you.
 
-The framework does two things on its own: it compresses an Agent's memory when context grows large ([Meditation](../more-possibilities/meditation)), and it sleeps an Agent when its work completes or it reaches its cycle budget. Everything else — cloning, creating, tearing down — happens because an Agent decides to call the tool.
+**Team leads hold the growth inside a group.** The leads of the built-in teams (the software team's lead, the research orchestrator, the studios' showrunners and producers) hold TaskBoards and the graph tools, and some also run sub-Graphs. A group can open part of its work as a sub-matter with its own board.
 
-So proliferation is an Agent's own decision, and it is not globally capped: an Agent that holds the founding tools and keeps deciding to spawn can run away. The design concentrates that authority in one Agent by default, and the system is fully observable and tearable-down so you can step in — it does not prevent runaway, and does not claim to. Like the rest of 0.3.0, it is built to be auditable and reversible rather than guaranteed safe.
+{/* screenshot pending: ![A matter's Theater: the Agents of its working groups, one lane each](/docs-assets/images/0.5/en/working-groups-theater.png) */}
+
+**Most members hold none of these tools**, so they do their part without proliferating further. This is a per-role choice, not a hard rule: any role can be given the tools in its editor, and the general `chat` group's assistant holds all of them.
+
+## What the host does by itself
+
+Everything above happens because an Agent decides to call a tool. The host (The One's runtime, not an Agent) does only this by itself:
+
+- It keeps every Agent alive. A sleeping Agent wakes when input arrives; one that hits an error retries with growing waits of up to 10 minutes, longer only when the provider asks it to wait, and is never given up on.
+- It compresses an Agent's history when its context reaches 85% of the model's working window ([Meditation](../more-possibilities/meditation)).
+- It creates each Space's main assistant, and a new one if that run has ended.
+- It fires triggers: schedules, webhooks and watched sources hand their work to the main assistant, a new run or a matter's working group. See [Triggers and running in the background](../../the-one-app/triggers).
+- At 03:30 each night it checks for new friction, and starts the nightly review only when there is some, or an earlier change to look at.
+- It wakes the main assistant when a group asks something, delivers, or stops: two minutes at rest without handing back or asking, or ten minutes of only retrying errors.
+- It adds a note to an Agent's history when its work grows costly, repeats the same failure or stops producing anything; the Agent decides what to do about it.
+- It pauses work at a usage limit you set and when you close a matter. Pausing is cooperative: each Agent finishes the step it is on.
+
+It never gives up on an Agent in error, and it never blocks, asks about or refuses a tool call.
+
+## Limits and stopping
+
+Proliferation is still an Agent's own decision, and nothing caps it automatically: by default there is no limit on how many turns an Agent takes or on what it spends. An Agent that holds the founding tools and keeps deciding to spawn can run away. What you have instead:
+
+- **A matter's limit.** On a matter's page, **Set a limit** caps what its working groups, sub-matters included, may spend without you stepping in (at least 10,000 tokens). At the limit the work pauses at its next checkpoint, after the step under way, until you press **Resume**, which starts the count over. The Agents at work hear about it at 80%.
+- **A run's limit.** In **Settings › All runs**, a usage limit can cover every run of one Graph, or every Graph.
+- **Stop All Agents**, in the app menu or the tray menu, interrupts every Agent at once, ends the commands they started, and pauses every run and trigger until you resume them.
+
+Everything stays visible (a matter's **Theater**, Settings › All runs) and recorded in the **Action log**, and files Agents changed can be put back. The design aims to be auditable and reversible, not to be guaranteed safe. See [Action log, undo and stopping](../../the-one-app/action-log).
 
 ## The name
 
-**The Zeroth** is named after Asimov's Zeroth Law — the law, set above his Three Laws, that a robot may act for humanity's good on its own judgment rather than wait for instruction at every turn. The name signals autonomy in service of the user: useful work done without asking at every step.
+**The Zeroth** is named after Asimov's Zeroth Law: the law, set above his Three Laws, that a robot may act for humanity's good on its own judgment rather than wait for instruction at every turn. The name signals autonomy in service of the user: useful work done without asking at every step.
 
-**The One** is read three ways, and the product means all three: *from one, the many* (一生万物) — one founder Agent gives rise to the whole system, which is Prolifera itself; *governs the whole* (统御万物) — it is the Agent that orchestrates the system it grows; and *the only one* (唯一) — the single Agent you talk to. *Prolifera* itself is from Latin *proles* (offspring) + *ferre* (to bear).
+**The One** is read three ways, and the product means all three: *from one, the many* (一生万物): one founder Agent gives rise to the whole system, which is Prolifera itself; *governs the whole* (统御万物): it is the Agent that orchestrates the system it grows; and *the only one* (唯一): the single Agent you talk to, since 0.5.0 literally one main assistant per Space. *Prolifera* itself is from Latin *proles* (offspring) + *ferre* (to bear).

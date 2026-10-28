@@ -1,19 +1,65 @@
 ---
 title: API 配置
-description: 配置官方模型服务、第三方 API Key、Codex 的 ChatGPT 账号登录和 OpenAI-compatible Provider。
+description: 在设置 › API 配置里连接模型服务：官方连接、用 ChatGPT 账号登录、API Key、自定义提供商，以及你电脑上的模型。
 ---
 
-The One 支持两类模型来源，可以同时配置、按 Agent 混用：
+**设置 › API 配置**管着 Agent 发模型请求所走的连接：随 The One 会员提供的官方连接、你的 ChatGPT 账号登录、OpenAI、Anthropic 和 Google Gemini 的 API Key，以及任何兼容的服务，包括跑在你自己电脑上的模型。连接只负责接通；每个 Agent 用哪个模型，在模型预设里定，每套预设指定一个连接。见[模型](../capabilities/models)。
 
-- **官方模型服务**：登录 The Zeroth 账号即可使用，无需自备任何 key。收费方式见[模型与价格](../../start/models-and-pricing)。
-- **第三方 Provider**，按你已有的账号选择接入方式：
-  - OpenAI——API key，或用 ChatGPT 账号登录使用 OpenAI Codex
-  - Anthropic——API key
-  - Google Gemini——API key
-  - 任意 OpenAI-compatible 的自定义 Provider——填写以 `/v1` 结尾的 Base URL（自备 key 的 OpenRouter 也走这条路，如 `https://openrouter.ai/api/v1`；列表里内置的 OpenRouter 条目是账号托管的官方连接，不可手动编辑）
+{/* screenshot pending: ![设置 › API 配置：官方连接、ChatGPT 登录和一个本机服务](/docs-assets/images/0.5/zh/api-configuration-overview.png) */}
 
-The One 0.4.28 及更早的版本还会显示 Claude Code、Gemini CLI 与 Antigravity 登录选项。下一个版本会移除它们，因为这些产品的条款不允许第三方应用使用它们的登录，详见 [0.4.x 发布记录](../../start/release-notes/0-4-x)。请改用 API key 接入 Anthropic 或 Gemini。
+## 这一页有什么
 
-改动会热生效，无需重启。删除一条连接时，引用它的 Agent 预设会被引导迁移到其他连接，不会留下悬空引用。
+最上面是**连接**、**OAuth**、**密钥**的数量。下面先是官方连接（账号有的话），然后是**已连接**：其余每一条连接，写着服务商、自定义连接用的协议、怎么认证（OAuth、API Key 或不用 key）和 Base URL。**添加连接**打开服务商列表。
 
-{/* TODO: new screenshot of Settings › API configuration (0.4.x) */}
+密钥和登录都保存在这台电脑上，由系统加密。定义空间和模型预设只引用连接，从不带着它的密钥。
+
+## 官方连接
+
+官方连接随 The One 会员提供。它显示为 **Official OpenRouter**，带**官方**标记；卡片上写着你的**会员级别**、套餐包含的用量还剩多少，以及**管理订阅**（在浏览器里打开账户控制台的订阅页）。这条连接由你的账号提供，所以在这里不能编辑或删除。
+
+账号没有官方连接时，这里就没有这张卡片。第一次使用时，**快速上手**（侧边栏的**上手**）里会出现**开通会员**；你也可以照下面的方法连接自己的服务。套餐和用量见[模型与价格](../../start/models-and-pricing)。
+
+## 用 ChatGPT 账号登录
+
+有 ChatGPT Plus 或 Pro 订阅的话，Agent 可以用订阅里的 Codex 额度，不用 API Key。点**添加连接**，在 **OpenAI Codex** 上点 **OAuth**，再在浏览器打开的页面里登录。快速上手里同一个选项叫**用 ChatGPT 账号登录**。
+
+这条连接下面显示 **ChatGPT 计划用量**：每个额度周期用了多少、什么时候重置。额度属于你的 ChatGPT 账号，和你用的其他 Codex 应用共用。登录过期时，在这一行点**重新登录**。
+
+## API Key
+
+OpenAI（Responses API）、Anthropic（Claude Messages API）或 Google Gemini：点**添加连接**，在对应服务商上点**连接**，粘贴你在它的控制台创建的 Key，再点**保存连接**。以后要换 Key，在这条连接上点**更新**；Key 一栏留空就保留原来的。
+
+## 自定义提供商和本机模型
+
+**自定义提供商**可以接入任何使用以下三种协议之一的服务。点**添加连接**，在**自定义**下点**添加**，然后填写：
+
+- **协议**：**OpenAI Chat Completions** 把请求发往 `<Base URL>/chat/completions`，大多数兼容服务用这个，Base URL 通常以 `/v1` 结尾。**OpenAI Responses** 发往 `<Base URL>/responses`，只有服务实现了这个接口时才选它。**Anthropic Messages** 发往 `<Base URL>/v1/messages`，所以 Base URL 不要带 `/v1`，和给 Claude Code 配 `ANTHROPIC_BASE_URL` 时填的值一样。
+- **API Base URL**：服务的地址。
+- **认证方式**：**API Key**（OpenAI 的两种协议放在 `Authorization: Bearer` 里，Anthropic Messages 放在 `x-api-key` 里），或者**不用 key**，给不需要凭据的服务用，比如本机的 Ollama、LM Studio 或 vLLM。选了不用 key，请求就不带任何 key，环境变量里的也不带。
+
+两个例子：
+
+| 接什么 | 协议 | Base URL | 认证方式 |
+| --- | --- | --- | --- |
+| 自备 Key 的 OpenRouter | OpenAI Chat Completions | `https://openrouter.ai/api/v1` | API Key |
+| 本机的 Ollama | OpenAI Chat Completions | `http://127.0.0.1:11434/v1` | 不用 key |
+
+{/* screenshot pending: ![添加自定义提供商：协议和认证方式](/docs-assets/images/0.5/zh/api-configuration-custom.png) */}
+
+## 改动立即生效
+
+保存连接后马上生效，不用重启应用。如果提示后端没能热更新，到设置 › 通用点**重启后端**。
+
+新连接要在**设置 › 默认模型**的某套模型预设里选上才会被用到。预设编辑器里还有**刷新模型目录**，向这个连接取它现在提供的模型。详见[模型](../capabilities/models)。
+
+## 删除连接
+
+点这条连接上的垃圾桶图标。如果有角色直接指定了这个连接，会弹出对话框列出它们，点**迁移并删除**就把它们迁到另一个可用的连接（没有可用连接时清空，回到默认）。用这个连接的模型预设不会跟着改，请到设置 › 默认模型给它们换一个连接。
+
+## 服务商拒绝时
+
+服务商拒绝某个连接的 Key 或登录时，Agent 的运行里会说明，并带着回到这一页那条连接的链接。在你更新 Key 或重新登录之前，经这个连接的请求在本机暂停；Agent 会自己继续重试，这个连接每 30 分钟重新检查一次。
+
+## 0.5.0 移除的登录方式
+
+The One 0.4.28 及更早的版本还提供 Claude Code、Gemini CLI 与 Antigravity 登录。0.5.0 已移除这三种方式，因为这些产品的条款都不允许第三方应用使用它们的登录。Anthropic 和 Gemini 请改用 API Key 连接；OpenAI Codex 仍可用 ChatGPT 账号登录。详见 [The One 0.5.0 Release Notes](../../start/release-notes/0-5-0)。

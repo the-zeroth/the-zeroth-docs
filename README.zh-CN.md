@@ -34,42 +34,35 @@
 
 ```text
 content/docs
-+-- zh/                            中文文档
-|   +-- index.mdx                  入口页
-|   +-- start/                     快速入门、模型价格与发布记录
-|   |   `-- release-notes/         版本发布记录
-|   +-- the-one-app/               The One 应用操作
-|   |   +-- definition-space/      Profile、MCP、Agent 与 Graph
-|   |   +-- run/                   运行入口
-|   |   `-- settings/              Space 与 API 配置
-|   `-- multi-agent-architecture/  Multi-Agent 工程思想
-|       +-- single-agent/          模型、工具、上下文、ReAct、行动链
-|       +-- evolution/             从单一 Agent 到 Multi-Agent
-|       `-- more-possibilities/    通讯、上下文编辑、Dynamic Graph
-`-- en/                            English documentation
-    +-- index.mdx                  Entry page
-    +-- start/                     Quick start, pricing, and release notes
-    |   `-- release-notes/         Release note versions
-    +-- the-one-app/               The One app guide
-    |   +-- definition-space/      Profile, MCP, Agent, and Graph
-    |   +-- run/                   Runtime entry
-    |   `-- settings/              Space and API configuration
-    `-- multi-agent-architecture/  Multi-Agent architecture
-        +-- single-agent/          Model, tools, context, ReAct, action sequence
-        +-- evolution/             From single Agent to Multi-Agent
-        `-- more-possibilities/    Communication, context editing, dynamic Graph
++-- zh/                              中文文档
+|   +-- index.mdx                    欢迎
+|   +-- start/                       快速入门、模型与价格、发布记录
+|   |   `-- release-notes/           每条版本线一页
+|   +-- the-one-app/                 使用 The One
+|   |   +-- main-assistant.mdx …     主助手、事项、工作组、需要你、触发器、
+|   |   |                            进化、行动记录、随身通道
+|   |   +-- capabilities/            工作组模板、角色、技能与提示词、MCP、模型、
+|   |   |                            插件、总图、定义空间、记忆
+|   |   `-- settings/                设置、API 配置、所有运行、Linux 服务器
+|   `-- multi-agent-architecture/    工程思想
+|       +-- single-agent/            模型、工具、上下文、ReAct、行动链
+|       +-- evolution/               从单一 Agent 到 Multi-Agent
+|       +-- a-genetic-engineering/   模板即基因
+|       +-- prolifera-engineering/   在运行时长出系统
+|       `-- more-possibilities/      通讯、上下文编辑、Dynamic Graph、冥想
+`-- en/                              English documentation, same slugs
 ```
 
 ## 草稿与资源
 
 - `docs_md`：本地新文档草稿来源。该目录已被 Git 忽略。
-- `resources`：文档中引用的视频资源。
+- `resources`：早期 0.1.0 的演示视频，留作参考，没有页面引用。
 - `public/docs-assets/images`：文档页面使用的截图资源。
 - `public/docs-assets/videos`：文档页面使用的演示视频资源。
 
 ## 编辑方式
 
-文档页面直接在 `content/docs/en` 与 `content/docs/zh` 中编写，两种语言需要一起更新。官网会从本仓库同步 `content/docs` 与 `public/docs-assets`。
+文档页面直接在 `content/docs/en` 与 `content/docs/zh` 中编写，两种语言需要一起更新。当前版本的截图放在 `public/docs-assets/images/<版本>/<语言>/`，用对应语言的界面截取。官网会从本仓库同步 `content/docs` 与 `public/docs-assets`。
 
 曾用于从 `docs_md` 生成首版页面的 `scripts/migrate_docs_md.py` 已移除：它会先删除 `content/docs` 再重新生成，且早已与已发布的页面不一致。如有需要，可以在 Git 历史中找到它。
 
@@ -82,6 +75,6 @@ content/docs
 
 ## 内容边界
 
-The One 是一款为 Multi-Agent 架构设计的桌面应用，用来搭建、运行、观察和迭代多智能体系统。
+The One 是一款桌面应用：主助手接下每一个请求，交给在用户自己电脑上运行的 AI 智能体工作组去做。
 
 这个仓库只负责公开文档表达。真正的桌面端实现、后端服务、账号系统、模型调用实现和内部编排逻辑都不在这里。

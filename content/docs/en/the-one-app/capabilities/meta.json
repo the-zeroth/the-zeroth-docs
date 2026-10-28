@@ -1,0 +1,15 @@
+{
+  "title": "Capabilities",
+  "pages": [
+    "index",
+    "working-group-templates",
+    "roles",
+    "skills-and-prompts",
+    "mcp",
+    "models",
+    "plugins",
+    "atlas",
+    "definition-spaces",
+    "memory"
+  ]
+}

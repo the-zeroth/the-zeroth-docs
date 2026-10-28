@@ -5,4 +5,6 @@ description: The One Agents run through reasoning, tool use, observation, and fu
 
 Agents in The One run with a ReAct-style architecture by default.
 
-When active, an Agent repeatedly reasons, calls tools, accumulates new context, and reasons again. The loop continues until the Agent calls a tool to stop itself or the user stops it directly.
+When active, an Agent repeatedly reasons, calls tools, accumulates new context, and reasons again. A turn ends only when the Agent calls a tool that ends it: `sleep_node` to rest, `handoff_work` to pass work along an edge, `talk_with_human` to answer or ask you, or `report_task_completion` from a TaskBoard task, among a few others. Plain text never ends a turn and reaches no one: it is the Agent thinking aloud.
+
+Ending a turn does not end the Agent. A sleeping Agent stays alive and wakes when new input arrives: your message, a handoff, an answer or a result. An Agent that hits an error is not given up on either: it retries with growing waits of up to 10 minutes, or longer when the provider asks it to wait (a spent usage window, for example), for as long as it takes. Pausing is cooperative, so a paused Agent first finishes the step it is on; only you can interrupt one mid-step, or stop them all with **Stop All Agents** in the app menu or the tray menu.

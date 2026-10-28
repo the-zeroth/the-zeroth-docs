@@ -1,6 +1,6 @@
 ---
 title: The One 0.4.x Release Notes
-description: 0.4.0 through 0.4.28 add Plugins and the Plugin catalog and change how shared Spaces carry them; the next release removes three third-party sign-ins.
+description: 0.4.0 to 0.4.28 bring Plugins and the Plugin catalog, change how shared Spaces carry Plugins, and announce the removal of three third-party sign-ins.
 ---
 
 These notes cover The One 0.4.0 through 0.4.28.
@@ -17,6 +17,8 @@ A Plugin packages capabilities an Agent can use. One Plugin can combine any numb
 - Each Plugin has its own settings: ordinary values such as models and endpoints, and **connections** for API tokens, OAuth sign-ins, and shared accounts. Tokens and account sessions are never part of a Plugin package or a Definition Space.
 - Plugins that include an application open it from the new **Apps** page, where it runs isolated from The One.
 - Agents can build Plugins too. The `plugin_authoring` tools let an Agent combine Skills, scripts, and MCP servers into a Plugin, validate it, and add it to an Agent.
+
+> **Note (0.5.0):** **Capabilities** in the sidebar replaces Extensions; Plugins and Definition Spaces open from there. See [Capabilities](../../the-one-app/capabilities).
 
 Executable Plugin components run with your own user permissions: while they run, they can read and change files, use the network, and start processes. A Plugin's signed declarations describe what it expects to do; they are not a sandbox. Installing a Plugin or adding it to a Space does not by itself run its code.
 
@@ -36,9 +38,15 @@ A publisher's signature shows who published a Plugin and that its files have not
 - Importing a `.zerospace` file from disk now shows the same preview as importing from the sharing platform, before anything is written.
 - A later 0.4.x update also makes duplicating a Space copy its installed Plugins; previously the copy came without them.
 
-## Coming next: three sign-ins removed
+### Model presets (0.4.14)
 
-The next release after 0.4.28 removes three ways of connecting a model provider:
+- 0.4.14 adds model presets: named setups that each save a model, a provider connection, reasoning settings and a service tier. Create and edit them under **Manage model presets** in the title-bar model menu, and switch the global default from the same menu.
+- The Agent editor, the Graph editor and a session's model settings can each pick a saved preset; a Graph's default preset covers the nodes that name no model of their own.
+- The temperature setting is gone: providers use their own default.
+
+## Announced: three sign-ins removed
+
+0.5.0, the next release after 0.4.28, removes three ways of connecting a model provider:
 
 - Claude Code sign-in
 - Gemini CLI Code Assist sign-in

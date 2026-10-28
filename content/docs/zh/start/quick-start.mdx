@@ -1,20 +1,51 @@
 ---
 title: 快速入门
-description: 从安装 The One 到运行第一个 Multi-Agent Graph 的最短路径。
+description: 一步步安装 The One、连接模型服务，把第一件事交给主助手。
 ---
 
-本指南将带你从安装开始，到在 The One 中运行一个你专属的 Multi-Agent。
+这份指南带你从安装 The One 走到第一个事项：主助手把它交给一个工作组，你在事项的看板上跟进。
 
-1. 安装 The One 并登录。前往官网下载安装包。首次启动的“上手”流程会引导你连接一个模型来源——官方模型服务，或你自己的第三方 Provider——并设置全局默认模型（Default Model，之后随时可在桌面顶栏修改）。
+## 1. 安装并登录
 
-2. 准备你自己的仓储 Space。出厂的 Default Space 是只读的，一键把它复制成你自己的可编辑副本；也可以从分享平台下载别人分享的 Space，或导入本地的 `.zerospace` 包。
+从[下载页](https://the-zeroth.com/zh/download)下载 macOS 版（Apple 芯片，macOS 15 或更高）或 Windows 版，安装后用你的 The Zeroth 账号登录。在模型配置好之前，应用会打开**快速上手**（侧边栏的**上手**），带你完成下面几步。
 
-![切换与管理定义空间](/docs-assets/images/quick-start-spaces.png)
+## 2. 连接模型服务
 
-3. 导入你常用的 Prompt、Skill 和 MCP，用你喜欢的方式来调整 Agent 和 Graph——在预设页手动编辑，或到 [Atlas](../the-one-app/definition-space/atlas) 让 director 用自然语言替你编写。
+主助手和工作组都靠模型干活，所以这一步排在最前面。
 
-![Agent 编辑器](/docs-assets/images/agent-editor.png)
+- 如果你是 The One 会员，官方连接已经在了：卡片上显示你的会员级别和剩余用量。
+- 如果还不是会员，卡片上会出现**开通会员**，点它会打开控制台。在那里开通后，回到这里点**我已开通，刷新**。
+- 也可以连接你自己的服务：**用 ChatGPT 账号登录**，使用你 ChatGPT 套餐里的 Codex 额度；或者填 OpenAI、Anthropic、Gemini 的 API Key。**其他服务**可以连接兼容 OpenAI 或 Anthropic 接口的服务，包括跑在你自己电脑上的模型，比如 Ollama、LM Studio。
 
-4. 开始对话。最简单的入口是内置的对话助手：告诉它你要做什么，它会替你拉起合适的 Graph 团队并指挥它们干活。你也可以直接选择一个 Graph 蓝图和项目路径来[运行](../the-one-app/run)，与其中担任入口角色的 Agent 对话。
+{/* screenshot pending: ![在快速上手里连接模型服务](/docs-assets/images/0.5/zh/quick-start-connect.png) */}
 
-![一次正在运行的会话](/docs-assets/images/session-running.png)
+各种方式的区别见[模型与价格](./models-and-pricing)，每种连接的设置见 [API 配置](../the-one-app/settings/api-configuration)。
+
+## 3. 选默认模型
+
+选一个默认模型：主助手和没有单独指定模型的 Agent 都用它。之后随时可以在标题栏的模型按钮或**设置 › 默认模型**里修改，那里也可以保存多套模型预设。详见[模型](../the-one-app/capabilities/models)。
+
+## 4. 检查空间里的模型（需要时才出现）
+
+空间里的 Agent 可以单独指定自己的模型或连接，比如别人分享给你的空间。如果其中有在你电脑上连不上的，快速上手会多出这一步并把它们列出来，给你两条路：让这些 Agent **改用默认模型**，或者连接它们指定的服务。
+
+## 5. 准备你自己的空间（推荐）
+
+一开始用的是官方空间。它是只读的：里面的工作组模板、角色和技能由官方维护，跟着版本更新；所以主助手和进化实验室找到的改进，在这里只能留作提议。选择**复制官方空间并使用**，换到你自己的空间：它们的改进会直接生效，你自己也可以随意修改。代价是官方空间以后的更新不会自动进到你的副本里。详见[定义空间](../the-one-app/capabilities/definition-spaces)。
+
+## 6. 对主助手说第一件事
+
+最后一步**可以开始了**会告诉你，记住三个地方就够了：**主助手**、**需要你**和**晨报**。写下你想让它做的事，选择**交给主助手**；也可以选择**先去首页看看**。
+
+{/* screenshot pending: ![快速上手的最后一步](/docs-assets/images/0.5/zh/quick-start-ready.png) */}
+
+## 接下来会发生什么
+
+- 主助手马上回复你。如果这件事比一句回答大，它会开一个**事项**（出现在侧边栏的**事项**下），并在同一步把工作交给一个工作组。
+- 工作组干活时，事项的看板会慢慢填满：它的提问和交付都以卡片出现。它的提问也会出现在**需要你**里；凭你已经说过的话能答的，主助手会先替你答。
+- 工作组交付后，主助手会对照你最初的要求检查，先告诉你结论。你用**接受**、**返工**（你的话会转给工作组）或**放弃**来评判。
+- 第二天早上，**晨报**会总结交付了什么、还等你什么、花了多少。
+
+{/* screenshot pending: ![首页：和主助手的对话、侧边栏里你的事项，以及旁边需要你的事](/docs-assets/images/0.5/zh/main-assistant-home.png) */}
+
+继续阅读：[主助手](../the-one-app/main-assistant)、[事项与看板](../the-one-app/matters)和[工作组](../the-one-app/working-groups)。

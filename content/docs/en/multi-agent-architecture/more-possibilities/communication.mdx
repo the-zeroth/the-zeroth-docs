@@ -1,12 +1,24 @@
 ---
 title: Communication
-description: The main ways Agents communicate in The One.
+description: "How Agents pass work and information: handoffs, shared files, TaskBoards, sub-Graphs, the matter board, messages between groups, and you."
 ---
 
-The One provides three major ways for Agents to communicate:
+Agents in The One pass work and information in several ways, each suited to a different kind of exchange. The first four work inside one working group:
 
-1. An Agent can actively call a handoff tool and transfer work to another Agent connected by an edge.
+1. **Handoff.** An Agent calls `handoff_work` to pass work, files or a request to an Agent it is connected to by an edge. The sender goes to sleep and the receiver wakes with what it was handed, and nothing else of the sender's context.
 
-2. Agents can communicate indirectly by reading and writing files in the same workspace.
+2. **Shared files.** The Agents of a group work in the same folder and read what the others wrote.
 
-3. Through the Task Board tool, an Agent can start multiple sub-Agents in parallel, wait for them to finish, and then wake the main Agent with their results.
+3. **TaskBoard.** An Agent plans tasks in layers. Each task gets a worker and a reviewer, the tasks of one layer run in parallel, and the Agent gets the results back when the layer is done.
+
+4. **Sub-Graph.** An Agent runs another template as a sub-Graph and acts as its human: the sub-Graph's questions come to it, and it answers with `reply_to_subgraph`.
+
+The rest connect working groups with each other and with you:
+
+5. **The matter board.** Every group on a matter reads and writes its cards: the facts, decisions, checklists, links and files that others will need. Reading the board wakes nobody.
+
+6. **Messages between groups.** With `message_working_group` a group writes to another group on the same matter or on a matter above, below or beside it: to ask, request, reply, or say what a reply still lacks (rework). A request reaches the other group once it is resting, and that group decides whether and how to take it up.
+
+7. **The main assistant.** It briefs a group with your own words, passes on your follow-ups, and answers a group's questions or leaves them to you.
+
+8. **You.** When an Agent needs you, it asks: the question reaches **Needs you** and the matter's board. You can also talk to any working group directly.

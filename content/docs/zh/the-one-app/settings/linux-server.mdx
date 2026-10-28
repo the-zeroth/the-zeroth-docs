@@ -1,0 +1,179 @@
+---
+title: 在 Linux 服务器上运行 The One
+description: 在没有屏幕的 Linux 机器上安装 the-one-server，连接模型，用 systemd 让它一直运行，并在终端里给工作组派活。
+---
+
+`the-one-server` 让 The One 跑在没有屏幕的 Linux 机器上，比如云服务器、容器或小型 ARM 板。它在同一套后端外面接过桌面应用的活：启动后端、把你的模型凭据交给它、保存插件配置和 MCP 登录、后端崩溃时重启它、退出时让它好好关掉。你在终端里用它，没有窗口。
+
+## 安装
+
+```sh
+curl -fsSL https://updates.the-zeroth.com/server/linux/install.sh | sh
+```
+
+脚本先检查这台机器，再下载适合它的最新版，核对 sha256 后安装。需要 x86_64 或 arm64 的 Linux，glibc 2.28 及以上（Debian 10、Ubuntu 20.04、RHEL 8 起），以及 `tar`、`gzip`、`sha256sum` 和 `curl` 或 `wget`。安装包自带 Python 和 Node，机器上不用另装。不支持 Alpine 这类 musl 系统。
+
+普通用户安装时，程序装到 `~/.local/lib/the-one-server`，命令放在 `~/.local/bin/the-one-server`；用 root 安装则是 `/opt/the-one-server` 和 `/usr/local/bin`。命令所在的目录不在 `PATH` 里时，脚本会打印要加的那一行。
+
+脚本有几个选项：`--version VERSION` 安装指定版本，`--archive FILE` 安装手上已有的安装包，`--prefix` 和 `--bin-dir` 指定目录。经管道运行时，把选项写在 `sh -s --` 后面：
+
+```sh
+curl -fsSL https://updates.the-zeroth.com/server/linux/install.sh | sh -s -- --version VERSION
+```
+
+## 连接模型
+
+服务器只从两个地方读模型凭据，从不从命令行读：
+
+- **环境变量**：`ANTHROPIC_API_KEY`、`OPENAI_API_KEY`、`OPENROUTER_API_KEY` 或 `GEMINI_API_KEY`，各自可以再配一个 `*_BASE_URL`。每个变量成为一个以供应商命名的连接，比如 `anthropic`。
+- **凭据文件**：`~/.config/the-one-server/credentials.json`。它必须是你自己的普通文件，而且只有你能读（权限 600 或 400）；不符合时服务器拒绝启动，并提示你 `chmod 600`。
+
+```json
+{
+  "default": "anthropic",
+  "connections": [
+    {"provider": "anthropic", "api_key": "..."},
+    {"id": "ollama", "provider": "custom", "api_family": "openai-chat-completions",
+     "base_url": "http://127.0.0.1:11434/v1", "auth_type": "none"}
+  ]
+}
+```
+
+`provider` 可以是 `anthropic`、`openai`、`openrouter`、`gemini` 或 `custom`。连接的 id 就是它的 `id`，没写时是供应商名。`custom` 连接要写 `base_url`，`api_family` 是 `openai-chat-completions`（默认）、`openai-responses` 或 `anthropic-messages` 之一。`"auth_type": "none"` 给不需要凭据的自定义服务用，比如同一台机器上的 Ollama、LM Studio 或 vLLM。环境变量和文件里有同一个 id 的连接时，以环境变量为准。服务器不需要 The Zeroth 账号，也没有官方连接：它用的模型都来自这些凭据。
+
+用 `--model` 以 `供应商/模型` 的形式指定模型，比如 `anthropic/claude-sonnet-4-5`；用 `--effort` 指定推理强度（`none`、`minimal`、`low`、`medium`、`high`、`xhigh` 或 `max`）。这几项也可以写在 `THE_ONE_MODEL`、`THE_ONE_EFFORT`、`THE_ONE_CONNECTION` 里，或者写成 `~/.config/the-one-server/settings.json` 里的 `model`、`effort`、`connection`。命令行参数优先于环境变量，环境变量优先于文件。Agent 激活过的模型预设也优先于文件，直到命令行参数或环境变量指定了模型。没指定连接时，先用凭据文件的 `default`，其次是和模型前缀同一家供应商的连接，最后是第一个连接。
+
+Agent 看不到这些密钥：服务器只在内存里把它们交给后端，Agent 运行的命令的环境变量里也没有。
+
+### 用 ChatGPT 账号登录
+
+```sh
+the-one-server login codex
+```
+
+命令会打印 OpenAI 的登录链接，最多等 10 分钟。在任意一台电脑的浏览器里打开它。如果那台电脑不是这台服务器，要么先在那台电脑上运行 `ssh -L 1455:127.0.0.1:1455 <服务器>`，要么登录后把浏览器打不开的那个地址完整粘回命令里。登录以连接 `openai_codex` 存进凭据文件。启动服务器时用 `--model openai/MODEL`，MODEL 是你的 ChatGPT 套餐在 Codex 里提供的模型；它不是默认连接时再加 `--connection openai_codex`。已经在跑的服务器要停掉再启动，才会用上新的连接。
+
+给服务器单独登录一次，不要拷别的机器上的登录：两边各自刷新同一个登录时，会互相把对方挤下线。
+
+## 启动、查看和停止
+
+```sh
+the-one-server start --model anthropic/claude-sonnet-4-5   # 在后台启动，就绪后才返回
+the-one-server status                                     # 是否在跑、本机地址、模型、各服务是否健康
+the-one-server stop                                       # 等服务器真的停下才返回
+the-one-server serve --model anthropic/claude-sonnet-4-5   # 在前台运行，按 Ctrl-C 停
+```
+
+退出码：0 成功；1 失败，比如服务器没起来或没停下，登录或插件改动没完成；2 配置不对，比如缺凭据、没选模型、凭据文件权限不对；3 需要服务器在跑的命令（`status`、`sign-in`、`plugins`）发现它没在跑。
+
+### 作为服务运行
+
+用 systemd 跑 `serve`，让服务器一直运行。下面是一个用户服务的例子，写在 `~/.config/systemd/user/the-one-server.service`；把里面的模型换成你的：
+
+```ini
+[Unit]
+Description=The One server
+
+[Service]
+ExecStart=%h/.local/bin/the-one-server serve --model anthropic/claude-sonnet-4-5
+KillMode=mixed
+Restart=on-failure
+RestartPreventExitStatus=2
+
+[Install]
+WantedBy=default.target
+```
+
+```sh
+systemctl --user daemon-reload
+systemctl --user enable --now the-one-server
+loginctl enable-linger "$USER"   # 退出登录后也继续运行；可能要加 sudo
+```
+
+密钥放在凭据文件里，不要写进 unit 文件。`KillMode=mixed` 让停止信号只发给服务器本身：它收到 `SIGTERM` 后先存好刷新过的登录和插件配置，再自己关掉后端。后端崩溃后服务器最多重启它三次，再不行就以退出码 1 退出，由 systemd 重新启动它。`RestartPreventExitStatus=2` 让 systemd 不去重试配置问题。
+
+在 Docker 里运行时，用 `docker run --init` 启动容器。
+
+## 给它派一个任务
+
+```sh
+the-one-server run "修好失败的测试，并说明原因" --workdir /srv/app
+```
+
+`run` 把任务原样交给在这个文件夹里干活的工作组，等它交付。服务器没在跑时，它会为这个任务先启动一个，做完再停掉（加 `--keep-server` 就留着）；`--model`、`--effort`、`--connection` 的用法和 `start` 一样。服务器在跑但用的是别的模型时，它会拒绝，不会悄悄换模型。进度写到 stderr，每一步一行。交付写到 stdout 和文件夹里的 `.the-one/delivery.md`，旁边的 `run.json` 记着结果、提问和回答、用量，以及 git 里哪些文件变了。每个任务都会成为一个独立的事项，以任务的第一行命名；`--matter MATTER_ID` 把它放到已有的事项上。
+
+- `--team`：工作组模板的 id。默认是官方空间里做软件的模板 `polished_software_dev`；`deep_research` 做研究和综述。
+- `--on-question ask|answer|stop`：`ask` 在终端里问你，有终端时默认用它；`answer` 让工作组自己定，并在交付里说明定了什么，没有终端时默认用它；`stop` 结束这次运行。
+- `--timeout`：工作组最多用多久，比如 `45m` 或 `1h30m`（默认 3 小时）。
+- 任务写成 `-` 时从 stdin 读。
+
+运行结束时会冻结在原处，命令返回后工作组不会再动；按 Ctrl-C 也一样。退出码：0 交付了，1 失败，2 停在提问，3 超时，130 被打断。
+
+## 需要登录的 MCP 服务器
+
+Agent 连到一个要 OAuth 登录的 MCP 服务器时，拿到的错误会写明要你在服务器上运行的命令：
+
+```sh
+the-one-server sign-in SERVER_ID
+```
+
+命令会打印服务商的登录链接。在任意一台电脑的浏览器里打开它。如果那台电脑不是这台服务器，先在那台电脑上运行命令打印出的那行 `ssh -L`（默认是 `ssh -L 33418:127.0.0.1:33418 <服务器>`），或者把浏览器打不开的那个地址粘回命令里。登录存在 `~/.config/the-one-server/mcp-oauth-credentials.json`（权限 600），命令会报告这个服务器提供多少个工具。
+
+## 插件
+
+服务器在跑时：
+
+```sh
+the-one-server plugins list                     # 官方目录、装了哪些、这台机器能装哪些
+the-one-server plugins install tavily-search    # 也可以写 the-zeroth/tavily-search@0.1.0
+the-one-server plugins update                   # 把装了的插件都升到这台机器能装的最新版
+the-one-server plugins remove tavily-search
+```
+
+每次改动都会先说明要做什么，并在执行前问你。加 `--yes` 就不问；没有终端时，必须加 `--yes` 才会改。插件要运行程序时，说明里会写明这些程序以服务器用户的身份运行。装好以后，Agent 用它的方式和桌面版一样，见[插件与应用](../capabilities/plugins)。
+
+插件里带了什么，决定它能装在哪里。只有技能和连接器的插件，哪台服务器都能装：上面例子里的 Tavily Search 就只是一个连接器，让网页搜索用你自己的 Tavily 账号。要运行程序的插件（MCP 服务器、脚本）只有在提供了这台机器的构建（`linux-x86_64` 或 `linux-arm64`）时才能装；`plugins list` 会逐个说明能不能在这里运行。需要屏幕的插件，比如 Computer Use 和 OneCanvas，没有 Linux 版。服务器下载插件时直接走 HTTPS、不经代理，所以只能通过代理上网的机器暂时装不了插件。
+
+Agent 需要某个插件的密钥（比如 API Key 或账号）时，会请你在终端里填，Agent 看不到填的值：
+
+```sh
+the-one-server plugins setup                       # 逐个回答开着的请求
+the-one-server plugins setup REQUEST_ID            # 回答一个；输入时不回显，也可以从管道读入
+the-one-server plugins setup REQUEST_ID --decline  # 不给值，关掉这个请求
+```
+
+一个请求 24 小时内有效，服务器重启后就没了，Agent 可以再开一个。需要在浏览器里登录的账号，暂时没法在服务器上设置。
+
+## 浏览器
+
+官方空间的浏览器工具（Chrome DevTools MCP）会用机器 `PATH` 上的 Chrome 或 Chromium，在没有窗口的模式下运行。安装包不带浏览器，请用系统的包管理器装一个：比如 Debian 上 `apt-get install -y chromium`，Ubuntu 上用 Google Chrome 的 `.deb`，Fedora 和 RHEL 上 `dnf install -y chromium`。装好后不用重启服务器。
+
+## 自查
+
+```sh
+the-one-server doctor
+```
+
+`doctor` 逐项检查系统、安装、凭据、模型、保存的状态、在跑的服务器、浏览器、git、Docker、磁盘空间、装好的每个插件，以及到各供应商的网络。每项一行，写 `ok`、`warn`、`fail` 或 `skip`，不对的下一行写 `fix:` 怎么改。它不改动任何东西。`--no-network` 跳过网络检查，`--json` 以 JSON 打印同样的内容；服务器按现在的配置起不来时，退出码是 1。
+
+## 文件在哪里
+
+| 内容 | 位置 |
+| --- | --- |
+| 数据：空间、运行和日志（`logs/`） | `~/.local/share/the-one-server`（`--data-dir`、`THE_ONE_SERVER_DATA_DIR`） |
+| 配置：凭据、模型设置和预设、插件配置、MCP 登录 | `~/.config/the-one-server`（`--config-dir`、`THE_ONE_SERVER_CONFIG_DIR`） |
+
+设置了 `XDG_DATA_HOME` 或 `XDG_CONFIG_HOME` 时，目录改为它下面的 `the-one-server`。`--data-dir` 和 `--config-dir` 要写在命令前面，比如 `the-one-server --data-dir /srv/the-one start`，而且每条命令都要给同样的值；用环境变量更省事。
+
+## 升级和卸载
+
+升级时再运行一次安装脚本。它会保留上一个版本（已经在跑的服务器停掉再启动之前一直用它），更早的版本删掉。用 systemd 运行时，`systemctl --user restart the-one-server` 就是停掉再启动。你的数据和配置不受影响。
+
+卸载时先停掉服务器，再删掉程序和命令：
+
+```sh
+the-one-server stop
+rm -rf ~/.local/lib/the-one-server ~/.local/bin/the-one-server
+```
+
+如果设置了服务，用 `systemctl --user disable --now the-one-server` 代替 `stop`，再删掉它的 unit 文件。用 root 安装的程序和命令在 `/opt/the-one-server` 和 `/usr/local/bin/the-one-server`。如果连数据和凭据也不要了，再删掉 `~/.local/share/the-one-server` 和 `~/.config/the-one-server`。

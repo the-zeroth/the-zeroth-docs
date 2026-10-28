@@ -6,3 +6,5 @@ description: Tools turn a language model into an Agent.
 Tools turn an LLM into an actual Agent. Without tools, even a powerful model is still only a chatbot. The boundary of available tools is the boundary of Agent capability, and The One's Multi-Agent architecture is built around composable tool access.
 
 That boundary is no longer fixed when the Agent is built. Through the Capability Manager an Agent can discover Skills and attach MCP servers to itself while it works, and built-in tools like `meditate` let an Agent manage its own context rather than only act on the world.
+
+Capabilities also come packaged. A **Plugin** bundles Skills, scripts, MCP servers, apps and connectors; adding it to a role gives that role what the Plugin brings, while the Space keeps only a reference to it. An Agent with the Plugin-authoring tools can build a Plugin and add it to a role itself. See [Plugins and Apps](../../the-one-app/capabilities/plugins).

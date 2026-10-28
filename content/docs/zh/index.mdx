@@ -1,32 +1,33 @@
 ---
 title: 欢迎
-description: 了解 The One 为什么为 Multi-Agent 架构而生，以及应该从哪里开始阅读。
+description: The One 是一款桌面应用：主助手接下你交代的事，交给在你自己电脑上运行的 AI Agent 工作组去做。
 ---
 
-The One 是一款专为 Multi-Agent 架构设计的桌面应用。它用来搭建、运行、观察和迭代你自己的多智能体系统。
+The One 是 The Zeroth 出品的桌面应用，支持 macOS 和 Windows。你把事交代给**主助手**；比一句回答大的事会变成一个**事项**，有自己的看板，主助手把它交给一个**工作组**——一组在你自己电脑上干活的 AI Agent。
 
-## 核心理念
+## 工作是怎么组织的
 
-多智能体是 AI Agent 的未来，但今天的大多数探索还停留在“手写几个 Agent、硬编码几条调用链”的阶段。这个过程慢、脆弱、不可复用，也很难看清 Agent 之间到底发生了什么。
+- **主助手**：每个空间都有一个常驻的主助手，什么事都先跟它说。能直接回答的它直接回答，更大的事它开成事项，并一直跟进。
+- **事项**：一个事项就是一块由卡片组成的看板：等你处理的事、按天记下的进展，以及这件事本身——目标、工作组、清单、链接和文件。
+- **工作组**：工作组是按工作组模板（也就是 Graph）组建的一组 Agent。它的提问和交付以卡片出现在看板上，你也可以直接和它对话。
+- **需要你和晨报**：只有你能拍板的问题、等你评判的交付，都在**需要你**里等你。每天的**晨报**总结交付了什么、还等你什么、花了多少。
+- **触发器**：定时、Webhook，以及新邮件、新订单、文件或网页的变化，让固定的工作在你离开时也继续推进。
+- **能力**：空间里的工作组模板、角色、技能、提示词、外部工具（MCP）、模型和插件。在你自己的空间里，主助手和进化实验室也能改进它们。
 
-The One 的目标很直接：用一款软件来搭建任意人们能想象的 Multi-Agent 架构。
+## 没有黑箱
 
-这让多智能体架构从“藏在代码里的流程”变成“可以被看见、讨论和修改的系统设计”。
-
-The One 明确反对黑箱式 Agent 运行。在 The One 中，你可以从“上帝视角”观察一次 Graph 运行，看到 Agent 之间如何沟通、如何调用工具、如何传递状态，以及每个 Agent 当前拥有怎样的上下文。
-
-这套透明性不是装饰功能，而是 Multi-Agent 探索的基础设施。看不清 Agent 怎么协作，就不可能系统性改进架构。
+多 Agent 的工作，只有看得见才值得信任。在 The One 里，你可以在**剧场**里看一个事项的工作组怎么干活，读每个 Agent 的消息、工具调用和上下文，并逐块审阅每一处改动。Agent 不会每一步都停下来请你批准；它做的每件事都记在**行动记录**里，被它改动或删除的文件可以放回。
 
 ## 从这里开始
 
-- [快速入门](./start/quick-start)：从安装到运行第一个 Multi-Agent Graph。
-- [模型与价格](./start/models-and-pricing)：理解官方模型服务、第三方模型渠道和收费方式。
-- [单一 Agent](./multi-agent-architecture/single-agent)：先理解一个 Agent 的构成，再进入 Multi-Agent。
-- [A-Genetic Engineering（Agent 基因工程）](./multi-agent-architecture/a-genetic-engineering)：理解 The One 如何把一支工作小组写成可复用、可编辑、可传承的基因。
-- [仓储（Definition Space）](./the-one-app/definition-space)：理解 The One 如何管理 Prompt、Skill、MCP、Agent 和 Graph。
-- [发布记录](./start/release-notes/0-4-x)：查看 The One 最新公开版本变化。
+- [快速入门](./start/quick-start)：安装 The One，把第一件事交给主助手。
+- [主助手](./the-one-app/main-assistant)和[事项与看板](./the-one-app/matters)：日常工作怎么流转。
+- [模型与价格](./start/models-and-pricing)：官方模型服务、你自己的模型服务、会员和用量包。
+- [能力](./the-one-app/capabilities)：一个空间由什么组成，怎么修改。
+- [单一 Agent](./multi-agent-architecture/single-agent)、[A-Genetic Engineering（Agent 基因工程）](./multi-agent-architecture/a-genetic-engineering) 和 [Prolifera Engineering（增殖式工程）](./multi-agent-architecture/prolifera-engineering)：背后的思路。
+- [The One 0.5.0 Release Notes](./start/release-notes/0-5-0)：最新版本有哪些变化。
 
 ## 更多资源
 
-- 下载 The One：请前往官网下载安装包。
+- 下载 The One：[the-zeroth.com/zh/download](https://the-zeroth.com/zh/download)
 - 支持邮箱：support@the-zeroth.com

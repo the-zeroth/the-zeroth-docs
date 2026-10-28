@@ -1,0 +1,86 @@
+---
+title: All runs (developer view)
+description: Settings › All runs lists every run in your Space with each Agent's messages, context and tools, so you can follow a team closely, step in, fork or freeze it.
+---
+
+**Settings › All runs** is the developer view of The One: every run in the current Space, the working groups' runs included, down to the full context of each Agent. Day to day you follow work on a matter's board and its Theater; come here to see exactly what an Agent read, wrote and called, to step into a run, or to start a Graph yourself.
+
+**All runs (developer view)** on the [Capabilities](../capabilities) page opens it too. **Open** on an item in Needs you, a notification or an item in the tray menu also brings you here, to the Agent the item came from; items from the main assistant open Home instead.
+
+{/* screenshot pending: ![All runs: the run list, a working group's run and the Agent Roster](/docs-assets/images/0.5/en/all-runs-run-view.png) */}
+
+## The run list
+
+The left column, **Workspace**, starts with **Talk to the main assistant** (back to Home) and **New Graph**, and a search box for sessions and projects with filters for runtime status, **Pinned only** and **Include archived**. Below them:
+
+- **Projects**: runs grouped by the project folder they work in. A sub-Graph sits under the run that started it.
+- **Chat Assistants**: older chat sessions, shown only while there are some.
+- **Atlas Sessions**: your sessions with the Atlas; opening one takes you to the [Atlas](../capabilities/atlas).
+- **Unfiled**: runs without a project folder.
+- **Archived**: runs you archived. The first time you opened 0.5.0, your earlier sessions moved here, apart from running or pinned ones; you can still open or restore them.
+
+The main assistant's own conversation is not listed: it stays on Home. Each row's menu has **Pin in group**, **Rename**, **Archive**, **Copy workflow ID** and **Delete**. Archive only tidies the list; Delete removes the run and its sub-Graphs together with their records and session data.
+
+## Starting a Graph yourself
+
+**New Graph** gives a task straight to one Graph, without the main assistant:
+
+1. **Choose a blueprint**: the Graph to run. The software team, `polished_software_dev`, comes first, marked **Factory software team**.
+2. **Project and task**: an optional **Project root** (left unspecified, the Agent chooses where to work) and an optional **Task**, which goes to the Graph's first Agent as your message and starts the run. Cmd/Ctrl+Enter sends it. With no task, **Create Graph** only creates the run, and you write to an Agent yourself.
+
+**What it needs to run** checks everything the Graph names: models, connections, roles, prompts, Skills, MCP servers and Plugins. It says which missing piece would stop the run from being created, which would make its model requests fail, and which the run can do without. You can create the run either way. A run starts from the Graph as last saved. It belongs to no matter: you follow it here and in Needs you.
+
+{/* screenshot pending: ![New Graph, with what the Graph needs to run](/docs-assets/images/0.5/en/all-runs-new-graph.png) */}
+
+## Reading a run
+
+The header names the run and its state (executing, waiting, frozen and so on) and holds:
+
+- **Conversation** / **Theater**: one Agent's conversation, or the whole team at once.
+- **Freeze** / **Unfreeze** and **Cancel workflow**, described in [Freezing and stopping](#freezing-and-stopping).
+- **Session Default Model**: a model for this run only, used by the Agents that follow the default model.
+- **Run controls**: retries, recovery and the usage limit.
+- How many tokens the run has used so far.
+
+Under the header, the **Work Chain** (folded at first) draws who woke whom, step by step, including where the run waited for you.
+
+On the right, the **Agent Roster** lists every Agent in the run with its model calls, tool calls, tokens, how full its context window is and how hard it reasons. A sub-Graph opens in place, and **Back to parent graph** returns. Agents in error show a badge with **Recover all**, and **Jump to next error** finds them. **View Graph topology** shows the live nodes and edges.
+
+**Theater** gives each Agent a lane: thinking, calling a tool, waiting for you, waiting on others, in error, idle or stopped, with handoffs drawn between lanes, over the last 5 minutes, 15 minutes or hour. Click a stretch of a lane for its tool calls, with the raw tool names and arguments. **Live tiles** show what a few Agents are writing, the output of their commands and the newest picture they saw; pin up to four. It is the same Theater a matter shows for all its working groups; see [Working groups](../working-groups).
+
+## Inspecting an Agent
+
+Pick an Agent in the roster or the Work Chain. Its view has five tabs:
+
+| Tab | What it shows |
+| --- | --- |
+| **Messages** | Its reasoning, each tool call with arguments and result, and **Meditated** markers where it compressed its own context, with the message counts before and after. A reply can open the request it answered. |
+| **Outputs** | The files, images, links and code its messages delivered, with a preview. |
+| **Context** | Its context slots and context mode, the system prompt, the next request exactly as it will be sent (**Send view**), and its latest **Sent requests**. |
+| **Tools** | The tools it can call, with their JSON schemas. |
+| **Shared Data** | What the Graph shares with it. |
+
+## Stepping in
+
+- **Write to any Agent** in the box under its messages, and drag in, paste or attach images and files. Its questions, confirmations and choices wait above the box; they also reach Needs you and, for a working group, the matter's board. What you write to a working group counts as your own words, and the main assistant sees that you are talking to that group.
+- **Interrupt** stops what the Agent is doing; a message from you sets it going again.
+- **Edit** one of your own messages and choose **Save & resend**: everything after it is discarded and generated again.
+- **Fork** at any message makes a new Agent in the same Graph with the history up to that message. It has no edges and does nothing until you write to it; the original Agent is untouched.
+
+## Freezing and stopping
+
+- **Freeze** stops the run and its sub-Graphs at the next safe point, once the model and tool calls in flight return; **Unfreeze** lets it go on. A run that lost its process offers **Recover workflow** instead.
+- **Cancel workflow** asks you to confirm, then stops the run and keeps its sessions and history to read.
+- An Agent that hits an error keeps retrying with growing waits of up to 10 minutes, or longer when the provider asks it to wait (a spent usage window, for example). **Run controls** lists such Agents, and **Retry agents awaiting recovery** tries again now. Freezing stops the automatic retries.
+- **Usage limit**, in Run controls, pauses a run once it has used that many tokens without anyone stepping in, for this Graph or for every Graph. Its Agents hear about it at 80%; resuming the run gives it the same allowance again.
+- **Stop All Agents**, in the app menu or the tray, stops everything at once. See [Action log, undo and stopping](../action-log).
+
+## The Review pane
+
+When a run has changed files or run visual checks, **Review** appears next to the Agent Roster:
+
+- **Changes**: every file the run's Agents changed, block by block, with who changed each block. Accept, reject or comment on each block (J and K move between blocks, A accepts, X rejects, C comments), then **Submit review**: the blocks you rejected go back to how they were on disk, and your review goes to the Agents that made the changes, or to their lead once they have finished. **What to review** can be **This mission** or **Whole session**, and you can undo the write-back from the action log.
+- **Outputs**: the files the Agents made or changed and kept. Markdown, PDF, web pages, images, audio, video and code open right in the app.
+- **Visual checks**: each round in which an Agent compared or checked a page with the Visual Check Plugin.
+
+The pane can fill the page; Esc brings it back. Nothing in it stops or waits for the Agents, which keep working while you review.

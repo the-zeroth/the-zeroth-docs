@@ -3,8 +3,8 @@ title: Meditation
 description: 让 Agent 自己管理上下文窗口，压缩自己的历史。
 ---
 
-一个 Agent 的上下文窗口，是决定它能连续工作多久的硬上限。只要被赋予对应的 Tool，一个 Agent 就可以 “meditate”：通过一个内联的 summarizer 原地压缩自己的对话历史，summarizer 会继承它的模型和配置，让 Agent 带着一份更小、更干净的上下文继续工作。
+一个 Agent 的上下文窗口，是决定它能连续工作多久的硬上限。Graph 里的每个 Agent 都带着 `meditate` 工具，可以 “meditate”：通过一个内联的 summarizer 原地压缩自己的对话历史，summarizer 会继承它的模型和配置，让 Agent 带着一份更小、更干净的上下文继续工作。
 
-Meditation 可以由 Agent 显式调用，也可以在真实上下文占用越过阈值时自动触发——这样一个长时间运行的 Agent 会在溢出之前就把自己的 prompt 缩下来，而不是在上限处卡死。
+Meditation 可以由 Agent 显式调用；真实上下文占用到模型工作窗口的 85% 时，它也会自动开始——这样一个长时间运行的 Agent 会在溢出之前就把自己的 prompt 缩下来，而不是在上限处卡死。在那之前很久，Agent 的历史一越过 60k、100k、150k token（之后每多 50k），你下一次给它发消息时，它就会先收到一条提示，告诉它上下文有多大。它可以在交回时带上 `meditate_after=true`，等这一轮结束、你在读它的回答时再压缩。
 
-在压缩之前，Agent 可以把一条可复用的经验留进这个 Space 的 [memory](../../the-one-app/definition-space/memory)，让长任务留下知识，而不是被压缩一笔勾销。每一次 meditation 都会被记录在消息时间线里，所以你能清楚看到 Agent 在哪里压缩了自己。
+summarizer 只负责压缩，不能写记忆。持有记忆工具的 Agent 可以在冥想之前自己用 `remember` 把一条教训留进这个空间的记忆，让长任务留下知识，而不是被压缩一笔勾销（见[记忆与召回](../../the-one-app/capabilities/memory)）。每一次 meditation 都会被记录在消息时间线里，所以你能清楚看到 Agent 在哪里压缩了自己。

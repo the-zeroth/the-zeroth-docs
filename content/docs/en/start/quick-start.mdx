@@ -1,20 +1,51 @@
 ---
 title: Quick Start
-description: The shortest path from installing The One to running your first Multi-Agent Graph.
+description: Install The One, connect a model service, and give the main assistant its first matter, step by step.
 ---
 
-This guide takes you from installation to running your first custom Multi-Agent Graph in The One.
+This guide takes you from installing The One to your first matter: the main assistant hands it to a working group, and you follow the work on its board.
 
-1. Install The One and sign in. Download it from the official website. The first-launch onboarding walks you through connecting a model source — the official model service, or a third-party provider of your own — and setting the global default model (adjustable anytime from the desktop title bar).
+## 1. Install and sign in
 
-2. Prepare your own Definition Space. The factory Default Space is read-only: duplicate it into your own editable copy with one click, download a Space you like from the sharing platform, or import a local `.zerospace` bundle.
+Download The One for macOS (Apple Silicon, macOS 15 or later) or Windows from the [download page](https://the-zeroth.com/en/download), install it and sign in with your The Zeroth account. Until a model is set up, the app opens **Get started** (**Start** in the sidebar), which walks you through the next steps.
 
-![Switching and managing Definition Spaces](/docs-assets/images/quick-start-spaces.png)
+## 2. Connect a model service
 
-3. Import your usual Prompts, Skills, and MCP tools, then adjust Agents and Graphs in your preferred way — edit them by hand on the Presets pages, or let the [Atlas](../the-one-app/definition-space/atlas) director author them for you in natural language.
+The main assistant and the working groups work with a model, so this comes first.
 
-![The Agent editor](/docs-assets/images/agent-editor.png)
+- With The One membership, the official connection is already there: its card shows your tier and how much usage is left.
+- Without a membership, the card offers **Become a member**, which opens the console. Subscribe there, then come back and choose **I have subscribed, refresh**.
+- Or connect your own: **Sign in with ChatGPT** uses the Codex allowance of your ChatGPT plan, or add an API key for OpenAI, Anthropic or Gemini. **Other services** connects a service with an OpenAI- or Anthropic-compatible API, including models on your own computer such as Ollama or LM Studio.
 
-4. Start talking. The simplest entry is the built-in chat assistant: tell it what you need and it stands up the right Graph teams and drives them for you. You can also pick a Graph blueprint and a project path to [run](../the-one-app/run) directly, and talk to its entry Agent.
+{/* screenshot pending: ![Connecting a model service in Get started](/docs-assets/images/0.5/en/quick-start-connect.png) */}
 
-![A running session](/docs-assets/images/session-running.png)
+[Models and Pricing](./models-and-pricing) compares the options, and [API configuration](../the-one-app/settings/api-configuration) covers every connection type.
+
+## 3. Pick a default model
+
+Pick the model that the main assistant, and every Agent that names no model of its own, works with. You can change it any time from the model button in the title bar or in **Settings › Default model**, where you can also keep several model presets. See [Models](../the-one-app/capabilities/models).
+
+## 4. Check the Space's models (only when needed)
+
+Agents in a Space can name a model or a connection of their own, for example in a Space someone shared with you. When one of them cannot be reached on your computer, Get started adds this step and lists them, with two ways out: **Use the default model** for those Agents, or connect the service they name.
+
+## 5. Set up your own Space (recommended)
+
+You start in the official Space. It is read-only: its working-group templates, roles and Skills are kept by The One and updated with new versions, so whatever the main assistant and the evolution lab find to improve stays a proposal there. Choose **Copy the official Space and use it** to work in a Space of your own, where their changes take effect and you can edit anything yourself. The cost is that later updates to the official Space do not reach your copy by themselves. See [Definition Spaces](../the-one-app/capabilities/definition-spaces).
+
+## 6. Tell the main assistant the first thing
+
+The last step, **Ready to go**, names the three places you need: the **Main assistant**, **Needs you** and the **Morning report**. Type what you want done and choose **Give it to the main assistant**, or **Look at the home page first**.
+
+{/* screenshot pending: ![The last step of Get started](/docs-assets/images/0.5/en/quick-start-ready.png) */}
+
+## What happens next
+
+- The main assistant answers right away. When the request is bigger than one answer, it opens a **matter**, which appears under **Matters** in the sidebar, and hands the work to a working group in the same step.
+- The matter's board fills as the group works: its questions and deliveries arrive as cards. Its questions also show in **Needs you**; the main assistant answers the ones it can settle from what you already told it.
+- When the group delivers, the main assistant checks the delivery against what you asked for and tells you the conclusion first. Judge it with **Accept**, **Rework** (your words go back to the group) or **Give up**.
+- The next morning, the **Morning report** sums up what was delivered, what still waits for you and what it cost.
+
+{/* screenshot pending: ![The home page: the main assistant's conversation, your matters in the sidebar and what needs you beside it](/docs-assets/images/0.5/en/main-assistant-home.png) */}
+
+Read on: [The main assistant](../the-one-app/main-assistant), [Matters and boards](../the-one-app/matters) and [Working groups](../the-one-app/working-groups).

@@ -92,7 +92,7 @@ The Default Space is now installer-managed and **read-only**, mirroring the bund
 - Thinking now streams into the UI for **every** Provider — Anthropic, OpenAI Responses and chat, Gemini, and Codex — instead of Anthropic only.
 - Per-Provider model pickers were filled in for Codex and Anthropic / Claude Code, the context window is now resolved by model **and** connection so the displayed limit matches reality, and a global **Main Model** (set from the top bar, hot-reloaded with no restart) backs any Agent that doesn't pin its own model.
 
-> **Note (0.4.x):** the Claude Code connection mentioned above is removed in the release after 0.4.28; Anthropic models remain available with an API key. See the [0.4.x release notes](./0-4-x).
+> **Note (0.5.0):** the Claude Code connection mentioned above was removed in 0.5.0; Anthropic models remain available with an API key. See the [0.5.0 release notes](./0-5-0).
 
 ## Experience Improvements
 
@@ -131,3 +131,15 @@ When an Agent calls a human-interaction tool, the desktop app pops a native OS n
 0.3.0 proves they can endure: Agents that manage their own context, grow their own capabilities, build and operate their own sub-Graphs, remember across conversations, and improve themselves — all visible and reversible.
 
 The One is moving from a Multi-Agent platform toward an environment where Multi-Agent systems run long, grow their own capabilities, and get better over time.
+
+## Since then
+
+These notes describe 0.3.0 as it shipped. Later releases changed some of what they describe:
+
+- **Meditation and memory.** The summarizer no longer writes memory; it only compresses history. An Agent that holds the memory tools can still `remember` a lesson itself. Agents also no longer see every memory entry each turn, but up to 20 picked by relevance.
+- **Desktop Control.** The official Space now ships the Chrome DevTools MCP server instead, and controlling the computer is the Computer Use Plugin.
+- **The chat Assistant as a router** gave way in 0.5.0 to the [main assistant](../../the-one-app/main-assistant): one per Space, which opens matters and hands them to working groups.
+- **The Self-Evolution Lab** now has three roles (Director, Patcher, Verifier) and works the evolution matter; 0.5.0 also added the nightly review. See [Evolution: the lab and the nightly review](../../the-one-app/evolution).
+- **Temperature** was removed in 0.4.14, and the global Main Model became [model presets](../../the-one-app/capabilities/models), one of which is the default (Settings › Default model).
+- **Built-in definitions.** New, imported and duplicated Spaces now also receive the main assistant, the nightly review and the evolution lab.
+- **Sessions** is now [Settings › All runs](../../the-one-app/settings/all-runs), the developer view.

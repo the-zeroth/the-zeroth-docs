@@ -2,7 +2,8 @@
   "title": "Settings",
   "pages": [
     "index",
-    "space-management",
-    "api-configuration"
+    "api-configuration",
+    "all-runs",
+    "linux-server"
   ]
 }

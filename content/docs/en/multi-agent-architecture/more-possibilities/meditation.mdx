@@ -3,8 +3,8 @@ title: Meditation
 description: Agents manage their own context window by compressing their own history.
 ---
 
-An Agent's context window is the hard limit on how long it can keep working. With the right tool, an Agent can "meditate": compress its own conversation history in place through an inline summarizer that inherits its model and settings, then resume with a smaller, cleaner context.
+An Agent's context window is the hard limit on how long it can keep working. Every Agent in a Graph holds the `meditate` tool: it can "meditate", compressing its own conversation history in place through an inline summarizer that inherits its model and settings, then resume with a smaller, cleaner context.
 
-Meditation can be called explicitly by the Agent, or triggered automatically when real context usage crosses a threshold — so a long-running Agent shrinks its own prompt before it overflows instead of wedging at the limit.
+Meditation can be called explicitly by the Agent, or it starts automatically when real context usage reaches 85% of the model's working window, so a long-running Agent shrinks its own prompt before it overflows instead of wedging at the limit. Well before that, when an Agent's history grows past 60k, 100k or 150k tokens (and every 50k after), it gets a note when you next write to it, saying how large its context is. It can then hand back with `meditate_after=true` and compact once its turn has ended, while you read its answer.
 
-Before compressing, the Agent can keep a durable lesson in the Space's [memory](../../the-one-app/definition-space/memory), so long work leaves knowledge behind instead of losing it to compaction. Each meditation is recorded in the message timeline, so you can see exactly where an Agent compacted itself.
+The summarizer only compresses: it cannot write memory. An Agent that holds the memory tools can `remember` a lesson in the Space's memory before it meditates, so long work leaves knowledge behind instead of losing it to compaction (see [Memory and recall](../../the-one-app/capabilities/memory)). Each meditation is recorded in the message timeline, so you can see exactly where an Agent compacted itself.

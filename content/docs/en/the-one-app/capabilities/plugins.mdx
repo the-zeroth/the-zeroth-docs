@@ -1,0 +1,89 @@
+---
+title: Plugins and Apps
+description: Plugins add Skills, tools, service connections and apps to The One. Install them from the Plugin library into your own Space and give them to roles.
+---
+
+A **Plugin** packages capabilities that Agents can use (Skills, scripts, MCP servers, apps and connections to online services) so that you can install, configure, share and give them to a role as one unit. Plugins are the only kind of extension in The One, and the apps some of them bring open from **Apps**.
+
+## What a Plugin contains
+
+A Plugin combines any number of five kinds of components:
+
+| Component | What it adds |
+| --- | --- |
+| Skill | Written know-how that a role reads when it needs it |
+| Script | A program the Plugin runs as a tool for an Agent |
+| MCP | An MCP server and its tools |
+| Application | An app with its own screen, opened from Apps |
+| Connector | An online service the Plugin reaches with your API key or sign-in |
+
+Plugins live outside every Definition Space. They are installed on your computer, and a Space records only which Plugins its roles use and their settings that are not secret. That is why an exported or shared Space never contains a Plugin, only references to the ones it needs.
+
+## The Plugin library
+
+Open **Capabilities › Plugins**. Plugins and Definition Spaces share one window, titled **Extension Center**, and Plugins has two views:
+
+- **Plugin library**: official Plugins and Plugins others have shared. Each row shows the version and what the Plugin does; open one to see its components, the access it declares and its settings.
+- **Installed**: the Plugins on this computer, including the ones you made, with **Update** when the library has a newer release.
+
+{/* screenshot pending: ![The Plugin library](/docs-assets/images/0.5/en/plugins-library.png) */}
+
+## Install a Plugin
+
+Installing puts the Plugin on this computer and adds it to the active Space, which has to be a Space of your own: the official Space is read-only, so copy it first (see [Definition Spaces](./definition-spaces)).
+
+1. Choose **Install Plugin** on its row.
+2. **Review Plugin change plan** lists what will be installed, the permissions it asks for, and any settings it needs before it can run.
+3. Choose **Continue to confirmation**. The One asks you to confirm the changes and permissions in a window of its own, then installs the Plugin in the background.
+
+On the website, **Open in The One** on a Plugin in the [Plugin catalog](https://the-zeroth.com/en/extensions) starts the same from your browser. The app first verifies the signed release, while nothing is installed yet, then asks which of your Spaces it goes to. Downloading it, approving full local access and writing to the Space are each confirmed separately.
+
+{/* screenshot pending: ![Installing a Plugin opened from the website](/docs-assets/images/0.5/en/plugins-install.png) */}
+
+A Plugin needs no Python or Node on your computer. The One builds a Python environment for it from the Plugin's own locked list of packages, and the first build can take a few minutes. Servers written for Node can run on the Node that comes with The One.
+
+## Settings and connections
+
+A Plugin's details hold two kinds of settings:
+
+- **Configure Plugin**: ordinary values such as models and endpoints.
+- **Plugin connections**: API tokens, OAuth sign-ins and shared accounts. Signing in opens your browser.
+
+Keys and sign-ins are stored encrypted on this computer. They are never part of a Plugin package or a Definition Space. When an Agent needs a key to go on, it can ask you for it with a secure setup card: what you type there goes straight to protected storage, and the Agent only learns whether the connection is ready.
+
+## Give a Plugin to a role
+
+Installing a Plugin does not run it, and no role uses it yet. Choose **Add to Agent** in the Plugin's details to add the whole Plugin to a role without opening the role's editor, or pick it under **Plugins** in the editor itself (see [Roles](./roles)). The main assistant can do this too, and it can make Plugins of its own from Skills, scripts and MCP servers.
+
+When roles in your Space refer to Plugins you have not installed, for example after you import a Space, the Plugins page says **Some Agents still need Plugin setup**. Install the ones you need from the library; Plugins for roles you do not use can wait.
+
+## Apps
+
+**Apps** in the sidebar opens a quick menu of the apps your Plugins bring, and Cmd/Ctrl+Shift+A opens it from anywhere in the app. Double-click **Apps**, or choose **Manage all applications**, for the full list; **Capabilities › Apps** opens it too. Depending on the app, it opens inside The One, in an isolated web window, in your browser or as a native app. Closing an app's own window also stops the app.
+
+{/* screenshot pending: ![The Apps quick menu](/docs-assets/images/0.5/en/plugins-apps-menu.png) */}
+
+## What a Plugin can do on your computer
+
+Executable components run with your own user permissions: while they run, they can read and change files, use the network and start programs. What a Plugin declares under **Access and capability disclosures**, and the **Full local access** badge, describe what it expects to do; they are not a sandbox. A publisher's signature (**Verified source**) shows who published a Plugin and that its files have not changed since. It does not certify that the code is safe.
+
+As with every tool, what Agents do through a Plugin is recorded in **Settings › Action log**. See [Action log, undo and stopping](../action-log).
+
+## Make and share a Plugin
+
+In **Installed**, **Create Plugin** opens the Plugin's manifest, a JSON file in which you declare its Skills, scripts, MCP servers, apps and connectors by hand. Asking the main assistant to build the Plugin is usually easier. To share a Plugin you made, choose **Share Plugin**, pick a visibility (**Public**, which is selected at first, listed after review; **Unlisted**, reachable by its link; or **Private**, visible only to your account) and add tags. The One packages, signs, uploads and submits it in one step. The names and descriptions of its settings are shared; your tokens, accounts and the values you entered are not. Follow the review with **Manage on website**.
+
+Since 0.5.0 the Plugin catalog uses one signed format, and Capability Packs are gone.
+
+## Official Plugins
+
+| Plugin | What it does |
+| --- | --- |
+| Computer Use | Lets Agents see and control browsers and desktop apps |
+| OneCanvas | An infinite canvas app where you and Agents arrange, annotate and connect things on the same board |
+| Image Generation | Image prompt design and generation through Image2-compatible, Gemini, OpenRouter or APIFrame accounts |
+| Video Production | Plans and reviews video productions, and runs Seedance video jobs through a Volcengine Ark account |
+| Blender Control | Builds scenes, renders and exports with the Blender installed on your computer |
+| Gmail Control | Searches, reads, drafts, sends and organizes Gmail after you sign in with Google |
+| Tavily Search | Lets the built-in web search use your own Tavily account; without it, web search uses your model provider's own |
+| Agent Room Channel | Lets **Settings › Phone channel** reach your Agents from your phone through Agent Room; see [Phone channel and outside callers](../remote) |

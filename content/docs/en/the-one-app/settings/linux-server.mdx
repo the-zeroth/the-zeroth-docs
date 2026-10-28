@@ -1,0 +1,179 @@
+---
+title: The One on a Linux server
+description: Install the-one-server on a Linux machine without a screen, connect a model, run it under systemd and give its working groups tasks from the terminal.
+---
+
+`the-one-server` runs The One on a Linux machine without a screen, such as a cloud server, a container or a small ARM board. It takes the desktop app's place around the same backend: it starts it, hands it your model credentials, keeps Plugin settings and MCP sign-ins, restarts it after a crash and shuts it down cleanly. You work with it from the terminal; there is no window.
+
+## Install
+
+```sh
+curl -fsSL https://updates.the-zeroth.com/server/linux/install.sh | sh
+```
+
+The script checks the machine, downloads the latest release for it, verifies its sha256 and installs it. It needs Linux on x86_64 or arm64 with glibc 2.28 or later (Debian 10, Ubuntu 20.04, RHEL 8 and later), plus `tar`, `gzip`, `sha256sum`, and `curl` or `wget`. Python and Node come inside the package, so the machine needs neither. Alpine and other musl systems are not supported.
+
+As a normal user, the program goes to `~/.local/lib/the-one-server` and the command to `~/.local/bin/the-one-server`; as root, to `/opt/the-one-server` and `/usr/local/bin`. If the command's folder is not on your `PATH`, the script prints the line to add.
+
+The script takes options: `--version VERSION` installs a given version, `--archive FILE` installs a package you already have, and `--prefix` and `--bin-dir` choose the folders. Through the pipe, put them after `sh -s --`:
+
+```sh
+curl -fsSL https://updates.the-zeroth.com/server/linux/install.sh | sh -s -- --version VERSION
+```
+
+## Connect a model
+
+The server reads model credentials from two places only, never from the command line:
+
+- **Environment variables**: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `OPENROUTER_API_KEY` or `GEMINI_API_KEY`, each with an optional `*_BASE_URL`. Each becomes a connection named after its provider, such as `anthropic`.
+- **A credentials file**: `~/.config/the-one-server/credentials.json`. It must be a regular file of your own that only you can read (mode 600 or 400); the server refuses any other and tells you to `chmod 600` it.
+
+```json
+{
+  "default": "anthropic",
+  "connections": [
+    {"provider": "anthropic", "api_key": "..."},
+    {"id": "ollama", "provider": "custom", "api_family": "openai-chat-completions",
+     "base_url": "http://127.0.0.1:11434/v1", "auth_type": "none"}
+  ]
+}
+```
+
+`provider` is `anthropic`, `openai`, `openrouter`, `gemini` or `custom`. A connection's id is its `id`, or its provider when it has none. A custom connection needs a `base_url`, and its `api_family` is `openai-chat-completions` (the default), `openai-responses` or `anthropic-messages`. `"auth_type": "none"` is for a custom server that takes no credentials, such as Ollama, LM Studio or vLLM on the same machine. When the environment and the file both have a connection with the same id, the environment's wins. The server needs no The Zeroth account and has no official connection: its models come from these credentials.
+
+Name the model as `provider/model` with `--model`, for example `anthropic/claude-sonnet-4-5`, and the reasoning with `--effort` (`none`, `minimal`, `low`, `medium`, `high`, `xhigh` or `max`). The same settings can go in `THE_ONE_MODEL`, `THE_ONE_EFFORT` and `THE_ONE_CONNECTION`, or as `model`, `effort` and `connection` in `~/.config/the-one-server/settings.json`. A flag beats a variable, and a variable beats the file. A model preset an Agent has made active also beats the file, until a flag or a variable names a model. When no connection is named, the server uses the credentials file's `default`, then the connection whose provider matches the model's prefix, then the first connection.
+
+Agents never see the keys: the server hands them to the backend in memory, and they are not in the environment of the commands Agents run.
+
+### Sign in with ChatGPT
+
+```sh
+the-one-server login codex
+```
+
+This prints an OpenAI sign-in link and waits up to 10 minutes. Open the link in a browser on any computer. If that computer is not the server, either run `ssh -L 1455:127.0.0.1:1455 <server>` on it first, or, after signing in, paste the address the browser could not open back into the command. The sign-in is saved in the credentials file as the connection `openai_codex`. Start the server with `--model openai/MODEL`, where MODEL is a model your ChatGPT plan offers in Codex, and add `--connection openai_codex` when it is not the default. A server that is already running keeps its connections until you stop and start it.
+
+Give the server a sign-in of its own rather than a copy of another machine's: when both refresh the same sign-in, each signs the other out.
+
+## Start, check and stop
+
+```sh
+the-one-server start --model anthropic/claude-sonnet-4-5   # in the background; returns once ready
+the-one-server status                                     # running or not, its local address, the model, each service's health
+the-one-server stop                                       # returns once the server has really stopped
+the-one-server serve --model anthropic/claude-sonnet-4-5   # in the foreground, until Ctrl-C
+```
+
+Exit codes: 0 done; 1 failed, for example the server did not start or stop, or a sign-in or a Plugin change did not go through; 2 a configuration problem, such as missing credentials, no model chosen or a credentials file with the wrong mode; 3 a command that needs a running server (`status`, `sign-in`, `plugins`) found none.
+
+### Run it as a service
+
+Keep the server running with systemd through `serve`. Here is an example user service, in `~/.config/systemd/user/the-one-server.service`; put your own model in it:
+
+```ini
+[Unit]
+Description=The One server
+
+[Service]
+ExecStart=%h/.local/bin/the-one-server serve --model anthropic/claude-sonnet-4-5
+KillMode=mixed
+Restart=on-failure
+RestartPreventExitStatus=2
+
+[Install]
+WantedBy=default.target
+```
+
+```sh
+systemctl --user daemon-reload
+systemctl --user enable --now the-one-server
+loginctl enable-linger "$USER"   # keeps it running after you log out; may need sudo
+```
+
+Keep the keys in the credentials file rather than in the unit. `KillMode=mixed` sends the stop signal to the server alone: on `SIGTERM` it first saves refreshed sign-ins and Plugin settings, then stops its backend itself. After a crash the server restarts its backend up to three times; after that it exits with code 1 and systemd starts it again. `RestartPreventExitStatus=2` keeps systemd from retrying a configuration problem.
+
+In Docker, start the container with `docker run --init`.
+
+## Give it a task
+
+```sh
+the-one-server run "Fix the failing tests and say what caused them" --workdir /srv/app
+```
+
+`run` hands the task, word for word, to a working group in the folder, and waits for its delivery. If no server is running, it starts one for the task and stops it afterwards (`--keep-server` leaves it running); `--model`, `--effort` and `--connection` work as they do for `start`. If one is running with another model, it refuses rather than switch. Progress goes to stderr, one line per step. The delivery goes to stdout and to `.the-one/delivery.md` in the folder, with `run.json` beside it: the result, the questions and answers, the usage, and which files changed in git. Each task becomes a matter of its own, named after its first line; `--matter MATTER_ID` adds it to an existing one.
+
+- `--team`: the working-group template, by id. The default is `polished_software_dev`, the official Space's template for software work; `deep_research` does research and synthesis.
+- `--on-question ask|answer|stop`: `ask` asks you in the terminal, the default when there is one. `answer` tells the working group to decide by itself and say what it decided in the delivery, the default otherwise. `stop` ends the run.
+- `--timeout`: how long the working group may take, for example `45m` or `1h30m` (3 hours by default).
+- `-` as the task reads it from stdin.
+
+When the run ends it is frozen where it stands, so the working group does nothing more after the command returns; Ctrl-C does the same. Exit codes: 0 delivered, 1 failed, 2 stopped at a question, 3 timed out, 130 interrupted.
+
+## MCP servers that need a sign-in
+
+An Agent that reaches an MCP server needing an OAuth sign-in gets an error that names the command for you to run on the server:
+
+```sh
+the-one-server sign-in SERVER_ID
+```
+
+The command prints the provider's sign-in link. Open it in a browser on any computer. If that computer is not the server, first run on it the `ssh -L` line the command prints (by default `ssh -L 33418:127.0.0.1:33418 <server>`), or paste the address the browser could not open back into the command. The sign-in is saved in `~/.config/the-one-server/mcp-oauth-credentials.json` (mode 600), and the command reports how many tools the server offers.
+
+## Plugins
+
+With the server running:
+
+```sh
+the-one-server plugins list                     # the official catalog, what is installed, what this machine can install
+the-one-server plugins install tavily-search    # or the-zeroth/tavily-search@0.1.0
+the-one-server plugins update                   # every installed Plugin to its latest version for this machine
+the-one-server plugins remove tavily-search
+```
+
+Each change shows what it does and asks before applying it. `--yes` skips the question; without a terminal, the change needs it. When a Plugin runs programs, the summary says they run as the server's user. Once a Plugin is installed, Agents use it as they do on the desktop; see [Plugins and Apps](../capabilities/plugins).
+
+What a Plugin carries decides where it installs. A Plugin made only of Skills and connectors installs on any server: Tavily Search, the example above, is a single connector that lets web search use your own Tavily account. A Plugin that runs programs (MCP servers, scripts) installs only when it has a build for this machine, `linux-x86_64` or `linux-arm64`; `plugins list` says for each Plugin whether it runs here. Plugins that need a screen, such as Computer Use and OneCanvas, get no Linux build. The server downloads Plugins over HTTPS without going through a proxy, so a machine that reaches the internet only through a proxy cannot install them yet.
+
+When an Agent needs a secret for a Plugin, such as an API key or an account, it asks you to enter it in the terminal, where the Agent never sees it:
+
+```sh
+the-one-server plugins setup                       # answer each open request in turn
+the-one-server plugins setup REQUEST_ID            # answer one; you type the value unseen, or pipe it in
+the-one-server plugins setup REQUEST_ID --decline  # close the request without a value
+```
+
+A request lasts 24 hours and ends if the server restarts; the Agent can open another. Accounts that have to be signed into in a browser cannot be set up on a server yet.
+
+## The browser
+
+The official Space's browser tools (Chrome DevTools MCP) run Chrome or Chromium from the machine's `PATH`, without a window. The package brings no browser: install one with the system's package manager, for example `apt-get install -y chromium` on Debian, the Google Chrome `.deb` on Ubuntu, or `dnf install -y chromium` on Fedora and RHEL. The server does not need a restart.
+
+## Check the setup
+
+```sh
+the-one-server doctor
+```
+
+`doctor` checks the system, the install, credentials, the model, saved state, the running server, a browser, git, Docker, disk space, each installed Plugin and the network to each provider. Every line reads `ok`, `warn`, `fail` or `skip`, with a `fix:` line under anything wrong. It changes nothing. `--no-network` leaves out the network checks, `--json` prints the same as JSON, and the exit code is 1 when the server could not start as configured.
+
+## Files
+
+| What | Where |
+| --- | --- |
+| Data: Spaces, runs and logs (`logs/`) | `~/.local/share/the-one-server` (`--data-dir`, `THE_ONE_SERVER_DATA_DIR`) |
+| Configuration: credentials, model settings and presets, Plugin settings, MCP sign-ins | `~/.config/the-one-server` (`--config-dir`, `THE_ONE_SERVER_CONFIG_DIR`) |
+
+When `XDG_DATA_HOME` or `XDG_CONFIG_HOME` is set, the folder is `the-one-server` inside it instead. `--data-dir` and `--config-dir` go before the command, as in `the-one-server --data-dir /srv/the-one start`, and every command needs the same ones; the variables are simpler.
+
+## Upgrade and uninstall
+
+To upgrade, run the install script again. It keeps the version before, which a server that is already running goes on using until you stop and start it, and removes older ones. Under systemd, `systemctl --user restart the-one-server` does the stop and start. Your data and configuration stay as they are.
+
+To uninstall, stop the server and delete the program and its command:
+
+```sh
+the-one-server stop
+rm -rf ~/.local/lib/the-one-server ~/.local/bin/the-one-server
+```
+
+If you set up the service, run `systemctl --user disable --now the-one-server` instead of `stop`, and delete its unit file. As root, the program and command are `/opt/the-one-server` and `/usr/local/bin/the-one-server`. Delete `~/.local/share/the-one-server` and `~/.config/the-one-server` as well if you also want its data and credentials gone.

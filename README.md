@@ -34,42 +34,35 @@ The canonical documentation lives under `content/docs/en` and `content/docs/zh`.
 
 ```text
 content/docs
-+-- en/                            English documentation
-|   +-- index.mdx                  Entry page
-|   +-- start/                     Quick start, pricing, and release notes
-|   |   `-- release-notes/         Release note versions
-|   +-- the-one-app/               The One app guide
-|   |   +-- definition-space/      Profile, MCP, Agent, and Graph
-|   |   +-- run/                   Runtime entry
-|   |   `-- settings/              Space and API configuration
-|   `-- multi-agent-architecture/  Multi-Agent architecture
-|       +-- single-agent/          Model, tools, context, ReAct, action sequence
-|       +-- evolution/             From single Agent to Multi-Agent
-|       `-- more-possibilities/    Communication, context editing, dynamic Graph
-`-- zh/                            Chinese documentation
-    +-- index.mdx                  Entry page
-    +-- start/                     Quick start, pricing, and release notes
-    |   `-- release-notes/         Release note versions
-    +-- the-one-app/               The One app guide
-    |   +-- definition-space/      Profile, MCP, Agent, and Graph
-    |   +-- run/                   Runtime entry
-    |   `-- settings/              Space and API configuration
-    `-- multi-agent-architecture/  Multi-Agent architecture
-        +-- single-agent/          Model, tools, context, ReAct, action sequence
-        +-- evolution/             From single Agent to Multi-Agent
-        `-- more-possibilities/    Communication, context editing, dynamic Graph
++-- en/                              English documentation
+|   +-- index.mdx                    Welcome
+|   +-- start/                       Quick start, models and pricing, release notes
+|   |   `-- release-notes/           One page per release line
+|   +-- the-one-app/                 Using The One
+|   |   +-- main-assistant.mdx …     Main assistant, matters, working groups, Needs you,
+|   |   |                            triggers, evolution, action log, phone channel
+|   |   +-- capabilities/            Templates, roles, Skills and prompts, MCP, models,
+|   |   |                            Plugins, Atlas, Definition Spaces, memory
+|   |   `-- settings/                Settings, API configuration, All runs, Linux server
+|   `-- multi-agent-architecture/    Concepts
+|       +-- single-agent/            Model, tools, context, ReAct, action sequence
+|       +-- evolution/               From a single Agent to Multi-Agent
+|       +-- a-genetic-engineering/   Templates as genes
+|       +-- prolifera-engineering/   Growing the system at runtime
+|       `-- more-possibilities/      Communication, context editing, dynamic Graph, meditation
+`-- zh/                              Chinese documentation, same slugs
 ```
 
 ## Drafts and Assets
 
 - `docs_md`: local source drafts for new documentation. This directory is ignored by Git.
-- `resources`: video assets referenced by the documentation.
+- `resources`: earlier 0.1.0 demo videos kept for reference; no page uses them.
 - `public/docs-assets/images`: screenshots used by documentation pages.
 - `public/docs-assets/videos`: demo videos used by documentation pages.
 
 ## Editing
 
-Pages are written directly in `content/docs/en` and `content/docs/zh`; update both languages together. The website syncs `content/docs` and `public/docs-assets` from this repository.
+Pages are written directly in `content/docs/en` and `content/docs/zh`; update both languages together. Screenshots of the current app live in `public/docs-assets/images/<version>/<locale>/`, captured from the app in that language. The website syncs `content/docs` and `public/docs-assets` from this repository.
 
 `scripts/migrate_docs_md.py`, which generated the first version of these pages from `docs_md`, has been removed. It deleted `content/docs` before regenerating it and no longer matched the published pages. It remains in the Git history.
 
@@ -82,6 +75,6 @@ Pages are written directly in `content/docs/en` and `content/docs/zh`; update bo
 
 ## Scope
 
-The One is a desktop application designed for Multi-Agent architecture. It helps users build, run, observe, and iterate on multi-agent systems.
+The One is a desktop app in which one main assistant takes every request and hands the work to working groups of AI agents running on the user's own computer.
 
 This repository is only responsible for public documentation. The desktop implementation, backend services, account system, model-call implementation, and internal orchestration logic are outside this repository.

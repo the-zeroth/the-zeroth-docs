@@ -1,0 +1,15 @@
+{
+  "title": "能力",
+  "pages": [
+    "index",
+    "working-group-templates",
+    "roles",
+    "skills-and-prompts",
+    "mcp",
+    "models",
+    "plugins",
+    "atlas",
+    "definition-spaces",
+    "memory"
+  ]
+}

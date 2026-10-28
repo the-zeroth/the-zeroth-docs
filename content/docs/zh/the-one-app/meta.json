@@ -1,8 +1,15 @@
 {
-  "title": "The One 应用操作",
+  "title": "使用 The One",
   "pages": [
-    "definition-space",
-    "run",
+    "main-assistant",
+    "matters",
+    "working-groups",
+    "needs-you",
+    "triggers",
+    "evolution",
+    "action-log",
+    "remote",
+    "capabilities",
     "settings"
   ]
 }

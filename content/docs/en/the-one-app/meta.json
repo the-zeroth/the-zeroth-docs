@@ -1,8 +1,15 @@
 {
-  "title": "The One App",
+  "title": "Using The One",
   "pages": [
-    "definition-space",
-    "run",
+    "main-assistant",
+    "matters",
+    "working-groups",
+    "needs-you",
+    "triggers",
+    "evolution",
+    "action-log",
+    "remote",
+    "capabilities",
     "settings"
   ]
 }

@@ -1,10 +1,10 @@
 ---
 title: Dynamic Graph
-description: 让 Agent 在运行过程中动态创建、克隆、激活或休眠其他 Agent。
+description: 让 Agent 在工作中创建、克隆、激活或休眠其他 Agent，让工作组边做边长。
 ---
 
-在 Graph 中，只要被赋予了对应的 Tool，一个 Agent 就可以创建/克隆/激活/休眠其他 Agent，这让 Graph 可以动态地拓展。
+在 Graph 中，只要角色带着 Graph 工具，一个 Agent 就可以创建、克隆、激活或休眠其他 Agent，让工作组在干活的过程中长大，而不是一直保持开始时的样子。
 
-具体来说，一个 Agent 可以从一个已有的 preset 实例化出一个对等 Agent，可以把一个正在运行的 Agent——连同它的配置、上下文和工具——克隆成一个全新身份，也可以把一整个 blueprint 拉起为一个子 Graph 并**充当它自己的人类**，自己回答这个子 Graph 的提问。内置的聊天助手正是用这种方式充当一个路由器：它拉起并指挥各个专精的子 Graph 团队，而不是一个人全干。
+具体来说，一个 Agent 可以从一个已有的角色实例化出一个对等 Agent，可以把一个正在运行的 Agent——连同它的配置、上下文和工具——克隆成一个全新身份，可以用 `clone_graph` 把整张图（连同所有子 Graph 和每个 Agent 的上下文）复制一份，也可以把另一个模板拉起为子 Graph 并**充当它自己的人类**，自己回答这个子 Graph 的提问。如今的 The One 里，主助手并不这样替你“长”出系统：它把每个事项的活交给一个工作组，那是一次独立的运行。增殖发生在工作组内部：团队负责人克隆 worker、开 TaskBoard，或者拉起子 Graph。
 
-这一整套能力——一个 Agent 在运行时把 Graph 长出来——就是我们所说的 [Prolifera Engineering（增殖式工程）](../prolifera-engineering)。有几条不变量值得直说：被克隆或创建出来的 Agent **生来即断连、未激活**，必须先被接入并激活才会做事；Agent 只有在**自己决定**调用工具时才会创建或克隆——长上下文不会触发它，那由 [Meditation](meditation) 另行处理；而一个 Agent 能否这样做，取决于它的 preset 是否被授予了开创工具（`create_subgraph`、`clone_agent_node`、`create_agent_node`、`create_task_board`）。由于这个决定是 Agent 自己的、且没有全局上限，一个被授予工具的 Agent 可以无上限地扇出；这份权柄按设计是集中且可观察的，而非被阻止的。
+这一整套能力——一个 Agent 在运行时把 Graph 长出来——就是我们所说的 [Prolifera Engineering（增殖式工程）](../prolifera-engineering)。有几条不变量值得直说：被克隆或创建出来的 Agent **生来即断连、未激活**，必须先被接入并激活才会做事，复制出来的图也先处于休眠；Agent 只有在**自己决定**调用工具时才会创建或克隆——长上下文不会触发它，那由 [Meditation](./meditation) 另行处理；而一个 Agent 能否这样做，取决于它的角色是否带着开创工具（`create_subgraph`、`clone_agent_node`、`create_agent_node`、`clone_graph`、`create_task_board`）。由于这个决定是 Agent 自己的，也没有什么会自动给它封顶，这样的 Agent 可以无上限地扇出；这份权柄按设计是集中且可观察的，而非被阻止的。你给它所在的事项或运行设的用量边界会让它暂停，应用菜单或托盘菜单里的**急停所有 Agent**能停下一切。

@@ -1,0 +1,86 @@
+---
+title: The One 0.5.0 Release Notes
+description: 0.5.0 rebuilds The One around one main assistant per Space, with matters on boards, working groups, triggers, Needs you and a morning report.
+---
+
+These notes cover The One 0.5.0, the first release after 0.4.27 on macOS and 0.4.28 on Windows.
+
+Up to 0.4.x you started a chat for each task and chose the Graph that should do it. 0.5.0 gives every Space one **main assistant** that takes everything you ask. Work bigger than one answer becomes a **matter**, a board of cards, and the assistant hands it to the right **working group** of Agents. You follow the work on the board, answer what needs you, and judge what comes back.
+
+## Core Changes
+
+### The main assistant and matters
+
+- The app opens on your Space's main assistant (**Assistant** in the sidebar). Tell it anything: it answers what it can directly and opens a matter for anything bigger, handing the work to a working group in the same step.
+- **New Chat** is gone. Your earlier sessions, except those still at work or pinned, moved to **Archived**, at the bottom of **Settings › All runs**, where you can still open or restore them. Nothing was deleted.
+- A matter's **Board** shows what waits for you first, then what happened day by day, with the matter itself beside it. A working group's questions and deliveries arrive there as cards. The main assistant checks each delivery against what you asked for and reports it with the conclusion first and what you need to do last.
+- You can talk to any working group directly, pause or resume it, retry one that keeps failing, and send a delivery back with your own words. The **Working groups** page lists the groups on the open matters in the sidebar.
+- Each matter counts what its working groups spend. Set a usage limit on a matter and its work pauses at it until you resume it. The matter's **Changes** show what its work changed, and you can undo it there. **Theater** shows every group's Agents at work on one screen.
+- A working group can open a sub-matter for part of its work, and you or the main assistant can make it a matter of its own. Groups on one matter read and write its board and can write to each other.
+- Closing a matter pauses its work; reopening it picks the work up again.
+
+### Capabilities and Settings
+
+- The sidebar is now Assistant, Needs you, Morning, Working groups, your open Matters, **Capabilities**, Apps and Settings. Sessions, Presets and Extensions are gone from it.
+- **Capabilities** gathers everything Agents work with: working-group templates (Graphs), roles (Agent presets), Skills, prompts, external tools (MCP), models, Plugins, Apps, Atlas and your Definition Spaces.
+- Every run, including the old session view with its Work Chain and Agent Roster, is under **Settings › All runs**, the developer view.
+
+### Cards that stay current
+
+- A data card shows what a Plugin tool, a file, a web page or a command says now.
+- A link card checks that its address still opens.
+- A panel card puts a Plugin tool's panel on the board.
+- A matter with triggers shows its cadence, so you can see what runs and when.
+
+### Triggers, Needs you and the morning report
+
+- Schedules, webhooks (Stripe, Creem, GitHub and shop platforms) and new orders, mail, files, pages or command output can wake Agents or hand work to a matter's working group. Manage them in **Settings › Background & triggers**. The app stays in the menu bar or tray for its triggers and can keep the computer awake while they wait.
+- **Needs you** collects what Agents choose to ask you and the runs that finished or failed, with notifications, a Dock badge and the tray.
+- The **Morning** report opens with three numbers and what to do first, folds the deliveries you have already read, and sums up by matter. Every delivery has an evidence pack that reads as its acceptance, visual checks included.
+- With **Settings › Phone channel** you talk to the main assistant from your phone, and its replies come back where you asked.
+
+### Seeing and undoing what Agents did
+
+- **Settings › Action log** records every tool call: which files it created, changed or deleted, which addresses it reached, and how it ended. Files Agents changed or deleted can be put back. The One does not block or ask before an Agent acts; the log and undo are how you stay in control.
+- A run shows what it has used so far and you can set its usage limit.
+- **Stop All Agents**, in the app menu and the tray menu, interrupts every Agent, ends the commands they started, and pauses every run and trigger until you resume them.
+- The review pane lets you read every Agent's changes block by block, accept or reject each block and send the review back. **Outputs** lists what the Agents made, with a preview.
+
+### First use
+
+- First use (**Start**) begins with the model connection: The One membership brings the official connection, or you connect your own ChatGPT account or an API key. It then checks that every Agent in your Space can reach its model, offers to set up a Space of your own, and ends with your first words to the main assistant.
+
+### The One on a Linux server
+
+- `the-one-server` runs The One's agents on a Linux machine without a screen, x86_64 or arm64. Install it with `curl -fsSL https://updates.the-zeroth.com/server/linux/install.sh | sh`; it brings its own Python and Node. See [The One on a Linux server](../../the-one-app/settings/linux-server).
+
+### Models
+
+- A ChatGPT sign-in's row in **Settings › API Config** shows how much of its plan is used and when it resets.
+- Long runs reuse the prompt cache much more often, which lowers what they cost.
+- The Claude Code, Gemini CLI Code Assist and Gemini Antigravity Code Assist sign-ins are removed, as announced in 0.4.x. Connect Anthropic and Gemini with an API key; OpenAI Codex keeps Sign in with ChatGPT.
+- Web search uses the model provider's own search when no search key is saved. Tavily moved into the optional Tavily Search Plugin.
+
+### Plugins, tools and Skills
+
+- A Plugin tool's panel (MCP Apps) shows under its call in the conversation, can be pinned to the side panel and goes fullscreen without reloading. Tool cards say whether a call only reads, changes things or reaches outside your computer.
+- MCP servers that speak the 2026-07-28 protocol can run long tool calls in the background, and their results are collected after a restart.
+- Node-based MCP servers run on The One's own Node, and a Plugin's Python runs in an environment the app builds from the Plugin's lock file.
+- Capability Packs are gone: Plugins are the only kind of extension, and the Plugin catalog uses one signed format.
+- You can import whole Agent Skills repositories and `.zip` or `.skill` packages.
+
+### Memory, appearance and storage
+
+- Memory and project notes are ranked by meaning, by default with a built-in model that runs on your computer, and a new session sees what earlier sessions in the same project concluded.
+- **Settings › Appearance**: light, dark or the system's, plus color schemes of your own.
+- **Settings › Storage** shows where disk space goes, Docker and git worktrees included, warns when the disk runs low and clears Plugin workspaces.
+
+### Security, privacy and updates
+
+- A shared Space is private unless you choose otherwise, exported Spaces leave secrets out, and downloads are verified before they are used.
+- Updates can be rolled out in stages and halted.
+- Crash reports from the app's main process are scrubbed of tokens, email addresses, account IDs and your user name before they are sent. **Usage statistics** in Settings › General is off by default, counts only which pages you open and which built-in apps you launch, and stays on your computer.
+
+## Summary
+
+0.4.x gave Agents' capabilities a home in Plugins. 0.5.0 gives the work itself a home: one assistant to talk to, matters you can follow and undo, and working groups that keep going while you are away.

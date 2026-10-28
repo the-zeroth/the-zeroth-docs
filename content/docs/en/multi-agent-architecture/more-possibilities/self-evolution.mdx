@@ -1,12 +1,29 @@
 ---
 title: Self-Evolution
-description: An agent-only workshop that diagnoses its own failures and fixes the right layer.
+description: "How a Space improves its own templates, roles, Skills and memory from evidence, through two loops: the evolution matter and the nightly review."
 ---
 
-The One ships a self-evolution lab: a Multi-Agent Graph that observes recurring failures, diagnoses them, and applies the smallest durable fix — a memory, a Skill, a prompt, a workflow, or tool code — then reviews, tests, and either promotes or rolls it back.
+**Self-evolution** is how a Space gets better at its own work from evidence. Agents find where work keeps going wrong, change the smallest layer that causes it, and keep the change only when the readings show it helped. The One runs it as two loops: the **evolution matter**, which you start, and the **nightly review**, which runs by itself.
 
-The human is deliberately not the approval gate inside the loop. Internal reviewer, tester, and archivist roles, together with tests and rollback, take that role. The one hard boundary: the loop never performs high-risk external side effects — sending messages, deleting your data, mutating production — on its own. In those cases it stops at a safe proposal.
+## Two loops
 
-It builds on auditable, reversible primitives — per-Space [memory](../../the-one-app/definition-space/memory) and version history with rollback — so self-improvement stays safe and inspectable rather than magical.
+| | The evolution matter | The nightly review |
+| --- | --- | --- |
+| Starts | When you ask the main assistant to make the Space better at its own work; after that, a weekly census on Mondays at 10:00 that skips weeks with nothing new | Every night at 03:30, only when there is new friction or an earlier change to look at |
+| Worked by | The lab working group: Director, Patcher, Verifier | One Agent, the Reviewer |
+| Reads | Where real work went wrong, how the nightly review's changes did, and the lab's own scorecard | Friction in real use: repeated tool failures, loops, detours, questions to you, reworks, one working group's reply sent back by another, Agents stuck in errors |
+| Changes | The smallest layer that failed: memory, a Skill, a role, a template or code | A lesson in memory or a Skill; for prompts, templates or the platform it writes a proposal instead |
+| How a change is judged | Before it ships: the failed step is replayed, then the target cases run beside the current version, then untuned cases, then sealed ones. It ships only if it clears the bar written down before the first reading | After it takes effect: each change is read before and after against the friction it targets, and the Reviewer undoes or reworks one that made things worse or did nothing by its deadline |
+| Where you see it | The Evolution matter's page: its figures, the change under test, the changes tried | The morning report: **Last night's review** and **Last week's reviews** |
 
-In the vocabulary of [A-Genetic Engineering](../a-genetic-engineering), this is directed evolution acting on the genes: observe the phenotype's failures, edit the genotype, verify.
+## What keeps it honest
+
+- **Evidence first.** Both loops start from what actually went wrong in this Space's work, and act only on what recurs with a mechanism they can name.
+- **Written down before it is read.** What a change should fix, what it must not break and by when are recorded before its first reading, so a result cannot be picked after the fact.
+- **Small and reversible.** One change at a time, at the smallest layer. The lab keeps the old version frozen; the nightly review's changes go through the **Action log**, and you can undo any of them from the morning report. The Reviewer's procedure tells it not to repeat a change you undid.
+- **No approval gate.** Inside the loop the Director decides, not you. The lab's instructions tell it to stop at a proposal rather than carry out a high-risk external side effect itself; that is the Agents' own rule, not a gate the host enforces. As everywhere in The One, nothing blocks a tool call: safety is the record and undo.
+- **Your own Space.** The official Space is read-only: there, neither loop can change anything, and the lab keeps what it finds as a proposal until you copy the Space.
+
+## In the language of A-Genetic Engineering
+
+Self-evolution is directed evolution acting on the genes: watch where the phenotype fails, edit the genotype at the smallest layer, verify, and keep only what helped. See [A-Genetic Engineering](../a-genetic-engineering) for the genes, and [Evolution: the lab and the nightly review](../../the-one-app/evolution) for how to start and follow both loops in the app.
