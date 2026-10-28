@@ -9,7 +9,22 @@ Agents work on their own and come to you only when they decide they need you. No
 
 ## Needs you
 
-Open **Needs you** from the sidebar; the number beside it counts what is still open. The page has three columns:
+Open **Needs you** from the sidebar. The number beside it counts what waits for you, and it is the same number everywhere: on the strip above the main assistant's conversation, in the morning report and, on a Mac, on the Dock icon.
+
+The page lists those things first (for example **3 waiting on you**), in the order they came, as the same cards the strip opens. You handle each one on its card:
+
+| Card | What waits | What you can do |
+| --- | --- | --- |
+| **Waiting for your review** | A delivery that waits for your verdict. | **Accept**, **Rework** or **Give up**; **Evidence** opens its evidence pack. |
+| **Not finished** | A delivery that did not finish. | **Rework** or **Give up**; **Evidence**. |
+| **Waiting for your answer** | A question an Agent asked you. | Answer it (see below), or put it away with **No need to answer**. |
+| **Stopped** | A run that failed, with no delivery of it waiting for your verdict. | **Take a look** opens the conversation it came from; **Leave it** puts it away. |
+| **Needs your sign-in** | A model connection that refuses its groups' work (a key, access or the plan) until you fix it, with the matters that wait on it. | **Fix it in Settings** opens that connection. |
+| **Paused at its limit** | A matter whose work used up the unattended limit you set. | **Resume**, or **Open the matter** to change the limit. |
+
+A delivery stays here until it has a verdict, even once you have read it. What the main assistant tells you without asking anything is news, not something that waits.
+
+Below the cards is the record of what reached you, in three columns:
 
 | Column | What lands there |
 | --- | --- |
@@ -17,20 +32,20 @@ Open **Needs you** from the sidebar; the number beside it counts what is still o
 | **Completed** | Work an Agent handed back, and runs that finished. |
 | **Failed** | Deliveries that did not finish, and runs that failed. |
 
-Each card names the Agent or run, says when it came and which matter it belongs to (**Matter: …** opens that matter's board). **Open** takes you to the conversation it came from.
+Each item in the record names the Agent or run, says when it came and which matter it belongs to (**Matter: …** opens that matter's board). **Open** takes you to the conversation it came from. An item that also waits above has **Handle it above**, which takes you to its card, instead of its own answer or verdict buttons.
 
 To answer a question:
 
 - A choice shows its options as buttons. A confirmation shows **Confirm** and **Decline**, or the labels the Agent gave them.
-- A question in words has a reply box: write your answer and press **Reply** (or Ctrl/⌘ + Enter).
-- A few kinds of question can only be answered in their conversation. The card says so, and **Open** takes you there.
+- A question in words has **Write an answer…**: write your answer in the box it opens and press **Reply** (or Ctrl/⌘ + Enter).
+- A few kinds of question can only be answered in their conversation. The card says so, and **Open**, on its item in the record, takes you there.
 - **Keeps working while it waits** means the Agent did not stop for your answer.
 
-Your answer goes straight to the Agent that asked, and it carries on. The same questions also appear on the matter's board and in **Needs you** on the home page; answering in any of these places is the same.
+Your answer goes straight to the Agent that asked, and it carries on. The same questions also appear above the main assistant's conversation and on the matter's board; answering in any of these places is the same.
 
 To clear the page, **Put away** closes a question you will not answer (if the Agent asked with a card, it is told the card was cancelled), and **Mark read** closes a delivery or failure you have seen. **Show handled** brings closed items back, each with how it ended: **Answered**, **Read**, **Put away**, **Ended unanswered** or **Replaced by a newer result**.
 
-{/* screenshot pending: ![Needs you with two questions, one delivery and one failure](/docs-assets/images/0.5/en/needs-you-inbox.png) */}
+{/* screenshot pending: ![Needs you: what waits for you as cards on top, and the record of questions, deliveries and failures below](/docs-assets/images/0.5/en/needs-you-inbox.png) */}
 
 Two readings at the top cover the last 7 days. The first-pass rate is the share of work you accepted at its first delivery, counting only work you judged yourself. The other counts how often you were asked per delivered run. Fewer questions and more first passes mean the Agents get the work right on their own.
 
@@ -40,7 +55,7 @@ When a working group on a matter asks something, the main assistant hears it fir
 
 ### Notifications
 
-Each question, delivery and failure is told to you once: a system notification while The One is in the background, a message in the window while it is in front. More than three at once arrive as one notification. The tray menu shows how many are open and lists up to five of them, and on a Mac the Dock icon shows the count.
+Each question, delivery and failure is told to you once: a system notification while The One is in the background, a message in the window while it is in front. More than three at once arrive as one notification. The tray menu shows how many are open and lists up to five of them, and on a Mac the Dock icon shows how many things wait for you.
 
 Some deliveries come in quietly. They are in Needs you and the morning report, without a notification:
 
@@ -52,7 +67,7 @@ Questions and failures never come in quietly. A question that someone else usual
 
 ## Judging a delivery
 
-A delivery waiting for you has three buttons. They are the same in Needs you, on the matter's board, in the morning report and on the delivery's evidence page:
+A delivery waiting for you has three buttons. They are the same above the main assistant's conversation, in Needs you, on the matter's board, in the morning report and on the delivery's evidence page:
 
 | Button | What happens |
 | --- | --- |
@@ -79,7 +94,7 @@ About 15 seconds after each delivery, The One writes an evidence pack for it, so
 | --- | --- |
 | **Conclusion** | What the Agent that delivered wrote, marked as its own account and not evidence. |
 | **Still waiting for you** | Questions the same working group still has open for you on this matter, with a link to answer them. |
-| **Your verdict** | Whether accepting now counts as a first pass, and the three buttons. |
+| **Your verdict** | Once it is judged: where it stands, what you said for a rework, and **Change your mind**. While it still waits for you, its card sits under the page's header instead, with the three buttons and whether accepting now counts as a first pass. |
 | **Checks** | Whether tests ran, whether the last one passed, whether files changed after it, and whether every file the Agent names exists. |
 | **What changed** | Files created, modified and deleted since the work began, with the diff. |
 | **Test and check commands** | Tests, builds, type checks and lints with their folder, exit code and output. **Copy command** copies one to run again. |

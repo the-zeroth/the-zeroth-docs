@@ -41,7 +41,7 @@ curl -fsSL https://updates.the-zeroth.com/server/linux/install.sh | sh -s -- --v
 
 `provider` 可以是 `anthropic`、`openai`、`openrouter`、`gemini` 或 `custom`。连接的 id 就是它的 `id`，没写时是供应商名。`custom` 连接要写 `base_url`，`api_family` 是 `openai-chat-completions`（默认）、`openai-responses` 或 `anthropic-messages` 之一。`"auth_type": "none"` 给不需要凭据的自定义服务用，比如同一台机器上的 Ollama、LM Studio 或 vLLM。环境变量和文件里有同一个 id 的连接时，以环境变量为准。服务器不需要 The Zeroth 账号，也没有官方连接：它用的模型都来自这些凭据。
 
-用 `--model` 以 `供应商/模型` 的形式指定模型，比如 `anthropic/claude-sonnet-4-5`；用 `--effort` 指定推理强度（`none`、`minimal`、`low`、`medium`、`high`、`xhigh` 或 `max`）。这几项也可以写在 `THE_ONE_MODEL`、`THE_ONE_EFFORT`、`THE_ONE_CONNECTION` 里，或者写成 `~/.config/the-one-server/settings.json` 里的 `model`、`effort`、`connection`。命令行参数优先于环境变量，环境变量优先于文件。Agent 激活过的模型预设也优先于文件，直到命令行参数或环境变量指定了模型。没指定连接时，先用凭据文件的 `default`，其次是和模型前缀同一家供应商的连接，最后是第一个连接。
+用 `--model` 以 `供应商/模型` 的形式指定模型，比如 `anthropic/claude-sonnet-4-5`；用 `--effort` 指定推理强度（`none`、`minimal`、`low`、`medium`、`high`、`xhigh` 或 `max`）。这几项也可以写在 `THE_ONE_MODEL`、`THE_ONE_EFFORT`、`THE_ONE_CONNECTION` 里，或者写成 `~/.config/the-one-server/settings.json` 里的 `model`、`effort`、`connection`。命令行参数优先于环境变量，环境变量优先于文件。Agent 激活过的模型预设也优先于文件，直到命令行参数或环境变量指定了模型。没指定连接时，先用凭据文件的 `default`，其次是和模型前缀同一家供应商的连接，最后是第一个连接。对 OpenAI（包括用 ChatGPT 账号登录的连接）、Anthropic 和 Gemini，前缀只用来选连接：它们的接口只认不带前缀的 id，所以前缀就是所用连接的供应商时，服务器会去掉它（`anthropic/claude-sonnet-4-5` 交给 Anthropic 时是 `claude-sonnet-4-5`）。OpenRouter 和自定义服务器收到的是你写的原样，所以照那家服务的写法写 id，斜杠也照写。
 
 Agent 看不到这些密钥：服务器只在内存里把它们交给后端，Agent 运行的命令的环境变量里也没有。
 

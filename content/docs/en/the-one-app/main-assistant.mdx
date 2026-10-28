@@ -53,7 +53,7 @@ Its account starts with the conclusion against what you asked, not with "done": 
 
 ### Verdicts are yours
 
-You judge each delivery with **Accept**, **Rework** or **Give up**, on the board, in Needs you or in the morning report (see [Needs you, deliveries and the morning report](./needs-you)). You can also just tell the assistant ("good", "change the colours", "drop it"): it records your verdict and, for a rework, passes your words to the group. It never judges a delivery for you, and closing a matter is not a verdict.
+You judge each delivery with **Accept**, **Rework** or **Give up**, above this conversation, on the board, in Needs you or in the morning report (see [Needs you, deliveries and the morning report](./needs-you)). You can also just tell the assistant ("good", "change the colours", "drop it"): it records your verdict and, for a rework, passes your words to the group. It never judges a delivery for you, and closing a matter is not a verdict.
 
 ### Groups that stall
 
@@ -73,9 +73,10 @@ It can improve the Space itself too. Ask for a new template, role or Skill and i
 
 ## The home page
 
-The conversation fills the left of the home page. Beside it:
+The conversation fills the left of the home page. Above it, a strip says how many things wait for you (for example **3 waiting for you**) and has a button for each that says what to do and where, such as **Review** or **Answer** with the matter's name; after the first five, a button such as **2 more** shows the rest. A button opens that thing's card under the strip, where you handle it on the spot: judge a delivery, answer a question, go and fix a model connection, or resume a matter paused at its limit. A handled card leaves the strip, and with nothing waiting the strip is gone. These are the same cards as in Needs you and on the matter's board, and the strip's count is the number beside **Needs you** in the sidebar; see [Needs you, deliveries and the morning report](./needs-you).
 
-- **Needs you**: matters paused at a usage limit you set, model connections only you can fix (with how many matters each holds up), then open questions, deliveries and runs that did not finish, newest first. It shows six at most; the rest are on the Needs you page. Answering here, on the matter's board or in the conversation is the same.
+Beside the conversation:
+
 - **Going on**: the matters a working group is at, or that are hitting errors, each with its status line.
 - **Since the last morning report**: how many deliveries, questions and unfinished runs came in since you last read it, with **Read the morning report** below.
 - **Show closed** lists your closed matters, and **Open a matter yourself** opens one by hand.
@@ -84,7 +85,7 @@ Open a matter yourself when you want to collect notes before you hand something 
 
 Looking at the conversation marks what the assistant handed back as read.
 
-{/* screenshot pending: ![The home page: the conversation with the main assistant, and what needs you beside it](/docs-assets/images/0.5/en/main-assistant-home.png) */}
+{/* screenshot pending: ![The home page: the conversation with the main assistant, what waits for you above it and what is going on beside it](/docs-assets/images/0.5/en/main-assistant-home.png) */}
 
 ## Writing to it
 
@@ -93,7 +94,7 @@ Looking at the conversation marks what the assistant handed back as read.
 - Attach images or files with the paperclip (**Add image or file**), by dropping them on the conversation or by pasting. Images are compressed to fit 5 MB; other files can be up to 10 MB.
 - **Templates** inserts a request template from your Space for you to fill in, such as **Implement a feature**, **Diagnose and fix a problem**, **Review and verify work** or **One-person company**.
 
-Your own words show as your messages, including what you send from your phone (marked **From your phone**). Messages that reached the assistant from elsewhere show as cards that name their source, such as **Trigger** or **Matter notice** (with **Open this matter**), so they never mix with yours. To talk to the assistant from your phone, see [Phone channel and outside callers](./remote).
+Your own words show as your messages, including what you send from your phone (marked **From your phone**). The assistant's replies show in full; what it did on the way folds into one line of plain words that opens into one line per step. When it asks you something, the question is marked **Waiting for your answer**, and **Reply to this** makes what you send next the answer. Messages that reached the assistant from elsewhere show as one line saying what happened, so they never mix with yours: a working group asked a question, handed something in, could not finish, keeps failing or stopped on a matter (**Open** goes to that matter), a trigger came due, or an outside program wrote. While the assistant works, a line above the composer says what it is doing, and **Stop** interrupts it. To talk to the assistant from your phone, see [Phone channel and outside callers](./remote).
 
 ## Before a model is set up
 
