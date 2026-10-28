@@ -27,7 +27,7 @@ Because the main assistant chooses by the description, write it for that reader:
 
 The pencil next to the template's name edits its ID and description. **Start a task** runs the template once, outside any matter, the way **New Graph** does in All runs: handy for trying it out.
 
-{/* screenshot pending: ![The Graph editor with an edge selected](/docs-assets/images/0.5/en/working-group-templates-editor.png) */}
+![The Graph editor with an edge selected](/docs-assets/images/0.5/en/working-group-templates-editor.png)
 
 ## What an edge means
 
@@ -54,7 +54,7 @@ The toolbar above the canvas holds the template's default model: a model preset 
 - Some things never come across. Imported roles use your default model, and the report names the model the file asked for. Tools The One has no match for are listed with the agents that used them. Secrets stay out of the template; the report names them only.
 - The One has no engine for fixed steps, so a sequence of steps (an Agent Spec Flow, a Dify workflow, a Declarative Workflow with branches) becomes a lead Agent whose prompt lists the steps in order. The agents those steps call become members, and the lead hands their steps to them.
 
-{/* screenshot pending: ![Importing a Dify DSL file with its conversion report](/docs-assets/images/0.5/en/working-group-templates-import.png) */}
+![Importing a Dify DSL file with its conversion report](/docs-assets/images/0.5/en/working-group-templates-import.png)
 
 **Export** writes the last saved version as Agent Spec 26.1.2 (YAML or JSON), a Dify DSL file, or a Declarative Workflow that Microsoft's `agent-framework-declarative` Python package runs. Skills, Plugins, model settings and the default model preset stay behind, and the conversion report says so. The file keeps The One's own edges in its metadata, so importing it back unchanged gives you the same template.
 

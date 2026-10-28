@@ -27,7 +27,7 @@ description: 工作组模板是一张由角色和连线组成的 Graph，主助�
 
 模板名字旁边的铅笔用来改它的 ID 和描述。**开始任务**在任何事项之外把模板跑一次，和所有运行里的**新建 Graph** 一样，适合试一试模板。
 
-{/* screenshot pending: ![选中一条连线的 Graph 编辑器](/docs-assets/images/0.5/zh/working-group-templates-editor.png) */}
+![选中一条连线的 Graph 编辑器](/docs-assets/images/0.5/zh/working-group-templates-editor.png)
 
 ## 连线是什么意思
 
@@ -54,7 +54,7 @@ description: 工作组模板是一张由角色和连线组成的 Graph，主助�
 - 有些东西从来不转过来。导入的角色用你的默认模型，报告里写着文件原本要的是哪个模型。The One 里没有对应的工具，会连同用它的 agent 一起列在报告里。密钥不会进模板，报告里只写它们的名字。
 - The One 没有跑固定步骤的引擎，所以一串固定步骤（Agent Spec 的 Flow、Dify 的工作流、带分支的 Declarative Workflow）会变成一个领头的 Agent，它的提示词按顺序写出每一步；这些步骤里调用的 agent 变成团队成员，由领头的把那一步交给它们。
 
-{/* screenshot pending: ![导入 Dify DSL 文件和它的转换报告](/docs-assets/images/0.5/zh/working-group-templates-import.png) */}
+![导入 Dify DSL 文件和它的转换报告](/docs-assets/images/0.5/zh/working-group-templates-import.png)
 
 **导出**把最近一次保存的版本写成 Agent Spec 26.1.2（YAML 或 JSON）、Dify DSL 文件，或者微软的 Python 包 `agent-framework-declarative` 能直接运行的 Declarative Workflow。技能、插件、模型设置和默认模型预设不会带出去，转换报告里会写明。文件的元数据里存着 The One 自己的连线，所以原样导入回来，还是同一个模板。
 
