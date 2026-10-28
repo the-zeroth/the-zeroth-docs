@@ -16,7 +16,7 @@ Experience without structure drifts; structure without heredity dissolves.
 
 ## The genotype: what a Space writes down
 
-In The One, a team is written down **in full** in a Definition Space, and you find each part of it under **Capabilities**:
+In The One, a team is written down **in full** in a Definition Space, and you find each part of it under **Teams and tools**, where each working group's card opens its template:
 
 - **Working-group templates** (`workflows/*.yaml`, the Graphs): nodes and edges. Each node binds a role and can add instructions for that node alone; each edge's text *is* the handoff instruction: when to hand off, what to pass, what the other side should produce. This is the team's **body plan**.
 - **Roles** (`agents/*.yaml`, the Agent presets): each member's instructions, its model preset or the default model, reasoning, built-in tools and MCP servers, Skills, prompts and Plugins, defined independently of every other member. These are the **cell types**.
@@ -28,9 +28,9 @@ Taken separately, the previous generation had prototypes of all of these. The fu
 
 ## The phenotype: a working group on a matter
 
-Genotype and phenotype come apart. The template is the genotype. When the **main assistant** gives the work of a **matter** to a template, The One starts a new run of it: a **working group**, the phenotype, at work on that matter's board. One template can be at work for several matters at once; the Capabilities page lists them under **Templates at work for matters**.
+Genotype and phenotype come apart. The template is the genotype. When the **main assistant** gives the work of a **matter** to a template, The One starts a new run of it: a **working group**, the phenotype, at work on that matter's board. One template can be at work for several matters at once; on **Teams and tools**, its working group's card names them, as **Working for 2:** followed by the matters' titles.
 
-{/* screenshot pending: ![The Capabilities page with templates at work for matters](/docs-assets/images/0.5/en/capabilities-overview.png) */}
+{/* screenshot pending: ![Teams and tools, each working group's card naming the matters it works for](/docs-assets/images/0.5/en/capabilities-overview.png) */}
 
 Expression can continue inside a group: with `create_subgraph` an Agent runs another template as a sub-Graph of its group, and can open that part of the work as a sub-matter with its own board. Groups sleep, pause and end; the gene remains, and the next expression reproduces the structure and configuration verbatim. (Faithful means the *configuration* is reproduced, not the behaviour: model output is still stochastic, and one gene does not guarantee two identical runs.)
 
@@ -41,11 +41,11 @@ The environment can change without touching the gene. The main assistant can giv
 None of this has to land on you. [The main assistant](../../the-one-app/main-assistant) of your Space decides which gene to express and when one should change:
 
 - **Selection.** For each matter it picks the template that fits from the Space's templates, which are listed in its context with what each is for, and prefers one that has done this kind of work well.
-- **Authoring.** When no template fits and the work will come back, it has a new one written: it gives the authoring to the `atlas` working group, or edits the definitions itself with the definition-authoring Skill.
+- **Authoring.** When no template fits and the work will come back, it has a new one written: it gives the authoring to the Definitions studio, the `atlas` working group, or edits the definitions itself with the definition-authoring Skill.
 - **Observation.** It holds each delivery against what you asked for, answers a group's questions or leaves them to you, and hears when a group stops. The verdict on a delivery stays yours: **Accept**, **Rework** or **Give up**.
 - **Directed evolution.** When you ask the Space to get better at its own work, it opens the evolution matter (below).
 
-The editing bench underneath is the same for every Agent. It reads the whole Space at its exact revision, composes a batch of changes, can dry-run the batch and validate it against the schemas, the references between definitions, tool and MCP bindings and Plugin availability, and then commits it as one change. Every edit an Agent makes is recorded in the **Action log** and can be undone. The editors under Capabilities and the [Atlas](../../the-one-app/capabilities/atlas) change the same files.
+The editing bench underneath is the same for every Agent. It reads the whole Space at its exact revision, composes a batch of changes, can dry-run the batch and validate it against the schemas, the references between definitions, tool and MCP bindings and Plugin availability, and then commits it as one change. Every edit an Agent makes is recorded in the **Action log** and can be undone. The editors under Teams and tools and the [Atlas](../../the-one-app/capabilities/atlas) change the same files.
 
 ## Directed evolution
 

@@ -5,13 +5,13 @@ description: A working-group template is a Graph of roles and edges that the mai
 
 A **working-group template** says how one kind of work is shared out: which roles take part, who may hand work to whom, and how the result gets checked. When the main assistant gives a matter's work away, it starts a new run of a template, and that run is a **working group**. See [Working groups](../working-groups).
 
-Templates are Graphs. The editor, its tab (**Graph**) and the runs under **Settings › All runs** still use that word. You find them in **Capabilities › Working-group templates**.
+Templates are Graphs. The editor, its tab (**Graph**) and the runs in All runs still use that word. On **Teams and tools**, **See what it can do** on a working group's card opens its template in this editor, whose list (**Graphs**) has the Space's templates; the **Graph** tab beside the other editors opens it too.
 
 ## How a template becomes a working group
 
 - The main assistant sees every template in the Space with the first 800 characters of its description, and picks one for each piece of work. Software work in a project goes to `polished_software_dev`, a studio's kind of work to that studio, and ordinary multi-step work to `chat`.
 - Each assignment starts a new run of the template, in the folder the work belongs to. Your request, in your own words, goes to the template's entry Agent, and a **Working group** card on the matter's board follows the group from then on.
-- One template can have several groups at work at once, on different matters. Capabilities lists them under **Templates at work for matters**.
+- One template can have several groups at work at once, on different matters. Its card on Teams and tools names them, as **Working for 2:** followed by the matters' titles.
 - The main assistant can run one group on other models without changing the template, for example when you ask for a stronger model on one piece of work.
 - Groups formed after you save a template use the new version. Changes to a role also reach Agents already at work, from their next turn.
 
@@ -25,7 +25,7 @@ Because the main assistant chooses by the description, write it for that reader:
 4. Connect two nodes by dragging from one node's output to the other's input, then select the edge and write its handoff text (below).
 5. Choose **Apply Changes** in the inspector, then **Save** (Cmd/Ctrl+S).
 
-The pencil next to the template's name edits its ID and description. **Start a task** runs the template once, outside any matter, the way **New Graph** does in Settings › All runs: handy for trying it out.
+The pencil next to the template's name edits its ID and description. **Start a task** runs the template once, outside any matter, the way **New Graph** does in All runs: handy for trying it out.
 
 {/* screenshot pending: ![The Graph editor with an edge selected](/docs-assets/images/0.5/en/working-group-templates-editor.png) */}
 
@@ -62,24 +62,24 @@ In the read-only official Space you can export, but not preview or import.
 
 ## The templates in the official Space
 
-| Template | What it does |
-| --- | --- |
-| `chat` | The general working group: one assistant that does ordinary multi-step work directly with tools. Built in. |
-| `polished_software_dev` | The software team. A solution lead builds; checkers started beside it turn the request, the project's conventions, reported symptoms and the places where separately specified features meet into checks; a developer node takes TaskBoard tasks. |
-| `deep_research` | Research and synthesis, with researcher branches on a TaskBoard for independent evidence. |
-| `frontend_design_studio` | Frontend design and build: a design director, an implementer and an independent design reviewer. |
-| `image_generation_studio` | Images with the Image Generation Plugin: a coordinator and a runner. |
-| `video_production_studio` | Video: a producer, a creative director, a render engineer and an independent QA reviewer. |
-| `cinematic_film_production_studio` | A six-role film studio, from story and visual direction to reviewed media. |
-| `strategic_scifi_drama_studio` | A six-role studio for strategic science-fiction drama. |
-| `blender_scene_studio` | Blender scenes: a director, a builder (the only one who changes the scene) and a reviewer. |
-| `product_evaluation_lab` | Product experience evaluation: a director, simulated users on the real product, and an auditor of their evidence. |
-| `site_deployment_ops` | Putting a site online with its domain, payment links and mail: an engineer makes the changes, an orchestrator checks them independently. |
-| `storefront_studio`, `store_operator`, `store_reviewer` | A one-person company: building the shop, running it day to day (orders, mail, refunds), and the weekly review. |
-| `atlas` | Authoring templates, roles, prompts, Skills and Plugins. Built in. |
-| `self_evolution_lab` | The evolution matter's lab: a Director, a Patcher and a Verifier. Built in. |
+| Template | In the app | What it does |
+| --- | --- | --- |
+| `chat` | **General group** | One assistant that does ordinary multi-step work directly with tools. Built in. |
+| `polished_software_dev` | **Software team** | A solution lead builds; checkers started beside it turn the request, the project's conventions, reported symptoms and the places where separately specified features meet into checks; a developer node takes TaskBoard tasks. |
+| `deep_research` | **Research group** | Research and synthesis, with researcher branches on a TaskBoard for independent evidence. |
+| `frontend_design_studio` | **Frontend design studio** | Frontend design and build: a design director, an implementer and an independent design reviewer. |
+| `image_generation_studio` | **Image studio** | Images with the Image Generation Plugin: a coordinator and a runner. |
+| `video_production_studio` | **Video studio** | Video: a producer, a creative director, a render engineer and an independent QA reviewer. |
+| `cinematic_film_production_studio` | **Film studio** | A six-role film studio, from story and visual direction to reviewed media. |
+| `strategic_scifi_drama_studio` | **Sci-fi drama studio** | A six-role studio for strategic science-fiction drama. |
+| `blender_scene_studio` | **3D scene studio** | Blender scenes: a director, a builder (the only one who changes the scene) and a reviewer. |
+| `product_evaluation_lab` | **Product evaluation lab** | Product experience evaluation: a director, simulated users on the real product, and an auditor of their evidence. |
+| `site_deployment_ops` | **Site launch team** | Putting a site online with its domain, payment links and mail: an engineer makes the changes, an orchestrator checks them independently. |
+| `storefront_studio`, `store_operator`, `store_reviewer` | **Storefront studio**, **Store operations**, **Store weekly review** | A one-person company: building the shop, running it day to day (orders, mail, refunds), and the weekly review. |
+| `atlas` | **Definitions studio** | Authoring templates, roles, prompts, Skills and Plugins. Built in. |
+| `self_evolution_lab` | **Self-improvement lab** | The evolution matter's lab: a Director, a Patcher and a Verifier. Built in. |
 
-Built-in templates are not shown in the list, but the main assistant can use them. Two more built-ins are run by the app itself: `main_assistant` and `nightly_review`. See [Capabilities](../capabilities).
+Built-in templates are not shown in the list, but the main assistant can use them. Two more built-ins are run by the app itself: `main_assistant` and `nightly_review`. See [Teams and tools](../capabilities).
 
 ## Designing a template
 

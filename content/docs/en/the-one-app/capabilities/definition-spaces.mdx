@@ -5,7 +5,7 @@ description: A Definition Space holds a whole set of templates, roles, Skills an
 
 A **Definition Space** is one complete set of what your Agents work with: working-group templates, roles, prompts, Skills, external tools (MCP), request templates and the Space's memory, together with the list of Plugins its roles use. You can keep as many Spaces as you like, for example one per client or kind of work, and they do not affect each other.
 
-Manage them in **Capabilities › Definition Spaces**. The Space switcher in the title bar shows the active Space and switches it in one click; **Manage Spaces...** at the bottom of it opens the page.
+Manage them on the **Definition Spaces** page. The Space switcher in the title bar shows the active Space and switches it in one click; **Manage Spaces...** at the bottom of it opens the page. The page also sits beside **Plugins** in the Extension Center (**Teams and tools › Plugins**), and with the developer view on, **Teams and tools** lists it under **In the developer view**.
 
 {/* screenshot pending: ![The Definition Spaces page with the official Space and a copy](/docs-assets/images/0.5/en/definition-spaces-page.png) */}
 
@@ -28,14 +28,14 @@ Only one Space is active at a time, and the app shows that Space's work:
 - matters, working groups and **Needs you**;
 - triggers: another Space's triggers wait until you switch back to it, and then by default catch up once;
 - the morning report and the nightly review;
-- the runs in Settings › All runs.
+- the runs in All runs.
 
-Some things belong to the computer instead: model presets and connections (see [Models](./models)), installed Plugins (each Space chooses which ones it uses), and **Settings › Action log**, which covers every Space so that undo can reach everything (see [Action log, undo and stopping](../action-log)).
+Some things belong to the computer instead: model presets and connections (see [Models](./models)), installed Plugins (each Space chooses which ones it uses), and **Settings › Data and undo › Action log**, which covers every Space so that undo can reach everything (see [Action log, undo and stopping](../action-log)).
 
 ## Switch, create, duplicate and delete
 
 - **Switch here**, or the title-bar switcher, changes the active Space at once, without a restart. If Agents are still at work, The One says how many and offers **Stop and switch**: everything running is stopped first.
-- **New Space** starts an empty Space with the built-ins every Space carries: the main assistant, the general `chat` template, Atlas, the nightly review and the evolution lab.
+- **New Space** starts an empty Space with the built-ins every Space carries: the main assistant, the General group (`chat`), Atlas, the nightly review and the evolution lab.
 - **Duplicate** copies a Space together with its memory and its choice of Plugins.
 - **Edit** renames a Space of your own or changes its description.
 - **Delete** removes a Space of your own and all of its definitions, for good. The active Space and the official one cannot be deleted.

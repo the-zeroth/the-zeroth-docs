@@ -9,24 +9,24 @@ A working group is a team of Agents doing the work of one of your matters: a run
 
 A working-group template describes how one kind of work is shared out: which roles, in what order, and how the result is checked (see [Working-group templates](./capabilities/working-group-templates)). A working group is that template at work on a matter. When the main assistant gives a matter's work to a template, The One starts a new run of it in the folder the work belongs in, and the matter's board gets a **Working group** card for it.
 
-The official Space comes with templates for common kinds of work, among them:
+The official Space comes with templates for common kinds of work. On boards and pages the app names each group in plain words; the developer view adds the template's ID beside the name. Among them:
 
-| Template | What it is for |
-| --- | --- |
-| `polished_software_dev` | Software work in a code project. Its lead and checkers turn the requirements into tests as it builds. |
-| `deep_research` | Research and synthesis, with branches that gather evidence independently. |
-| `chat` | Ordinary multi-step work done directly with tools. |
-| `frontend_design_studio`, `image_generation_studio`, `video_production_studio`, `blender_scene_studio` | Studios for designed web pages, images, video and 3D scenes. |
-| `storefront_studio`, `store_operator`, `store_reviewer` | A one-person company: the storefront, the day-to-day operations and the weekly review. |
-| `site_deployment_ops` | Launching a website, with an independent final check. |
-| `atlas` | Writing new templates, roles, Skills and Plugins. |
-| `self_evolution_lab` | The lab that works the evolution matter. See [Evolution: the lab and the nightly review](./evolution). |
+| Working group | Template | What it is for |
+| --- | --- | --- |
+| **Software team** | `polished_software_dev` | Software work in a code project. Its lead and checkers turn the requirements into tests as it builds. |
+| **Research group** | `deep_research` | Research and synthesis, with branches that gather evidence independently. |
+| **General group** | `chat` | Ordinary multi-step work done directly with tools. |
+| **Frontend design studio**, **Image studio**, **Video studio**, **3D scene studio** | `frontend_design_studio`, `image_generation_studio`, `video_production_studio`, `blender_scene_studio` | Studios for designed web pages, images, video and 3D scenes. |
+| **Storefront studio**, **Store operations**, **Store weekly review** | `storefront_studio`, `store_operator`, `store_reviewer` | A one-person company: the storefront, the day-to-day operations and the weekly review. |
+| **Site launch team** | `site_deployment_ops` | Launching a website, with an independent final check. |
+| **Definitions studio** | `atlas` | Writing new templates, roles, Skills and Plugins. |
+| **Self-improvement lab** | `self_evolution_lab` | The lab that works the evolution matter. See [Evolution: the lab and the nightly review](./evolution). |
 
-A group can take more than one piece of work. When you want something else on the same matter, the main assistant gives it to the group already there, which keeps what it has learned. A group at work on one matter can also take another matter's work after its current work is handed back (see below). **Capabilities** lists the **Templates at work for matters**.
+A group can take more than one piece of work. When you want something else on the same matter, the main assistant gives it to the group already there, which keeps what it has learned. A group at work on one matter can also take another matter's work after its current work is handed back (see below). On **Teams and tools**, each group's card names the open matters it works for, such as **Working for 2:** followed by their titles (see [Teams and tools](./capabilities)).
 
 ## The working group card
 
-Each group on a matter has a card in the board's **Working groups** area. It shows:
+Each group on a matter has a card in the board's **Working groups** area, titled with the group's name, such as **Software team**. It shows:
 
 - Its state: **Working**, **Asking**, **Delivered**, **Failed**, **Not started** or **Queued**.
 - **Asked for**: the work it was given.
@@ -39,7 +39,7 @@ Its buttons are **Talk to this group** and **Pause** or **Resume**, and, when th
 
 ## The Working groups page
 
-The Working groups page, in the sidebar, lists the groups on the Space's open matters, by matter, with the matters that wait for you first. Groups on sub-matters show only on their boards. For each group you see its name, its state, what it was asked for and who talked to it last, with the buttons Talk to this group and **Open board**. The page reads the same cards as the boards, so the two always agree.
+The **Working groups** page lists the groups on the Space's open matters, by matter, with the matters that wait for you first. Open it with **See what each group is doing now** on Teams and tools; it has no place of its own in the sidebar. Groups on sub-matters show only on their boards. For each group you see its name in plain words, its state, what it was asked for and who talked to it last, with the buttons Talk to this group and **Open board**; the developer view adds the template's ID beside the name. The page reads the same cards as the boards, so the two always agree.
 
 {/* screenshot pending: ![The Working groups page: the groups on each open matter](/docs-assets/images/0.5/en/working-groups-page.png) */}
 

@@ -13,9 +13,9 @@ Writing a memory is a choice, not a routine step: Agents keep only what will hel
 
 **How Agents see it.** Before each turn, an Agent that holds the memory tools gets up to 20 memory cards, picked by how well they match the two latest requests it received (within a budget of about 1,600 tokens). A card shows the entry's description and where it came from; the Agent opens the full text only when it needs it, and can search all of memory by meaning. Entries that have expired or been replaced are left out of cards and searches, but stay on disk.
 
-In the official Space, the memory tools belong to the main assistant, the assistant of the general `chat` working group, the nightly Reviewer and the evolution lab's Director. Give a role of your own the memory tools in its editor, and it sees memory too.
+In the official Space, the memory tools belong to the main assistant, the assistant of the General group (`chat`), the nightly Reviewer and the evolution lab's Director. Give a role of your own the memory tools in its editor, and it sees memory too.
 
-**History and undo.** When an entry is changed or removed, its earlier version is kept: each entry keeps its last five versions in the Space. Every memory an Agent writes, changes or removes is also recorded in **Settings › Action log**, where you can put the old version back. See [Action log, undo and stopping](../action-log).
+**History and undo.** When an entry is changed or removed, its earlier version is kept: each entry keeps its last five versions in the Space. Every memory an Agent writes, changes or removes is also recorded in **Settings › Data and undo › Action log**, where you can put the old version back. See [Action log, undo and stopping](../action-log).
 
 ## Project notes and AGENTS.md
 
@@ -28,9 +28,9 @@ When an Agent works in a project folder, it also sees knowledge that belongs to 
 
 When an Agent's context fills up, meditation folds its history into a summary of what it found and decided (see [Meditation](../../multi-agent-architecture/more-possibilities/meditation)). Meditation does not write memory; its summaries are what later sessions can find. With an embedding model, an Agent that holds the memory tools gets up to three cards from other sessions' summaries in the same project when they clearly match what was just asked, each with the session's title and date. Agents can also search memory, project notes and these summaries in one go.
 
-## Settings › Memory recall
+## Settings › Data and undo › Memory recall
 
-Recall ranks by meaning when an embedding model is available, so a question in Chinese can find a memory written in English; without one, it ranks by keywords. **Settings › Memory recall** shows the model **In use** and lets you choose another under **Embedding model**:
+Recall ranks by meaning when an embedding model is available, so a question in Chinese can find a memory written in English; without one, it ranks by keywords. **Settings › Data and undo › Memory recall** shows the model **In use** and lets you choose another under **Embedding model**:
 
 - **Automatic (recommended)**: the first that works of an Ollama or LM Studio embedding model on this computer, the embeddings API of your default provider, and the built-in model.
 - **Built-in model**: `embeddinggemma-300m`, about 218 MB, downloaded the first time it is needed and then run on this computer's CPU, with no API and no network. Until the download finishes, results rank by keywords. `bge-m3`, about 586 MB, is the other built-in choice.
@@ -40,7 +40,7 @@ Recall ranks by meaning when an embedding model is available, so a question in C
 
 The **Index** section shows, for memory, project knowledge and session conclusions, how much is indexed and the progress of any indexing. **Rebuild index** clears every computed vector, then embeds again in the background what Agents searched in the last 30 days, which costs money when a provider's API does the work.
 
-{/* screenshot pending: ![Settings › Memory recall](/docs-assets/images/0.5/en/memory-recall.png) */}
+{/* screenshot pending: ![Settings › Data and undo › Memory recall](/docs-assets/images/0.5/en/memory-recall.png) */}
 
 ## Who writes memory
 

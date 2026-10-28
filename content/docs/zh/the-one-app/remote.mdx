@@ -13,7 +13,7 @@ The One 以网络 Agent 的身份进到你在 Agent Room（agentroom.chat）的�
 
 ### 连上
 
-1. 打开**设置 › 随身通道**。页面提示需要 **Agent Room Channel** 插件时，点**去安装**先装好它。The One 在房间里的身份加密存在这个插件的保险库里，Agent 和别的插件都拿不到。
+1. 打开**设置 › 手机和别的程序 › 随身通道**。页面提示需要 **Agent Room Channel** 插件时，点**去安装**先装好它。The One 在房间里的身份加密存在这个插件的保险库里，Agent 和别的插件都拿不到。
 2. 在 Agent Room 你的房间里点「接入 Agent」，把整段邀请文字（或只把 Agent 口令，样子是 XXXX-XXXX-XXXX）粘到 **Agent 口令或邀请文字**，点**连接**。
    - 有口令就直接进。建号有时要几分钟，这期间可以先离开这个页面。
    - 只有房间号时 The One 会去敲门，等房间的管理者在 Agent Room 网页上点「让它进来」。一个小时没人放行，这次敲门就作废。
@@ -21,7 +21,7 @@ The One 以网络 Agent 的身份进到你在 Agent Room（agentroom.chat）的�
 
 之后只有你的话会派活。房间里别人的消息一律忽略，只在页面上计个数。
 
-{/* screenshot pending: ![设置 › 随身通道：已连接、已绑定](/docs-assets/images/0.5/zh/remote-phone-channel.png) */}
+{/* screenshot pending: ![设置 › 手机和别的程序 › 随身通道：已连接、已绑定](/docs-assets/images/0.5/zh/remote-phone-channel.png) */}
 
 ### 在手机上怎么用
 
@@ -59,7 +59,7 @@ The One 以网络 Agent 的身份进到你在 Agent Room（agentroom.chat）的�
 
 ## 对外调用
 
-**设置 › 对外调用**让这台电脑上的程序把你的团队当工具用：列出团队、给一支团队派活、等它交付、回答它的提问。你正在 Claude Code 或 Codex 里写代码，想把部署、写文档或一套固定流程交给 The One 里的团队，又不想切窗口时，就用它。
+**设置 › 手机和别的程序 › 对外调用**让这台电脑上的程序把你的团队当工具用：列出团队、给一支团队派活、等它交付、回答它的提问。你正在 Claude Code 或 Codex 里写代码，想把部署、写文档或一套固定流程交给 The One 里的团队，又不想切窗口时，就用它。
 
 这里的团队是当前 Space 的工作组模板，自带的 chat 和 atlas 也在其中。每个程序用一个在这个页面发的令牌。
 
@@ -79,7 +79,7 @@ The One 以网络 Agent 的身份进到你在 Agent Room（agentroom.chat）的�
 
 入口只在本机 127.0.0.1 上收调用，默认端口 8014。发了令牌才打开，而且 The One 要开着才收得到。可以在页面上改端口，填 0 关掉入口；改了端口，已经加好的程序要用新地址重新加一次。
 
-{/* screenshot pending: ![设置 › 对外调用：一个令牌和 Claude Code 的命令](/docs-assets/images/0.5/zh/remote-outside-callers.png) */}
+{/* screenshot pending: ![设置 › 手机和别的程序 › 对外调用：一个令牌和 Claude Code 的命令](/docs-assets/images/0.5/zh/remote-outside-callers.png) */}
 
 ### 程序能做什么
 

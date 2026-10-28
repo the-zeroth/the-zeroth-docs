@@ -1,48 +1,60 @@
 ---
-title: Capabilities
-description: "What your Space's work is done with: working-group templates, roles, Skills, prompts, external tools, models and Plugins, and who can change them."
+title: Teams and tools
+description: "The working groups the main assistant picks from, what each does and which matters it works for, and the Plugins, Skills, roles, prompts, external tools and models the work is done with."
 ---
 
-**Capabilities** is where you see what the work in your Space is done with: the templates that working groups are formed from, the roles that make them up, their Skills, prompts and external tools, the models they think with and the Plugins that extend them. The main assistant chooses among these for every matter; you come here to look at one or to change it.
+**Teams and tools** is where you see the teams the main assistant picks from for each matter, what each one does and which matters it works for, and what the work is done with: Plugins and their apps, Skills, roles, prompts, external tools and models. You come here to look at a team or a tool, or to change one.
 
-**Capabilities** sits near the bottom of the sidebar, above **Apps** and **Settings**.
+**Teams and tools** sits near the bottom of the sidebar, above **Settings**. **Apps** sits between them once a Plugin brings an app you can open.
 
-{/* screenshot pending: ![The Capabilities page](/docs-assets/images/0.5/en/capabilities-overview.png) */}
+{/* screenshot pending: ![The Teams and tools page: the working groups, then Plugins and apps, then ways of working, roles and models](/docs-assets/images/0.5/en/capabilities-overview.png) */}
 
-## Three groups, ten places
+## Working groups
 
-The page sorts what a Space works with into three groups: **Working groups**, **Know-how and models**, and **Plugins and Spaces**. Each place says how much it holds, such as **Templates: 13**, or **None yet**. Select a place to open its editor.
+The page starts with the working groups, one card for each. A card shows:
 
-### Working groups
+- the group's name in plain words, such as **Software team**, and what it does in a line;
+- how many roles it has, such as **Roles: 4**;
+- the open matters it works for, such as **Working for 2:** followed by their titles, each opening its board; or **Not working on anything now**;
+- **See what it can do**, which opens its template in the editor of working-group templates (see [Working-group templates](./working-group-templates)).
 
-| Place | What it holds | Page |
-| --- | --- | --- |
-| **Working-group templates** | How one kind of work is shared out: which roles take part, who hands work to whom, and how the result is checked. | [Working-group templates](./working-group-templates) |
-| **Roles** | Each Agent of a working group: what it does, and which model, prompts, Skills, tools and Plugins it uses. | [Roles](./roles) |
-| **Atlas** | Templates, roles and prompts on one canvas, to see how they connect. | [Atlas](./atlas) |
+The groups at work come first, the one working for the most matters first; then the official Space's groups in a fixed order, broad work first, and your own after them. Six cards show at first, and **See all** (such as **See all 13**) shows the rest. **See what each group is doing now** opens the Working groups page, with each group on your open matters and what it is doing (see [Working groups](../working-groups)).
 
-### Know-how and models
+The built-in groups, such as the General group, are not in the list of templates, so one gets a card only while it works for a matter, without a role count or **See what it can do**. The main assistant itself and the nightly review are not teams to pick, so they have no card.
 
-| Place | What it holds | Page |
-| --- | --- | --- |
-| **Skills** | Ways of working written down, which a role opens when it needs them. | [Skills and prompts](./skills-and-prompts) |
-| **Prompts** | Longer instructions and rules that several roles share. | [Skills and prompts](./skills-and-prompts) |
-| **External tools (MCP)** | MCP servers that connect Agents to outside services and data. | [External tools (MCP)](./mcp) |
-| **Models** | Model presets, and the default model for Agents that name none. This place opens **Settings › Default model**. | [Models](./models) |
+## Where the tools are
 
-### Plugins and Spaces
+Below the working groups, the page leads to the editors of what the work is done with. Each place says how much it holds, such as **Roles: 12**, or **None yet**.
+
+### Plugins and apps
 
 | Place | What it holds | Page |
 | --- | --- | --- |
 | **Plugins** | Official and local Plugins, with the tools and connections they bring. | [Plugins and Apps](./plugins) |
 | **Apps** | The application screens that Plugins bring. **Apps** in the sidebar opens them too. | [Plugins and Apps](./plugins) |
+
+### Ways of working, roles and models
+
+| Place | What it holds | Page |
+| --- | --- | --- |
+| **Skills** | Ways of working written down, which a role opens when it needs them. | [Skills and prompts](./skills-and-prompts) |
+| **Roles** | Each Agent of a working group: what it does, and which model, prompts, Skills, tools and Plugins it uses. | [Roles](./roles) |
+| **Prompts** | Longer instructions and rules that several roles share. | [Skills and prompts](./skills-and-prompts) |
+| **External tools (MCP)** | MCP servers that connect Agents to outside services and data. | [External tools (MCP)](./mcp) |
+| **Models** | Model presets, and the default model for Agents that name none. This place opens **Settings › Models and sign-in › Default model**. | [Models](./models) |
+
+### In the developer view
+
+With the developer view on (turn it on in **Settings › Developer**), a last section, **In the developer view**, adds what developers look at:
+
+| Place | What it holds | Page |
+| --- | --- | --- |
+| **Atlas** | Templates, roles and prompts on one canvas, to see how they connect. | [Atlas](./atlas) |
 | **Definition Spaces** | Whole sets of templates, roles and settings: switch, copy, import and export them. | [Definition Spaces](./definition-spaces) |
+| **All runs** | Every run as it was recorded: sessions, sub-Graphs and their Agents, with each Agent's messages and context. | [All runs (developer view)](../settings/all-runs) |
+| **Evaluations** | Fixed tasks that test the working groups, to see whether a change made them better or worse. | [Settings](../settings) |
 
-## Templates at work, and all runs
-
-While working groups are busy, the Working groups section lists **Templates at work for matters**: each template that has a group working, asking or queued on an open matter, followed by those matters. Select a matter to open its board. The templates line counts them too, as in **Templates: 13 · at work: 2**.
-
-**All runs (developer view)**, at the top right, opens **Settings › All runs**. It lists every run in the Space with its Agents, messages and context, for when you want to look under a working group. See [All runs (developer view)](../settings/all-runs).
+Without the developer view you still reach them: Atlas is the **Atlas** tab beside the editors, **Manage Spaces...** in the title bar's Space switcher opens Definition Spaces, and **Settings › Developer** has **Open all runs** and the Evaluations page.
 
 ## What lives in the Space, and what does not
 
@@ -62,25 +74,25 @@ Every Space carries five built-in templates, together with the roles they need:
 | Template | What it is |
 | --- | --- |
 | `main_assistant` | [The main assistant](../main-assistant). The app keeps one run of it per Space. |
-| `chat` | The general working group: one assistant that does ordinary multi-step work directly with tools. |
-| `atlas` | The authoring group: its director writes templates, roles, prompts, Skills and Plugins. **The Director** bar at the bottom of the [Atlas](./atlas) canvas runs it too. |
-| `nightly_review` | The nightly review. At 03:30 each night the app starts it when there is something new to review. |
-| `self_evolution_lab` | The three-role lab that works the evolution matter. |
+| `chat` | The **General group**: one assistant that does ordinary multi-step work directly with tools. |
+| `atlas` | The **Definitions studio**: its director writes templates, roles, prompts, Skills and Plugins. **The Director** bar at the bottom of the [Atlas](./atlas) canvas runs it too. |
+| `nightly_review` | The **Nightly review**. At 03:30 each night the app starts it when there is something new to review. |
+| `self_evolution_lab` | The **Self-improvement lab**: the three-role lab that works the evolution matter. |
 
 The last two are explained in [Evolution: the lab and the nightly review](../evolution).
 
-When you create, copy or import a Space, and each time the app starts, The One adds whichever of these are missing, with the prompts and Skills they use. It never overwrites a file that is already there, so your own changes to them stay. The built-in templates are not shown under Working-group templates; their roles are listed under Roles.
+When you create, copy or import a Space, and each time the app starts, The One adds whichever of these are missing, with the prompts and Skills they use. It never overwrites a file that is already there, so your own changes to them stay. The built-in templates are not in the list of templates, so Teams and tools gives one a card only while it works for a matter; their roles are listed under Roles.
 
-A new, empty Space therefore starts with these five templates and no others. Until it has templates of its own, the main assistant gives ordinary work to `chat`.
+A new, empty Space therefore starts with these five templates and no others. Until it has templates of its own, the main assistant gives ordinary work to the General group (`chat`).
 
-## Who changes capabilities
+## Who changes them
 
 - **You**, in each place's editor. The editors of templates, roles, prompts, Skills and external tools have **Source**, which shows the definition's file as it is saved, read-only, with its path.
-- **The main assistant**, when you ask it to. It changes definitions itself, or gives the authoring to the `atlas` group as a working group. When no template fits work that will come back, it has a new one written.
+- **The main assistant**, when you ask it to. It changes definitions itself, or gives the authoring to the Definitions studio (`atlas`) as a working group. When no template fits work that will come back, it has a new one written.
 - **The evolution lab** and **the nightly review**, which improve the Space from evidence of where its Agents keep struggling. See [Evolution: the lab and the nightly review](../evolution).
 
 In the official Space none of this lands. That Space is read-only: its editors show **Duplicate to edit**, and whatever the main assistant or the lab finds stays a proposal. To change anything, work in a copy of your own. See [Definition Spaces](./definition-spaces).
 
-No Agent waits for approval before it changes a definition. Instead, every change an Agent makes is recorded in **Settings › Action log**, where you can undo it. See [Action log, undo and stopping](../action-log).
+No Agent waits for approval before it changes a definition. Instead, every change an Agent makes is recorded in **Settings › Data and undo › Action log**, where you can undo it. See [Action log, undo and stopping](../action-log).
 
 Seen through [A-Genetic Engineering](../../multi-agent-architecture/a-genetic-engineering), the Space is your gene bank: the complete definition of every reusable working group lives here, is edited here, and travels with the Space.

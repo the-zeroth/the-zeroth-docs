@@ -5,7 +5,7 @@ description: "Connect MCP servers so roles can reach outside services and data: 
 
 **External tools (MCP)** is where a Space connects [Model Context Protocol](https://modelcontextprotocol.io) servers: programs and services that give Agents tools, data and panels beyond the built-in ones. This page defines each connection; a role's **MCP Servers** setting decides which Agents use it.
 
-Open it from **Capabilities › External tools (MCP)**. The page is called **MCP Servers**, and its tab in the editors is **MCP**.
+Open it from **Teams and tools › External tools (MCP)**. The page is called **MCP Servers**, and its tab in the editors is **MCP**.
 
 ## Add a server
 
@@ -50,7 +50,7 @@ An Agent's call never opens a sign-in by itself. When a saved sign-in stops work
 
 In a role's editor, **Capabilities › MCP Servers** decides which servers its Agents use: **All** for every server in the Space, including ones added later, which reach the Agent from its next turn, or **Custom** to pick them ([Roles](./roles)). An Agent can also add a server of the Space to itself while it works.
 
-In the official Space and in your copies of it, the main assistant and the `chat` group's assistant get every server, so a server you add reaches them from their next turn. Team roles get only the servers their work needs.
+In the official Space and in your copies of it, the main assistant and the General group's assistant get every server, so a server you add reaches them from their next turn. Team roles get only the servers their work needs.
 
 ## How Agents use MCP tools
 
@@ -58,7 +58,7 @@ In the official Space and in your copies of it, the main assistant and the `chat
 - Besides tools, Agents can list and read a server's resources and use its prompts.
 - A server can ask a question in the middle of a call, for example to confirm an option. The Agent gets the question as the call's result and answers it.
 - Tool cards label each call **Read-only**, **Changes things** or **Reaches outside**, from hints the server gives. The hints only describe: nothing is stopped or asked because of them. Read-only calls an Agent makes together run side by side.
-- Every call is recorded in **Settings › Action log**, and files a call changed can be put back there ([Action log, undo and stopping](../action-log)).
+- Every call is recorded in **Settings › Data and undo › Action log**, and files a call changed can be put back there ([Action log, undo and stopping](../action-log)).
 
 ## Long calls and restarts
 

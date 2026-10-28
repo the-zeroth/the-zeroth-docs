@@ -1,11 +1,11 @@
 ---
 title: API 配置
-description: 在设置 › API 配置里连接模型服务：官方连接、用 ChatGPT 账号登录、API Key、自定义提供商，以及你电脑上的模型。
+description: 在设置 › 模型和登录 › API 配置里连接模型服务：官方连接、用 ChatGPT 账号登录、API Key、自定义提供商，以及你电脑上的模型。
 ---
 
-**设置 › API 配置**管着 Agent 发模型请求所走的连接：随 The One 会员提供的官方连接、你的 ChatGPT 账号登录、OpenAI、Anthropic 和 Google Gemini 的 API Key，以及任何兼容的服务，包括跑在你自己电脑上的模型。连接只负责接通；每个 Agent 用哪个模型，在模型预设里定，每套预设指定一个连接。见[模型](../capabilities/models)。
+**设置 › 模型和登录 › API 配置**管着 Agent 发模型请求所走的连接：随 The One 会员提供的官方连接、你的 ChatGPT 账号登录、OpenAI、Anthropic 和 Google Gemini 的 API Key，以及任何兼容的服务，包括跑在你自己电脑上的模型。连接只负责接通；每个 Agent 用哪个模型，在模型预设里定，每套预设指定一个连接。见[模型](../capabilities/models)。
 
-{/* screenshot pending: ![设置 › API 配置：官方连接、ChatGPT 登录和一个本机服务](/docs-assets/images/0.5/zh/api-configuration-overview.png) */}
+{/* screenshot pending: ![设置 › 模型和登录 › API 配置：官方连接、ChatGPT 登录和一个本机服务](/docs-assets/images/0.5/zh/api-configuration-overview.png) */}
 
 ## 这一页有什么
 
@@ -50,11 +50,11 @@ OpenAI（Responses API）、Anthropic（Claude Messages API）或 Google Gemini�
 
 保存连接后马上生效，不用重启应用。如果提示后端没能热更新，到设置 › 通用点**重启后端**。
 
-新连接要在**设置 › 默认模型**的某套模型预设里选上才会被用到。预设编辑器里还有**刷新模型目录**，向这个连接取它现在提供的模型。详见[模型](../capabilities/models)。
+新连接要在**设置 › 模型和登录 › 默认模型**的某套模型预设里选上才会被用到。预设编辑器里还有**刷新模型目录**，向这个连接取它现在提供的模型。详见[模型](../capabilities/models)。
 
 ## 删除连接
 
-点这条连接上的垃圾桶图标。如果有角色直接指定了这个连接，会弹出对话框列出它们，点**迁移并删除**就把它们迁到另一个可用的连接（没有可用连接时清空，回到默认）。用这个连接的模型预设不会跟着改，请到设置 › 默认模型给它们换一个连接。
+点这条连接上的垃圾桶图标。如果有角色直接指定了这个连接，会弹出对话框列出它们，点**迁移并删除**就把它们迁到另一个可用的连接（没有可用连接时清空，回到默认）。用这个连接的模型预设不会跟着改，请到设置 › 模型和登录 › 默认模型给它们换一个连接。
 
 ## 服务商拒绝时
 

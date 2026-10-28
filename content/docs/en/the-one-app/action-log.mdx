@@ -11,7 +11,7 @@ Agents in The One work on their own and come to you only when they decide to ask
 
 ## What the action log records
 
-**Settings › Action log** lists the recent runs. For each tool call it keeps:
+**Settings › Data and undo › Action log** lists the recent runs. For each tool call it keeps:
 
 - which Agent and which run made it, and the tool and its arguments, with anything that looks like a key or password left out;
 - which files it created, modified or deleted, each with its version before and after;
@@ -23,7 +23,7 @@ The log is append-only. Every record carries the hash of the one before it, so a
 
 At the top, **Undoable changes** reads how many times Agents modified or deleted a file in the last 7 days, how many of those changes can be put back, and why any file could not be copied.
 
-{/* screenshot pending: ![Settings › Action log after a run that edited and deleted files](/docs-assets/images/0.5/en/action-log-settings.png) */}
+{/* screenshot pending: ![Settings › Data and undo › Action log after a run that edited and deleted files](/docs-assets/images/0.5/en/action-log-settings.png) */}
 
 ## Undoing
 
@@ -47,7 +47,7 @@ Every undo shows a preview first, and nothing is touched until you confirm:
 
 ### The trash
 
-The copies live in the app's trash for 7 days, then are removed automatically. When the disk is nearly full (under 5 GB free, protection mode), only 1 day is kept, oldest first out. On disks that can clone files, such as a Mac's APFS, a copy shares disk space with the original until the original changes (for files up to 4 GB); elsewhere The One makes a full copy of files up to 64 MB, or up to 1 MB in protection mode. **Settings › Storage** shows how much the action log and its trash take.
+The copies live in the app's trash for 7 days, then are removed automatically. When the disk is nearly full (under 5 GB free, protection mode), only 1 day is kept, oldest first out. On disks that can clone files, such as a Mac's APFS, a copy shares disk space with the original until the original changes (for files up to 4 GB); elsewhere The One makes a full copy of files up to 64 MB, or up to 1 MB in protection mode. **Settings › Data and undo › Storage** shows how much the action log and its trash take.
 
 ### What undo does not cover
 
@@ -63,8 +63,8 @@ The copies live in the app's trash for 7 days, then are removed automatically. W
 
 You can stop work short of stopping everything:
 
-- **A matter's usage limit.** **Set a limit** in the matter's header sets **At most, unattended**, in million tokens (at least 10,000 tokens). When the matter's working groups, sub-matters included, have spent that much since you last stepped in, their work pauses at its next checkpoint; a step under way finishes first. The Agents are told at 80%. A banner on the matter and a message in the window say the matter stopped, and it waits for you above the main assistant's conversation and in Needs you; **Resume** gives it the same allowance again. You can also ask the main assistant to set a limit or resume the work.
-- **A run's usage limit.** In Settings › All runs, **Usage limit** pauses each run of one Graph, or of every Graph, after the tokens you set (see [All runs (developer view)](./settings/all-runs)).
+- **A matter's usage limit.** **Set a limit** in the matter's header sets **At most, unattended**, in million tokens (at least 10,000 tokens). When the matter's working groups, sub-matters included, have spent that much since you last stepped in, their work pauses at its next checkpoint; a step under way finishes first. The Agents are told at 80%. A banner on the matter and a message in the window say the matter stopped, and it waits for you in the strip above the main assistant's conversation and in Needs you; **Resume** gives it the same allowance again. You can also ask the main assistant to set a limit or resume the work.
+- **A run's usage limit.** In All runs (**Open all runs** in Settings › Developer), **Usage limit** pauses each run of one Graph, or of every Graph, after the tokens you set (see [All runs (developer view)](./settings/all-runs)).
 - **One working group.** **Pause** on its card on the board stops it after each member's current step, including its work for other matters; **Resume** lets it go on.
 - **A whole matter.** **Close** pauses its work and its triggers; **Reopen** picks up where they stopped. See [Matters and boards](./matters).
 
@@ -80,7 +80,7 @@ All of these are cooperative: each Agent finishes the step at hand, then stops.
 
 Unlike the pauses above, it does not wait for a step to finish. Only you can stop Agents this way; no Agent, not even the main assistant, can.
 
-To go on, resume a working group with **Resume** on its card on the matter's board, or a run with **Unfreeze** in Settings › All runs; the Agents that were working pick up again. Resume the triggers with **Resume All Triggers** in the tray menu or **Resume all** in **Settings › Background & triggers** (see [Triggers and running in the background](./triggers)).
+To go on, resume a working group with **Resume** on its card on the matter's board, or a run with **Unfreeze** in All runs; the Agents that were working pick up again. Resume the triggers with **Resume All Triggers** in the tray menu or **Resume all** in **Settings › Runs by itself** (see [Triggers and running in the background](./triggers)).
 
 ## Related
 

@@ -7,11 +7,11 @@ The main assistant is the conversation The One opens on, and the one place to br
 
 ## One conversation that goes on
 
-Every Space has its own main assistant: **Assistant** in the sidebar, **Main assistant** on the page. It is one permanent conversation that runs across days and across all your matters. There is no new chat to start and no session list to tidy up. Everything you ask lands in the same place, so the assistant can connect what you said last week with what you ask today.
+Every Space has its own main assistant: **Conversation** in the sidebar, **Main assistant** on the page. It is one permanent conversation that runs across days and across all your matters. There is no new chat to start and no session list to tidy up. Everything you ask lands in the same place, so the assistant can connect what you said last week with what you ask today.
 
 The assistant belongs to its Space. When you switch Space in the title bar, you switch to that Space's assistant, its matters, what needs you and its morning report. If Agents are still at work, The One asks first, because switching stops them (**Stop and switch**).
 
-The assistant is an Agent like the others. Its role, `main-assistant`, is under **Capabilities › Roles**. It works with your default model (**Settings › Default model**) unless you give that role a model preset of its own in a Space of yours. Its conversation lives on the home page, not in **Settings › All runs**.
+The assistant is an Agent like the others. Its role, `main-assistant`, is under **Teams and tools › Roles**. It works with your default model (**Settings › Models and sign-in › Default model**) unless you give that role a model preset of its own in a Space of yours. Its conversation lives on the home page, not in All runs.
 
 ## What it does itself, and what becomes a matter
 
@@ -23,7 +23,7 @@ The assistant decides each time:
 
 A new matter gets a short title and an overview that says where the work should get to, with every result you asked to see. The overview matters: deliveries are later held against it.
 
-In the same step, the assistant hands the work to a working group. The group starts at once, and the assistant stays free for you and your other matters. It picks the group from the Space's working-group templates: software work in a code project goes to the software team (`polished_software_dev`), whose lead and checkers turn your requirements into tests as it builds; research and studio work goes to the template made for it; other multi-step work goes to the general `chat` group. Among the templates that fit, it prefers one that has done this kind of work well. It has a new template written (by the `atlas` group) only when none fits and the work will come back.
+In the same step, the assistant hands the work to a working group. The group starts at once, and the assistant stays free for you and your other matters. It picks the group from the Space's working-group templates: software work in a code project goes to the software team (`polished_software_dev`), whose lead and checkers turn your requirements into tests as it builds; research and studio work goes to the template made for it; other multi-step work goes to the **General group** (`chat`). Among the templates that fit, it prefers one that has done this kind of work well. It has a new template written (by the **Definitions studio**, `atlas`) only when none fits and the work will come back.
 
 See [Working-group templates](./capabilities/working-group-templates), [Matters and boards](./matters) and [Working groups](./working-groups).
 
@@ -35,7 +35,7 @@ This is on purpose. A retold request carries the assistant's reading of it, and 
 
 ## While the groups work
 
-The assistant keeps each open matter's one-line summary current: where it stands and whom it waits for. You see that line under the matter's title, and in the sidebar when nothing more urgent needs saying.
+The assistant keeps each open matter's one-line summary current: where it stands and whom it waits for. You see that line under the matter's title, and in the sidebar and the Matters overview when nothing more urgent needs saying.
 
 ### Questions
 
@@ -53,7 +53,7 @@ Its account starts with the conclusion against what you asked, not with "done": 
 
 ### Verdicts are yours
 
-You judge each delivery with **Accept**, **Rework** or **Give up**, above this conversation, on the board, in Needs you or in the morning report (see [Needs you, deliveries and the morning report](./needs-you)). You can also just tell the assistant ("good", "change the colours", "drop it"): it records your verdict and, for a rework, passes your words to the group. It never judges a delivery for you, and closing a matter is not a verdict.
+You judge each delivery with **Accept**, **Rework** or **Give up**, on its card in this conversation, on the board, in Needs you or in the morning report (see [Needs you, deliveries and the morning report](./needs-you)). You can also just tell the assistant ("good", "change the colours", "drop it"): it records your verdict and, for a rework, passes your words to the group. It never judges a delivery for you, and closing a matter is not a verdict.
 
 ### Groups that stall
 
@@ -69,23 +69,23 @@ The assistant holds every control you have on a matter's page. When you ask, it 
 
 It has full authority over your work, including the sign-ins and saved keys on this computer and the spending the work needs. Nothing waits for your approval. It asks you only when it chooses to, for example when only you know something it needs. What keeps you in control is the record of everything Agents did and the undo that goes with it: see [Action log, undo and stopping](./action-log).
 
-It can improve the Space itself too. Ask for a new template, role or Skill and it writes the definitions, itself or through the `atlas` group. Ask it to make the Space better at its own work and it opens the evolution matter (see [Evolution: the lab and the nightly review](./evolution)). Such changes take effect only in a Space of your own; in the read-only official Space they stay proposals. See [Definition Spaces](./capabilities/definition-spaces).
+It can improve the Space itself too. Ask for a new template, role or Skill and it writes the definitions, itself or through the Definitions studio. Ask it to make the Space better at its own work and it opens the evolution matter (see [Evolution: the lab and the nightly review](./evolution)). Such changes take effect only in a Space of your own; in the read-only official Space they stay proposals. See [Definition Spaces](./capabilities/definition-spaces).
 
 ## The home page
 
-The conversation fills the left of the home page. Above it, a strip says how many things wait for you (for example **3 waiting for you**) and has a button for each that says what to do and where, such as **Review** or **Answer** with the matter's name; after the first five, a button such as **2 more** shows the rest. A button opens that thing's card under the strip, where you handle it on the spot: judge a delivery, answer a question, go and fix a model connection, or resume a matter paused at its limit. A handled card leaves the strip, and with nothing waiting the strip is gone. These are the same cards as in Needs you and on the matter's board, and the strip's count is the number beside **Needs you** in the sidebar; see [Needs you, deliveries and the morning report](./needs-you).
+The home page is the conversation with the main assistant, across the whole window beside the sidebar. Your matters are in the sidebar and in the Matters overview, which the **Matters** heading in the sidebar opens; see [Matters and boards](./matters). **New matter: tell the assistant**, under the matters in the sidebar, brings you back here with the cursor in the composer.
 
-Beside the conversation:
+Above the conversation, a strip says how many things wait for you (for example **3 waiting for you**) and has a button for each that says what to do and where, such as **Review · Checkout redesign** or **Answer · Refund policy**; after the first five, a button such as **2 more** shows the rest. A button takes you to that thing's card in the conversation, under the line that announced it, and makes the card stand out for a moment. What the conversation does not show there, such as a model connection to fix, a matter paused at its limit or a notice from further back, opens its card under the strip instead. Either way you handle it on the spot: judge a delivery, answer a question, go and fix a model connection, or resume the matter. A handled card leaves the strip, and with nothing waiting the strip is gone. These are the same cards as in Needs you and on the matter's board, and the strip's count is the number beside **Conversation** in the sidebar; see [Needs you, deliveries and the morning report](./needs-you).
 
-- **Going on**: the matters a working group is at, or that are hitting errors, each with its status line.
-- **Since the last morning report**: how many deliveries, questions and unfinished runs came in since you last read it, with **Read the morning report** below.
-- **Show closed** lists your closed matters, and **Open a matter yourself** opens one by hand.
-
-Open a matter yourself when you want to collect notes before you hand something over. Give it a **Title**, say **What it is and where it should get to**, and you land on its board. The assistant sees it among its matters; tell it what to do with it. **New matter: tell the assistant**, under the matters in the sidebar, does the opposite: it brings you to the conversation with the cursor in the composer.
+**Search the conversation**, at the top right, or Cmd+F (Ctrl+F on Windows) opens a search above the conversation. It looks through what the conversation shows: your words, the assistant's, and the lines that say what happened on a matter. Hits come newest first; a click or Enter takes you to the message and makes it stand out, and Esc closes the search. It searches as far back as the conversation has loaded.
 
 Looking at the conversation marks what the assistant handed back as read.
 
-{/* screenshot pending: ![The home page: the conversation with the main assistant, what waits for you above it and what is going on beside it](/docs-assets/images/0.5/en/main-assistant-home.png) */}
+{/* screenshot pending: ![The home page: the conversation with the main assistant, what waits for you in the strip above it and as cards under the lines that announced it](/docs-assets/images/0.5/en/main-assistant-home.png) */}
+
+### The day's greeting
+
+When you open the app for the first time in a day, or come back to it on a new day after an hour or more away, and something happened that you have not seen, the main assistant greets you in the conversation: **Good morning** (or afternoon, or evening), what happened since you last looked, and how many things wait for you in the strip above. The greeting is the assistant's message at the time it greeted, so what you write next comes under it. **Open the morning report** opens the full report (see [The morning report](./needs-you#the-morning-report)), and **Got it** puts the greeting away for the day.
 
 ## Writing to it
 
@@ -94,7 +94,13 @@ Looking at the conversation marks what the assistant handed back as read.
 - Attach images or files with the paperclip (**Add image or file**), by dropping them on the conversation or by pasting. Images are compressed to fit 5 MB; other files can be up to 10 MB.
 - **Templates** inserts a request template from your Space for you to fill in, such as **Implement a feature**, **Diagnose and fix a problem**, **Review and verify work** or **One-person company**.
 
-Your own words show as your messages, including what you send from your phone (marked **From your phone**). The assistant's replies show in full; what it did on the way folds into one line of plain words that opens into one line per step. When it asks you something, the question is marked **Waiting for your answer**, and **Reply to this** makes what you send next the answer. Messages that reached the assistant from elsewhere show as one line saying what happened, so they never mix with yours: a working group asked a question, handed something in, could not finish, keeps failing or stopped on a matter (**Open** goes to that matter), a trigger came due, or an outside program wrote. While the assistant works, a line above the composer says what it is doing, and **Stop** interrupts it. To talk to the assistant from your phone, see [Phone channel and outside callers](./remote).
+Your own words show as your messages, including what you send from your phone (marked **From your phone**). The assistant's replies show in full; what it did on the way folds into one line of plain words that opens into one line per step. When it asks you something, the question is marked **Waiting for your answer**, and **Reply to this** makes what you send next the answer. A line above the first message of each day names the day: **Today** or **Yesterday** with its date, and the date alone for earlier days.
+
+Messages that reached the assistant from elsewhere show as one line saying what happened, so they never mix with yours: a working group asked a question, handed something in, could not finish, keeps failing or stopped on a matter (**Open** goes to that matter), a trigger came due, or an outside program wrote. The line names the group in plain words, such as **Software team**. While the question or delivery it brought still waits for you, its card sits under the line, with the matter and the group it came from, and you answer or judge it there. Once it is handled, the card folds into one line where it was, saying what became of it: for example "You accepted delivery 1 of “Checkout redesign”" with **Look** for its evidence, or "The main assistant answered “Refund policy” for you" with the answer. On the latest delivery of a piece of work, **Change your mind** on that line brings back the verdicts it still allows.
+
+A line above the composer says what the assistant is doing (thinking, at work, tidying up its memory), and **Stop** interrupts it. While it rests, the line says **Main assistant is resting; say something and it wakes up**. When a reply did not get through, the message says why in plain words, for example that the model is too busy, and the line says when it tries again, with **Try now** to try at once. To talk to the assistant from your phone, see [Phone channel and outside callers](./remote).
+
+The developer view, which you turn on in **Settings › Developer** or with Cmd+Shift+D (Ctrl+Shift+D on Windows), shows the conversation the way a developer reads it: the assistant's system prompt, the notices as written for its model, and each tool call with its arguments and result. See [Settings](./settings).
 
 ## Before a model is set up
 
@@ -104,4 +110,4 @@ The assistant needs a model before it can start. Until you have connected a mode
 
 ## Coming from 0.4
 
-Up to 0.4.x you started a new chat for each task; that button is gone. The first time a Space has its main assistant, your earlier sessions move to **Archived**, at the bottom of Settings › All runs, where you can still open or restore them. Nothing is deleted, and sessions still at work or pinned stay where they were. To run a template yourself, outside any matter, use **New Graph** in Settings › All runs; see [All runs (developer view)](./settings/all-runs).
+Up to 0.4.x you started a new chat for each task; that button is gone. The first time a Space has its main assistant, your earlier sessions move to **Archived**, at the bottom of All runs (**Open all runs** in Settings › Developer), where you can still open or restore them. Nothing is deleted, and sessions still at work or pinned stay where they were. To run a template yourself, outside any matter, use **New Graph** in All runs; see [All runs (developer view)](./settings/all-runs).

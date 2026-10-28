@@ -9,9 +9,9 @@ Agents work on their own and come to you only when they decide they need you. No
 
 ## Needs you
 
-Open **Needs you** from the sidebar. The number beside it counts what waits for you, and it is the same number everywhere: on the strip above the main assistant's conversation, in the morning report and, on a Mac, on the Dock icon.
+What waits for you shows first where you talk to the main assistant: as cards in its conversation and in the strip above it (see [The main assistant](./main-assistant)). The **Needs you** page keeps all of it in one place, with the record of everything that reached you. It has no place in the sidebar: open it with **Open Inbox** in the tray menu, by clicking a notification that bundles several items, or from the morning report (such as **2 more in Needs you**). The number of things waiting for you is the same everywhere: beside **Conversation** in the sidebar, on the strip above the conversation, in the morning report and, on a Mac, on the Dock icon.
 
-The page lists those things first (for example **3 waiting on you**), in the order they came, as the same cards the strip opens. You handle each one on its card:
+The page lists those things first (for example **3 waiting on you**), in the order they came, as the same cards as in the conversation. Each card names the matter and the working group it came from; with the developer view on, it also shows the IDs behind it, such as the mission and the run. You handle each one on its card:
 
 | Card | What waits | What you can do |
 | --- | --- | --- |
@@ -38,10 +38,10 @@ To answer a question:
 
 - A choice shows its options as buttons. A confirmation shows **Confirm** and **Decline**, or the labels the Agent gave them.
 - A question in words has **Write an answer…**: write your answer in the box it opens and press **Reply** (or Ctrl/⌘ + Enter).
-- A few kinds of question can only be answered in their conversation. The card says so, and **Open**, on its item in the record, takes you there.
+- A few kinds of question can only be answered in their session. The card says **This one is answered in its session.**, and **Answer in the session** takes you there.
 - **Keeps working while it waits** means the Agent did not stop for your answer.
 
-Your answer goes straight to the Agent that asked, and it carries on. The same questions also appear above the main assistant's conversation and on the matter's board; answering in any of these places is the same.
+Your answer goes straight to the Agent that asked, and it carries on. The same questions also appear in the main assistant's conversation, in the strip above it and on the matter's board; answering in any of these places is the same.
 
 To clear the page, **Put away** closes a question you will not answer (if the Agent asked with a card, it is told the card was cancelled), and **Mark read** closes a delivery or failure you have seen. **Show handled** brings closed items back, each with how it ended: **Answered**, **Read**, **Put away**, **Ended unanswered** or **Replaced by a newer result**.
 
@@ -67,7 +67,7 @@ Questions and failures never come in quietly. A question that someone else usual
 
 ## Judging a delivery
 
-A delivery waiting for you has three buttons. They are the same above the main assistant's conversation, in Needs you, on the matter's board, in the morning report and on the delivery's evidence page:
+A delivery waiting for you has three buttons. They are the same on its card in the main assistant's conversation, in Needs you, on the matter's board, in the morning report and on the delivery's evidence page:
 
 | Button | What happens |
 | --- | --- |
@@ -75,7 +75,7 @@ A delivery waiting for you has three buttons. They are the same above the main a
 | **Rework** | You write what should change and press **Send back for rework**. Your words go, as they are, to the Agent that delivered. If its working group is busy with another matter, it hears your words first when it comes back to this one. |
 | **Give up** | After one more check, the work is recorded as abandoned and no further delivery is awaited. The Agent is not stopped. |
 
-A verdict is a record. Apart from rework sending your words, it does not wake or stop anyone. You can change it later with **Change your mind** on the evidence page. If a newer delivery arrived after the page loaded, nothing is recorded and you are asked to look at the new one first.
+A verdict is a record. Apart from rework sending your words, it does not wake or stop anyone. You can change it later with **Change your mind** on the evidence page, or on the line the card folded into in the main assistant's conversation. If a newer delivery arrived after the page loaded, nothing is recorded and you are asked to look at the new one first.
 
 You do not have to press a button:
 
@@ -106,13 +106,13 @@ The evidence comes from the app's own records, mostly the action log, not from t
 
 {/* screenshot pending: ![The evidence pack of a delivery with tests and screenshots](/docs-assets/images/0.5/en/needs-you-evidence.png) */}
 
-Packs stay on this computer and are never uploaded. Their text is kept for 180 days and copies of screenshots and outputs for 30 days, sooner when the disk is nearly full. **Settings › Storage** shows their size under **Evidence packs**. Packs are written only in the desktop app.
+Packs stay on this computer and are never uploaded. Their text is kept for 180 days and copies of screenshots and outputs for 30 days, sooner when the disk is nearly full. **Settings › Data and undo › Storage** shows their size under **Evidence packs**. Packs are written only in the desktop app.
 
 ## The morning report
 
-**Morning** in the sidebar opens the **Morning report**: what happened since you last looked. (Until a model connection and a default model are set up, that sidebar item is **Start** instead.) It reads only the app's own records. Reading it calls no model and tells no Agent anything, unless you press a verdict.
+The **Morning report** says what happened since you last looked. It reads only the app's own records. Reading it calls no model and tells no Agent anything, unless you press a verdict.
 
-You rarely need to open it yourself. When you open the app for the first time in a day, or come back to it on a new day after an hour or more away, and there is something you have not seen today, the app opens on the morning report. If The One is running at 8:00, or the computer wakes after 8:00, it also sends one notification when there is news; a click opens the report.
+It has no place in the sidebar; the day's news finds you instead. When you open the app for the first time in a day, or come back to it on a new day after an hour or more away, and there is something you have not seen today, the main assistant greets you in its conversation with the news, and **Open the morning report** in that greeting opens the report (see [The main assistant](./main-assistant)). If The One is running at 8:00, or the computer wakes after 8:00, it also sends one notification when there is news; a click opens the report.
 
 The first line says which window the report covers (**Last 24 hours** the first time, afterwards **Since** the time you last looked) and what is new. Three numbers follow: delivered, waiting for you, spent today. Deliveries you have already read are folded away; **Fold what I read** shows or hides them.
 
