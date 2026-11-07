@@ -17,7 +17,7 @@ Agents in The One work on their own and come to you only when they decide to ask
 - which files it created, modified or deleted, each with its version before and after;
 - which addresses it reached, and how it ended.
 
-Calls you make yourself, through a Plugin's panel in a conversation or on a board, are recorded as yours.
+Calls you make yourself, through a Plugin's panel in a conversation or on a board, are recorded as yours. A call through a panel on a board belongs to no run, so it is listed under **Calls outside runs**, with the matter it was for.
 
 The log is append-only. Every record carries the hash of the one before it, so a changed or deleted record shows up: **Check** under **Log integrity** confirms the whole chain. The log covers the whole computer, every Space, so you can see and undo anything Agents did on it. It is kept only in the desktop app.
 
@@ -31,7 +31,7 @@ You can undo at four sizes:
 
 | What to undo | Where |
 | --- | --- |
-| One call | In **Recent runs**, open a run and press **Undo this call** on the call. |
+| One call | In **Recent runs**, open a run and press **Undo this call** on the call. A call that belongs to no run, such as yours through a panel on a board, is under **Calls outside runs**; a matter's **Changes** says how many calls you made through panels and links there. |
 | A whole run | **Undo** on the run in **Recent runs**. |
 | A matter's work | **Undo these changes** under **Changes** on the matter's page. The work of its sub-matters is included. |
 | Everything since a time | **Undo by time** on the Action log page: choose the time and press **Preview**. |
