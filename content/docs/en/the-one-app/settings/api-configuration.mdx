@@ -1,15 +1,15 @@
 ---
 title: API configuration
-description: "Connect model services in Settings › Models and sign-in › API Config: the official connection, Sign in with ChatGPT, API keys, custom providers and models on your computer."
+description: "Connect model services in Settings › API Config: the official connection, ChatGPT sign-in, API keys, custom providers, and what to do when a provider refuses."
 ---
 
-**Settings › Models and sign-in › API Config** holds the connections that Agents send their model requests through: the official connection that comes with a The One membership, your ChatGPT sign-in, API keys for OpenAI, Anthropic and Google Gemini, and any compatible service, including models running on your own computer. A connection only gives access: which model an Agent uses is set in model presets, and each preset names a connection. See [Models](../capabilities/models).
+**Settings › Models and sign-in › API Config** holds the connections that Agents send their model requests through: the official connection that comes with a The One membership, your ChatGPT sign-in, API keys for OpenAI, Anthropic and Google Gemini, and any compatible service, including models running on your own computer. The page itself is headed **Provider Auth**. A connection only gives access: which model an Agent uses, and through which connection, is set in model presets or in its role. See [Models](../capabilities/models).
 
-![Settings › Models and sign-in › API Config with the official connection, a ChatGPT sign-in and a local server](/docs-assets/images/0.5/en/api-configuration-overview.png)
+![Settings › Models and sign-in › API Config with one ChatGPT sign-in](/docs-assets/images/0.5/en/api-configuration-overview.png)
 
 ## What the page shows
 
-At the top are counts of your **Connections**, **OAuth** sign-ins and **Keys**. Below them comes the official connection, when your account has one, then **Connected**: every other connection with its provider, its protocol if it is a custom one, how it signs in (OAuth, API Key or No key) and its Base URL. **Add connection** opens the list of providers.
+At the top are counts of your **Connections**, **OAuth** sign-ins and **Keys**. Below them comes the official connection, when your account has one, then **Connected**: every other connection with its provider, its protocol if it is a custom one, how it signs in (OAuth, API Key or No key) and its Base URL, with a mark on any that is disabled or still has no key. **Add connection**, at the top right, opens the list of providers.
 
 Keys and sign-ins are kept on this computer, encrypted by the system. Definition Spaces and model presets only refer to a connection; they never hold its key.
 
@@ -29,10 +29,13 @@ The connection's row shows **ChatGPT plan usage**: how much of each limit window
 
 For OpenAI (Responses API), Anthropic (Claude Messages API) or Google Gemini, choose **Add connection**, then **Connect** on the provider, paste the key you created in its console and choose **Save Connection**. To change the key later, choose **Update** on the connection's row; leaving the key field empty keeps the saved key.
 
+The Claude Code, Gemini CLI and Antigravity sign-ins of earlier versions were removed in 0.5.0; connect Anthropic or Gemini with an API key instead. See [The One 0.5.0 Release Notes](../../start/release-notes/0-5-0).
+
 ## Custom providers and models on your computer
 
 A **Custom Provider** connects any service that speaks one of three protocols. Choose **Add connection**, then **Add** under **Custom**, and fill in:
 
+- **Name**: what the connection is called in the list and in model presets.
 - **Protocol**: **OpenAI Chat Completions** sends requests to `<Base URL>/chat/completions` and suits most compatible services; the Base URL usually ends in `/v1`. **OpenAI Responses** sends them to `<Base URL>/responses`; choose it only if the service implements that API. **Anthropic Messages** sends them to `<Base URL>/v1/messages`, so leave `/v1` off the Base URL: it is the same value you would give Claude Code as `ANTHROPIC_BASE_URL`.
 - **API Base URL**: the service's address.
 - **Authentication**: **API key**, sent as `Authorization: Bearer` with the OpenAI protocols and as `x-api-key` with Anthropic Messages; or **No key**, for a server that takes no credentials, such as Ollama, LM Studio or vLLM on this computer. With No key, requests carry no key at all, not even one from the environment.
@@ -50,16 +53,16 @@ Two examples:
 
 Saving a connection takes effect without restarting the app. If the app says the backend could not reload, choose **Restart Backend** in Settings › General.
 
-To use a new connection, pick it in a model preset under **Settings › Models and sign-in › Default model**. The preset editor also has **Refresh models**, which fetches the models the connection offers right now. See [Models](../capabilities/models).
+For Agents to use a connection, have a model preset go through it (in **Settings › Models and sign-in › Default model**), or choose it when you configure a model of its own in a role's **Model & Parameters**. The preset editor's **Refresh models** fetches the models the connection offers right now. See [Models](../capabilities/models) and [Roles](../capabilities/roles).
 
 ## Deleting a connection
 
-Choose the trash icon on the connection's row. If roles name the connection directly, a dialog lists them, and **Migrate and Delete** moves them to another available connection (or, when there is none, back to the default). Model presets that use the connection keep pointing at it, so give them another connection in Settings › Models and sign-in › Default model.
+Choose the trash icon on the connection's row. If no role names the connection directly, it is deleted at once, without a question. If roles do, a dialog lists them, and **Migrate and Delete** moves them to another available connection (or, when there is none, back to the default). Model presets that use the connection keep pointing at it, so give them another connection in Settings › Models and sign-in › Default model; any model capacity override you set for the connection is deleted with it.
 
 ## When a provider refuses
 
-When a provider rejects a connection's key or sign-in, the Agent's run says so and links to the connection on this page. Requests through that connection pause on this computer until you update the key or sign in again; the Agent keeps retrying by itself, and the connection is checked again every 30 minutes.
+A provider can refuse in three ways, and each wants something different:
 
-## Sign-ins removed in 0.5.0
-
-The One 0.4.28 and earlier also offered Claude Code, Gemini CLI and Antigravity sign-ins. 0.5.0 removed them, because the terms of those products do not allow third-party apps to use their sign-ins. Connect Anthropic or Gemini with an API key instead; OpenAI Codex keeps Sign in with ChatGPT. See [The One 0.5.0 Release Notes](../../start/release-notes/0-5-0).
+- **It rejects the key or sign-in** (HTTP 401): the Agent in [All runs](./all-runs) says the connection **rejected its credentials**, with an **Open this connection** link. When a matter's working group runs into it, the strip of what waits for you above the conversation also shows a **Needs your sign-in** card, whose **Fix it in Settings** brings you to the connection (see [Waiting for you, deliveries and the morning report](../needs-you)). Until you update the key or sign in again, requests through that connection stay on this computer instead of reaching the provider; the Agent keeps retrying by itself, and the connection is checked again every 30 minutes. A new key or sign-in lets requests through at once, and **Retry agents awaiting recovery** in a run's **Run controls** tries again right away.
+- **It denies access** (HTTP 403): the account may lack access to the model, or to the service from your region. The connection is not paused; check what the connection is allowed to use, or choose another model.
+- **Its policy blocks the request**: the Agent shows **The model provider blocked this request**, and the Agent Roster marks it **Needs action**. The same request is not sent again by itself, and **Recover all** and **Retry agents awaiting recovery** skip it. Edit the task to make clear what you are authorized to do, use an applicable, authorized model connection, or cancel the task. A changed request or another connection goes out as usual.

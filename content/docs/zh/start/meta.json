@@ -3,6 +3,7 @@
   "pages": [
     "quick-start",
     "models-and-pricing",
+    "linux-server",
     "release-notes"
   ]
 }

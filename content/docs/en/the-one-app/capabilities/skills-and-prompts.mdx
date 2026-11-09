@@ -1,6 +1,6 @@
 ---
 title: Skills and prompts
-description: Prompts are instructions a role always reads; Skills are packaged ways of working it opens when needed. Write, import and attach both.
+description: Prompts are instructions a role always reads and Skills are packaged ways of working it opens when needed; how to write, import and attach both.
 ---
 
 **Skills** and **prompts** are the know-how that roles share. A prompt is text an Agent always reads, such as a working approach or rules several roles have in common. A Skill is a packaged way of working, with files of its own, that waits in an Agent's context as a short card until the work calls for it.
@@ -13,7 +13,7 @@ Text in an Agent's standing context acts on everything it does, even where it do
 
 ## Prompts
 
-Choose **New Prompt**, give it a **Name** and write the **Content** in Markdown. The name becomes the prompt's resource alias, `@profiles/<name>.md`.
+Choose **New Prompt**, give it a **Name** and write the **Content** in Markdown. The name becomes the prompt's resource alias, `@profiles/<name>.md`. When the list grows, **New folder** above it groups prompts: drag one into a folder to move it.
 
 To use a prompt, mount it in a role: **Prompts › Structured Prompt** in the role's editor. A role can mount several, and one prompt can be mounted by many roles. Every role in the official Space mounts the shared `Agents' cognition`, for example, so the whole Space's working approach changes in one place.
 
@@ -32,6 +32,8 @@ To write one, choose **New Skill**. The **Skill ID** matches the `name` in `SKIL
 To give Skills to a role, use **Capabilities › Skills** in the role's editor: **All** for every Skill in the Space, including later ones, or **Custom** to pick them.
 
 Plugins bring Skills of their own: add the Plugin to a role and its Skills come with it ([Plugins and Apps](./plugins)). Skills that come with a Plugin the Space uses can show in the list as well. They belong to the Plugin, which updates them, and a Skill of the Space cannot take the same name.
+
+You do not have to write Skills by hand: the main assistant, the nightly review and the evolution lab write and improve them too. See [Who changes them](../capabilities#who-changes-them).
 
 ## Import Skills
 
@@ -59,12 +61,4 @@ Enter `https://github.com/anthropics/skills` as the source and `frontend-design`
 
 ![Importing a Git repository with Import all](/docs-assets/images/0.5/en/skills-and-prompts-import.png)
 
-The official Space is read-only and cannot import: copy it first. The notice at the top of the page has **Duplicate to edit** ([Definition Spaces](./definition-spaces)).
-
-## Who else writes Skills
-
-- **The nightly review** looks each night at where Agents kept struggling in real use, and skips the night when nothing is new. It turns what repeats into a lesson in memory or a better Skill: at most three changes a night, each shown with its diff in the next morning report, where you can undo it.
-- **The evolution lab**, when you ask the Space to get better at its own work, changes the smallest layer that failed: memory, a Skill, a role, a template or code.
-- **The main assistant**, and other Agents with the authoring tools, write a Skill when a lesson is worth reusing.
-
-In the read-only official Space none of them can change anything; what the main assistant and the evolution lab find stays a proposal. See [Evolution: the lab and the nightly review](../evolution).
+The official Space is read-only: it takes no imports, and its prompts and Skills cannot be changed. The notice at the top of the page has **Duplicate to edit**. See [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).

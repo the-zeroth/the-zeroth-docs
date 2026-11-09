@@ -1,9 +1,9 @@
 ---
 title: Working groups
-description: A working group is a team of Agents doing a matter's work, which you follow on its board, talk to directly, pause and review.
+description: A working group is a team of Agents doing a matter's work, which you follow on its board and the Panorama, talk to directly, pause and review.
 ---
 
-A working group is a team of Agents doing the work of one of your matters: a run of a working-group template, started when the main assistant hands it the work. You follow it on the matter's board, talk to it whenever you like, and review what it changed before you accept it.
+A working group is a team of Agents doing the work of one of your matters: a run of a working-group template, started when the main assistant hands it the work. You follow it on the matter's board, see every group at once on the [Panorama](./panorama), talk to it whenever you like, and review what it changed before you accept it.
 
 ## From template to working group
 
@@ -17,7 +17,7 @@ The official Space comes with templates for common kinds of work. On boards and 
 | **Research group** | `deep_research` | Research and synthesis, with branches that gather evidence independently. |
 | **General group** | `chat` | Ordinary multi-step work done directly with tools. |
 | **Frontend design studio**, **Image studio**, **Video studio**, **3D scene studio** | `frontend_design_studio`, `image_generation_studio`, `video_production_studio`, `blender_scene_studio` | Studios for designed web pages, images, video and 3D scenes. |
-| **Storefront studio**, **Store operations**, **Store weekly review** | `storefront_studio`, `store_operator`, `store_reviewer` | A one-person company: the storefront, the day-to-day operations and the weekly review. |
+| **Storefront studio**, **Store operations**, **Store weekly review** | `storefront_studio`, `store_operator`, `store_reviewer` | An online store: the storefront, the day-to-day operations and the weekly review. |
 | **Site launch team** | `site_deployment_ops` | Launching a website, with an independent final check. |
 | **Definitions studio** | `atlas` | Writing new templates, roles, Skills and Plugins. |
 | **Self-improvement lab** | `self_evolution_lab` | The lab that works the evolution matter. See [Evolution: the lab and the nightly review](./evolution). |
@@ -34,12 +34,15 @@ Each group on a matter has a card in the board's **Working groups** area, titled
 - Who talked to it last, such as **You talked to it last** or **The main assistant talked to it last**.
 - Messages from other groups, such as "The working group … asked it something".
 - Where its work waits when it serves several matters, and which members keep failing.
+- When closing the matter stopped it mid-work, **It paused when the matter was closed; reopen the matter and it goes on.** (see [Closing and reopening](./matters#closing-and-reopening)).
 
 Its buttons are **Talk to this group** and **Pause** or **Resume**, and, when they apply, **Do this first** and **Retry now**.
 
-## The Working groups page
+## All groups at once
 
-The **Working groups** page lists the groups on the Space's open matters, by matter, with the matters that wait for you first. Open it with **See what each group is doing now** on Teams and tools; it has no place of its own in the sidebar. Groups on sub-matters show only on their boards. For each group you see its name in plain words, its state, what it was asked for and who talked to it last, with the buttons Talk to this group and **Open board**; the developer view adds the template's ID beside the name. The page reads the same cards as the boards, so the two always agree.
+To see what the groups on all your matters are doing, open **Panorama** in the sidebar. Each open matter gets a column, and each working group in it is drawn as a small graph of its template: one row per Agent, saying whether it is thinking, calling a tool, waiting on someone or in error, with arrows for who hands work to whom. Click an Agent for its details, or a group's name for the matter's theater. See [Panorama](./panorama).
+
+For a list by matter, use the **Working groups** page: open it with **See what each group is doing now** on Teams and tools; it has no place of its own in the sidebar. It lists the groups on the Space's open matters, by matter, with the matters that wait for you first. Groups on sub-matters show only on their boards. For each group you see its name in plain words, its state, what it was asked for and who talked to it last, with the buttons Talk to this group and **Open board**; the developer view adds the template's ID beside the name. The page reads the same cards as the boards, so the two always agree.
 
 ![The Working groups page: the groups on each open matter](/docs-assets/images/0.5/en/working-groups-page.png)
 
@@ -60,7 +63,11 @@ If the group is busy with another matter's work when you write, your message is 
 - When only you can fix the problem (a refused key, no access, a plan without that usage), the card offers **Open this connection** instead. When the connection's key or sign-in was refused, the failing members retry within seconds of you replacing it there.
 - To stop everything at once, use **Stop All Agents** in the app menu or the tray. See [Action log, undo and stopping](./action-log).
 
-If a group's card still says Working but nothing in it has moved for two minutes, or its members have only retried errors for ten, the main assistant is told and decides what happens next. See [The main assistant](./main-assistant).
+### Groups that stall
+
+Sometimes a group's card still says Working while the group has stopped: the whole group has rested for two minutes (no Agent at work and no command still running) without handing anything back or asking anything, or for ten minutes its members have done nothing but retry errors. The main assistant then gets a notice saying since when, who worked last and what it last said, and, with errors, each member's error. It reads that and decides: tell the group what it lacks, give the work to another group or to other models, or tell you what is stuck. Only you can fix a model connection, its key or its usage limit; once you have, the assistant has the group retry.
+
+A group you stopped or paused yourself, a group waiting for a reply from another group it asked, and the groups on sub-matters do not count as stalled.
 
 ## One group, several matters
 
@@ -82,11 +89,15 @@ A group reads and writes the board of its matter, and of the matters above, unde
 
 ## Inside a group
 
-Larger templates have a lead who can split the work further: a TaskBoard that hands parts to workers, or a sub-Graph, a smaller team for one part. All of it is the group's own work. What it spends, changes and asks counts toward the group's matter, and Theater shows it inside the group. A part with its own goal and delivery can become a sub-matter with a board of its own; see [Matters and boards](./matters).
+Larger templates have a lead who can split the work further: a TaskBoard that hands parts to workers (one worker per task, with another Agent checking it), or a sub-Graph, a smaller team for one part. Some leads also copy a member at work, which gives a **Clone**: a new Agent with the same setup, context and tools, which then works on its own. All of it is the group's own work. What it spends, changes and asks counts toward the group's matter, and Theater shows it inside the group.
+
+On the [Panorama](./panorama) a clone sits indented under the Agent it was copied from, marked **Clone**; a TaskBoard layer and a team the group opened each sit in a dashed box inside the group, and a TaskBoard layer counts its tasks, such as **Branches ×3**. Finished branches are no longer drawn one by one: they fold into one line, **Branches done: N**, which opens the theater where their history is.
+
+A part with its own goal and delivery can become a sub-matter with a board of its own; see [Matters and boards](./matters). How Agents copy and create members while they work: see [Prolifera Engineering](../multi-agent-architecture/prolifera-engineering).
 
 ## Theater
 
-Once a group works on a matter, the switch above the board flips to **Theater**: what every working group's Agents are doing, on one screen. Each group has a section named like its card, with its sub-Graphs inside. A bar on top shows each TaskBoard's progress and how many Agents are working, waiting for you, waiting on others, in error, idle or stopped.
+Once a group works on a matter, the switch above the board flips to **Theater**: what every working group's Agents are doing, on one screen. Clicking a group's name on the [Panorama](./panorama), **Open theater** in an Agent's details there, or **Branches done: N** opens it too. Each group has a section named like its card, with its sub-Graphs inside. A bar on top shows each TaskBoard's progress and how many Agents are working, waiting for you, waiting on others, in error, idle or stopped.
 
 - Each Agent has a lane on a timeline that ends at now (**5 min**, **15 min** or **1 hour** back), in one of these states: **Thinking**, **Calling a tool**, **Waiting for you**, **Waiting on others**, **Error**, **Idle** or **Stopped**. Beside it, one line says what it is doing right now. Handoffs between Agents are drawn as arrows.
 - Click a stretch of a lane for its start and end, each tool call in plain words, the raw tool name and its arguments.

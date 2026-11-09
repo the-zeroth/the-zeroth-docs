@@ -1,27 +1,31 @@
 ---
 title: Atlas
-description: Atlas draws your whole Space on one canvas, and its director changes templates, roles and prompts for you from a request in plain words.
+description: Atlas draws your whole Space on one canvas, and its director changes templates, roles, prompts, Skills, external tools and Plugins from a plain request.
 ---
 
-**Atlas** draws your whole Definition Space on one canvas, so you can see how it fits together: which roles use which prompts, Skills and tools, which templates the roles work in, and which Plugins they rely on. Its director turns a request in plain words into changes to the Space, made in front of you.
+**Atlas** draws your whole Definition Space on one canvas, so you can see how it fits together: which roles use which prompts, Skills and tools, which templates the roles work in, and which Plugins they rely on. The director at the bottom of the canvas turns a request in plain words into changes to the Space, made in front of you.
 
-Open it with the **Atlas** tab next to the editors for roles, prompts, Skills, MCP and templates; the page is titled **Definition Atlas**. With the developer view on, **Teams and tools** lists it too, under **In the developer view**.
+Open it with the **Atlas** tab above the lists of the editors for roles, prompts, Skills, MCP and templates; the page is titled **Definition Atlas**. With the developer view on, **Teams and tools** lists it too, under **In the developer view**.
 
-![The Atlas canvas with the director at work](/docs-assets/images/0.5/en/atlas-canvas.png)
+![The Atlas canvas with a working-group template selected and the director's bar below](/docs-assets/images/0.5/en/atlas-canvas.png)
 
 ## The canvas
 
 Each kind of definition has a zone of its own: **Prompts**, **Skills**, **MCP**, **Agents** (roles), **Graphs** (working-group templates) and **External Plugins**, the Plugins your roles use from outside the Space. Prompts, Skills and roles kept in folders are grouped by folder. Lines show who uses what and which role extends which.
 
-- Select an item to light up everything connected to it. A prompt, Skill, MCP server or Plugin also opens a panel that lists what uses it. A Plugin's panel says whether it is installed, opens the roles and templates that use it in their editors, and has **Open in Plugin Center**.
-- Zoom out for the shape of the whole Space and in for the details; **Back to overview** fits everything on screen again.
+- Select an item to light up everything connected to it. A prompt or Skill opens a panel with its full text, and an MCP server a panel that lists its tools; each says what uses it. A Plugin's panel says whether it is installed and how many places use it, opens the roles and templates that use it in their editors, and has **Open in Plugin Center**.
+- Zoom out for the shape of the whole Space and in for the details. The toolbar in the canvas corner zooms, has **Fit canvas** to fit everything on screen again, **Locate selection**, and the **Minimap**. Esc clears the selection and goes back to the whole map.
 - **Find a definition…** jumps to any item by name.
 
 ## The director
 
-The bar at the bottom of the canvas (**The Director**) takes a request in plain words, such as "add a reviewer to the research template" or "split this prompt in two". The director lays out its plan on the right and then makes the changes in front of you: the camera follows each edit, and the canvas stays locked until it is done. **New chat** starts a fresh conversation; earlier ones stay under **Atlas Sessions** in All runs. See [All runs (developer view)](../settings/all-runs).
+The bar at the bottom of the canvas (**The Director**) takes a request in plain words, such as "add a reviewer to the research template" or "split this prompt in two". The director lays out its plan on the right and then makes the changes in front of you: the camera follows each edit, and the canvas stays locked until it is done. To stop it, choose **Interrupt assistant** on the bar.
 
-The director is a run of the built-in `atlas` working-group template, which every Space carries. You do not have to open Atlas to use it: ask the main assistant for a new template or role, and it may make the change itself or give the work to the **Definitions studio**, an `atlas` working group. See [The main assistant](../main-assistant).
+The director writes and changes working-group templates, roles, prompts, Skills, external tools (MCP) and Plugins. It can also create or edit model presets, or switch the global default to another; model presets live on this computer and every Space shares them (see [Models](./models)).
+
+The bar carries on your last Atlas conversation, so when you leave Atlas and come back, the director still knows where you were. **New chat** starts a fresh conversation; earlier ones stay under **Atlas Sessions** in All runs. See [All runs (developer view)](../settings/all-runs).
+
+The director is a run of the built-in `atlas` working-group template, called **Definitions studio**, which every Space carries (see [Definition Spaces](./definition-spaces)). You do not have to open Atlas to use it: ask the [main assistant](../main-assistant) for a new template or role, and it may make the change itself or give the work to the Definitions studio.
 
 ## Changes stay safe
 

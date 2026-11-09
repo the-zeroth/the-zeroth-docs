@@ -1,17 +1,55 @@
 ---
 title: "Evolution: the lab and the nightly review"
-description: How a Space improves from its own real use, through the evolution matter's three-role lab and the nightly review, with every change measured and undoable.
+description: How a Space improves from its own real use, through the nightly review and the evolution matter's three-role lab, with every change measured and undoable.
 ---
 
-A Space can get better at its own work. Two loops do this, both from evidence of real use: the **evolution matter**, where a lab of three Agents tests one change at a time to your teams, roles, Skills or the main assistant, and the **nightly review**, which looks each night at where Agents kept struggling and makes small changes to memory and Skills.
+A Space can get better at its own work. Two loops do this, both from evidence of real use: the **nightly review**, which runs by itself each night, looks at where Agents kept struggling and makes small changes to memory and Skills; and the **evolution matter**, opened only when you ask, where a lab of three Agents tests one change at a time to your teams, roles, Skills or the main assistant.
 
-Neither loop asks for approval. Every change is recorded, measured afterwards against what it was meant to fix, and can be undone. For the idea behind this, see [Self-Evolution](../multi-agent-architecture/more-possibilities/self-evolution).
+Neither loop asks for approval. Every change is recorded, measured afterwards against what it was meant to fix, and can be undone. They change only a Space of your own; the official Space is out of their reach (see the last section). For the idea behind this, see [Self-Evolution](../multi-agent-architecture/self-evolution).
 
-## First, a Space of your own
+## The nightly review
 
-The official Space is read-only: its working-group templates, roles and Skills are kept by The One and updated with new versions. Neither the lab nor the nightly review can change it: the lab keeps what it finds as proposals, and the nightly review's changes to it are refused. Copy the official Space and use the copy, and their changes take effect: Get started offers **Copy the official Space and use it**, and [Definition Spaces](./capabilities/definition-spaces) lets you do it any time. The cost is that later updates to the official Space no longer reach your copy by themselves.
+Every Space has a built-in trigger, **Nightly review**, at 03:30 this computer's time. Before anything starts, the app checks whether there is something to review: new friction since the last review, an earlier change past its deadline without effect, or an alert on one. If there is nothing, it records a skip with the reason and spends nothing. It does not keep the computer awake; if the computer sleeps through 03:30, the review runs once the computer wakes.
 
-When the lab finds a change it cannot make because the Space is read-only, it keeps the change as a proposal with its evidence and asks you once whether to copy the Space.
+Its trigger is in **Settings › Runs by itself**, marked **Built in**: switch it off, change its time, rename it or delete it, and the app does not put it back. See [Triggers and running in the background](./triggers).
+
+### Friction
+
+Friction is where Agents kept struggling in this Space's real use. The app finds it in its records without calling a model, in seven kinds: **Repeated failure**, **Loop**, **Detour**, **Asked you**, **Rework**, **Kept erroring** and **Colleague rework**.
+
+### What the Reviewer does
+
+When the review runs, an Agent called the Reviewer:
+
+1. looks first at its earlier changes, the worst reading first, and undoes or narrows those that made things worse;
+2. picks the few new findings that recur and makes the smallest lasting change for each: a lesson in the Space's memory, or an edit to one of its Skills, at most three changes a night; when unsure, it first tries the change on the step where the friction happened;
+3. writes a fix proposal instead when the cause is out of its reach, such as a tool, a role's prompt, a team, or something you must decide;
+4. registers each change beforehand: which friction it should reduce, which must not rise, by how much, and by when (28 days unless it says otherwise).
+
+Its changes take effect at once, without anyone's approval, and go into the action log like any Agent's edits (see [Action log, undo and stopping](./action-log)). The review opens nothing in Needs you and notifies no one; you read what it did in the morning.
+
+### Reading and undoing it in the morning report
+
+**Last night's review** in the morning report (see [Waiting for you, deliveries and the morning report](./needs-you)) lists each review since you last looked: when it ran, how many frictions it found and how many of them happened again, how many changes it made and what it cost, and any **Fix proposals** it wrote. Each change shows:
+
+- what it changed (**Memory**, **Skill**…), which item, and what the Reviewer said beforehand it expects;
+- its readings: for each friction it answers, how often that friction happened per 100 chances before the change and since, for example "3.1 → 0.4 per 100 calls"; with too few chances so far it says **Too early** and how many more it needs;
+- **Guard** readings: frictions the change must not make worse, and the first-pass rate, rework, cost and time to first delivery of the team where the friction happened, read the same way;
+- a status: **Better**, **Worse**, **No change yet**, **Too early**, **Past its deadline without effect**, **Still flat after two weeks** or **Undone**.
+
+Some changes also show:
+
+- **Tried on the step**: the Reviewer tried the change on the step where things went wrong before making it, and the line says how often it came out right as it was and with the change;
+- an **Alert**: the friction it answers keeps coming as often as before, so the Reviewer looks at it first;
+- "with nothing changed, M of N readings here moved as much": the change in the reading is within how much this computer's readings move by themselves, so it counts as neither better nor worse.
+
+**Show the change** shows the diff. **Undo** takes the change back through the action log, along with other files the same call changed; an undone change can be brought back with **Restore**.
+
+{/* screenshot pending: ![Last night's review in the morning report](/docs-assets/images/0.5/en/evolution-nightly-review.png) */}
+
+The first report you read in a week adds **Last week's reviews**: how many changes helped and stayed, how many reviews ran and how many changes they made, how many changes you undid, how many got worse or passed their deadline, and what it all cost. Below it, a line gives the Reviewer's record over 90 days: of the changes with a verdict, how many helped.
+
+Readings are evidence for the Reviewer and for you; the app never undoes a change on its own. A change you undo is your verdict, and the Reviewer's procedure tells it not to make the same change again.
 
 ## The evolution matter
 
@@ -43,7 +81,7 @@ The evolution matter's page shows the lab above the board, under **Evolution · 
 
 - four figures: **Changes shipped** and how many were kept, **Changes tried**, **Spent on trials**, and **Next census**;
 - **Under test now**: this round's change, the layer it touches, when it started, its readings so far and what the group is doing;
-- **Changes tried**, newest first: the date, what was tried and its readings, the verdict (**Testing**, **Shipped** or **Abandoned**, and once shipped whether it was **kept**, **undone** or **regressed**) and the cost;
+- **Changes tried**, newest first: the date, what was tried and its readings, the verdict (**Testing**, **Shipped** or **Abandoned**; once shipped, **reading after ship** and then **kept**, **undone** or **regressed**) and the cost;
 - **The lab's rules** and **What a change goes through**, the steps above;
 - **Change its direction**: write what the lab should improve first or leave alone, and press **Tell the main assistant**. It passes your words on, and its answer appears on the home page.
 
@@ -51,37 +89,11 @@ The evolution matter's page shows the lab above the board, under **Evolution · 
 
 Below, the board keeps the lab's own cards: its folder, the census, the hypotheses under test, what shipped and what was abandoned, and two data cards that read the scorecard.
 
-## The nightly review
+## The official Space is out of reach
 
-Every Space has a built-in trigger, **Nightly review**, at 03:30 this computer's time. Before anything starts, the app checks whether there is something to review: new friction since the last review, an earlier change past its deadline without effect, or an alert on one. If there is nothing, it records a skip with the reason and spends nothing. It does not keep the computer awake; if the computer sleeps through 03:30, the review runs once the computer wakes.
+The official Space is read-only: its working-group templates, roles and Skills are kept by The One and updated with new versions. Neither loop can change it: the nightly review's changes to it are refused, and the lab keeps what it finds as proposals, with their evidence, and asks you once whether to copy the Space.
 
-Friction is where Agents kept struggling in this Space's real use. The app finds it in its records without calling a model, in seven kinds: **Repeated failure**, **Loop**, **Detour**, **Asked you**, **Rework**, **Kept erroring** and **Colleague rework**.
-
-When the review runs, an Agent called the Reviewer:
-
-1. looks first at its earlier changes, the worst reading first, and undoes or narrows those that made things worse;
-2. picks the few new findings that recur and makes the smallest lasting change for each: a lesson in the Space's memory, or an edit to one of its Skills, at most three changes a night;
-3. writes a proposal file instead when the cause is out of its reach, such as a tool, a role's prompt, a team, or something you must decide;
-4. registers each change beforehand: which friction it should reduce, which must not rise, by how much, and by when (28 days unless it says otherwise).
-
-Its changes take effect at once, without anyone's approval, and go into the action log like any Agent's edits (see [Action log, undo and stopping](./action-log)). The review opens nothing in Needs you and notifies no one; you read what it did in the morning.
-
-You manage its trigger in **Settings › Runs by itself**: switch it off, change its time, rename it or delete it. The app does not put it back. See [Triggers and running in the background](./triggers).
-
-### Reading and undoing it in the morning report
-
-**Last night's review** in the morning report (see [Needs you, deliveries and the morning report](./needs-you#the-morning-report)) lists each review since you last looked: when it ran, how many frictions it found and how many of them happened again, how many changes it made and what it cost, and any proposal files it wrote. Each change shows:
-
-- what it changed (**Memory**, **Skill**…) and the friction it answers;
-- its reading: how often that friction happened per 100 chances before the change and since, for example "3.1 → 0.4 per 100 calls";
-- a status: **Better**, **Worse**, **No change yet**, **Too early**, **Past its deadline without effect**, **Still flat after two weeks** or **Undone**;
-- **Show the change** for the diff, and **Undo**, which takes it back through the action log. An undone change can be brought back with **Restore**.
-
-{/* screenshot pending: ![Last night's review in the morning report](/docs-assets/images/0.5/en/evolution-nightly-review.png) */}
-
-The first report you read in a week adds **Last week's reviews**: how many changes helped and stayed, how many reviews ran, how many changes you undid, how many got worse or passed their deadline, and what it all cost.
-
-Readings are evidence for the Reviewer and for you; the app never undoes a change on its own. A change you undo is your verdict, and the Reviewer's procedure tells it not to make the same change again.
+Copy the official Space and use the copy, and their changes take effect: Get started offers **Copy the official Space and use it**, and [Definition Spaces](./capabilities/definition-spaces) lets you do it any time. The cost is that later updates to the official Space no longer reach your copy by themselves.
 
 ## Related
 

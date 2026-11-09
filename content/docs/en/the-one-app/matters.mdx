@@ -16,7 +16,9 @@ A matter is not a single run. Several working groups can work on it at the same 
 
 ## Matters in the sidebar
 
-Open matters are listed under **Matters** in the sidebar, each with a dot and one line on how it stands. Those that wait for you come first, then those in trouble, then work going on, then delivered and quiet ones; within each, the most recently changed comes first. The **Matters** heading says how many are open, such as **All 4**, and opens the Matters overview (below).
+Open matters are listed under **Matters** in the sidebar, each with a dot in front. Those that wait for you come first, then those in trouble, then work going on, then delivered and quiet ones; within each, the most recently changed comes first. A matter that waits for you or ran into trouble has a second line saying what is up; the others keep to one line and show theirs when you hover. The **Matters** heading says how many are open, such as **All 4**, and opens the Matters overview (below).
+
+That line says one of these, in the same words as in the Matters overview and on the [Panorama](./panorama):
 
 | The line says | What it means |
 | --- | --- |
@@ -24,15 +26,15 @@ Open matters are listed under **Matters** in the sidebar, each with a dot and on
 | **A model connection needs you** | A model connection refused its group's work (a key, access or the plan), and only you can fix it. |
 | **To answer: 1**, **To look at: 2**, or **1 to answer, 2 to look at** | Questions and deliveries wait for you, its sub-matters' included. |
 | **A working group did not finish** | A group's run failed. |
-| **Hitting errors; retrying by itself** | An Agent keeps failing and keeps retrying on its own. |
-| **A working group is at it** | Work is going on. |
+| **Hitting errors; retrying by itself**, or **Members hitting errors: 2; retrying** | Agents keep failing and keep retrying on their own. |
+| **A working group is at it**, or **Working groups at it: 2** | Work is going on. |
 | **Queued** | Its group finishes another matter's work first. |
 | A sentence of its own | Nothing above applies, so you see the one-line summary the main assistant keeps current. |
 | **Delivered** | Its groups have delivered and nothing waits for you. |
 | **Always on · waits for its next trigger** | Nothing is going on now; its triggers bring the next work. |
 | **Not started yet** | No group has started on it. |
 
-**New matter: tell the assistant**, under the list, takes you to the main assistant's composer. Closed matters leave the list; the Matters overview shows them under **Closed**.
+Hover over a matter (or reach it with the keyboard) and an end button shows on its right; see [Closing and reopening](#closing-and-reopening) below. **New matter: tell the assistant**, under the list, takes you to the main assistant's composer. Closed matters leave the list; the Matters overview shows them under **Closed**. **Panorama**, above the matters, draws every open matter with its working groups on one page; see [Panorama](./panorama).
 
 ## The Matters overview
 
@@ -40,13 +42,28 @@ The overview, titled **Matters**, lists every open matter, one line each: its do
 
 At the top right, **New matter: tell the assistant** takes you to the main assistant's composer, and **Open one yourself** opens a matter by hand, for when you want to collect notes before you hand something over. Give it a **Title**, say **What it is and where it should get to**, choose **Open matter**, and you land on its board. The assistant sees it among its matters; tell it what to do with it.
 
+## The header
+
+Open a matter and the top of its page shows its title, its one-line summary (**No summary yet** before it has one), chips such as **Closed** and **Always on**, and what it has **Spent** (see [Spending and limits](#spending-and-limits) below). A sub-matter's title has **Sub-matter** over it and a **Back to …** link to the matter it is under.
+
+The matter's buttons sit at the top right of the window:
+
+- **Review**, once a working group has a run: what each group changed and made. See [Working groups](./working-groups#review).
+- **Make it a matter of its own**, on a sub-matter.
+- **Edit title and summary**.
+- **Close matter**, or **Reopen matter** on a closed matter. See [Closing and reopening](#closing-and-reopening) below.
+
+Once a working group works on the matter, a switch at the left above the board flips between **Board** and **Theater**. Theater shows every group's Agents at work on one screen; see [Theater](./working-groups#theater). Clicking a working group's name on the [Panorama](./panorama) opens this theater too.
+
+![A matter's header: what it spent, and the Board and Theater switch](/docs-assets/images/0.5/en/matters-header.png)
+
 ## The board
 
-Open a matter and you see its board in two columns.
+Under the header is the matter's board, in two columns.
 
 On the left:
 
-- **Waiting for you**: what waits for you on this matter or its sub-matters, such as a group's question or a delivery that waits for your verdict, each with the working group it came from. These are the same cards as in the main assistant's conversation and in Needs you, and you answer, judge or resume right on them (see [Needs you, deliveries and the morning report](./needs-you)). Only the latest delivery of a piece of work waits here; earlier ones become history. Once you have handled a question or delivery, the board's own **Question** or **Delivery** card for it is under Progress.
+- **Waiting for you**: what waits for you on this matter or its sub-matters, such as a group's question or a delivery that waits for your verdict, each with the working group it came from. These are the same cards as in the main assistant's conversation, on the Needs you page and on the Panorama, and you answer, judge or resume right on them (see [Waiting for you, deliveries and the morning report](./needs-you)). Only the latest delivery of a piece of work waits here; earlier ones become history. Once you have handled a question or delivery, the board's own **Question** or **Delivery** card for it is under Progress.
 - **Readings and panels**: data cards and panel cards, which need the width.
 - **Progress**: everything else, newest first and grouped by day, each entry with the time it last changed. Long text starts folded.
 
@@ -104,24 +121,13 @@ What you do through a panel is yours. Those calls go into the action log as made
 
 Every save of a card keeps a version, and a removed card keeps its history. If someone changed a card after you opened it to edit, your save is refused and the board shows the new version; make your edit on that one. A card holds up to 64 KB, so longer things belong in files that a card points to.
 
-## The header
-
-At the top of the page are the matter's title, its one-line summary, chips such as **Closed** and **Always on**, and what it has spent. Its buttons sit at the top right of the window:
-
-- **Review**, once a working group has a run: what each group changed and made. See [Working groups](./working-groups).
-- **Make it a matter of its own**, on a sub-matter.
-- **Edit title and summary**.
-- **Close matter**, or **Reopen matter** on a closed matter.
-
-Once a working group works on the matter, a switch above the board flips between **Board** and **Theater**. Theater shows every group's Agents at work on one screen.
-
-![A matter's header: what it spent, its limit, and the Board and Theater switch](/docs-assets/images/0.5/en/matters-header.png)
-
 ## Spending and limits
 
-The **Spent** line counts every model response the matter's working groups got while they worked on it, its sub-matters included: the cost, the tokens, how many of them were **unattended**, and the limit. Hover it for the number of model calls and how much came from cache. Unattended is what the groups spent since you last stepped in: a message, an answer, an edit or a retry of yours to one of its groups, or words of yours that the main assistant passed on.
+**Spent**, in the header, shows one figure at rest: the cost, or the tokens when no price is known. Click it to open a line with the cost, the tokens, how many of them were **unattended** and the limit (**no limit**, or **limit** and the cap), with **Set a limit** or **Change** beside it. Hover the figures for the number of model calls, how much came from cache, and how many calls had no price.
 
-**Set a limit** caps the unattended spending, in millions of tokens (at least 0.01, that is 10,000 tokens). When the groups reach it, the work pauses at its next checkpoint (a step under way finishes first), a banner says how much was spent, and you get a notice. Resume, in the banner, lets the work go on and starts the count over. **Change** edits the limit or removes it.
+It counts every model response the matter's working groups got while they worked on it, its sub-matters included. Unattended is what the groups spent since you last stepped in: a message, an answer, an edit or a retry of yours to one of its groups, or words of yours that the main assistant passed on.
+
+**Set a limit** caps the unattended spending, in millions of tokens (at least 0.01, that is 10,000 tokens). When the groups reach it, the work pauses at its next checkpoint (a step under way finishes first), a banner under the header says how much was spent, and you get a notice. **Resume**, in the banner, lets the work go on and starts the count over. **Change** edits the cap, or **Remove the limit**.
 
 - A limit covers the matter's sub-matters too.
 - Shortly before the limit (at 80%), the Agents at work are told that the matter's work will pause there.
@@ -134,20 +140,31 @@ Below the board, **Changes** counts the files the matter's working groups change
 
 ## Closing and reopening
 
-Close a matter when you are done with it. The work for it stops at the step it is at, and its triggers pause. A group that also serves other matters goes on with theirs. Reopen picks up where the work stopped: paused groups go on, and its triggers come back on, counting from now (fires missed while it was closed are not made up).
+Close a matter when you are done with it. There are two ways:
 
-Closing is not a verdict: a delivery that arrives while the matter is closed still waits for you. Closed matters leave the sidebar; find them in the Matters overview under **Closed**. You can also tell the main assistant to close a matter.
+- **Close matter**, at the top right of the matter's page, closes it with one press; hover it and it says what closing means.
+- In the sidebar or on the [Panorama](./panorama), hover over a matter (or reach it with the keyboard) and an end button shows on its right. It asks once more (**Close "…"?**), so a stray click does not stop a group's work. When things on the matter or its sub-matters still wait for you, the dialog says how many and names the first three: **Handle them first** takes you to the matter's page instead of closing it, **Close matter** closes it, and **Cancel** does nothing.
+
+Once a matter is closed:
+
+- The work for it stops at the step it is at, and its triggers pause. A group at work on it finishes the step at hand and stops, and its card says **It paused when the matter was closed; reopen the matter and it goes on.**; the cadence card says **Paused with the matter**. A group that also serves other matters goes on with theirs.
+- It leaves the sidebar and the Panorama; find it in the Matters overview under **Closed**.
+- Its questions, deliveries and failures, and its sub-matters', stop waiting for you: they leave **Waiting for you** above the conversation, the cards at the top of the Needs you page, the board's **Waiting for you** and every count of what waits. The morning report stops asking too: its questions are not listed and none of its things are among the first ones to do; a delivery it made in the report's window still counts as delivered but reads **Matter closed: reopen it to judge this**, without verdict buttons.
+
+Closing is not a verdict: its deliveries still wait for your verdict, and reopening the matter brings them back to what waits for you. Reopening also picks up where the work stopped: paused groups go on, and its triggers come back on, counting from now (fires missed while it was closed are not made up).
+
+You can also tell the main assistant to close or reopen a matter.
 
 ## Sub-matters
 
-A working group can open a sub-matter for a part of its work that has its own goal and delivery, or that you may want to follow on its own, such as the logo for a shop. Sub-matters are listed under that heading on their matter's board, not in the sidebar, and a sub-matter's page leads back to its matter.
+A working group can open a sub-matter for a part of its work that has its own goal and delivery, or that you may want to follow on its own, such as the logo for a shop. Sub-matters are listed under that heading on their matter's board, not in the sidebar, and a sub-matter's page leads back to its matter. On the Panorama a sub-matter has no column of its own: its groups are drawn in its matter's column, marked **Sub-matter "…"**.
 
 - A sub-matter's questions go first to the group that opened it. The question card says so, and what you tell the asking Agent directly answers it too.
 - Its deliveries go to that group, which uses them (**Handed to the group that opened it**); they do not wait for you.
 - What it spends counts toward every matter above it, and their limits cover it.
-- Closing a sub-matter stops only its own work; closing the matter above it stops it too.
+- Closing a sub-matter stops only its own work; closing the matter above it stops it too, and puts away what waits on it.
 
-Make it a matter of its own lifts a sub-matter to the top level. It joins the matters in the sidebar and the main assistant's list, and from then on what it spends counts toward it alone; what it spent before stays counted where it was. Its questions still go first to the group that opened it.
+**Make it a matter of its own** lifts a sub-matter to the top level. It joins the matters in the sidebar, the Panorama and the main assistant's list, and from then on what it spends counts toward it alone; what it spent before stays counted where it was. Its questions still go first to the group that opened it.
 
 ## Always on, and the evolution matter
 

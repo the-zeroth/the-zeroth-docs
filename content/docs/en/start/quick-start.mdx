@@ -7,17 +7,19 @@ This guide takes you from installing The One to your first matter: the main assi
 
 ## 1. Install and sign in
 
-Download The One for macOS (Apple Silicon, macOS 15 or later) or Windows from the [download page](https://the-zeroth.com/en/download), install it and sign in with your The Zeroth account. Until a model is set up, the app opens **Get started** (**Start** in the sidebar), which walks you through the next steps.
+Download The One for macOS (Apple Silicon, macOS 15 or later) from the [download page](https://the-zeroth.com/en/download) and install it. The Windows download is still 0.4.28, which has no main assistant or matters, so these steps follow the macOS app.
 
-The app opens in the light preset, **Xuan Paper**, while the screenshots in these docs use the dark preset, **Ink Night**; you choose the look in **Settings › General › Appearance**.
+The first time it opens, the window asks you to sign in: choose **Sign In**, sign in with your The Zeroth account in the browser, and come back to The One. Until a model is set up, the app opens **Get started** (**Start** in the sidebar), which walks you through the next steps; once you are set up, **Start** leaves the sidebar.
+
+The app opens in **Plain White**, the light look the screenshots here use; for the dark **Graphite**, or to follow the system, go to **Settings › General › Appearance**.
 
 ## 2. Connect a model service
 
 The main assistant and the working groups work with a model, so this comes first.
 
-- With The One membership, the official connection is already there: its card shows your tier and how much usage is left.
-- Without a membership, the card offers **Become a member**, which opens the console. Subscribe there, then come back and choose **I have subscribed, refresh**.
-- Or connect your own: **Sign in with ChatGPT** uses the Codex allowance of your ChatGPT plan, or add an API key for OpenAI, Anthropic or Gemini. **Other services** connects a service with an OpenAI- or Anthropic-compatible API, including models on your own computer such as Ollama or LM Studio.
+- With The One membership, the official connection is already there: its card shows your tier and how much usage is left, so choose **Next**. If you have just subscribed and the connection is still on its way, wait a moment and choose **Refresh**.
+- Without a membership, the page offers **Become a member**, which opens the console in your browser. Subscribe there and come back: the page checks again by itself, or choose **I have subscribed, refresh**.
+- Or connect your own: **Sign in with ChatGPT** uses the Codex allowance of your ChatGPT Plus or Pro subscription, or add an API key for OpenAI, Anthropic or Gemini. **Other services** has services with an OpenAI- or Anthropic-compatible API, and models on your own computer such as Ollama or LM Studio.
 
 ![Connecting a model service in Get started](/docs-assets/images/0.5/en/quick-start-connect.png)
 
@@ -29,25 +31,27 @@ Pick the model that the main assistant, and every Agent that names no model of i
 
 ## 4. Check the Space's models (only when needed)
 
-Agents in a Space can name a model or a connection of their own, for example in a Space someone shared with you. When one of them cannot be reached on your computer, Get started adds this step and lists them, with two ways out: **Use the default model** for those Agents, or connect the service they name.
+Agents in a Space can name a model or a connection of their own, for example in a Space someone shared with you. When one of them cannot be reached on this computer, Get started adds this step and lists which Agents each problem stops. In a Space you can edit, you can switch those Agents with **Use the default model**; a read-only Space cannot have its Agents changed, so connect the service they name, or copy the Space first and change the copy.
 
 ## 5. Set up your own Space (recommended)
 
-You start in the official Space. It is read-only: its working-group templates, roles and Skills are kept by The One and updated with new versions, so whatever the main assistant and the evolution lab find to improve stays a proposal there. Choose **Copy the official Space and use it** to work in a Space of your own, where their changes take effect and you can edit anything yourself. The cost is that later updates to the official Space do not reach your copy by themselves. See [Definition Spaces](../the-one-app/capabilities/definition-spaces).
+You start in the official Space: the Space menu at the top of the sidebar calls it **Default**, and the **Definition Spaces** page marks it **Read-only**. Its working-group templates, roles and Skills are kept by The One and updated with new versions, so whatever the main assistant and the evolution lab find to improve stays a proposal there. Choose **Copy the official Space and use it** to work in a Space of your own, where their changes take effect and you can edit anything yourself. The cost is that later updates to the official Space do not reach your copy by themselves. To bring in a Space someone shared with you, choose **Import / manage Spaces**. See [Definition Spaces](../the-one-app/capabilities/definition-spaces).
 
 ## 6. Tell the main assistant the first thing
 
-The last step, **Ready to go**, names the three places you need: the **Main assistant**, **Needs you** and the **Morning report**. The main assistant is **Conversation** in the sidebar; what needs you waits in its conversation too, and each day's greeting there opens the morning report. Type what you want done and choose **Give it to the main assistant**, or **Look at the home page first**.
+The last step is **Ready to go**. Type what you want done and choose **Give it to the main assistant**: the app goes to the home page, where the main assistant answers. Or choose **Look at the home page first**. The home page is **Conversation** in the sidebar.
 
 ![The last step of Get started](/docs-assets/images/0.5/en/quick-start-ready.png)
 
 ## What happens next
 
 - The main assistant answers right away. When the request is bigger than one answer, it opens a **matter**, which appears under **Matters** in the sidebar, and hands the work to a working group in the same step.
-- The matter's board fills as the group works: its questions and deliveries arrive as cards. Those that wait for you also show in the conversation, as a card under the line that announces them, and in **Needs you**; the main assistant answers the questions it can settle from what you already told it.
+- The matter's board fills as the group works: its questions and deliveries arrive as cards. Those that wait for you also show in the conversation, under the line that announces them; the strip above the conversation counts them (for example **2 waiting for you**), and so does the number beside **Conversation** in the sidebar. The main assistant answers the questions it can settle from what you already told it.
+- To see what every working group is doing right now, open **Panorama** in the sidebar; see [Panorama](../the-one-app/panorama).
 - When the group delivers, the main assistant checks the delivery against what you asked for and tells you the conclusion first. Judge it with **Accept**, **Rework** (your words go back to the group) or **Give up**.
-- The next day, the main assistant greets you in the conversation with what happened since you last looked. **Open the morning report** shows the **Morning report**: what was delivered, what still waits for you and what it cost.
+- When the work is done, close the matter: point at it in the sidebar and choose the close button at its right, or choose **Close matter** on its page. The work for it stops at the step it is at, and reopening the matter picks it up again. See [Matters and boards](../the-one-app/matters).
+- The first time you open the app on a day, or come back to it on a new day after an hour or more away, the main assistant greets you in the conversation if there is news you have not seen, with what happened since you last looked. **Open the morning report** shows the **Morning report**: what was delivered, what still waits for you and what it cost. **Got it** puts the greeting away for the rest of the day.
 
 ![The home page: the main assistant's conversation, what waits for you above it and your matters in the sidebar](/docs-assets/images/0.5/en/main-assistant-home.png)
 
-Read on: [The main assistant](../the-one-app/main-assistant), [Matters and boards](../the-one-app/matters) and [Working groups](../the-one-app/working-groups).
+Read on: [The main assistant](../the-one-app/main-assistant), [Matters and boards](../the-one-app/matters), [Working groups](../the-one-app/working-groups), and [What waits for you and the morning report](../the-one-app/needs-you).

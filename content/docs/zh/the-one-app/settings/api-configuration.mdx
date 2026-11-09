@@ -1,15 +1,15 @@
 ---
 title: API 配置
-description: 在设置 › 模型和登录 › API 配置里连接模型服务：官方连接、用 ChatGPT 账号登录、API Key、自定义提供商，以及你电脑上的模型。
+description: 在设置 › 模型和登录 › API 配置里连接模型服务：官方连接、用 ChatGPT 账号登录、API Key、自定义提供商和你电脑上的模型，以及服务商拒绝时怎么办。
 ---
 
-**设置 › 模型和登录 › API 配置**管着 Agent 发模型请求所走的连接：随 The One 会员提供的官方连接、你的 ChatGPT 账号登录、OpenAI、Anthropic 和 Google Gemini 的 API Key，以及任何兼容的服务，包括跑在你自己电脑上的模型。连接只负责接通；每个 Agent 用哪个模型，在模型预设里定，每套预设指定一个连接。见[模型](../capabilities/models)。
+**设置 › 模型和登录 › API 配置**管着 Agent 发模型请求所走的连接：随 The One 会员提供的官方连接、你的 ChatGPT 账号登录、OpenAI、Anthropic 和 Google Gemini 的 API Key，以及任何兼容的服务，包括跑在你自己电脑上的模型。页面上的标题写着**服务商授权**。连接只负责接通；每个 Agent 用哪个模型、走哪个连接，在模型预设或角色里定，见[模型](../capabilities/models)。
 
-![设置 › 模型和登录 › API 配置：官方连接、ChatGPT 登录和一个本机服务](/docs-assets/images/0.5/zh/api-configuration-overview.png)
+![设置 › 模型和登录 › API 配置：一条用 ChatGPT 账号登录的连接](/docs-assets/images/0.5/zh/api-configuration-overview.png)
 
 ## 这一页有什么
 
-最上面是**连接**、**OAuth**、**密钥**的数量。下面先是官方连接（账号有的话），然后是**已连接**：其余每一条连接，写着服务商、自定义连接用的协议、怎么认证（OAuth、API Key 或不用 key）和 Base URL。**添加连接**打开服务商列表。
+最上面是**连接**、**OAuth**、**密钥**的数量。下面先是官方连接（账号有的话），然后是**已连接**：其余每一条连接，写着服务商、自定义连接用的协议、怎么认证（OAuth、API Key 或不用 key）和 Base URL，停用的和还没填 Key 的也会标出来。右上角的**添加连接**打开服务商列表。
 
 密钥和登录都保存在这台电脑上，由系统加密。定义空间和模型预设只引用连接，从不带着它的密钥。
 
@@ -29,10 +29,13 @@ description: 在设置 › 模型和登录 › API 配置里连接模型服务�
 
 OpenAI（Responses API）、Anthropic（Claude Messages API）或 Google Gemini：点**添加连接**，在对应服务商上点**连接**，粘贴你在它的控制台创建的 Key，再点**保存连接**。以后要换 Key，在这条连接上点**更新**；Key 一栏留空就保留原来的。
 
+以前版本里的 Claude Code、Gemini CLI 和 Antigravity 登录已在 0.5.0 移除，Anthropic 和 Gemini 请用 API Key 连接，见 [The One 0.5.0 Release Notes](../../start/release-notes/0-5-0)。
+
 ## 自定义提供商和本机模型
 
 **自定义提供商**可以接入任何使用以下三种协议之一的服务。点**添加连接**，在**自定义**下点**添加**，然后填写：
 
+- **名称**：这条连接在列表和模型预设里显示的名字。
 - **协议**：**OpenAI Chat Completions** 把请求发往 `<Base URL>/chat/completions`，大多数兼容服务用这个，Base URL 通常以 `/v1` 结尾。**OpenAI Responses** 发往 `<Base URL>/responses`，只有服务实现了这个接口时才选它。**Anthropic Messages** 发往 `<Base URL>/v1/messages`，所以 Base URL 不要带 `/v1`，和给 Claude Code 配 `ANTHROPIC_BASE_URL` 时填的值一样。
 - **API Base URL**：服务的地址。
 - **认证方式**：**API Key**（OpenAI 的两种协议放在 `Authorization: Bearer` 里，Anthropic Messages 放在 `x-api-key` 里），或者**不用 key**，给不需要凭据的服务用，比如本机的 Ollama、LM Studio 或 vLLM。选了不用 key，请求就不带任何 key，环境变量里的也不带。
@@ -50,16 +53,16 @@ OpenAI（Responses API）、Anthropic（Claude Messages API）或 Google Gemini�
 
 保存连接后马上生效，不用重启应用。如果提示后端没能热更新，到设置 › 通用点**重启后端**。
 
-新连接要在**设置 › 模型和登录 › 默认模型**的某套模型预设里选上才会被用到。预设编辑器里还有**刷新模型目录**，向这个连接取它现在提供的模型。详见[模型](../capabilities/models)。
+要让 Agent 用上一条连接，就让一套模型预设走它（在**设置 › 模型和登录 › 默认模型**里），或者在角色的**模型与参数**里单独配置模型时选它。预设编辑器里的**刷新模型目录**会向这个连接取它现在提供的模型。详见[模型](../capabilities/models)和[角色](../capabilities/roles)。
 
 ## 删除连接
 
-点这条连接上的垃圾桶图标。如果有角色直接指定了这个连接，会弹出对话框列出它们，点**迁移并删除**就把它们迁到另一个可用的连接（没有可用连接时清空，回到默认）。用这个连接的模型预设不会跟着改，请到设置 › 模型和登录 › 默认模型给它们换一个连接。
+点这条连接上的垃圾桶图标。没有角色直接指定这个连接时，它马上就删掉，不再问你。有的话会弹出对话框列出这些角色，点**迁移并删除**就把它们迁到另一个可用的连接（没有可用连接时清空，回到默认）。用这个连接的模型预设不会跟着改，请到设置 › 模型和登录 › 默认模型给它们换一个连接；为这个连接设过的模型容量覆盖会一起删掉。
 
 ## 服务商拒绝时
 
-服务商拒绝某个连接的 Key 或登录时，Agent 的运行里会说明，并带着回到这一页那条连接的链接。在你更新 Key 或重新登录之前，经这个连接的请求在本机暂停；Agent 会自己继续重试，这个连接每 30 分钟重新检查一次。
+服务商拒绝请求分三种，处理办法不一样：
 
-## 0.5.0 移除的登录方式
-
-The One 0.4.28 及更早的版本还提供 Claude Code、Gemini CLI 与 Antigravity 登录。0.5.0 已移除这三种方式，因为这些产品的条款都不允许第三方应用使用它们的登录。Anthropic 和 Gemini 请改用 API Key 连接；OpenAI Codex 仍可用 ChatGPT 账号登录。详见 [The One 0.5.0 Release Notes](../../start/release-notes/0-5-0)。
+- **拒绝了 Key 或登录**（HTTP 401）：Agent 在[所有运行](./all-runs)里写着这个连接**拒绝了它的凭据**，带着**打开这个连接**的链接；事项的工作组碰到时，对话上面的等你一栏还会出现**要你登录**的卡片，**去设置里处理**直接来到这条连接（见[等你、交付和晨报](../needs-you)）。在你更新 Key 或重新登录之前，经这个连接的请求留在本机，不再发给服务商；Agent 照样自己重试，这个连接每 30 分钟重新检查一次。保存新的 Key 或重新登录后马上放行；在运行的**运行控制**里点**立即重试待恢复 Agent**，也会马上再试一次。
+- **拒绝访问**（HTTP 403）：这个账号可能无权用这个模型，或者所在地区用不了。这不会暂停连接；检查这条连接的权限，或者换一个模型。
+- **请求被服务商的策略挡下**：Agent 显示**模型提供商阻止了本次请求**，Agent 名册上标着**需人工处理**。同样的请求不会自动再发，**全部恢复**和**立即重试待恢复 Agent**也会跳过它。编辑任务，说清楚你被授权做的范围；或者换一个适用、有授权的模型连接；或者取消任务。改过的请求、换过的连接会照常发出去。

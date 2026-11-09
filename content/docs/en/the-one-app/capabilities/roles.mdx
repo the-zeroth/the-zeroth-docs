@@ -1,19 +1,19 @@
 ---
 title: Roles
-description: "A role is one Agent of a working group written down: its model, prompts, Skills, built-in tools, external tools and Plugins. How to set one up."
+description: How to set up a role, one Agent of a working group written down with its model, prompts, Skills, built-in tools, external tools and Plugins.
 ---
 
 A **role** is one Agent of a working group written down: what it does, which model it thinks with, and which prompts, Skills, tools and Plugins it can use. Every node of a working-group template is bound to a role, so one role can serve in several templates, and every Agent that plays it starts from the same definition. See [Working-group templates](./working-group-templates).
 
-Teams and tools calls them **Roles**; the editor (its tab is **Agent**) calls each one an Agent preset. Open one from **Teams and tools › Roles**, or choose **New Agent** above the list.
+Teams and tools calls them **Roles**; the editor (its tab is **Agent**) calls each one an Agent preset. Open one from **Teams and tools › Roles**, or choose **New Agent** above the list. The list is grouped in folders, and a role that inherits from another sits indented under its base. **New folder** adds a folder; drag a role into it to move it.
 
-The editor has three tabs: **Configuration**, **Prompts** and **Capabilities**. Each change applies when you save: groups formed afterwards use it, and Agents already at work pick it up from their next turn, while a reply already being written finishes as it was.
+The editor has three tabs: **Configuration**, **Prompts** and **Capabilities**. Each change applies when you save: groups formed afterwards use it, and Agents already at work pick up what you added or changed from their next turn, while a reply already being written finishes as it was. Removals are another matter. Skills and Plugins you remove are gone from Agents at work from their next turn; tools, external tool servers and prompts you remove stay with Agents already at work, and only groups formed afterwards go without them.
 
 ## Configuration
 
-### Name and description
+### Identity
 
-The **Name** is the role's ID. Renaming it later also updates the roles that inherit from it and the templates that use it.
+The **Identity** block holds the name and description, with inheritance below them. The **Name** is the role's ID. Renaming it later also updates the roles that inherit from it and the templates that use it.
 
 The **Description** says what the role is good at. Agents read it too: an Agent that may hand work to this role finds the description in its list of handoff targets, so write it for them.
 
@@ -29,9 +29,7 @@ Under **Model & Parameters** a role gets its model in one of three ways:
 - **Use default model.** The role follows the global default, which you set in **Settings › Models and sign-in › Default model** or from the model menu under the main assistant's composer. The editor shows the **Current default**.
 - **Its own settings.** Leave both off and set **API Config** (the connection), **Speed / service tier**, **Model** and **Reasoning (thinking)** here.
 
-There is no temperature setting: the provider uses its own default.
-
-When an Agent starts a turn, the first model that applies wins: a model the main assistant chose for this one run, then the role's own, then a default model set for the run in All runs, then the template's default preset, then the global default. So a role that names no model takes whatever the template or the global default says, and the main assistant can put one working group on a stronger model without touching the role. See [Models](./models).
+How a role's own model ranks against a model chosen for one run, the template's default and the global default is explained in [Models](./models#which-model-wins).
 
 **Composition & sources** sums up what the role is made of and where each part comes from: its own settings, or the role it inherits from. Select a line to jump to that part.
 
@@ -56,7 +54,7 @@ You can also start from the other side: **Add to Agent** in the Plugin library a
 
 ### Tools
 
-**Tools** are the built-in toolsets: reading and writing files, running commands, the web, talking to you, handing tasks out on a TaskBoard, starting sub-Graphs, memory and more. Expand one to see its **Exposed Functions** and switch single functions off, fill in its **Instance Config**, or add a usage constraint to its description.
+**Tools** are the built-in toolsets: reading and writing files, running commands, the web, talking to you, handing tasks out on a TaskBoard, starting sub-Graphs, memory and more. Expand one to see its **Exposed Functions** and switch single functions off, fill in its **Instance Config**, give it another name for the model to see, or add a usage constraint to its description.
 
 Tools marked **Full local access** act with your user account's rights on files, the network and processes. The marking discloses what the tool can do; it does not limit it.
 
@@ -66,7 +64,7 @@ Tools marked **Full local access** act with your user account's rights on files,
 
 ### MCP Servers
 
-**All** enables every external tool server in the Space, including servers added later, which reach the Agent from its next turn. **Custom** picks servers one by one. The [External tools (MCP)](./mcp) page only defines the connections; this is where a role gets them.
+**All** enables every external tool server in the Space, including servers added later, which reach the Agent from its next turn. **Custom** picks servers one by one. The [External tools (MCP)](./mcp) page only defines the connections; this is where a role gets them. A role that inherits takes its servers along with its **Tools**: switch Tools to Override to choose servers of its own.
 
 ![The Capabilities tab of a team role](/docs-assets/images/0.5/en/roles-capabilities.png)
 
@@ -74,12 +72,8 @@ In the official Space, the main assistant and the General group's assistant get 
 
 ## Source, the built-in roles and the official Space
 
-- **Source** shows the role's file as it is saved, read-only, with its path in the Space.
+- **Source** shows the role's file as it is saved, read-only, with its path in the Space. **Delete** at the bottom of the editor deletes the role.
 - The built-in roles (`main-assistant`, `chat-assistant`, `atlas-director`, `nightly-reviewer` and the evolution lab's three) are listed like any other and can be edited in your own Space. The main assistant is the conversation everything reaches, so change it with care.
-- In the official Space the editor is read-only. **Duplicate to edit** copies the Space and switches to the copy. See [Definition Spaces](./definition-spaces).
+- In the official Space the editor is read-only. **Duplicate to edit**, in the notice at the top, copies the Space and switches to the copy. For what else can change there, see [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).
 
-## Who else edits roles
-
-You do not have to edit roles by hand. The main assistant writes and changes roles when you ask, and **The Director** bar on the [Atlas](./atlas) canvas edits them in front of you. The evolution lab can change a role when evidence shows it should. See [Evolution: the lab and the nightly review](../evolution).
-
-A role, together with its template and the other members, makes up the gene of a reusable working group: see [A-Genetic Engineering](../../multi-agent-architecture/a-genetic-engineering).
+You do not have to edit roles by hand: the main assistant, **The Director** bar on the Atlas canvas and the evolution lab change them too. See [Who changes them](../capabilities#who-changes-them). A role, together with its template and the other members, makes up the gene of a reusable working group: see [A-Genetic Engineering](../../multi-agent-architecture/a-genetic-engineering).

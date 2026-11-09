@@ -15,7 +15,7 @@ Writing a memory is a choice, not a routine step: Agents keep only what will hel
 
 In the official Space, the memory tools belong to the main assistant, the assistant of the General group (`chat`), the nightly Reviewer and the evolution lab's Director. Give a role of your own the memory tools in its editor, and it sees memory too.
 
-**History and undo.** When an entry is changed or removed, its earlier version is kept: each entry keeps its last five versions in the Space. Every memory an Agent writes, changes or removes is also recorded in **Settings › Data and undo › Action log**, where you can put the old version back. See [Action log, undo and stopping](../action-log).
+**Look, change and undo.** No page in the app lists memory entries. To see what a Space remembers, ask the main assistant: it holds the memory tools, so it can search by meaning, open an entry, and rewrite or remove one when you ask. When an entry is changed or removed, its earlier version is kept: each entry keeps its last five versions in the Space. Every memory an Agent writes, changes or removes is recorded in **Settings › Data and undo › Action log**, where you can put the old version back (see [Action log, undo and stopping](../action-log)); memories the nightly review changed are also listed in the next morning report's **Last night's review**.
 
 ## Project notes and AGENTS.md
 
@@ -26,7 +26,9 @@ When an Agent works in a project folder, it also sees knowledge that belongs to 
 
 ## Earlier sessions
 
-When an Agent's context fills up, meditation folds its history into a summary of what it found and decided (see [Meditation](../../multi-agent-architecture/more-possibilities/meditation)). Meditation does not write memory; its summaries are what later sessions can find. With an embedding model, an Agent that holds the memory tools gets up to three cards from other sessions' summaries in the same project when they clearly match what was just asked, each with the session's title and date. Agents can also search memory, project notes and these summaries in one go.
+When an Agent's context fills up, meditation folds its history into a summary of what it found and decided (see [Context and meditation](../../multi-agent-architecture/single-agent/context)). Meditation does not write memory; its summaries are what later sessions can find. With an embedding model, an Agent that holds the memory tools gets up to three cards from other sessions' summaries in the same project when they clearly match what was just asked, each with the session's title and date. Agents can also search memory, project notes and these summaries in one go.
+
+These summaries are found by project folder, not by Space: work on the same project from another Space, and the earlier conclusions are still there.
 
 ## Settings › Data and undo › Memory recall
 
@@ -38,7 +40,9 @@ Recall ranks by meaning when an embedding model is available, so a question in C
 - **Custom address**: any OpenAI-compatible embeddings address that needs no key, such as Ollama on this computer.
 - **Off**: keywords only.
 
-The **Index** section shows, for memory, project knowledge and session conclusions, how much is indexed and the progress of any indexing. **Rebuild index** clears every computed vector, then embeds again in the background what Agents searched in the last 30 days, which costs money when a provider's API does the work.
+The **Index** section shows, for memory, project knowledge and session conclusions, how much is indexed and the progress of any indexing. **Rebuild index** clears every computed vector, then embeds again in the background what Agents searched in the last 30 days. Saving a different embedding model also embeds what was searched in the last 30 days again, with the new model. Both cost money when a provider's API does the work.
+
+Agents that hold the memory tools, such as the main assistant, can also read and change these settings and rebuild the index, just as you can on this page.
 
 ![Settings › Data and undo › Memory recall](/docs-assets/images/0.5/en/memory-recall.png)
 

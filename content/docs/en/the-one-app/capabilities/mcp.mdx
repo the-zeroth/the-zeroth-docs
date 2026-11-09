@@ -1,11 +1,11 @@
 ---
 title: External tools (MCP)
-description: "Connect MCP servers so roles can reach outside services and data: local and remote servers, sign-in, panels, long-running tasks and which role gets what."
+description: "Connect MCP servers so roles can reach outside services and data: local and remote servers, sign-in, panels, long calls and which role gets what."
 ---
 
 **External tools (MCP)** is where a Space connects [Model Context Protocol](https://modelcontextprotocol.io) servers: programs and services that give Agents tools, data and panels beyond the built-in ones. This page defines each connection; a role's **MCP Servers** setting decides which Agents use it.
 
-Open it from **Teams and tools › External tools (MCP)**. The page is called **MCP Servers**, and its tab in the editors is **MCP**.
+Open it from **Teams and tools › External tools (MCP)**. The page is called **MCP Servers**, and its tab above the editors' lists is **MCP**.
 
 ## Add a server
 
@@ -14,20 +14,26 @@ Choose **Add Server**. The form, **Connect to Custom MCP**, starts with the **Na
 **STDIO** runs a program on this computer:
 
 - **Launch Command** and **Arguments**, for example a command that starts with `npx`.
-- **Environment Variables** to hand to the program, and **Environment Passthrough** for variables it should receive from the app's own environment.
+- **Environment Variables** to hand to the program, and **Environment Passthrough** for variables it should receive from The One's own environment. Few can come through that way; see **Secrets and sharing** below.
 - **Working Directory**. Without one, the server gets a folder of its own in the app's data, so its scratch files stay out of your projects.
 
 A STDIO server runs with your user account's rights: it can read and change files, use the network and start other programs. The page marks it **Full local access**; the environment settings only decide which values it receives and are not a sandbox.
 
-You do not need Node installed for servers started with `npx` or `node`: The One uses your computer's Node when there is one, and its own otherwise. On a Mac, commands installed with Homebrew, nvm or Volta are found even when you open the app from the Dock.
+Once started, a STDIO server keeps running between calls, and every Agent and working group shares that one process: a server that keeps state shows the same state to all of them. Chrome DevTools in the official Space is the exception, with one process per working group (below); the form has no setting for this.
+
+You do not need Node installed for servers started with `npx` or `node`: The One uses your computer's Node when there is one, and its own otherwise. On a Mac, commands installed with Homebrew, nvm or Volta are found even when you open the app from the Dock. Node is the only runtime The One brings: a server started with a command such as `uvx`, `python` or `docker` needs that command installed on your computer.
 
 **Streamable HTTP** connects to a server on the network:
 
 - **URL** of the server.
-- **Headers**, such as an API key the service asks for, and **Headers from Environment Variables**. **Bearer Token Environment Variable** names a variable that holds a bearer token.
+- **Headers**, such as an API key the service asks for, plus **Headers from Environment Variables** and **Bearer Token Environment Variable**; see **Secrets and sharing** below for where those variables come from.
 - **OAuth 2.1 / PKCE** for a server that asks you to sign in (below).
 
 When you save, The One discovers the server's tools; if that fails, the server is saved anyway and you can try again later. Each row in the list shows how the server is reached, its number of tools (expand it to read them) and **Discover Tools**, which lists them again, for example after the server changed. **Source** shows the server's file with secret-looking values masked.
+
+MCP servers that come with the Plugins this Space uses are listed here too, beside the Space's own. The Plugin owns them, so they cannot be changed or deleted on this page (see **MCP servers inside Plugins** below).
+
+The official Space is read-only. This page does not warn you first, but adding, saving, discovering tools or deleting there is refused with an error that asks you to copy the Space (see [Definition Spaces](./definition-spaces)).
 
 ![The MCP Servers page](/docs-assets/images/0.5/en/mcp-servers.png)
 
@@ -37,18 +43,33 @@ For a remote server that needs a sign-in, check **OAuth 2.1 / PKCE** ("Enable br
 
 - **OAuth client ID**: only when the service gave you one, or when a sign-in stops and asks for it.
 - **OAuth scopes**: only when the service asks for specific ones.
-- **Credential vault ID**: give several Spaces the same ID and they share one sign-in.
+- **Credential vault ID**: give this server the same ID in several Spaces, with the same URL, client ID, scopes and redirect URI, and they share one sign-in. Without it, each Space signs in on its own, a duplicated Space included; changing any of those fields also means signing in again.
 - **OAuth loopback redirect URI**: where the sign-in returns, `http://127.0.0.1:33418/callback` unless the service needs another.
+- **OAuth client secret environment variable** and **Existing access / refresh token environment variables** are rarely needed, and the variables they can read are limited; see **Secrets and sharing** below.
 
-When you save the server, or later choose **Discover Tools**, its sign-in page opens in your browser. The tokens are kept in your system's keychain, never in the Space.
+When you save the server, or later choose **Discover Tools**, its sign-in page opens in your browser. The tokens are stored encrypted on this computer, never in the Space.
 
 An Agent's call never opens a sign-in by itself. When a saved sign-in stops working, the Agent is told so and goes another way or asks you; sign in again with **Discover Tools** on the server.
 
 ![A Streamable HTTP server with OAuth sign-in](/docs-assets/images/0.5/en/mcp-oauth.png)
 
+## The server in the official Space
+
+The official Space ships one server, **Chrome DevTools**: browser automation in the Google Chrome installed on your computer. Agents open and navigate pages, read them as text snapshots or screenshots, click and fill in forms, and read the console and network requests. Its package comes with The One, so it needs neither Node nor a download. Each working group gets a process and browser profile of its own, so one group never acts on another group's pages.
+
+Ten roles of the official Space that work in a browser use it: the software team's solution lead and developer, the three frontend studio roles, the Blender director and reviewer, the deep web researcher, and the product evaluation director and simulated users. Copying the official Space copies it too; a new, empty Space does not have it.
+
+Controlling the desktop and other apps is not a server in the Space: it is the **Computer Use** Plugin.
+
+## MCP servers inside Plugins
+
+Many tools come as Plugins that carry an MCP server, such as Blender Control, OneCanvas, Gmail Control and Computer Use. Install the Plugin and, in a Space of your own, add it to a role: the server's launch settings come from the signed Plugin and its keys from the Plugin's own settings, so there is nothing to fill in on this page. These servers show in the list above, but you manage them from the Plugin. **Browse Plugins** opens the Plugin library ([Plugins and Apps](./plugins)).
+
+Prefer a Plugin when a tool needs code, settings or keys you would otherwise set up again in every Space. Keep a server on this page when it belongs to this Space alone.
+
 ## Give servers to roles
 
-In a role's editor, **Capabilities › MCP Servers** decides which servers its Agents use: **All** for every server in the Space, including ones added later, which reach the Agent from its next turn, or **Custom** to pick them ([Roles](./roles)). An Agent can also add a server of the Space to itself while it works.
+In a role's editor, **Capabilities › MCP Servers** decides which servers its Agents use: **All** for every server in the Space, including those of the Plugins it uses and ones added later, which reach the Agent from its next turn, or **Custom** to pick them ([Roles](./roles)). An Agent can also add a server of the Space to itself while it works.
 
 In the official Space and in your copies of it, the main assistant and the General group's assistant get every server, so a server you add reaches them from their next turn. Team roles get only the servers their work needs.
 
@@ -56,44 +77,36 @@ In the official Space and in your copies of it, the main assistant and the Gener
 
 - To keep each request short, an Agent first sees an MCP tool by name only. It finds tools with `search_tools` and loads a tool's full description and parameters with `load_tool`, ready from its next turn.
 - Besides tools, Agents can list and read a server's resources and use its prompts.
-- A server can ask a question in the middle of a call, for example to confirm an option. The Agent gets the question as the call's result and answers it.
-- Tool cards label each call **Read-only**, **Changes things** or **Reaches outside**, from hints the server gives. The hints only describe: nothing is stopped or asked because of them. Read-only calls an Agent makes together run side by side.
-- Every call is recorded in **Settings › Data and undo › Action log**, and files a call changed can be put back there ([Action log, undo and stopping](../action-log)).
+- A server on the 2026-07-28 revision can ask a question in the middle of a call, for example to confirm an option. The Agent gets the question as the call's result and answers it. Servers on older revisions do not ask.
+- Tool cards label what a call may do, from hints the server gives: **Read-only** when the server marks the tool read-only; otherwise **Changes things**, plus **Reaches outside** unless the server says the tool stays local. The hints only describe: nothing is stopped or asked because of them. Read-only calls an Agent makes together run side by side.
+- MCP calls have no time limit: a call waits until the server answers or the call is cancelled.
+- Every call is recorded in **Settings › Data and undo › Action log** ([Action log, undo and stopping](../action-log)). What can be put back is limited to files named by an absolute path in the call's arguments; calls marked read-only keep no copies, and files a server changes elsewhere on its own cannot be put back.
 
 ## Long calls and restarts
 
-A server on the 2026-07-28 revision of MCP can turn a long call, such as a render or a backtest, into a task. The Agent waits for it as usual or lets it run in the background, and the progress the server reports shows on the call's tool card and in a matter's Theater.
+A server on the 2026-07-28 revision can turn a long call, such as a render or a backtest, into a task. The Agent waits for it as usual or lets it run in the background, and the progress the server reports shows on the call's tool card and in a matter's Theater.
 
-If the app restarts meanwhile, The One asks the server for the same task's result instead of calling the tool again. A call that was not a task, or whose task the server no longer knows, is repeated only when the server marks the tool read-only or safe to repeat; otherwise the Agent is told that the result is unknown, because the work may or may not have been done.
+If you quit or restart the app meanwhile, The One asks the server for the same task's result instead of calling the tool again. There are two exceptions:
+
+- If the app crashes, a task call the Agent was waiting on in the foreground has no task id saved yet, so its result is unknown.
+- A call that was not a task, or whose task the server no longer knows (a STDIO server that keeps tasks only in memory stops with the app, for example), is repeated only when the server marks the tool read-only or safe to repeat.
+
+When the result is unknown, the Agent is told that the work may or may not have been done.
 
 ## Panels (MCP Apps)
 
-A tool can come with a panel: a small app page from its server. The panel shows under the tool's call in the conversation. The three most recent load by themselves, older ones on a click, and each can be hidden, reloaded, shown fullscreen or pinned to the side panel.
+A tool can come with a panel: a small app page from its server. Panels show in the desktop app only, under the tool's call in the conversation. The three most recent load by themselves, older ones on a click, and each can be hidden, reloaded, shown fullscreen or pinned to the side panel.
 
-You and the Agent work on the same thing there. A panel can call its own server's tools, tell the Agent what it shows, or pass your message to the Agent. What you do in a panel is recorded in the action log as yours and can be undone like an Agent's call.
+You and the Agent work on the same thing there. A panel can call its own server's tools, open a web page in your browser, tell the Agent what it shows (the Agent sees it on its next turn and is not woken by it), or pass your message to the Agent. What you do in a panel is recorded in the action log as yours and can be undone like an Agent's call.
 
 Panels are isolated: they cannot reach the app, your files or the app's tokens, and they reach the network only where their server declared. The main assistant or a working group can also put a panel on a matter's board as a **Panel** card ([Matters and boards](../matters)).
 
-## Protocol versions
-
-The One talks to both generations of MCP servers and tells them apart by itself: servers on the 2026-07-28 revision, which need no handshake or session, and older ones (2024-11-05 to 2025-11-25), which handshake first. The older HTTP+SSE transport is not supported. A STDIO server keeps running between calls, so a server that keeps state keeps it.
-
-## The server in the official Space
-
-The official Space ships one server, **Chrome DevTools**: browser automation in the Google Chrome installed on your computer. Agents open and navigate pages, read them as text snapshots or screenshots, click and fill in forms, and read the console and network requests. Its package comes with The One, so it needs neither Node nor a download. Each run gets a browser profile of its own, so one working group never acts on another group's pages.
-
-Ten roles of the official Space that work in a browser use it: the software team's solution lead and developer, the three frontend studio roles, the Blender director and reviewer, the deep web researcher, and the product evaluation director and simulated users.
-
-Controlling the desktop and other apps is not a server in the Space: it is the **Computer Use** Plugin.
-
-## MCP servers inside Plugins
-
-Many tools come as Plugins that carry an MCP server, such as Blender Control, OneCanvas, Gmail Control and Computer Use. Install the Plugin and add it to a role: the server's launch settings come from the signed Plugin and its keys from the Plugin's own settings, so there is nothing to fill in on this page. **Browse Plugins** opens the Plugin library ([Plugins and Apps](./plugins)).
-
-Prefer a Plugin when a tool needs code, settings or keys you would otherwise set up again in every Space. Keep a server on this page when it belongs to this Space alone.
-
 ## Secrets and sharing
 
-A server's settings are a file in the Space's `mcp_servers` folder. When you export or share the Space, values that may be secrets are removed from these files, so the person you share with fills in their own. Sign-in tokens never leave your keychain. See [Definition Spaces](./definition-spaces).
+A server's settings are a file in the Space's `mcp_servers` folder. When you export or share the Space, values that may be secrets are removed from these files, so the person you share with fills in their own. Sign-in tokens never leave this computer. See [Definition Spaces](./definition-spaces).
 
-The official Space is read-only: copy it before you add servers.
+Put a key a server needs straight into **Headers** or **Environment Variables**, or use an OAuth sign-in. The fields named after environment variables (**Environment Passthrough**, **Headers from Environment Variables**, **Bearer Token Environment Variable** and the two OAuth ones) read the environment of The One's own background process. In the desktop app that holds only a few system variables such as `HOME`, `PATH` and `LANG`; variables you export in a shell profile such as `~/.zshrc` never reach it.
+
+## Protocol versions
+
+The One talks to both generations of MCP servers and tells them apart by itself: servers on the 2026-07-28 revision, which need no handshake or session, and older ones (2024-11-05 to 2025-11-25), which handshake first. The older HTTP+SSE transport is not supported. Only servers on the 2026-07-28 revision can turn long calls into tasks or ask questions mid-call.

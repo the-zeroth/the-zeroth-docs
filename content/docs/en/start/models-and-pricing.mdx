@@ -1,150 +1,42 @@
 ---
 title: Models and Pricing
-description: Understand official model service, third-party providers, subscriptions, and quota packs.
+description: How the official model service differs from your own providers, how membership plans and quota packs are charged, and who bills what.
 ---
 
-The One is The Zeroth's AI Agent desktop application. You can use The Zeroth official model service, which comes with a The One membership, or connect model accounts that you already own.
+The main assistant and the working groups in The One work with models. The models can come from the official model service that comes with a The One membership, or from a model service of your own. This page explains the difference and how each is charged; [API configuration](../the-one-app/settings/api-configuration) covers setting up every connection, and [Models](../the-one-app/capabilities/models) covers which Agent uses which model.
 
-The One supports two usage modes:
+## Two ways
 
-1. Use The Zeroth official model service.
-2. Connect your own third-party model provider.
-
-Either way, you choose models with **model presets**. A preset is a named set of model, provider connection, reasoning and service tier. One preset is the **Global default**, used by every Agent, Graph and session without a preset of its own; you can bind other presets to an Agent, to a Graph (as the default for its nodes) or to a single run. Manage them in **Settings › Models and sign-in › Default model** or from the model button under the main assistant's composer; see [Models](../the-one-app/capabilities/models).
-
-![Model presets in Settings › Models and sign-in › Default model](/docs-assets/images/0.5/en/models-default-model.png)
-
-## Official model service
-
-This is the simplest and recommended path.
-
-The official model service comes with a The One membership. Once you subscribe, the official connection shows up in The One: no API keys to prepare and no model providers to configure. Signing in with a The Zeroth account alone does not bring it: without a membership, **Get started** offers **Become a member**, or you connect a provider of your own.
-
-The Zeroth official model service is powered through OpenRouter. It gives you two practical advantages.
-
-### Broader model selection
-
-OpenRouter aggregates many mainstream and frontier models. In The One, that means you can choose from model ecosystems such as OpenAI, Anthropic, Google, Meta, Mistral, DeepSeek, and others.
-
-Compared with connecting to a single model vendor, the official service gives you more flexibility when choosing models for different Agents and tasks.
-
-The Zeroth also maintains the integration for you, reducing the operational mess of managing several provider accounts and API keys.
-
-### One account and one bill
-
-Every model you use through the official service is billed to your The Zeroth account. You can follow your remaining usage in the console, or in the app: in **Settings › Models and sign-in › API Config**, the official connection's card shows your membership tier, how much of the included usage is left, and **Manage subscription**. There are no vendor accounts to open or top up, and no keys to create or rotate.
-
-This is a convenience, not a discount. Usage is counted at OpenRouter's price for each model, and each plan includes less usage than its price (see [Pricing modes](#pricing-modes)), so the official service is not a cheaper way to call the same models. If the lowest cost per call matters most, use your own provider keys.
-
-The official model service suits:
-
-| Situation | Recommended |
-| --- | --- |
-| Using The One for the first time | Yes |
-| You don't want to configure API keys | Yes |
-| You want one bill for all your models | Yes |
-| You want to try many models quickly | Yes |
-| You want fewer provider accounts to manage | Yes |
-
-## Third-party model providers
-
-If you already have model provider accounts, you can add your own API keys in **Settings › Models and sign-in › API Config**, or sign in with ChatGPT to use OpenAI Codex. [API configuration](../the-one-app/settings/api-configuration) covers every connection type.
-
-Supported third-party channels include:
-
-| Provider | Connection method |
-| --- | --- |
-| OpenAI | API Key |
-| OpenAI Codex | Sign in with ChatGPT (uses the Codex allowance of your ChatGPT Plus or Pro plan) |
-| Anthropic Claude | API Key |
-| Google Gemini | API Key |
-| OpenRouter (your own key) | **Custom Provider** with OpenAI Chat Completions (Base URL: `https://openrouter.ai/api/v1`) |
-| Other compatible services | **Custom Provider** speaking OpenAI Chat Completions, OpenAI Responses or Anthropic Messages, with an API key |
-| Models on your computer (Ollama, LM Studio, vLLM) | **Custom Provider** with **No key** |
-
-The One 0.4.28 and earlier also offered Claude Code, Gemini CLI, and Antigravity sign-ins. 0.5.0 removed them, because the terms of Claude Code, Gemini CLI, and Antigravity do not allow third-party apps to use their sign-ins. Connections made that way stop working once you update; connect Anthropic or Gemini with an API key instead.
-
-A Custom Provider suits teams with an internal model gateway or a private deployment, any service compatible with the OpenAI or Anthropic APIs, and models you run on your own computer.
-
-When you use a third-party provider, calls do not consume The Zeroth official model service quota. Cost, quota, rate limits, and model availability are decided by that provider.
-
-## Pricing modes
-
-The Zeroth official model service supports subscriptions and quota packs.
-
-### Subscription
-
-Subscriptions are for users who keep using The One continuously. Each tier includes a different amount of official model service capacity.
-
-| Plan | Price | Included usage | Best for |
-| --- | --- | --- | --- |
-| Starter | $20 / month | $15 / month | Light usage, personal exploration, low-frequency Agent workflows |
-| Pro | $60 / month | $45 / month | Daily usage, Multi-Agent workflows, higher task frequency |
-| Max | $200 / month | $150 / month | Heavy usage, complex workflows, high-frequency automation |
-
-Included usage is OpenRouter credit: each call is charged at OpenRouter's price for the model it uses. It resets at the start of each billing period and does not roll over.
-
-Every plan includes the core capabilities of The One: the desktop app, the main assistant, matters and working groups, triggers, local execution, runtime observation, the official model service, and third-party provider connections.
-
-The main difference between plans is the included usage: Pro includes three times as much as Starter, and Max ten times as much.
-
-### Quota packs
-
-If your current subscription capacity is not enough, you can purchase additional quota packs.
-
-Quota packs suit:
-
-- a month when you use more than usual,
-- staying on your plan instead of upgrading,
-- a project, a delivery or a round of testing that needs more model usage.
-
-| Package | Price | Description |
+| | Official model service | Your own model service |
 | --- | --- | --- |
-| Quota pack | $20 / purchase | Adds $13 of usage that does not expire |
+| How you connect | Subscribe to The One membership and the official connection appears by itself, with no API key to prepare | Sign in with ChatGPT (OpenAI Codex); add an API key for OpenAI, Anthropic or Gemini; or use a **Custom Provider** for a service with an OpenAI- or Anthropic-compatible API, your organisation's model gateway or models on your own computer |
+| Which models | Models on OpenRouter, including OpenAI, Anthropic, Google, Meta, Mistral, DeepSeek and others | The models that service offers |
+| How it is charged | At each model's OpenRouter price, from your membership's included usage and your quota packs | By that service: an API key at its prices, Sign in with ChatGPT against the Codex allowance of your ChatGPT plan, an organisation's gateway by its own rules |
+| Suits | Using The One for the first time, not wanting to manage keys, one bill for every model, trying many models | Accounts you already have, a team that requires its own accounts or gateway, models on your own computer, the lowest cost per call |
 
-Quota packs do not change your subscription tier. They only increase your available official model service capacity.
+You can use both at once: the model preset an Agent uses decides which connection its requests take. Calls through your own service do not use any official model service usage.
 
-Two rules worth knowing: a pack adds $13 of usage for $20, while plans include $15 for every $20, so a pack buys a little less usage per dollar. In exchange, pack usage does not expire while your account remains active, whereas plan usage resets each billing period. Calls use your plan's usage first and pack usage after that.
+## The official model service
 
-## How third-party providers charge
+The official model service comes with a The One membership and runs through OpenRouter. Signing in with a The Zeroth account alone does not bring it: without a membership, **Get started** offers **Become a member**. Once you subscribe, the official connection shows up in The One.
 
-If you use your own OpenAI, Anthropic, Gemini, or custom model service, the related cost is charged by that provider or by your organization.
+You can follow your remaining usage in the console, or in the app: in **Settings › Models and sign-in › API Config**, the official connection's card shows your **Membership** tier, how much of the included usage is left, and **Manage subscription**.
 
-For example:
+This is a convenience, not a discount. Usage is counted at OpenRouter's price for each model, and each plan includes less usage than its price, so the official service is not a cheaper way to call the same models. If the lowest cost per call matters most, use your own provider keys.
 
-| How you use models | Who charges |
-| --- | --- |
-| The Zeroth official model service | Uses the official model service usage on your The Zeroth account |
-| Your own OpenAI API key | OpenAI |
-| Your own Anthropic API key | Anthropic |
-| Your own Gemini API key | Google |
-| Sign in with ChatGPT (OpenAI Codex) | Counts against the Codex allowance of your ChatGPT plan |
-| Your company's model gateway | Your team's or company's own rules |
+## Membership plans and quota packs
 
-The Zeroth does not deduct official model service capacity for third-party model calls.
+Every plan has the same features; they differ only in how much official model service usage they include: Pro includes three times as much as Starter, and Max ten times as much.
 
-## How to choose
+| Plan | Price | Included usage per month | Best for |
+| --- | --- | --- | --- |
+| Starter | $20 / month | $15 | Light usage, personal exploration, low-frequency Agent work |
+| Pro | $60 / month | $45 | Daily usage, multi-agent workflows, higher task frequency |
+| Max | $200 / month | $150 | Heavy usage, complex workflows, high-frequency automation |
 
-For most users, official model service is the easiest path: less configuration, broader model choice, and one bill. If you want the lowest cost per call, use your own provider keys.
+Included usage is OpenRouter credit. It resets at the start of each billing period and does not roll over.
 
-If you already have provider accounts, or your company requires model calls to go through internal accounts, use third-party providers.
+For a month when you use more than usual and don't want to upgrade, buy a **quota pack** in the console: $20 a purchase adds $13 of usage. A quota pack does not change your plan; it only adds usage.
 
-| Situation | Recommended |
-| --- | --- |
-| You don't want to configure API keys | Official model service |
-| You want to use many models quickly | Official model service |
-| You want one bill for every model | Official model service |
-| You want the lowest cost per call | Third-party provider |
-| You already have OpenAI / Claude / Gemini accounts | Third-party provider |
-| Your company has a model gateway | Custom Provider |
-| You want to use models on your own computer | Custom Provider with No key |
-| You want model costs on your own provider's bill | Third-party provider |
-
-## Summary
-
-The One supports two ways to use models:
-
-- The official model service: comes with a The One membership, runs through OpenRouter, offers a broad choice of models, needs no keys, and uses your plan's included usage or quota packs.
-- Third-party providers: connect your own model accounts or models on your own computer; the provider or your team settles the cost.
-
-For most people, the official model service is the least work. Teams that already have model infrastructure get more flexible connections from third-party providers.
+- Calls use your plan's included usage first, and pack usage after that.
+- A pack adds $13 for $20, a little less than the $15 that plans include for every $20. In exchange it does not expire: it does not reset with the billing period, and what is left still works after your plan ends.

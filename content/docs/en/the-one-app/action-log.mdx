@@ -7,21 +7,31 @@ The One lets Agents act without asking you first. What keeps you in control is a
 
 ## Why there is no approval step
 
-Agents in The One work on their own and come to you only when they decide to ask. A permission prompt before each action would call you back for every step, and would still not show you what the step did. So nothing blocks, questions or refuses an Agent's call. Instead, every call is recorded and every file change can be undone. Recording costs only the moment it takes to look at the files a call touches.
+If every action waited for your nod, Agents could not work for you while you are away, and the nod would still not show you what the step did. So nothing blocks, questions or refuses an Agent's call: every call is recorded, every file change can be undone, and recording costs only the moment it takes to look at the files a call touches. The thinking behind this is in [No approval step](../multi-agent-architecture/record-and-undo).
 
 ## What the action log records
 
-**Settings › Data and undo › Action log** lists the recent runs. For each tool call it keeps:
+For each tool call it keeps:
 
 - which Agent and which run made it, and the tool and its arguments, with anything that looks like a key or password left out;
 - which files it created, modified or deleted, each with its version before and after;
 - which addresses it reached, and how it ended.
 
-Calls you make yourself, through a Plugin's panel in a conversation or on a board, are recorded as yours. A call through a panel on a board belongs to no run, so it is listed under **Calls outside runs**, with the matter it was for.
+A change found between two calls, such as a file you or another program edited, is recorded too, as a **change seen**, and can be undone like the rest. Calls you make yourself, through a Plugin's panel in a conversation or on a board, are recorded as yours.
 
-The log is append-only. Every record carries the hash of the one before it, so a changed or deleted record shows up: **Check** under **Log integrity** confirms the whole chain. The log covers the whole computer, every Space, so you can see and undo anything Agents did on it. It is kept only in the desktop app.
+The log is append-only. Every record carries the hash of the one before it, so a changed or deleted record shows up. The log covers the whole computer, every Space, so you can see and undo anything Agents did on it. It is kept only in the desktop app.
 
-At the top, **Undoable changes** reads how many times Agents modified or deleted a file in the last 7 days, how many of those changes can be put back, and why any file could not be copied.
+## The Action log page
+
+**Settings › Data and undo › Action log**, from top to bottom:
+
+- **Undoable changes**: how many times Agents modified or deleted a file in the last 7 days, how many of those changes can be put back, and why any file could not be copied. Below it, what the **Trash** takes, and **Log integrity**: **Check** confirms the whole chain of records.
+- **Undo by time**: puts back everything changed since a time.
+- **Undos**: every undo, yours and Agents', newest first; each can be undone in turn.
+- **Calls outside runs**: calls that belong to no run, such as yours through a panel on a matter's board, each with the matter it was for.
+- **Recent runs**: one line per run with its calls and how many files it created, modified and deleted; open one to see the files changed, the addresses reached and each tool call.
+
+When you open a record from an evidence pack, the page shows that original record at the top first.
 
 ![Settings › Data and undo › Action log after a run that edited and deleted files](/docs-assets/images/0.5/en/action-log-settings.png)
 
@@ -31,17 +41,18 @@ You can undo at four sizes:
 
 | What to undo | Where |
 | --- | --- |
-| One call | In **Recent runs**, open a run and press **Undo this call** on the call. A call that belongs to no run, such as yours through a panel on a board, is under **Calls outside runs**; a matter's **Changes** says how many calls you made through panels and links there. |
+| One call | In **Recent runs**, open the run and press **Undo this call** on the call. A call that belongs to no run is undone on its own under **Calls outside runs**; a matter's **Changes** says how many calls you made through panels and links there. |
 | A whole run | **Undo** on the run in **Recent runs**. |
-| A matter's work | **Undo these changes** under **Changes** on the matter's page. The work of its sub-matters is included. |
-| Everything since a time | **Undo by time** on the Action log page: choose the time and press **Preview**. |
+| A matter's work | **Undo these changes** under **Changes** on the matter's page. The work of its sub-matters, and the calls you made through panels on its board, are included. |
+| Everything since a time | **Undo by time**: choose the time and press **Preview**. |
 
 Every undo shows a preview first, and nothing is touched until you confirm:
 
 - files go back to how they were before the first change in what you chose, and files an Agent created are removed;
 - a file changed again since is left alone, unless you tick **Put these back too (overwrites the later changes)**;
-- a file whose copy was not kept, or has expired, is reported as such rather than guessed;
-- the undo is itself recorded, so you can undo it too with **Undo this undo**.
+- a file whose copy was not kept, or has expired, is reported as such rather than guessed.
+
+The undo is itself recorded under **Undos**, where **Undo this undo** puts the files back the way they were just before it. An undo by matter or by time belongs to no run, so that list is the only place to find it; a matter's **Changes** says when the matter's work was last undone and links there.
 
 ![Undoing a matter's changes, with the preview](/docs-assets/images/0.5/en/action-log-matter-undo.png)
 
@@ -53,37 +64,40 @@ The copies live in the app's trash for 7 days, then are removed automatically. W
 
 - **Actions that left this computer**: payments, pushes, emails, publishes, deploys, remote commands and requests that sent data. They go ahead as usual and are marked on the run ("Happened outside this computer, cannot be undone"), and the morning report lists them under **Actions that cannot be taken back**.
 - **Dependency and cache folders**, such as `node_modules`, `.git` and `.venv`, and folders your `.gitignore` names, unless a command names a file in them.
+- **Your home folder itself, and the big folders right under it**, such as Documents, Desktop and Downloads: when a command runs in one of them, The One copies only the files the command names, not the whole folder.
+- **What an MCP tool writes elsewhere**: an MCP tool, including a call you make through a panel, gets copies only of the files its arguments name by full path. A payments Plugin's tools, for example, keep a ledger that is not copied: the calls are listed, but there is no file to put back.
+- **Things in the app's database**: changes to Agents, Graphs and presets kept there are recorded, not undone here.
 - **Files whose copy has expired** or could not be made.
 
 ## Reviewing changes block by block
 
-**Review** on a matter's page shows each working group's changes block by block, with who made each one. **Accept**, **Reject** or **Comment** on each block, then press **Submit review**: rejected blocks go back as they were, which the log records as an undo you can take back, and your comments go to the Agents. See [Working groups](./working-groups).
+**Review** on a matter's page shows each working group's changes block by block: **Accept**, **Reject** or **Comment** on each, then press **Submit review**. Rejected blocks go back as they were, which is recorded as an undo you can take back under **Undos**. See [Working groups](./working-groups).
 
 ## Limits and pauses
 
 You can stop work short of stopping everything:
 
-- **A matter's usage limit.** **Set a limit** in the matter's header sets **At most, unattended**, in million tokens (at least 10,000 tokens). When the matter's working groups, sub-matters included, have spent that much since you last stepped in, their work pauses at its next checkpoint; a step under way finishes first. The Agents are told at 80%. A banner on the matter and a message in the window say the matter stopped, and it waits for you in the strip above the main assistant's conversation and in Needs you; **Resume** gives it the same allowance again. You can also ask the main assistant to set a limit or resume the work.
-- **A run's usage limit.** In All runs (**Open all runs** in Settings › Developer), **Usage limit** pauses each run of one Graph, or of every Graph, after the tokens you set (see [All runs (developer view)](./settings/all-runs)).
+- **A matter's usage limit.** **Set a limit** in the matter's header, and the matter's working groups pause at their next checkpoint once they have spent that many tokens without you stepping in, until you resume them; see [Matters and boards](./matters).
+- **A run's usage limit.** **Usage limit** under **Run controls** in All runs pauses each run of one Graph, or of every Graph, after the tokens you set; see [All runs (developer view)](./settings/all-runs).
 - **One working group.** **Pause** on its card on the board stops it after each member's current step, including its work for other matters; **Resume** lets it go on.
-- **A whole matter.** **Close** pauses its work and its triggers; **Reopen** picks up where they stopped. See [Matters and boards](./matters).
+- **A whole matter.** **Close matter** pauses its work and its triggers; **Reopen matter** picks up where they stopped.
 
 All of these are cooperative: each Agent finishes the step at hand, then stops.
 
 ## Stopping everything
 
-**Stop All Agents** is in the app menu, which on macOS is the **The One** menu (Cmd+Shift+.), and in the tray menu. On Windows the menu bar is hidden, so use the tray. After you confirm:
+**Stop All Agents** is in the app menu, which on macOS is the **The One** menu (Cmd+Shift+.), and in the tray menu. On Windows the menu bar is hidden, so use the tray. Once you confirm with **Stop All**:
 
 - tool calls in progress are interrupted, and commands Agents started are ended;
 - every run is paused until you resume it;
 - every trigger is paused until you resume them.
 
-Unlike the pauses above, it does not wait for a step to finish. Only you can stop Agents this way; no Agent, not even the main assistant, can.
+Unlike the pauses above, it does not wait for a step to finish. One thing carries on: a tool job already handed to the background, whose result comes later, runs to its end. Only you can stop Agents this way; no Agent, not even the main assistant, can.
 
 To go on, resume a working group with **Resume** on its card on the matter's board, or a run with **Unfreeze** in All runs; the Agents that were working pick up again. Resume the triggers with **Resume All Triggers** in the tray menu or **Resume all** in **Settings › Runs by itself** (see [Triggers and running in the background](./triggers)).
 
 ## Related
 
-- [Needs you, deliveries and the morning report](./needs-you): evidence packs, built from this log.
+- [Waiting for you, deliveries and the morning report](./needs-you): evidence packs, built from this log.
 - [Matters and boards](./matters): a matter's spending, limit and changes.
 - [Settings](./settings): Storage and the other settings pages.

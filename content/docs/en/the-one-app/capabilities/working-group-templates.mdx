@@ -1,33 +1,50 @@
 ---
 title: Working-group templates
-description: A working-group template is a Graph of roles and edges that the main assistant turns into a working group. Build, wire, validate, import and export one.
+description: How to build, wire, validate, import and export a working-group template, the Graph of roles and edges the main assistant turns into a working group.
 ---
 
 A **working-group template** says how one kind of work is shared out: which roles take part, who may hand work to whom, and how the result gets checked. When the main assistant gives a matter's work away, it starts a new run of a template, and that run is a **working group**. See [Working groups](../working-groups).
 
-Templates are Graphs. The editor, its tab (**Graph**) and the runs in All runs still use that word. On **Teams and tools**, **See what it can do** on a working group's card opens its template in this editor, whose list (**Graphs**) has the Space's templates; the **Graph** tab beside the other editors opens it too.
+Templates are Graphs. The editor, its tab (**Graph**) and the runs in All runs still use that word. On **Teams and tools**, **See what it can do** on a working group's card opens its template in this editor; the list on the left of the editor (**Graphs**) has the Space's templates, and the **Graph** tab above the list of every other editor opens it too.
 
 ## How a template becomes a working group
 
 - The main assistant sees every template in the Space with the first 800 characters of its description, and picks one for each piece of work. Software work in a project goes to `polished_software_dev`, a studio's kind of work to that studio, and ordinary multi-step work to `chat`.
-- Each assignment starts a new run of the template, in the folder the work belongs to. Your request, in your own words, goes to the template's entry Agent, and a **Working group** card on the matter's board follows the group from then on.
+- Each assignment starts a new run of the template, in the folder the work belongs to. Your request, in your own words, goes to the template's entry node (below), and a **Working group** card on the matter's board follows the group from then on.
 - One template can have several groups at work at once, on different matters. Its card on Teams and tools names them, as **Working for 2:** followed by the matters' titles.
-- The main assistant can run one group on other models without changing the template, for example when you ask for a stronger model on one piece of work.
-- Groups formed after you save a template use the new version. Changes to a role also reach Agents already at work, from their next turn.
+- A piece of work can run on other models for that run alone, without changing the template or its roles, for example when you ask for a stronger model. See [Models](./models).
+- Groups formed after you save a template use the new version; groups already at work keep the edges they started with.
+- [Panorama](../panorama) draws each working group from its template: who can hand work to whom, and which node the work comes in at.
 
 Because the main assistant chooses by the description, write it for that reader: what kind of work the template is for, and what it is not for.
 
 ## Build a template
 
-1. In the list (**Graphs**), choose **New Graph**. Give it a **Blueprint ID**, which is the name the main assistant and the template's file use, and a **Description**.
-2. Add nodes with **Add node**. Every node is a live Agent and must be bound to a role: select the node and choose its **Agent Preset** in the **Node Inspector**. See [Roles](./roles).
+The toolbar above the canvas holds, in order: the template's default model, **+** (**Add node**), ⚡ (**Validate Graph**) and **Save**. With a node or edge selected, a bin appears as well. **+**, ⚡ and the bin are icons only; hover over one to see its name.
+
+1. Above the list (**Graphs**), choose **New Graph**. Give it a **Blueprint ID**, which is the name the main assistant and the template's file use, and a **Description**.
+2. Add nodes with **+**. Every node is a live Agent and must be bound to a role: select the node and choose its **Agent Preset** in the **Node Inspector**. See [Roles](./roles). New nodes are called `agent_1`, `agent_2` and so on; give one a name you will recognise under **Node ID**, and the edges attached to it follow. The node ID is the Agent's name in a run: handoffs and model choices refer to it.
 3. In the same inspector, **Custom System Prompt (Append)** adds text after the role's own prompt for this node only, so one role can play different parts in different templates. **Node Plugins** adds whole Plugins to this node alone; Plugins the node already gets from its role or from the whole template keep a badge that says where they come from.
 4. Connect two nodes by dragging from one node's output to the other's input, then select the edge and write its handoff text (below).
-5. Choose **Apply Changes** in the inspector, then **Save** (Cmd/Ctrl+S).
+5. Choose **Apply Changes** in the inspector, then **Save** (Cmd/Ctrl+S). What you change in the inspector is saved only once you have applied it.
 
-The pencil next to the template's name edits its ID and description. **Start a task** runs the template once, outside any matter, the way **New Graph** does in All runs: handy for trying it out.
+The menu in the toolbar is the template's default model: a model preset for every node whose role names no model of its own. **Follow default model** leaves those nodes on the global default. For how it ranks against a role's model and a run's, see [Models](./models#which-model-wins).
 
-![The Graph editor with an edge selected](/docs-assets/images/0.5/en/working-group-templates-editor.png)
+To delete a node or an edge, select it and choose the bin in the toolbar, or press Delete. A node goes with its edges, and the edge inspector also has **Delete Edge**. To delete a whole template, hover over it in the list, choose ✕ and confirm.
+
+The pencil next to the template's name edits its ID and description. **Start a task** runs the template once, outside any matter, the way **New Graph** does in All runs: handy for trying it out. The run opens in [All runs](../settings/all-runs).
+
+![The Graph editor with the frontend design studio's template: three nodes and the edges between them](/docs-assets/images/0.5/en/working-group-templates-editor.png)
+
+## The entry and validation
+
+The **entry** is the node that takes the work first: work given to the template reaches it before anyone else. A template records which node is its entry. When the editor saves a template that has none yet, it records the first node on the canvas, usually the one you added first; renaming that node's **Node ID** keeps it the entry. The editor neither marks the entry nor lets you change it. To see which node it is, choose **Start a task** and write a task: the dialog says **The task goes to** that node.
+
+So to change who takes the work first, give the entry node another **Agent Preset** rather than deleting it. Delete the entry node and save, and the template has no entry: validation reports an error, and work given to the template cannot start. To repair it, change another node's **Node ID** to the deleted node's ID and save; that node becomes the entry.
+
+**Validate Graph** (⚡) checks the saved version, so save first. It shows **Validation passed**, or how many errors it found, such as **2 errors**, without listing them. These count as errors: a template with no nodes; an entry node that is gone, or no recorded entry and no way to tell which node takes the work first; an edge to a node that is gone; and a node with no Agent Preset.
+
+A node whose role was deleted later is not an error, so validation still passes. Only that node's inspector says the preset is not available, and until you bind the node to another role, work given to the template cannot start.
 
 ## What an edge means
 
@@ -39,15 +56,9 @@ Edges are not a fixed pipeline. An edge from A to B is permission: it lets A han
 
 That last point is why the edge's text matters. The **Transition description (handoff instruction)** in the **Edge Inspector** is what the sending Agent reads at the moment of handoff, so write it in full: when to hand off, what to pass along, and what the other side should produce. For example: "Once the review passes, hand the full plan, the API contracts and the data model to the developer and ask for runnable code with tests." The more specific it is, the more accurately the two work together.
 
-## Model, validation and saving
-
-The toolbar above the canvas holds the template's default model: a model preset for every node whose role names no model of its own. **Follow default model** leaves those nodes on the global default. See [Models](./models).
-
-**Validate Graph** checks the saved template and shows **Validation passed** or how many errors it found. It looks for a template with no nodes, an edge to a node that is gone, an Agent node without a role, and a template where it cannot tell which node gets the work first. That node is the entry: the one node no edge points into, unless the template's file names its entry point. Validation reads what is saved, so save first. A node whose role no longer exists says so in its inspector.
-
 ## Import and export
 
-**Import Graph**, the button next to **New Graph**, turns a team written for another tool into a template of this Space. It reads Oracle's **Agent Spec**, a **Dify DSL** file or a **Microsoft Declarative Workflow**: choose a .yaml, .yml or .json file, or paste its content. The format is told from the content, or pick it under **Format**. Each agent in the file becomes a role, and the way they work together becomes edges.
+**Import**, the button next to **New Graph** above the list (its tooltip says **Import Graph**; in a narrow window only its icon shows), turns a team written for another tool into a template of this Space. It reads Oracle's **Agent Spec**, a **Dify DSL** file or a **Microsoft Declarative Workflow**: choose a .yaml, .yml or .json file, or paste its content, up to 5,000,000 characters. The format is told from the content, or pick it under **Format**. Leave **Graph ID (optional)** empty to use the name in the file. Each agent in the file becomes a role, and the way they work together becomes edges.
 
 - **Preview** shows the template, its agents and edges and the **Conversion report** before anything is written. **Import** writes it. **Replace existing** replaces a template or roles with the same names.
 - Nothing is dropped silently. The report lists every field that was **Left out** or **Carried over differently**, with where it is in the file.
@@ -58,16 +69,17 @@ The toolbar above the canvas holds the template's default model: a model preset 
 
 **Export** writes the last saved version as Agent Spec 26.1.2 (YAML or JSON), a Dify DSL file, or a Declarative Workflow that Microsoft's `agent-framework-declarative` Python package runs. Skills, Plugins, model settings and the default model preset stay behind, and the conversion report says so. The file keeps The One's own edges in its metadata, so importing it back unchanged gives you the same template.
 
-In the read-only official Space you can export, but not preview or import.
+The official Space's templates can be exported and run with **Start a task**; importing, previewing and changing them needs a copy of the Space. See [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).
 
 ## The templates in the official Space
 
+These templates are all in the list of templates. Five more are built in and not listed; see [Built in to every Space](../capabilities#built-in-to-every-space).
+
 | Template | In the app | What it does |
 | --- | --- | --- |
-| `chat` | **General group** | One assistant that does ordinary multi-step work directly with tools. Built in. |
 | `polished_software_dev` | **Software team** | A solution lead builds; checkers started beside it turn the request, the project's conventions, reported symptoms and the places where separately specified features meet into checks; a developer node takes TaskBoard tasks. |
 | `deep_research` | **Research group** | Research and synthesis, with researcher branches on a TaskBoard for independent evidence. |
-| `frontend_design_studio` | **Frontend design studio** | Frontend design and build: a design director, an implementer and an independent design reviewer. |
+| `frontend_design_studio` | **Frontend design studio** | Frontend design and build. A design director first sets the project's design system (your brand's or the project's own, otherwise adapted from a ready-made starter) and shows it on the canvas when OneCanvas is installed; an implementer builds only from it; an independent design reviewer checks that the pages keep to it. |
 | `image_generation_studio` | **Image studio** | Images with the Image Generation Plugin: a coordinator and a runner. |
 | `video_production_studio` | **Video studio** | Video: a producer, a creative director, a render engineer and an independent QA reviewer. |
 | `cinematic_film_production_studio` | **Film studio** | A six-role film studio, from story and visual direction to reviewed media. |
@@ -75,11 +87,7 @@ In the read-only official Space you can export, but not preview or import.
 | `blender_scene_studio` | **3D scene studio** | Blender scenes: a director, a builder (the only one who changes the scene) and a reviewer. |
 | `product_evaluation_lab` | **Product evaluation lab** | Product experience evaluation: a director, simulated users on the real product, and an auditor of their evidence. |
 | `site_deployment_ops` | **Site launch team** | Putting a site online with its domain, payment links and mail: an engineer makes the changes, an orchestrator checks them independently. |
-| `storefront_studio`, `store_operator`, `store_reviewer` | **Storefront studio**, **Store operations**, **Store weekly review** | A one-person company: building the shop, running it day to day (orders, mail, refunds), and the weekly review. |
-| `atlas` | **Definitions studio** | Authoring templates, roles, prompts, Skills and Plugins. Built in. |
-| `self_evolution_lab` | **Self-improvement lab** | The evolution matter's lab: a Director, a Patcher and a Verifier. Built in. |
-
-Built-in templates are not shown in the list, but the main assistant can use them. Two more built-ins are run by the app itself: `main_assistant` and `nightly_review`. See [Teams and tools](../capabilities).
+| `storefront_studio`, `store_operator`, `store_reviewer` | **Storefront studio**, **Store operations**, **Store weekly review** | An online shop: building it, running it day to day (orders, mail, refunds), and the weekly review. |
 
 ## Designing a template
 
@@ -91,4 +99,4 @@ The factory teams are built on a few principles. They are worth keeping when you
 - Put a rule where it is used, in the handoff it governs or in a Skill (see [Skills and prompts](./skills-and-prompts)), not in a role's standing prompt, where it acts even when it does not apply.
 - The lead's path is the cost: every hop on it adds turns. The number of nodes is a result, not a goal.
 
-You do not have to build templates by hand. Ask the main assistant, or use **The Director** bar on the [Atlas](./atlas) canvas. A template, with its roles, is the gene of a working group in [A-Genetic Engineering](../../multi-agent-architecture/a-genetic-engineering); when Agents grow a group further while it runs, by cloning Agents or opening sub-Graphs, that is [Prolifera Engineering](../../multi-agent-architecture/prolifera-engineering).
+You do not have to build templates by hand: the main assistant and **The Director** bar on the Atlas canvas write them too. See [Who changes them](../capabilities#who-changes-them). A template, with its roles, is the gene of a working group in [A-Genetic Engineering](../../multi-agent-architecture/a-genetic-engineering); when Agents grow a group further while it runs, by cloning Agents or opening sub-Graphs, that is [Prolifera Engineering](../../multi-agent-architecture/prolifera-engineering).

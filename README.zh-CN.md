@@ -36,20 +36,23 @@
 content/docs
 +-- zh/                              中文文档
 |   +-- index.mdx                    欢迎
-|   +-- start/                       快速入门、模型与价格、发布记录
+|   +-- start/                       快速入门、模型与价格、Linux 服务器、发布记录
 |   |   `-- release-notes/           每条版本线一页
 |   +-- the-one-app/                 使用 The One
-|   |   +-- main-assistant.mdx …     主助手、事项、工作组、需要你、触发器、
-|   |   |                            进化、行动记录、随身通道
+|   |   +-- main-assistant.mdx …     主助手、事项、工作组、全景、等你和晨报、
+|   |   |                            触发器、进化、行动记录、随身通道
 |   |   +-- capabilities/            工作组模板、角色、技能与提示词、MCP、模型、
 |   |   |                            插件、总图、定义空间、记忆
-|   |   `-- settings/                设置、API 配置、所有运行、Linux 服务器
-|   `-- multi-agent-architecture/    工程思想
-|       +-- single-agent/            模型、工具、上下文、ReAct、行动链
+|   |   `-- settings/                设置、API 配置、所有运行
+|   `-- multi-agent-architecture/    工程思想：总览，然后按阅读顺序
+|       +-- single-agent/            模型、工具和上下文；上下文与冥想；
+|       |                            ReAct 与回合；一直活着的 Agent
 |       +-- evolution/               从单一 Agent 到 Multi-Agent
 |       +-- a-genetic-engineering/   模板即基因
 |       +-- prolifera-engineering/   在运行时长出系统
-|       `-- more-possibilities/      通讯、上下文编辑、Dynamic Graph、冥想
+|       +-- collaboration.mdx        组内、组间和你
+|       +-- self-evolution.mdx       进化事项和夜间复盘
+|       `-- record-and-undo.mdx      没有审批这一步：记录、撤回、急停
 `-- en/                              English documentation, same slugs
 ```
 

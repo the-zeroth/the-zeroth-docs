@@ -36,20 +36,24 @@ The canonical documentation lives under `content/docs/en` and `content/docs/zh`.
 content/docs
 +-- en/                              English documentation
 |   +-- index.mdx                    Welcome
-|   +-- start/                       Quick start, models and pricing, release notes
+|   +-- start/                       Quick start, models and pricing, Linux server, release notes
 |   |   `-- release-notes/           One page per release line
 |   +-- the-one-app/                 Using The One
-|   |   +-- main-assistant.mdx …     Main assistant, matters, working groups, Needs you,
-|   |   |                            triggers, evolution, action log, phone channel
+|   |   +-- main-assistant.mdx …     Main assistant, matters, working groups, Panorama,
+|   |   |                            waiting for you and the morning report, triggers,
+|   |   |                            evolution, action log, phone channel
 |   |   +-- capabilities/            Templates, roles, Skills and prompts, MCP, models,
 |   |   |                            Plugins, Atlas, Definition Spaces, memory
-|   |   `-- settings/                Settings, API configuration, All runs, Linux server
-|   `-- multi-agent-architecture/    Concepts
-|       +-- single-agent/            Model, tools, context, ReAct, action sequence
+|   |   `-- settings/                Settings, API configuration, All runs
+|   `-- multi-agent-architecture/    Concepts: overview, then in reading order
+|       +-- single-agent/            Model, tools and context; context and meditation;
+|       |                            ReAct and turns; Agents that stay alive
 |       +-- evolution/               From a single Agent to Multi-Agent
 |       +-- a-genetic-engineering/   Templates as genes
 |       +-- prolifera-engineering/   Growing the system at runtime
-|       `-- more-possibilities/      Communication, context editing, dynamic Graph, meditation
+|       +-- collaboration.mdx        Within a group, across groups, and you
+|       +-- self-evolution.mdx       Evolution matters and the nightly review
+|       `-- record-and-undo.mdx      No approval step: record, undo, stop
 `-- zh/                              Chinese documentation, same slugs
 ```
 
