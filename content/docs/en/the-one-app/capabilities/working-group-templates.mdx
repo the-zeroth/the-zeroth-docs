@@ -20,6 +20,8 @@ Because the main assistant chooses by the description, write it for that reader:
 
 ## Build a template
 
+The official Space is read-only, so templates are changed in a Space you can edit. In the official Space a notice at the top says so, and **Duplicate to edit** copies the whole Space and switches to the copy, where everything below works. Until then **New Graph** and **Save** are off, and the pencil and ✕ that rename and delete a template are hidden. You can still look at a template, validate and export it, run it with **Start a task**, and try changes on the canvas; they are just not saved.
+
 The toolbar above the canvas holds, in order: the template's default model, **+** (**Add node**), ⚡ (**Validate Graph**) and **Save**. With a node or edge selected, a bin appears as well. **+**, ⚡ and the bin are icons only; hover over one to see its name.
 
 1. Above the list (**Graphs**), choose **New Graph**. Give it a **Blueprint ID**, which is the name the main assistant and the template's file use, and a **Description**.
@@ -38,13 +40,16 @@ The pencil next to the template's name edits its ID and description. **Start a t
 
 ## The entry and validation
 
-The **entry** is the node that takes the work first: work given to the template reaches it before anyone else. A template records which node is its entry. When the editor saves a template that has none yet, it records the first node on the canvas, usually the one you added first; renaming that node's **Node ID** keeps it the entry. The editor neither marks the entry nor lets you change it. To see which node it is, choose **Start a task** and write a task: the dialog says **The task goes to** that node.
+The **entry** is the node that takes the work first: work given to the template reaches it before anyone else. On the canvas it wears an **Entry** tab on its top edge. A template records which node is its entry; when the editor saves a template that has none yet, it records the first node on the canvas, usually the one you added first.
 
-So to change who takes the work first, give the entry node another **Agent Preset** rather than deleting it. Delete the entry node and save, and the template has no entry: validation reports an error, and work given to the template cannot start. To repair it, change another node's **Node ID** to the deleted node's ID and save; that node becomes the entry.
+To make another node the entry, select it and choose **Make this the entry node** under **Entry node** in the **Node Inspector**, then save. Renaming the entry node's **Node ID** keeps it the entry. Delete the entry node and the entry moves to another node, with a notice that says which: **The entry moved to “…”**. If a template's file names an entry node it does not have, the toolbar says **Entry “…” is missing** and no node wears the tab; make one of its nodes the entry and save.
 
-**Validate Graph** (⚡) checks the saved version, so save first. It shows **Validation passed**, or how many errors it found, such as **2 errors**, without listing them. These count as errors: a template with no nodes; an entry node that is gone, or no recorded entry and no way to tell which node takes the work first; an edge to a node that is gone; and a node with no Agent Preset.
+**Validate Graph** (⚡) checks the saved version, so save first. It shows **Validation passed**, or how many errors and warnings it found, such as **Errors: 2 · Warnings: 1**, and then **Validation results** opens under the toolbar; choose the count to hide or show it again. Each finding says what is wrong and what it points at, the whole Graph, a node or an edge. Choose a finding about a node or an edge to select it on the canvas.
 
-A node whose role was deleted later is not an error, so validation still passes. Only that node's inspector says the preset is not available, and until you bind the node to another role, work given to the template cannot start.
+- A finding marked **Error** is one of these: a template with no nodes; an entry node that is not in it, or no recorded entry and no single node that no edge leads into; an edge to a node that is gone; an Agent node with neither an **Agent Preset** nor a model of its own.
+- A finding marked **Warning** is a node whose role is not in the Space, for example because the role was deleted. With warnings only, validation still passes (**Passed · Warnings: 1**, for example), and that node's inspector says the preset is not available; but until you bind the node to another role, work given to the template cannot start.
+
+If validation cannot run at all, for example because the app's backend does not answer, a notice says why, and nothing is counted against the template.
 
 ## What an edge means
 
@@ -69,7 +74,7 @@ That last point is why the edge's text matters. The **Transition description (ha
 
 **Export** writes the last saved version as Agent Spec 26.1.2 (YAML or JSON), a Dify DSL file, or a Declarative Workflow that Microsoft's `agent-framework-declarative` Python package runs. Skills, Plugins, model settings and the default model preset stay behind, and the conversion report says so. The file keeps The One's own edges in its metadata, so importing it back unchanged gives you the same template.
 
-The official Space's templates can be exported and run with **Start a task**; importing, previewing and changing them needs a copy of the Space. See [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).
+In the official Space you can export templates, but not import or preview them. See [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).
 
 ## The templates in the official Space
 
