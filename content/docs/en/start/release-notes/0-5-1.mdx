@@ -1,0 +1,62 @@
+---
+title: The One 0.5.1 Release Notes
+description: 0.5.1 makes the app quieter, opens the home page on the conversation with the main assistant, adds the Panorama, counts what waits for you the same everywhere, and moves the official Space's main assistant to Mailbox for email.
+---
+
+These notes cover The One 0.5.1 on macOS. It follows 0.5.0 and keeps its shape: one main assistant per Space, and matters worked by working groups.
+
+## Look
+
+- Neutral black and white: the light look is 素白 (plain white), the dark look 石墨 (graphite); one sans typeface with softer corners; a sidebar that runs the window's full height.
+- The conversation column grows with the window up to 1040px, and reads at 16px when the window is wide.
+- The matter page is centered, with actions such as closing the matter in the title bar.
+
+## Home
+
+- Each day opens with the main assistant's greeting, and a line in the conversation names the day.
+- Search the conversation from the page header or with Cmd+F.
+- A handled card folds into one line where it was, and you can still change your mind there.
+- A line above the composer says when the main assistant rests, or when a failed reply tries again.
+- The conversation keeps its newest words in view until you scroll away yourself.
+
+## Panorama
+
+- **Panorama** in the sidebar shows every matter, working group and Agent on one page: **Org chart** shows who works on what right now, **Flow** shows today's timeline for each Agent.
+- Each working group is drawn as the graph its template makes; Flow zooms to the last hour or three, and finished branches fold away.
+- You can close a matter from the sidebar.
+
+## Waiting for you and Needs you
+
+- What waits for you is counted once, so the sidebar, the morning report and the Dock badge agree.
+- Closing a matter takes its things out of Waiting for you and the morning report at once.
+- Every waiting card names the working group it came from; a question from the main assistant is named by what it asks.
+- The inbox page is called **Needs you** everywhere.
+
+## Model connections
+
+- When the official connection's allowance is used up, its cards and notices say so and open the subscription page, instead of asking you to sign in again.
+- A key or account out of credit counts as a usage limit you are asked about, not as a refused sign-in.
+- A failing Agent says when it retries, and you can retry it now.
+
+## Settings and teams
+
+- Settings come in six sections, and each page names its section above it.
+- **Teams and tools** lists the working groups first, then what they work with.
+- A developer view, off by default, holds what developers look at.
+
+## Plugins
+
+Plugins update in the Plugin library, independently of the app's version. Updated alongside 0.5.1:
+
+- **Mailbox 0.2.0**: Google accounts sign in with Google to send and read Gmail, replacing Gmail Control; drafts can be saved; replying to mail you sent goes to the people it went to. The official Space's main assistant and General group now use Mailbox.
+- **Computer Use 0.4.0**: on macOS it finds a window by its app's name and sees and controls any app. Give The One Accessibility and Screen Recording permission in System Settings first.
+- **OneCanvas 0.5.0**: follows the app's theme and shows a project's design system; page items show an Agent's HTML page.
+- **Image Generation 0.5.3**: portrait sizes need no capability manifest, and a Plugin update no longer stops the image studio over old pinned hashes.
+- **Payments 0.2.0**, **Sites 0.2.0** and **Visual Check 0.1.2** enter the Plugin library for the first time; **Blender Control 0.7.0** brings a viewer panel and background tasks.
+- The Plugin library reads which host interface a Plugin version needs, and tells you first when The One must be updated.
+
+## Other changes
+
+- Dates read in the interface language, with your system's region.
+- More of the interface follows your language, including starting, signing in, the Plugin install confirmation window and the Phone channel.
+- The [Linux server](../linux-server) installs and runs on Alpine and other musl systems.
