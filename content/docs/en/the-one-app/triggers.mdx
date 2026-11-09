@@ -13,7 +13,7 @@ The easiest way to get a trigger is to say what should recur. Tell the main assi
 
 When the work belongs to a matter, the main assistant gives that matter a cadence: each fire goes to the matter's working group as a piece of work of its own, after whatever the group has in hand. The matter then shows:
 
-- a **Cadence** card on its board, one line per trigger: when it fires, where its work goes, the next and last fire, and **Fire now** and **Pause** or **Resume**;
+- a **Cadence** card on its board, one line per trigger: when it fires, where its work goes, the next fire (none while every trigger is paused) and the last, and **Fire now** and **Pause** or **Resume**;
 - **Always on** in the matter's header, while the matter is open and one of its triggers is on: its work comes by itself, on time or when something new arrives. The Matters overview lists such matters under **Scheduled**.
 
 ![The Cadence card on the board of a matter with a weekly trigger](/docs-assets/images/0.5/en/triggers-cadence-card.png)
@@ -42,7 +42,7 @@ Each row shows:
 
 - the name, the status (**Waiting**, **Watching**, **Listening**, **By hand**, **Off**…) and labels such as **Made by an Agent**, **Built in** and **Notifies when done**;
 - when it fires and what it does, for example "Every day at 09:00 · Goes to the main assistant" or "Wakes the Agent writer";
-- the next and the last fire, and any trouble, such as a source it cannot look at.
+- the next and the last fire, and any trouble, such as a source it cannot look at. While every trigger is paused, no next fire is shown.
 
 On the right: the on/off switch; **Fire now**, which runs it once even when it is off; **Edit**; **Source**, the trigger as the app stores it, read-only; and **Delete**. Right after you delete one, a line with **Restore** appears above the list and puts it back; once you leave the page, that line is gone. A deleted trigger is kept for 90 days, and an Agent that knows its id can restore it in that time.
 
