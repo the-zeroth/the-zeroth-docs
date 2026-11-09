@@ -1,28 +1,29 @@
 ---
 title: From Single Agent to Multi-Agent
-description: Why complex tasks need multiple Agents with clear roles and clean context.
+description: "Why work is split among Agents, and why more is not better: copies of one Agent go wrong in the same place, so the default is one well-equipped lead."
 ---
 
-## Why Multi-Agent is inevitable
+A single Agent is a context problem. As [Context and meditation](../single-agent/context) puts it:
 
-A single Agent is mainly a context engineering problem. For complex tasks, Multi-Agent architecture is necessary because it keeps each Agent's context clean.
+> The quality of an Agent's context comes down to whether its constraints (**who am I?**), information (**where do I come from?**) and task (**where am I going?**) are complete, explicit and clear, and whether context that serves none of them has been left out.
 
-For example, software development includes product thinking, architecture, implementation, testing, operations, and review. One Agent should not carry all these identities at once. That violates the basic requirement that an Agent must know clearly who it is.
+Complex work makes all three hard to keep at once. An Agent that both builds the work and checks it no longer knows clearly who it is; what it read for one subtask stays in its context while it does the next. Splitting the work among Agents with clear roles, each given only its own part of the information, is how each Agent's context stays clean.
 
-Complex tasks also contain independent subtasks. Each subtask should be handled by an Agent that only sees the information needed for that subtask. Letting one Agent read everything and do everything pollutes context and wastes capacity.
+## Another Agent is not always better
 
-Agents are not real people. You can create more Agents by copying and shaping context. For decomposable work, this improves execution efficiency and reduces unnecessary token consumption.
+But more Agents are not always better. From real runs, we have learned these things:
 
-In The One, this is what a **working group** is: when the main assistant gives a matter's work to a working-group template, each role in the group has its own instructions, and a handoff passes only what the sender chooses to hand over. See [Working groups](../../the-one-app/working-groups).
+- **Copies of the same Agent go wrong in the same place.** The same model with the same input, each copy making its own version and one picked at the end, often does no better than a single Agent and costs several times as much. Whether a node is worth adding depends on how little its mistakes have in common with those of the nodes already there.
+- **Useful nodes look at different things.** An acceptance checker that reads only the request, a convention checker that reads only the repository, a symptom checker that reads only the report and the data: each finds problems the lead cannot see. Using a different model is another way to make mistakes independent.
+- **A checker does not take its answers from what it checks.** A checker that has read the implementation inherits its mistakes. Give checkers the request, the data and the interfaces, not the implementation.
+- **Information must arrive before the decision.** The key choices are often made in the first few steps, and late feedback rarely overturns work already done. So specialist nodes start alongside the lead when the work starts, not after it.
+- **The lead's path is the cost.** The lead's turns take most of the model time, and every extra hop on its path costs it more turns. A node is worth adding only when what it brings outweighs the turns it adds.
+- **Instructions should appear where they are used.** A rule that sits in the context all the time works even when it does not apply, and pulls other work off course. Put a rule in the handoff instructions of the output it governs, or in a Skill the Agent opens only when it does that work.
 
-## Concept mapping
+So when a team is designed, the default is **one well-equipped lead**: it does most of the work itself; when it helps, it starts a few checkers that look at different things alongside itself from the start, or opens a TaskBoard and gives the parts that stand on their own to pairs of workers and reviewers. The shipped software team is built this way. The number of nodes is an outcome, not a goal.
 
-### From ReAct to paired Agents
+## In The One
 
-ReAct asks one Agent to review the current state after every action and reason again.
+The main assistant gives a matter's work to a **working group**, assembled from a working-group template: each role has its own instructions, and a handoff passes only what the sender chooses to hand over. See [Working groups](../../the-one-app/working-groups) and [Working-group templates](../../the-one-app/capabilities/working-group-templates).
 
-In Multi-Agent architecture, another Agent can take the reviewer role. This creates a paired-Agent pattern. In practice, the structure does not need to be rigid: a reviewer can continue the next part of the work and communicate with other Agents as the Graph evolves.
-
-When an Agent does this at runtime — creating, cloning, and wiring other Agents while the Graph is running, rather than following a topology fixed in advance — that capability is what we call [Prolifera Engineering](../prolifera-engineering).
-
-And when a collaboration structure that works stops living only in one run's memory — when the topology, together with every member's prompt, Skills, and tools, is written down in full as a reusable Graph template — that record is the crew's gene: [A-Genetic Engineering](../a-genetic-engineering).
+A collaboration structure that has proven itself can be written down in full as a reusable template, with every member's prompts, Skills and tools: that is [A-Genetic Engineering](../a-genetic-engineering). Agents creating, cloning and connecting other Agents at runtime as the work needs them, so the team grows as it goes: that is [Prolifera Engineering](../prolifera-engineering).

@@ -1,10 +1,40 @@
 ---
-title: ReAct
-description: The One Agents run through reasoning, tool use, observation, and further reasoning.
+title: ReAct and turns
+description: Agents in The One reason and act step by step, ReAct-style; a turn ends only when the Agent calls a tool that ends it, and plain text is its inner monologue.
 ---
 
-Agents in The One run with a ReAct-style architecture by default.
+All Agents in The One run with ReAct: an awake Agent keeps reasoning, calling tools, reading the results and reasoning again, until it decides itself that this turn is done.
 
-When active, an Agent repeatedly reasons, calls tools, accumulates new context, and reasons again. A turn ends only when the Agent calls a tool that ends it: `sleep_node` to rest, `handoff_work` to pass work along an edge, `talk_with_human` to answer or ask you, or `report_task_completion` from a TaskBoard task, among a few others. Plain text never ends a turn and reaches no one: it is the Agent thinking aloud.
+## How a turn ends
 
-Ending a turn does not end the Agent. A sleeping Agent stays alive and wakes when new input arrives: your message, a handoff, an answer or a result. An Agent that hits an error is not given up on either: it retries with growing waits of up to 10 minutes, or longer when the provider asks it to wait (a spent usage window, for example), for as long as it takes. Pausing is cooperative, so a paused Agent first finishes the step it is on; only you can interrupt one mid-step, or stop them all with **Stop All Agents** in the app menu or the tray menu.
+A turn ends only when the Agent calls a tool that ends it:
+
+- `sleep_node`: rest until new input arrives.
+- `handoff_work`: pass the work along an edge to the next Agent.
+- `talk_with_human`: answer you or ask you. With `keep_working=true` it only sends you the message and the turn goes on; your reply arrives later as a new message.
+- `report_task_completion`: a TaskBoard reviewer hands back its verdict on one task.
+- `restart_desktop_application`: restart The One itself, for example after changing its own code.
+
+The workflow ending, or a context restart, also ends the turn. `ask_choice` and `ask_confirmation` do not: they wait up to five minutes for you and, if you have not answered by then, the Agent carries on and your answer arrives later as a new message.
+
+Plain text never ends a turn and reaches no one: it is the Agent thinking aloud. Every Agent always has some way to end its turn, and the host never ends a turn for it outside its tools.
+
+## Action Sequence
+
+ReAct moves an Agent toward its goal one step at a time. But on a complex task, an Agent that keeps its eyes only on the final goal often runs into the same dead end again and again. So The One gives the roles that need it a planning tool, `update_action_sequence_plan`: the Agent breaks a large task into a sequence of smaller action goals, which we call an **Action Sequence**, writes it into the plan in its own context, and revises it as it goes.
+
+Not every Agent needs one: work that can be done in one go needs no plan. Which roles have the tool is set in each role's tools.
+
+## The host informs, the Agent decides
+
+Besides you and other Agents, the host (The One's runtime) also adds notes to the end of an Agent's history, but it never decides for the Agent:
+
+- When the work grows costly, the same failure keeps coming back, the same call keeps being repeated, or several turns in a row produce nothing, a note tells it to stop and think; whether to go on, change course or ask for help is its call.
+- When its context grows past certain sizes, a note says how large it is; see [Context and meditation](./context).
+- When the disk it writes to runs low, a note says how much is left and what takes the most space; whether to delete anything is up to it or you.
+
+Notes are only appended: they never rewrite earlier history, change the Agent's state or end its turn.
+
+## After a turn
+
+Ending a turn does not end the Agent: a sleeping Agent stays alive, and new input wakes it. See [Agents that stay alive](./life).

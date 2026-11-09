@@ -13,10 +13,26 @@ Proliferation does not create from nothing: every working group started and ever
 
 Each term maps to a mechanism documented elsewhere in this section:
 
-- **Replication.** `clone_agent_node` copies a running Agent (its configuration, its context and its tools) into a new identity; `clone_graph` copies a whole graph, every sub-Graph included. A cloned Agent is born with no edges and inactive, and a cloned graph starts dormant. See [Dynamic Graph](../more-possibilities/dynamic-graph).
-- **Division.** One Agent becomes several to work on bounded parts in parallel: cloned workers, or a TaskBoard whose tasks run in layers, each with a worker and a reviewer. An Agent overloaded with context does *not* divide: it compresses its own history in place, which is [Meditation](../more-possibilities/meditation), a separate mechanism.
+- **Replication.** `clone_agent_node` copies a running Agent (its configuration, its context and its tools) into a new identity; `clone_graph` copies a whole graph, every sub-Graph included. A cloned Agent is born with no edges and inactive, and a cloned graph starts dormant. See the founding tools below.
+- **Division.** One Agent becomes several to work on bounded parts in parallel: cloned workers, or a TaskBoard whose tasks run in layers, each with a worker and a reviewer. An Agent overloaded with context does *not* divide: it compresses its own history in place, which is [meditation](../single-agent/context), a separate mechanism.
 - **Differentiation.** A new Agent is a specialist because its role sets its instructions, prompts, Skills, tools, Plugins and model when it is created. While it works it can add to its own tools through the Capability Manager.
-- **Apoptosis.** When its part is done, an Agent hands back and goes to sleep. It is not freed: its context stays readable, and new input wakes it again. A parent removes it for good with `delete_agent` or `delete_subgraph`.
+- **Apoptosis.** When its part is done, an Agent hands back and goes to sleep. It is not freed: its context stays readable, and new input wakes it again. An Agent that holds the graph tools can remove it for good with `delete_agent`, which archives its context first; an Agent that can run sub-Graphs removes a whole sub-Graph with `delete_subgraph`, together with every Agent in it and their histories, and that cannot be undone.
+
+## The founding tools
+
+Proliferation rests on these tools; only roles that hold them can grow the team:
+
+- `create_agent_node`: create a new Agent from a role.
+- `clone_agent_node`: copy a running Agent, with its configuration, context and tools, into a new identity.
+- `clone_graph`: copy the whole graph, every sub-Graph and every Agent's context included.
+- `create_subgraph`: run another template as a sub-Graph and **act as its human**, answering the sub-Graph's questions with `reply_to_subgraph`.
+- `create_task_board`: lay the work out in layers on a TaskBoard, each task with a worker and a reviewer.
+
+A few invariants are worth stating plainly:
+
+- A cloned or created Agent is **born disconnected and inactive**: it must be wired in and woken before it does anything, and a copied graph starts dormant.
+- An Agent proliferates only when it **chooses** to call these tools. A long context does not trigger it; that is handled separately by [meditation](../single-agent/context).
+- Because the decision is the Agent's own and nothing caps it automatically, such an Agent can fan out without limit. The authority is concentrated and observable by design, not prevented; the limits and stopping below are what you have instead.
 
 ## Where the authority lives
 
@@ -35,7 +51,7 @@ Since 0.5.0 the authority to grow the system is split in two.
 Everything above happens because an Agent decides to call a tool. The host (The One's runtime, not an Agent) does only this by itself:
 
 - It keeps every Agent alive. A sleeping Agent wakes when input arrives; one that hits an error retries with growing waits of up to 10 minutes, longer only when the provider asks it to wait, and is never given up on.
-- It compresses an Agent's history when its context reaches 85% of the model's working window ([Meditation](../more-possibilities/meditation)).
+- It compresses an Agent's history when its context reaches 85% of the model's working window ([meditation](../single-agent/context)).
 - It creates each Space's main assistant, and a new one if that run has ended.
 - It fires triggers: schedules, webhooks and watched sources hand their work to the main assistant, a new run or a matter's working group. See [Triggers and running in the background](../../the-one-app/triggers).
 - At 03:30 each night it checks for new friction, and starts the nightly review only when there is some, or an earlier change to look at.
@@ -49,14 +65,14 @@ It never gives up on an Agent in error, and it never blocks, asks about or refus
 
 Proliferation is still an Agent's own decision, and nothing caps it automatically: by default there is no limit on how many turns an Agent takes or on what it spends. An Agent that holds the founding tools and keeps deciding to spawn can run away. What you have instead:
 
-- **A matter's limit.** On a matter's page, **Set a limit** caps what its working groups, sub-matters included, may spend without you stepping in (at least 10,000 tokens). At the limit the work pauses at its next checkpoint, after the step under way, until you press **Resume**, which starts the count over. The Agents at work hear about it at 80%.
+- **A matter's limit.** On a matter's page, click **Spent**, then **Set a limit** to cap what its working groups, sub-matters included, may spend without you stepping in (at least 10,000 tokens). At the limit the work pauses at its next checkpoint, after the step under way, until you press **Resume**, which starts the count over. The Agents at work hear about it at 80%.
 - **A run's limit.** In **All runs** (**Open all runs** in Settings › Developer), a usage limit can cover every run of one Graph, or every Graph.
 - **Stop All Agents**, in the app menu or the tray menu, interrupts every Agent at once, ends the commands they started, and pauses every run and trigger until you resume them.
 
-Everything stays visible (a matter's **Theater**, All runs) and recorded in the **Action log**, and files Agents changed can be put back. The design aims to be auditable and reversible, not to be guaranteed safe. See [Action log, undo and stopping](../../the-one-app/action-log).
+Everything stays visible (a matter's **Theater**, All runs) and recorded in the **Action log**, and files Agents changed can be put back. The design aims to be auditable and reversible, not to be guaranteed safe: for why it works this way, see [No approval step](../record-and-undo); for how to do it in the app, see [Action log, undo and stopping](../../the-one-app/action-log).
 
 ## The name
 
 **The Zeroth** is named after Asimov's Zeroth Law: the law, set above his Three Laws, that a robot may act for humanity's good on its own judgment rather than wait for instruction at every turn. The name signals autonomy in service of the user: useful work done without asking at every step.
 
-**The One** is read three ways, and the product means all three: *from one, the many* (一生万物): one founder Agent gives rise to the whole system, which is Prolifera itself; *governs the whole* (统御万物): it is the Agent that orchestrates the system it grows; and *the only one* (唯一): the single Agent you talk to, since 0.5.0 literally one main assistant per Space. *Prolifera* itself is from Latin *proles* (offspring) + *ferre* (to bear).
+**The One** is read three ways, and the product means all three: *from one, the many* (一生万物): one founder Agent gives rise to the whole system, which is Prolifera itself; *governs the whole* (统御万物): it is the Agent that orchestrates the system it grows; and *the only one* (唯一): the single Agent you give your work to, since 0.5.0 literally one main assistant per Space. *Prolifera* itself is from Latin *proles* (offspring) + *ferre* (to bear).

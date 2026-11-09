@@ -1,0 +1,29 @@
+---
+title: Agents that stay alive
+description: Agents in The One are not functions that vanish after a call; each has a life loop of its own and is still there after sleep, errors and app restarts.
+---
+
+Agents in The One are alive, not functions that end once they are called. Every Agent that can run has a life loop of its own that never stops, and it decides its own state only through its own tools.
+
+## Awake, asleep, in error
+
+- **Awake**: it reasons and acts turn after turn; see [ReAct and turns](./react).
+- **Asleep**: the Agent rests with `sleep_node`, but it has not gone anywhere. Its loop looks at its state every second, and your message, work handed over by another Agent, an answer or a background result wakes it. Its context stays there the whole time, and you can look at it whenever you like.
+- **In error**: when the model service fails or cannot be reached, the Agent is not given up on. It retries with growing waits of up to 10 minutes, then keeps trying at that interval; when the provider asks it to wait longer (a spent usage window, for example), it waits longer. If its credentials were rejected, it tries again within seconds once you change that connection's credentials in Settings; clicking **Try now** in the conversation does the same.
+
+## The saved state is what counts
+
+Whether an Agent is awake and what it is doing is decided by its saved state, not by anything held in memory. Waking an Agent means writing its state as awake; its loop reads that and wakes up. So:
+
+- When you quit the app, the computer restarts or the app crashes, nothing is lost. When it opens again, every run comes back as it was saved, but paused, and the Agents that were in the middle of something are marked with an error, so you can tell they were cut off. Resume the run, or send it a message, and the Agents that were working carry on. Runs a trigger started carry on by themselves, and so does a restart an Agent asked for (`restart_desktop_application`): after it, the runs that were running go on by themselves.
+- If an Agent that should be running ever loses its loop, the host checks every minute and brings it back.
+- When a new message and the end of a turn arrive at the same moment, the message wins: the Agent stays awake to answer it, so a message never sits saved while its Agent sleeps and nobody answers.
+
+## Pausing and interrupting
+
+- **Pausing** is cooperative: an Agent first finishes the step it is on and stops between turns. This is the only kind of pause the host itself uses, for example when usage reaches a limit you set.
+- **Interrupting** and **stopping everything** are yours alone, and they take effect at once. Interrupting an Agent stops the step it is on; **Stop All Agents** interrupts every Agent, ends the commands they started and pauses every run until you resume them. Once you do, the Agents that were working carry on. See [Action log, undo and stopping](../../the-one-app/action-log).
+
+## Why it works this way
+
+An assistant that works for you over the long run cannot give up after one error, and cannot forget its work because the app restarted. Because every Agent stays alive and goes by its saved state, it can be a colleague you rely on: when it rests, a word brings it back; when something fails, it tries again on its own after a while; and while you are away, the work still moves forward.

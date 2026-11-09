@@ -2,10 +2,8 @@
   "title": "单一 Agent",
   "pages": [
     "index",
-    "model",
-    "tools",
     "context",
     "react",
-    "action-sequence"
+    "life"
   ]
 }

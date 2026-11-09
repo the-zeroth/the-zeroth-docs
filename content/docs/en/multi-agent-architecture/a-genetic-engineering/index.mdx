@@ -10,7 +10,7 @@ description: How The One writes a multi-agent team down as a reusable, heritable
 The previous generation of Agent products each held half of the answer:
 
 - Single-body Agents like Claude Code and Codex use Skills to record verified experience and procedures. That is **experience**, but with no structure to carry it. In each new conversation a Skill lands in a different context, executed by a different implicit role, so the experience drifts.
-- Their multi-agent stories are ephemeral sub-agents: spawned for chores, discarded when done. That is **structure**, but with no heredity. However sound the division of labour, it dissolves when the run ends, and the next run starts from zero.
+- Their multi-agent side is sub-agents: the main Agent hands a piece of work to a few sub-agents for the moment. The sub-agents' definitions can be saved and reused, but how they divide the work, who passes what to whom and what is said at each handoff (the team's **structure**) is not written down. However sound the division of labour, it dissolves when the run ends, and next time the main Agent arranges it from zero.
 
 Experience without structure drifts; structure without heredity dissolves.
 
@@ -51,10 +51,10 @@ The editing bench underneath is the same for every Agent. It reads the whole Spa
 
 Gene editing driven by evidence is **directed evolution**, and The One runs two loops of it in each Space:
 
-- **The evolution matter.** You ask the main assistant to improve the Space. It opens a matter called Evolution and gives it to the lab working group: Director, Patcher and Verifier. Each round starts from a census of real failures, tests at most one hypothesis, with its bar written down before the first reading, changes the smallest layer that failed, and ships only what clears that bar, with the old version frozen so it can be taken back. A weekly census keeps the matter going and skips weeks with nothing new.
-- **The nightly review.** Every night at 03:30, when real use shows new friction, a Reviewer turns what repeats into a lesson in memory or a better Skill, at most three changes a night. Each change is measured against the friction it targets, before and after; the Reviewer undoes or improves a change that made things worse or did nothing, and you see every change in the morning report, where you can undo it.
+- **The evolution matter.** You ask the main assistant to improve the Space; it opens an evolution matter and gives it to the lab working group (Director, Patcher and Verifier) to move forward.
+- **The nightly review.** Every night, a Reviewer turns friction that keeps recurring in real use into a lesson or a better Skill.
 
-[Self-Evolution](../more-possibilities/self-evolution) describes the two loops as an idea; [Evolution: the lab and the nightly review](../../the-one-app/evolution) shows how to start and follow them in the app.
+Both loops start from failures that recur in real work, change the smallest layer, keep a change only when the readings show it helped, and can undo every change. [Self-Evolution](../self-evolution) describes the two loops as an idea; [Evolution: the lab and the nightly review](../../the-one-app/evolution) shows how to start and follow them in the app.
 
 ## Heredity
 
@@ -77,4 +77,4 @@ Like Prolifera, the analogy is borrowed from biology as plain vocabulary for the
 
 ## The concept map
 
-Start from [Single Agent](../single-agent): [From Single Agent to Multi-Agent](../evolution) explains why complex work needs several Agents with clean roles; this page explains how that collaboration is written down as heritable genes; [Prolifera Engineering](../prolifera-engineering) explains how genes are expressed and grow at runtime; [Self-Evolution](../more-possibilities/self-evolution) explains how they are improved, deliberately, from failure.
+Start from [Single Agent](../single-agent): [From Single Agent to Multi-Agent](../evolution) explains why complex work needs several Agents with clean roles; this page explains how that collaboration is written down as heritable genes; [Prolifera Engineering](../prolifera-engineering) explains how genes are expressed and grow at runtime; [Collaboration: in a group, between groups, and with you](../collaboration) explains how the expressed Agents pass work to each other; [Self-Evolution](../self-evolution) explains how genes are improved, deliberately, from failure.

@@ -1,27 +1,42 @@
 ---
 title: Single Agent
-description: Understand how one Agent is determined by model, tools, and context.
+description: An Agent is determined by three things, its model, its tools and its context; in The One, a role is an Agent with those three written down.
 ---
 
 At the core, every Agent is determined by three things:
 
-1. Model
+1. **Model**: the Agent's brain.
+2. **Tools**: the Agent's hands and feet.
+3. **Context**: the Agent's mind, including its system prompt, Skills, memory and the whole conversation so far.
 
-The model is the Agent's brain.
+All context affects the model's judgment, not only the system prompt.
 
-2. Available tools
+## Model
 
-Tools are the Agent's hands and feet.
+The recent model race has made one thing clear: the perfect model does not exist yet. Among the strongest models there is no absolute winner. Each has its strengths and weaknesses, and the tasks it does best.
 
-3. All existing context
+So in The One each role picks a saved model preset (a model with its connection, reasoning effort and speed) or follows the default model, so every member of a working group can run on the model that suits its part. See [Models](../../the-one-app/capabilities/models).
 
-Context includes the system prompt and every relevant user / assistant message. It is the Agent's mind.
+## Tools
 
-All context affects the Agent's behavior. The system prompt matters, but it is never the whole story.
+Tools turn an LLM into an actual Agent. Without tools, even a powerful model is still only a chatbot; the boundary of its tools is the boundary of what the Agent can do.
 
-## Expanded, one by one
+That boundary is not fixed when the Agent is built. Every Agent comes with three sets of tools for managing itself:
 
-- [Model](./model): pick the right brain for each Agent's role.
-- [Tools](./tools): what the Agent can reach and change.
-- [Context](./context): build a clear mind from three kinds of context — constraints, information, task.
-- [ReAct](./react) and [Action Sequence](./action-sequence): how a single Agent reasons while acting, and breaks a complex goal into executable stages.
+- **Capability Manager**: while it works, the Agent finds Skills and loads them into itself (it can also scan another repository's Skills), attaches MCP servers already set up in the app, and fetches the full parameters of tools it sees only by name.
+- **Context control**: Skills and files start collapsed, showing only a name and a short description; the Agent expands one when it needs it and collapses it again when it is done.
+- **Meditation** (`meditate`): the Agent compresses its own history; see [Context and meditation](./context).
+
+Beyond these, an Agent's tools come from its role: built-in tools (reading and writing files, running commands, using the network, creating Agents and sub-Graphs…), MCP servers and Plugins. A tool says what an Agent **can** do, not what it is **allowed** to do: nothing in The One blocks a call, and safety comes from the record and undo; see [No approval step](../record-and-undo).
+
+Capabilities also come packaged. A **Plugin** bundles Skills, scripts, MCP servers, apps and connectors; adding it to a role gives that role what the Plugin brings, while the Definition Space keeps only a reference to it. An Agent with the Plugin-authoring tools can build a Plugin and add it to a role itself. See [Plugins and Apps](../../the-one-app/capabilities/plugins).
+
+## Roles: Agents written down
+
+In The One these three things are written in a **role**: which model preset it uses, which prompts and Skills it reads, which built-in tools, MCP servers and Plugins it holds. Each node of a working-group template binds a role, so one role can appear in many working groups; change it in one place and every later run follows the change. See [Roles](../../the-one-app/capabilities/roles).
+
+## Read next
+
+- [Context and meditation](./context): what an Agent sees, and what happens when its context fills up.
+- [ReAct and turns](./react): how an Agent works step by step, and when a turn ends.
+- [Agents that stay alive](./life): an Agent is still there after sleeping, errors and app restarts.

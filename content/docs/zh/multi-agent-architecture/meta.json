@@ -1,10 +1,13 @@
 {
   "title": "Multi-Agent 工程思想",
   "pages": [
+    "index",
     "single-agent",
     "evolution",
     "a-genetic-engineering",
     "prolifera-engineering",
-    "more-possibilities"
+    "collaboration",
+    "self-evolution",
+    "record-and-undo"
   ]
 }

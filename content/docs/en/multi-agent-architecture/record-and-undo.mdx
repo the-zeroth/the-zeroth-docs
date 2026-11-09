@@ -1,0 +1,31 @@
+---
+title: No approval step
+description: The One never blocks, questions or refuses an Agent's tool call; it records every one, can put back what went wrong, and lets you stop everything at any time.
+---
+
+Many Agent products stop before a "dangerous" action and ask for your approval. The One has no such step: nothing blocks, questions or refuses a tool call. Safety comes not from blocking but from three things: **everything is recorded, it can be put back, and it can be stopped**.
+
+## Why no approval
+
+- An Agent meant to work for you for a long time, including while you are away, cannot really work for you if it waits for your nod at every step.
+- When approvals pile up, people stop reading them and just click "Allow". Approval gives the look of safety, not safety itself.
+- A tool says what an Agent **can** do (read files, change files, run commands, use the network), not what it is **allowed** to do. The One uses these declarations to record calls and tell them apart, never to block them.
+
+## Recorded
+
+Every tool call is recorded in the **Action log**: which Agent, in which run, what it called and how it went, which files it created, changed or deleted, and which addresses it visited. Effects that happen outside this computer (pushing code, sending email, publishing, deploying, remote logins, writing data to the web) go ahead as usual, but are flagged separately, and the morning report shows them.
+
+## Put back
+
+Before an Agent changes or deletes a file, The One keeps a copy (except in a few places, such as dependency and cache folders). Within the retention period you can put back the changes of one call, one run, one matter, or everything since a point in time; the undo itself is recorded too, and can be undone in turn.
+
+Undo cannot reach beyond this computer: code already pushed, email already sent or a service already deployed has to be taken back some other way. That is exactly why those effects are flagged.
+
+## Stopped
+
+- Set a usage **limit** on a matter: when it is reached, its working groups stop at the next checkpoint until you resume them.
+- **Stop All Agents** interrupts every Agent at once, ends the commands they started, and pauses every run and trigger until you resume them.
+
+Interrupting and stopping everything are yours alone; the host itself never interrupts an Agent mid-step, it only pauses one between turns.
+
+For how to read the record, undo and stop in the app, see [Action log, undo and stopping](../the-one-app/action-log).

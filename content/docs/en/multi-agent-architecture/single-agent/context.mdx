@@ -1,20 +1,37 @@
 ---
-title: Context
-description: Use constraints, information, and tasks to build a clear Agent mind.
+title: Context and meditation
+description: An Agent's context comes in three kinds, constraints, information and task; The One sends it in parts, and an Agent meditates to compress its own history.
 ---
 
-Context can be divided into three categories, corresponding to three basic questions: who am I, where do I come from, and where am I going?
+Context can be divided into three kinds, matching three old questions: **who am I, where do I come from, where am I going?**
 
-1. Constraints: who am I?
+1. **Constraints (who am I?)**: the prompt tells the Agent who it is, what it is good at, what it is responsible for, and what doing the work right looks like.
+2. **Information (where do I come from?)**: the information that matters for the task, such as the code and documents already in a repository.
+3. **Task (where am I going?)**: the work it is asked to do.
 
-This includes the Agent's identity, strengths, permission boundaries, and behavioral rules.
+The quality of an Agent's context comes down to whether these three are complete, explicit and clear, and whether context that serves none of them has been left out.
 
-2. Information: where do I come from?
+## What an Agent sees
 
-This includes effective task-related information, such as code and documents already present in a repository.
+Each time an Agent sends a request to its model, the request carries these parts:
 
-3. Task: where am I going?
+- **System prompt**: the instructions its role wrote, plus its place in the working group: whom it can hand work to, and when.
+- **Skills and files**: collapsed at first, showing only a name and a short description; expanded when needed and collapsed again after.
+- **Memory cards**: each turn, an Agent that holds the memory tools sees up to 20 entries from the Space's memory, the ones most relevant to its latest messages. See [Memory and recall](../../the-one-app/capabilities/memory).
+- **Plan**: the action plan it wrote with its planning tool; see [ReAct and turns](./react).
+- **History**: the conversation so far, with its tool calls and their results.
 
-This is the work the Agent is asked to complete.
+These parts change as the work goes on: a Skill gets expanded, memory cards change, the plan is updated. The One does not rewrite them from the top every turn. It fixes what stays the same for a stretch, called an **epoch**, and appends what changes within the epoch to the end of the history as a **Context update**. The model service can then reuse the beginning it has already read, instead of re-reading the whole conversation at full price every turn.
 
-The quality of context engineering depends on whether these three areas are complete, explicit, and clear. Irrelevant context should be removed as much as possible.
+When the model or the tools change, when the Agent meditates, or when the appended updates pile up, a new epoch starts and the current state is written out as the new beginning. An Agent cloned from another continues its source's epoch, so its first request can reuse what the source already sent. When you look at an Agent in [All runs](../../the-one-app/settings/all-runs), **Context mode** switches between **Context epochs** and **Classic**, and the **Send view** shows the next request exactly as it will go to the model.
+
+## Meditation: compressing itself before it is full
+
+An Agent's context window is the hard limit on how long it can keep working. Every Agent holds the `meditate` tool: it can "meditate", compressing its own conversation history in place through a summarizer that inherits its model and reasoning settings, then carry on with a smaller, cleaner context.
+
+- **Its own decision.** An Agent can meditate whenever it chooses. Well before it has to, when its history grows past 60k, 100k or 150k tokens (and every 50k after), it gets a note the next time you write to it, saying how large its context is; whether to compress is up to it. It can also hand back with `meditate_after=true` and compact once its turn has ended, while you read its answer.
+- **Automatic when nearly full.** When real context usage reaches 85% of the model's working window, meditation starts by itself, so a long-running Agent shrinks before it overflows instead of wedging at the limit.
+- **Memory outlives compression.** The summarizer only compresses: it cannot write memory. An Agent that holds the memory tools can `remember` a lesson in the Space's memory before it meditates, so long work leaves knowledge behind instead of losing it to compaction.
+- **Visible.** Each meditation is recorded in the message timeline, so you can see where an Agent compacted itself.
+
+Meditation is not division: an Agent overloaded with context does not turn into several Agents. For how an Agent becomes several, see [Prolifera Engineering](../prolifera-engineering).
