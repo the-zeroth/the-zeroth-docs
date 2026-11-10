@@ -5,7 +5,7 @@ description: How to set up a role, one Agent of a working group written down wit
 
 A **role** is one Agent of a working group written down: what it does, which model it thinks with, and which prompts, Skills, tools and Plugins it can use. Every node of a working-group template is bound to a role, so one role can serve in several templates, and every Agent that plays it starts from the same definition. See [Working-group templates](./working-group-templates).
 
-Teams and tools calls them **Roles**; the editor (its tab is **Agent**) calls each one an Agent preset. Open one from **Teams and tools › Roles**, or choose **New Agent** above the list. The list is grouped in folders, and a role that inherits from another sits indented under its base. **New folder** adds a folder; drag a role into it to move it.
+Teams and tools and the editor both call them **Roles** (the editor's tab is **Roles**). Open one from **Teams and tools › Roles**, or choose **New role** above the list. The list is grouped in folders, and a role that inherits from another sits indented under its base. **New folder** adds a folder; drag a role into it to move it.
 
 The editor has three tabs: **Configuration**, **Prompts** and **Capabilities**. Each change applies when you save: groups formed afterwards use it, and Agents already at work pick up what you added or changed from their next turn, while a reply already being written finishes as it was. Removals are another matter. Skills and Plugins you remove are gone from Agents at work from their next turn; tools, external tool servers and prompts you remove stay with Agents already at work, and only groups formed afterwards go without them.
 
@@ -27,7 +27,7 @@ Under **Model & Parameters** a role gets its model in one of three ways:
 
 - **A model preset.** Pick a saved preset under **Model preset**: model, connection, reasoning and service tier come together. When the preset changes, the role follows from its next turn.
 - **Use default model.** The role follows the global default, which you set in **Settings › Models and sign-in › Default model** or from the model menu under the main assistant's composer. The editor shows the **Current default**.
-- **Its own settings.** Leave both off and set **API Config** (the connection), **Speed / service tier**, **Model** and **Reasoning (thinking)** here.
+- **Its own settings.** Leave both off and set **Model connection**, **Speed / service tier**, **Model** and **Reasoning (thinking)** here.
 
 How a role's own model ranks against a model chosen for one run, the template's default and the global default is explained in [Models](./models#which-model-wins).
 

@@ -44,7 +44,7 @@ content/docs
 |   |   |                            evolution, action log, phone channel
 |   |   +-- capabilities/            Templates, roles, Skills and prompts, MCP, models,
 |   |   |                            Plugins, Atlas, Definition Spaces, memory
-|   |   `-- settings/                Settings, API configuration, All runs
+|   |   `-- settings/                Settings, Model connections, All runs
 |   `-- multi-agent-architecture/    Concepts: overview, then in reading order
 |       +-- single-agent/            Model, tools and context; context and meditation;
 |       |                            ReAct and turns; Agents that stay alive
