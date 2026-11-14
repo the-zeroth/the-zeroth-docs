@@ -1,15 +1,15 @@
 ---
-title: Waiting for you, deliveries and the morning report
-description: "What waits for you, and where: questions to answer, deliveries to judge against their evidence, and a morning report of what happened while you were away."
+title: Waiting for you and deliveries
+description: "Everything that waits for you is in the strip above the conversation: questions to answer, and deliveries to judge against their evidence."
 ---
 
-Some things only you can settle: the questions Agents choose to ask you, work handed back for your verdict, runs that failed, model connections only you can fix, and matters paused at a limit you set. The One calls these what is **Waiting for you**: one card each, the same card wherever you meet it, and the same count everywhere. The **Morning report** sums up each day what was delivered, what still waits for you and what it cost, so you can leave the work running and catch up in a minute.
+Some things only you can settle: the questions Agents choose to ask you, work handed back for your verdict, runs that failed, model connections only you can fix, and matters paused at a limit you set. The One calls these what is **Waiting for you**: one card each, all of them in the strip above the main assistant's conversation, the same card wherever you meet it, and the same count everywhere. So you can leave the work running: when you come back, the main assistant greets you with what happened since you last looked (see [The day's greeting](./main-assistant#the-days-greeting)), and to look back over the week, open the [Weekly report](./weekly) in the sidebar.
 
 Agents work on their own and come to you only when they decide they need you. Nothing here asks for permission: The One never holds an Agent's action for your approval. What keeps you in control is the record and undo described in [Action log, undo and stopping](./action-log).
 
 ## Waiting for you
 
-When something waits for you, a strip above the main assistant's conversation says how many (for example **3 waiting for you**), with a button for each of the first three that says what to do and where, such as **Review · Checkout redesign** or **Answer · Refund policy**; the rest are under **N more**, which opens a list. A button takes you to that thing's card in the conversation, under the line that announced it, and makes the card stand out for a moment. What the conversation does not show there, such as a model connection to fix, a matter paused at its limit or a notice from further back, opens its card under the strip instead. A handled card leaves the strip, and with nothing waiting the strip is gone.
+When something waits for you, a strip above the main assistant's conversation says how many (for example **3 waiting for you**), with a button for each of the first three that says what to do and where, such as **Judge · Checkout redesign** or **Answer · Refund policy**; the rest are under **N more**, which opens a list. A button takes you to that thing's card in the conversation, under the line that announced it, and makes the card stand out for a moment. What the conversation does not show there, such as a model connection to fix, a matter paused at its limit or a notice from further back, opens its card under the strip instead. A handled card leaves the strip, and with nothing waiting the strip is gone.
 
 Six kinds of things wait for you, each handled right on its card:
 
@@ -22,9 +22,9 @@ Six kinds of things wait for you, each handled right on its card:
 | **Needs your sign-in**, **Access denied**, **Not in the plan** or **Out of credit** | A model connection that refuses its groups' work until you fix it, with the matters that wait on it. The label gives the reason, in that order: it rejected the key or sign-in, it denied access, the plan does not include that usage, or the key or account is out of credit; see [When a provider refuses](./settings/api-configuration#when-a-provider-refuses). | **Fix it in Settings** opens that connection. When the official connection's allowance is used up, **Open my subscription** opens your account's subscription page instead, to renew or top it up. |
 | **Paused at its limit** | A matter whose work used up the unattended limit you set. | **Resume**, or **Open the matter** to change the limit. |
 
-The same card shows in several places: under the line that announced it in the main assistant's conversation, in the strip, in a matter board's **Waiting for you**, under the group it came from on the [Panorama](./panorama), at the top of the Needs you page and on the delivery's evidence page. Handling it in any of these is the same, and it leaves them all. Each card names the matter and the working group it came from; with the developer view on, it also shows the IDs behind it, such as the mission and the run.
+The same card shows in several places: under the line that announced it in the main assistant's conversation, in the strip, in a matter board's **Waiting for you**, under the group it came from on the [Panorama](./panorama), and on the delivery's evidence page. Handling it in any of these is the same, and it leaves them all. Each card names the matter and the working group it came from; with the developer view on, it also shows the IDs behind it, such as the mission and the run.
 
-The number of things waiting for you is the same everywhere: beside **Conversation** in the sidebar, on the strip, in the Panorama's top line, in the morning report and, on a Mac, on the Dock icon.
+The number of things waiting for you is the same everywhere: beside **Conversation** in the sidebar, on the strip, in the Panorama's top line, in the main assistant's greeting of the day and, on a Mac, on the Dock icon and the menu bar icon.
 
 A delivery waits until it has a verdict, even once you have read it. Two kinds of things do not wait:
 
@@ -36,7 +36,7 @@ A delivery waits until it has a verdict, even once you have read it. Two kinds o
 Answer a question right on its card:
 
 - A choice shows its options as buttons. A confirmation shows **Confirm** and **Decline**, or the labels the Agent gave them.
-- A question in words has **Write an answer…**: write your answer in the box it opens and press **Reply** (or Ctrl/⌘ + Enter).
+- A question in words has **Write an answer…**: write your answer in the box it opens and press **Send answer** (or Ctrl/⌘ + Enter).
 - A few kinds of question can only be answered in their session. The card says **This one is answered in its session.**, and **Answer in the session** takes you there.
 - When you will not answer, **No need to answer** puts the question away; if the Agent asked with a card, it is told the card was cancelled.
 
@@ -46,25 +46,11 @@ Your answer goes straight to the Agent that asked, and it carries on.
 
 When a working group on a matter asks something, the question shows on the matter's board at once, and the main assistant hears it first. When the cards on the board, your earlier words or ordinary judgement settle it, the assistant answers for you, and the question card on the board says so. When only you can decide (your taste, your money or accounts, a choice you have not made yet), or when you are the one talking to that group, it leaves the question to you and you are notified at once. It never makes up your answer. If after three minutes the assistant has neither answered nor left the question to you, you are notified anyway, so no question waits unseen.
 
-## The Needs you page
+## Notifications
 
-The **Needs you** page keeps everything that waits for you in one place, with the other messages that reached you below it. It has no place in the sidebar; open it with **Open Needs You** in the tray menu, by clicking a notification that bundles several items, or from a link in the morning report, such as **2 more in Needs you**.
+Each question, delivery and failure is told to you once: a system notification while The One is in the background, a message in the window while it is in front. More than three at once arrive as one notification (**N new messages**), which opens the main assistant's conversation. On the home page, what the main assistant hands back is not announced again, since the conversation already shows it. The tray menu's first line counts the questions, finished and failed items still open (**Open** · …) and lists up to five of them, and **Open what waits for you** opens the main assistant's conversation; on a Mac the Dock icon shows how many things wait for you.
 
-What waits for you comes first (for example **3 waiting on you**), in the order it came, as the same cards as in the conversation; once you handle one, the group carries on. Below the cards is one list, **Other messages**, with how many are open beside it (such as **2 open**): the messages no card above stands for, such as words handed back to you or work on a matter you ended. What already has a card above is not listed again.
-
-Each message starts with whether it is a **Question**, **Handed back** or **Did not finish**, then names the Agent or run, says when it came and which matter it belongs to (**Matter: …** opens that matter's board). **Open** takes you to the conversation it came from. A question marked **Keeps working while it waits** means the Agent did not stop for your answer.
-
-To clear the page, **Put away** closes a question you will not answer (if the Agent asked with a card, it is told the card was cancelled), and **Mark read** closes a delivery or failure you have seen. **Show handled** brings closed items back, each with how it ended: **Answered**, **Read**, **Put away**, **Ended unanswered** or **Replaced by a newer result**.
-
-![Needs you: what waits for you as cards on top, and the other messages below](/docs-assets/images/0.5/en/needs-you-inbox.png)
-
-Two readings at the top cover the last 7 days. The first-pass rate is the share of work you accepted at its first delivery, counting only work you judged yourself. The other counts how often you were asked per delivered run. Fewer questions and more first passes mean the Agents get the work right on their own.
-
-### Notifications
-
-Each question, delivery and failure is told to you once: a system notification while The One is in the background, a message in the window while it is in front. More than three at once arrive as one notification, which opens the Needs you page. On the home page, what the main assistant hands back is not announced again, since the conversation already shows it. The tray menu's first line counts the questions, finished and failed items still open (**Open:** …) and lists up to five of them, and on a Mac the Dock icon shows how many things wait for you.
-
-Some deliveries come in quietly. They are in Needs you and the morning report, without a notification:
+Some deliveries come in quietly, without a notification. One that waits for your verdict is still in the strip above the conversation, and all of them are in the [Weekly report](./weekly):
 
 - work a trigger started, unless that trigger is set to **Notify me when its work is done** (see [Triggers and running in the background](./triggers));
 - work an outside program gave, since that program receives the delivery itself (see [Phone channel and outside callers](./remote));
@@ -74,7 +60,7 @@ Questions and failures never come in quietly. A question that someone else usual
 
 ## Judging a delivery
 
-A delivery waiting for you has three buttons. They are the same on its card in the main assistant's conversation, in the strip, in Needs you, on the matter's board, on the Panorama, in the morning report and on the delivery's evidence page:
+A delivery waiting for you has three buttons. They are the same on its card in the main assistant's conversation, in the strip above the conversation, on the matter's board, on the Panorama, in the weekly report and on the delivery's evidence page:
 
 | Button | What happens |
 | --- | --- |
@@ -91,7 +77,7 @@ You do not have to press a button:
 - A delivery you have looked at and left for 12 hours without asking for changes is **Taken as accepted**.
 - Work still in progress, or failed, with no activity for 7 days is recorded as given up.
 
-Only verdicts you gave, with a button or in your own words, count toward the first-pass rate. Work taken as accepted is counted apart.
+Only verdicts you gave, with a button or in your own words, count toward the first-pass rate. Work taken as accepted is counted apart. The first-pass rate is in the [Weekly report](./weekly).
 
 ## The evidence pack
 
@@ -115,42 +101,11 @@ The evidence comes from the app's own records, mostly the action log, not from t
 
 Packs stay on this computer and are never uploaded. Their text is kept for 180 days and copies of screenshots and outputs for 30 days, sooner when the disk is nearly full. **Settings › Data and undo › Storage** shows their size under **Evidence packs**. Packs are written only in the desktop app.
 
-## The morning report
-
-The **Morning report** says what happened since you last looked. It reads only the app's own records. Reading it calls no model and tells no Agent anything, unless you press a verdict.
-
-It has no place in the sidebar; the day's news finds you instead. When you open the app for the first time in a day, or come back to it on a new day after an hour or more away, and there is something you have not seen today, the main assistant greets you in its conversation with the news, and **Open the morning report** in that greeting opens the report (see [The day's greeting](./main-assistant#the-days-greeting)). If The One is running at 8:00, or the computer wakes after 8:00, it also sends one notification when there is news; a click opens the report.
-
-The first line says which window the report covers (**Last 24 hours** the first time, afterwards **Since** the time you last looked) and what is new. Three numbers follow: delivered, waiting for you, spent today. The number waiting for you is the same count as everywhere else. Deliveries you have already read are folded away; **Fold what I read** shows or hides them.
-
-![The morning report after a day with deliveries, questions and one piece of work not done](/docs-assets/images/0.5/en/needs-you-morning-report.png)
-
-| Section | What it shows |
-| --- | --- |
-| **Do these 3 first** | Up to three of the most pressing things, all of them in the strip: questions first, then deliveries waiting for your verdict, then model connections only you can fix. Each carries its card's tag, such as **Waiting for your answer**, **Waiting for your verdict**, **Not finished** or **Needs your sign-in**. The rest are in Needs you. |
-| **What was delivered** | Each piece of work's latest delivery: its goal, how long it took, what it cost, its evidence pack and the verdict buttons. |
-| **Waiting for your answer** | Questions still open, oldest first. |
-| **Not done** | Failed deliveries; work stuck on an error for more than 30 minutes, with what went wrong and where to fix it; work quiet for 24 hours; triggers that went wrong. |
-| **Actions that cannot be taken back** | Payments, pushes, emails, publishes and deploys that left this computer, listed per piece of work. A time opens the original record. |
-| **Triggers** | What fired, what it started, what was skipped or caught up, and what fires next. **Manage triggers** opens their settings. |
-| **Last night's review** | What the nightly review changed and how its earlier changes are doing, with undo. See [Evolution: the lab and the nightly review](./evolution). |
-| **Last week's reviews** | Only in the first report you read in a week: how many of last week's changes helped and stayed, how many reviews ran, how many changes they made, how many you undid, how many got worse or passed their deadline, and what it cost. |
-| **Still running** | Work in progress: plan steps done, last activity, spend so far. |
-| **What passed first time** | The first-pass rate: how much of the work you took at its first delivery, its last four weeks and its reading per matter. |
-| **What it cost** | Tokens and spend per day, and the work that cost the most. |
-| **Next** | When the next triggers fire and for which matter, and matters paused at the limit you set. |
-| **By matter** | What happened in each matter. Open one to see its board. |
-
-Most sections appear only when they have something to show. Keeping the report on screen for a couple of seconds counts as reading it, so tomorrow's report starts from then; looking again later the same day does not shrink today's.
-
-A matter you closed stops waiting in the report too: its open questions are not listed or counted as new, a delivery it made in the window still counts as delivered but reads **Matter closed: reopen it to judge this** under What was delivered, without verdict buttons, and its earlier deliveries no longer ask for you. Reopening the matter brings them back.
-
-The report belongs to the active Space, as what waits for you, matters and triggers do. Only the spend covers every Space on this computer, and the report says so.
-
 ## Related
 
-- [The main assistant](./main-assistant): where you talk about anything you see here.
+- [The main assistant](./main-assistant): where you talk about anything you see here; its greeting of the day says what happened since you last looked.
 - [Matters and boards](./matters): the board where questions and deliveries also show up.
 - [Panorama](./panorama): what waits for you, under the group it came from.
+- [Weekly report](./weekly): a look back at the last 7 days: what was delivered, how much passed first time, how often you were asked, what it cost, and the messages.
 - [Triggers and running in the background](./triggers): the work that arrives quietly.
 - [Action log, undo and stopping](./action-log): the records behind every evidence pack.

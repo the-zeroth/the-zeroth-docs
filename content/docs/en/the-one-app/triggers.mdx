@@ -3,7 +3,7 @@ title: Triggers and running in the background
 description: Triggers start Agents' work on a schedule or when something new arrives, and The One stays in the background so they fire while you are away.
 ---
 
-A **trigger** starts work by itself: when a time comes, when a Plugin tool, a folder, a web page or a command shows something new, or when another service sends a webhook. With triggers, and The One running in the background, recurring work keeps going while you are away, and you catch up in the morning report (see [Waiting for you, deliveries and the morning report](./needs-you)).
+A **trigger** starts work by itself: when a time comes, when a Plugin tool, a folder, a web page or a command shows something new, or when another service sends a webhook. With triggers, and The One running in the background, recurring work keeps going while you are away: when you come back, the main assistant greets you with what happened since you last looked, and to look back over the week, open the [Weekly report](./weekly).
 
 Triggers do not limit what the Agents they wake may do, and nothing waits for your approval. What the Agents do is recorded and can be undone; see [Action log, undo and stopping](./action-log).
 
@@ -66,7 +66,7 @@ Webhook triggers receive requests on one port of this computer, 127.0.0.1, port 
 | **Who takes it** | **The main assistant (default)**, which handles each fire itself or gives it to the right matter and working group. Or pick a Graph to start a new run of it each time. |
 | **Project folder (optional)** | Where the work is. A new run works in it, the main assistant is told about it, and Plugin tools and commands run there. Left empty, a new run works in the app's data folder. |
 | **What the Agent should do** | The message sent with every fire. Write it so it makes sense on its own; what the source found comes after it. |
-| **Notify me when its work is done** | Also notify you when the work a fire started is finished. Leave it off for frequent work, such as each order: then finished work comes without a notification and waits in **Waiting for you** and the morning report. |
+| **Notify me when its work is done** | Also notify you when the work a fire started is finished. Leave it off for frequent work, such as each order: then finished work comes without a notification, waits for your verdict in the strip above the conversation and goes into the weekly report. |
 | **More options** | **If it fires while the last run is still working** (only for a trigger that starts runs of a Graph): wait and hand what piled up to the next run, skip this fire, or start another run. **If the computer was asleep or off**: fire once on return, or skip it. |
 
 A time with no time zone uses this computer's clock, so a 9:00 trigger stays at 9:00 across daylight saving time. The first look at a watched source only notes what is already there, unless a command's **Counts as new when** is set to **It prints anything**; after that, each look that finds something new fires once and brings the new items along.
@@ -81,7 +81,7 @@ The Agent gets the trigger's message with a first line that names the trigger, t
 
 A fire that goes to the main assistant is the main assistant's to arrange: it settles it, or puts it on the matter it belongs to and gives it to that matter's working group, opening a matter for work that recurs.
 
-The work a trigger starts comes back without a notification and waits in "Waiting for you" and the morning report, unless the trigger is set to notify you when its work is done. Questions and failures always notify.
+The work a trigger starts comes back without a notification, waits for your verdict in the strip above the conversation and goes into the weekly report, unless the trigger is set to notify you when its work is done. Questions and failures always notify.
 
 ## Webhooks
 
@@ -114,6 +114,7 @@ Every Space has one trigger of the app's own, **Nightly review**, which runs eac
 ## Related
 
 - [Matters and boards](./matters): the Cadence card and Always on.
-- [Waiting for you, deliveries and the morning report](./needs-you): where trigger work arrives.
+- [Waiting for you and deliveries](./needs-you): where trigger work arrives.
+- [Weekly report](./weekly): what the triggers did in the week, and which ones had a problem.
 - [Evolution: the lab and the nightly review](./evolution): the nightly review and the evolution matter's weekly census.
 - [Plugins and Apps](./capabilities/plugins): the Plugin tools a trigger can watch.

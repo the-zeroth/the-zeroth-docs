@@ -42,8 +42,8 @@ The channel takes text only; an image or a file gets a reply saying so.
 - The main assistant's replies go to the phone while your last words to it came from the phone. Once you talk to it on the computer, they stay there.
 - A working group's question first waits for the main assistant to answer it, up to three minutes, as it does on the computer.
 - Questions, results and failures mention you, so the room marks them. When you answer a question on the computer, the phone gets a note that it was answered there.
-- Anything over 4,000 characters is cut, with a pointer to Needs you on the computer.
-- Only the active Space's items are sent, as in Needs you.
+- Anything over 4,000 characters is cut, with a pointer to the full text on the computer, in the strip above the conversation.
+- Only the active Space's items are sent, as in the strip above the conversation.
 
 ### Language
 
@@ -93,7 +93,7 @@ Over MCP it gets four tools: `list_teams` lists the teams its token may use, `ru
 
 - Each task is a matter on your board: a new one titled with the task's first line, or the matter the program names. The team works on it as a working group, and the program follows it, so the main assistant is not woken for its questions and deliveries. The matter closes itself once the work is delivered, and reopens when the program says more.
 - What the team receives starts with a line saying who sent it, the token's name and the program, such as `[Message from an outside caller: Claude Code (…)]`.
-- Questions also reach Needs you, where you can answer them yourself. The program usually answers within seconds, so a question notifies you only once it has been open for a minute.
+- Questions also show in the strip above the conversation, where you can answer them yourself. The program usually answers within seconds, so a question notifies you only once it has been open for a minute.
 - Deliveries go back to the program without notifying you. Failures notify you at once.
 - A program's words do not count as you stepping in: they do not restart a matter's unattended count, and work paused at a usage limit stays paused until you resume it (see [Matters and boards](./matters)).
 
@@ -106,6 +106,6 @@ Over MCP it gets four tools: `list_teams` lists the teams its token may use, `ru
 ## Related
 
 - [The main assistant](./main-assistant): who your phone talks to.
-- [Waiting for you, deliveries and the morning report](./needs-you): where questions and results also wait on the computer.
+- [Waiting for you and deliveries](./needs-you): where questions also wait on the computer, in the strip above the conversation.
 - [Working groups](./working-groups): how a team works on a matter.
 - [Plugins and Apps](./capabilities/plugins): installing the Agent Room Channel Plugin.

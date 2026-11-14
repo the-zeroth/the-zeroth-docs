@@ -5,7 +5,7 @@ description: All runs, opened from Settings › Developer, lists every run in yo
 
 **All runs** is where a developer looks at The One's work: every run in the current Space, the working groups' runs included, down to the full context of each Agent. Day to day you follow work in [Panorama](../panorama) and on a matter's board and its Theater; come here to see exactly what an Agent read, wrote and called, to step into a run, or to start a Graph yourself.
 
-Open it with **Open all runs** in **Settings › Developer**, or, with the developer view on, with **All runs** on [Teams and tools](../capabilities). Opening an item from **Needs you**, a notification or the tray menu also brings you here, to the Agent the item came from; items from the main assistant open the home page instead. An app that opens inside The One from the sidebar's **Apps** lands here too, as a tab beside the Agent Roster.
+Open it with **Open all runs** in **Settings › Developer**, or, with the developer view on, with **All runs** on [Teams and tools](../capabilities). Opening an item from the weekly report's **Messages**, a notification or the tray menu also brings you here, to the Agent the item came from; items from the main assistant open the home page instead. An app that opens inside The One from the sidebar's **Apps** lands here too, as a tab beside the Agent Roster.
 
 ![All runs: the run list, a working group's run and the Agent Roster](/docs-assets/images/0.5/en/all-runs-run-view.png)
 
@@ -30,7 +30,7 @@ The main assistant's own conversation is not listed: it stays on the home page. 
 
 **What it needs to run** checks everything the Graph names: models, connections, Agent presets, prompts, Skills, MCP servers and Plugins. It says which missing piece would stop the run from being created, which would make its model requests fail, and which the run can do without. You can create the run either way. A run starts from the Graph as last saved.
 
-A run started this way belongs to no matter: the task you write is its mission, you judge its deliveries in the **Mission** bar at the top of the run (below), and its questions and deliveries also reach Needs you.
+A run started this way belongs to no matter: the task you write is its mission, you judge its deliveries in the **Mission** bar at the top of the run (below), and its questions and deliveries also wait in the strip above the conversation.
 
 ![New Graph, with what the Graph needs to run](/docs-assets/images/0.5/en/all-runs-new-graph.png)
 
@@ -44,7 +44,7 @@ The header names the run, its state (such as **Executing**, **Waiting for wake-u
 - **Run controls**: retries, recovery and the usage limit.
 - How many tokens the run has used so far.
 
-Once the run has a mission (the piece of work you or the main assistant gave it), a **Mission** bar shows under the header: what is to be done, where it stands (working, a delivery waiting for your verdict, accepted and so on), the delivery's **Evidence**, and **Accept**, **Rework** and **Give up**, as far as the mission's state allows them. **Rework** here only records the verdict: tell the Agent what to change in the message box below. **Give up** asks once more; the mission is then recorded as given up and no delivery is awaited, but the Agent is not stopped. For verdicts and evidence, see [Waiting for you, deliveries and the morning report](../needs-you).
+Once the run has a mission (the piece of work you or the main assistant gave it), a **Mission** bar shows under the header: what is to be done, where it stands (working, a delivery waiting for your verdict, accepted and so on), the delivery's **Evidence**, and **Accept**, **Rework** and **Give up**, as far as the mission's state allows them. **Rework** here only records the verdict: tell the Agent what to change in the message box below. **Give up** asks once more; the mission is then recorded as given up and no delivery is awaited, but the Agent is not stopped. For verdicts and evidence, see [Waiting for you and deliveries](../needs-you).
 
 Under that, the **Work Chain** (folded at first) draws who woke whom, step by step, including where the run waited for you.
 
@@ -68,7 +68,7 @@ When a provider rejects the Agent's key or sign-in, or its policy blocks the Age
 
 ## Stepping in
 
-- **Write to any Agent** in the box under its messages, and drag in, paste or attach images and files. Its questions, confirmations and choices wait above the box; they also reach Needs you and, for a working group, the matter's board. What you write to a working group counts as your own words, and the main assistant sees that you are talking to that group.
+- **Write to any Agent** in the box under its messages, and drag in, paste or attach images and files. Its questions, confirmations and choices wait above the box; they also wait in the strip above the conversation and, for a working group, on the matter's board. What you write to a working group counts as your own words, and the main assistant sees that you are talking to that group.
 - **Interrupt current Agent** stops what the Agent is doing; a message from you sets it going again.
 - **Edit** one of your own messages and choose **Save & resend**: everything after it is discarded and generated again.
 - **Fork** at any message makes a new Agent in the same Graph with the history up to that message. It has no edges and does nothing until you write to it; the original Agent is untouched.

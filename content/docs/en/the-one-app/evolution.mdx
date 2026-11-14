@@ -26,13 +26,15 @@ When the review runs, an Agent called the Reviewer:
 3. writes a fix proposal instead when the cause is out of its reach, such as a tool, a role's prompt, a team, or something you must decide;
 4. registers each change beforehand: which friction it should reduce, which must not rise, by how much, and by when (28 days unless it says otherwise).
 
-Its changes take effect at once, without anyone's approval, and go into the action log like any Agent's edits (see [Action log, undo and stopping](./action-log)). The review opens nothing in Needs you and notifies no one; you read what it did in the morning.
+Its changes take effect at once, without anyone's approval, and go into the action log like any Agent's edits (see [Action log, undo and stopping](./action-log)). The review puts nothing in the strip of what waits for you and notifies no one; you read what it did in the weekly report.
 
-### Reading and undoing it in the morning report
+### Reading and undoing it in the weekly report
 
-**Last night's review** in the morning report (see [Waiting for you, deliveries and the morning report](./needs-you)) lists each review since you last looked: when it ran, how many frictions it found and how many of them happened again, how many changes it made and what it cost, and any **Fix proposals** it wrote. Each change shows:
+**What it changed by itself**, the first section of the [Weekly report](./weekly), covers the reviews of the last 7 days. Its top line says how many changes helped and stayed, then how many reviews ran, how many changes they made, how many you undid, how many got worse, how many passed their deadline, and what it all cost. Below it, a line gives the Reviewer's record over 90 days: of the changes with a verdict, how many helped. A week without a review says only **No review ran in these 7 days. Each night it first checks the records, and starts only when they show a new place where work keeps getting stuck.**
 
-- what it changed (**Memory**, **Skill**…), which item, and what the Reviewer said beforehand it expects;
+Each change of the week follows, the ones that got worse first, then the ones past their deadline. Each change shows:
+
+- what it changed (**Memory**, **Skill**…), which item, whether it was created or modified and when, and what the Reviewer said beforehand it expects;
 - its readings: for each friction it answers, how often that friction happened per 100 chances before the change and since, for example "3.1 → 0.4 per 100 calls"; with too few chances so far it says **Too early** and how many more it needs;
 - **Guard** readings: frictions the change must not make worse, and the first-pass rate, rework, cost and time to first delivery of the team where the friction happened, read the same way;
 - a status: **Better**, **Worse**, **No change yet**, **Too early**, **Past its deadline without effect**, **Still flat after two weeks** or **Undone**.
@@ -45,9 +47,9 @@ Some changes also show:
 
 **Show the change** shows the diff. **Undo** takes the change back through the action log, along with other files the same call changed; an undone change can be brought back with **Restore**.
 
-{/* screenshot pending: ![Last night's review in the morning report](/docs-assets/images/0.5/en/evolution-nightly-review.png) */}
+Last comes a line for each night: when the review ran, how many frictions it found and how many of them happened again, how many changes it made and what it cost; below it, the **Fix proposals** and **Task drafts** the Reviewer wrote in these 7 days.
 
-The first report you read in a week adds **Last week's reviews**: how many changes helped and stayed, how many reviews ran and how many changes they made, how many changes you undid, how many got worse or passed their deadline, and what it all cost. Below it, a line gives the Reviewer's record over 90 days: of the changes with a verdict, how many helped.
+{/* screenshot pending: ![What it changed by itself, in the weekly report](/docs-assets/images/0.5/en/evolution-nightly-review.png) */}
 
 Readings are evidence for the Reviewer and for you; the app never undoes a change on its own. A change you undo is your verdict, and the Reviewer's procedure tells it not to make the same change again.
 

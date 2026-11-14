@@ -62,7 +62,7 @@ The copies live in the app's trash for 7 days, then are removed automatically. W
 
 ### What undo does not cover
 
-- **Actions that left this computer**: payments, pushes, emails, publishes, deploys, remote commands and requests that sent data. They go ahead as usual and are marked on the run ("Happened outside this computer, cannot be undone"), and the morning report lists them under **Actions that cannot be taken back**.
+- **Actions that left this computer**: payments, pushes, emails, publishes, deploys, remote commands and requests that sent data. They go ahead as usual and are marked on the run ("Happened outside this computer, cannot be undone"). When a payment, push, email, publish or deploy really happens, The One tells you at once: one system notification, and a line **Outside actions that cannot be taken back** under the strip above the conversation (see [The strip above the conversation](./main-assistant#the-strip-above-the-conversation)). The [Weekly report](./weekly) lists them under **Actions that cannot be taken back**. Tests and rehearsals are not told, and the weekly report only counts them.
 - **Dependency and cache folders**, such as `node_modules`, `.git` and `.venv`, and folders your `.gitignore` names, unless a command names a file in them.
 - **Your home folder itself, and the big folders right under it**, such as Documents, Desktop and Downloads: when a command runs in one of them, The One copies only the files the command names, not the whole folder.
 - **What an MCP tool writes elsewhere**: an MCP tool, including a call you make through a panel, gets copies only of the files its arguments name by full path. A payments Plugin's tools, for example, keep a ledger that is not copied: the calls are listed, but there is no file to put back.
@@ -98,6 +98,7 @@ To go on, resume a working group with **Resume** on its card on the matter's boa
 
 ## Related
 
-- [Waiting for you, deliveries and the morning report](./needs-you): evidence packs, built from this log.
+- [Waiting for you and deliveries](./needs-you): evidence packs, built from this log.
+- [Weekly report](./weekly): the week's actions that cannot be taken back.
 - [Matters and boards](./matters): a matter's spending, limit and changes.
 - [Settings](./settings): Storage and the other settings pages.

@@ -1,0 +1,81 @@
+---
+title: Weekly report
+description: "A look back at the last 7 days: what was delivered, how much passed first time, how often you were asked, what it cost and what it changed by itself."
+---
+
+The **Weekly report** looks back at the last 7 days: what was delivered, how much passed first time, how often you were asked, what it cost and what it changed by itself. It sits near the foot of the sidebar, between **Runs by itself** and **Teams and tools**.
+
+It reads only the app's own records. Reading it calls no model and tells no Agent anything, unless you press a verdict on it. It is not where things get handled: what waits for you is in the strip above the conversation (see [Waiting for you and deliveries](./needs-you)), and what is going on right now is on the [Panorama](./panorama). The day's news is the main assistant's greeting (see [The day's greeting](./main-assistant#the-days-greeting)); reading the weekly report does not count as having seen it.
+
+{/* screenshot pending: ![The weekly report: four numbers on top, the week's sections on the left and the readings on the right](/docs-assets/images/0.5/en/weekly-report.png) */}
+
+## Which days it covers
+
+The report covers today and the six days before it, from local midnight, and says so at the top, for example **Last 7 days · Nov 5 – Nov 11**. Every number on the page counts those same 7 days. Earlier weeks cannot be paged back to.
+
+## At the top
+
+The first line gives the week's main news, such as **Delivered: 5 · Not done: 1 · Real outside actions: 2**, or **No deliveries, failures or real outside actions.** Four numbers follow:
+
+| Number | What it is |
+| --- | --- |
+| **Delivered** | Work handed in during these 7 days, each piece of work once; when some was not done, **Not done: N** under it. |
+| **Passed first time** | The share of work you accepted at its first delivery, such as "4 of 5 judged". Only work you judged yourself counts; without any, it says **No delivery judged yet**. |
+| **Asked you** | How often Agents chose to ask you, with how often per delivery under it. |
+| **Spent** | What these 7 days cost, with the tokens under it. |
+
+Fewer questions and more first passes mean the Agents get the work right on their own.
+
+## The sections
+
+| Section | What it shows |
+| --- | --- |
+| **What it changed by itself** | The week's nightly reviews: how many changes helped and stayed, how many reviews ran and how many changes they made; each change with its readings, its diff and **Undo**; then each night in a line, and the fix proposals the Reviewer wrote. See [Reading and undoing it in the weekly report](./evolution#reading-and-undoing-it-in-the-weekly-report). |
+| **By matter** | For each matter, what it delivered and what did not get done in these 7 days, how it stands now (questions waiting, stuck on errors, quiet, at work) and what it cost. Open one to see its board. |
+| **What was delivered** | Each piece of work's latest delivery in these 7 days: its goal, its matter, when it was delivered, how long it took and what it cost, and what the Agent that delivered said; **Evidence**, and **Open the matter** (or **Open session** for work on no matter). One still waiting for you carries **Accept**, **Rework** and **Give up**. Eight are listed; **Show the other N** lists the rest. Work a trigger started is marked **Trigger**. |
+| **Not done** | Work whose last attempt in these 7 days did not get done, listed like the deliveries. |
+| **Actions that cannot be taken back** | Payments, pushes, emails, publishes and deploys that really left this computer, per piece of work. A time opens the original record in the action log; when the tool gave a receipt, it also shows the provider, the amount, how many recipients, an **Open** link and how to take it back. Tests and rehearsals are only counted, not listed. |
+| **Triggers** | What the triggers you and your Agents set up did in these 7 days, the ones with a problem, and **Manage triggers** (see below). |
+| **Messages** | The Agents' questions, hand-backs and failures, listed when you choose **Show** (see below). |
+
+On the right are the **Readings**:
+
+| Reading | What it shows |
+| --- | --- |
+| **What passed first time** | The first-pass rate, its reading for each of the last 4 weeks, and its reading per matter (a sub-matter counts for the matter it is under). Work that ended without your verdict, such as work you looked at and left, is named apart and not counted. |
+| **What it cost** | What these 7 days cost, in money, tokens and model calls, a line per day when there are several, and what cost the most. |
+
+**What it changed by itself** and **Messages** are always there; the other sections appear only when they have something to show. When the records hold nothing at all for the 7 days, the page is one line: **Nothing to report for these 7 days**.
+
+## Triggers
+
+**Triggers** covers the triggers you and your Agents set up: how often they fired, how many tasks they started, how often they woke an Agent, how many fires were skipped or caught up, when each one last fired, how the tasks they started stand now, and which one fires next and when. Missed times are called caught up only when a catch-up ran: **catch-ups: N (for M missed)**; when none ran, **missed, not caught up: M**. When every trigger is paused, the section says so.
+
+Triggers with a problem come in two groups:
+
+- **Not working now: N**: a source a trigger cannot look at, or a webhook entry that cannot open. **Open triggers** takes you there to fix it.
+- **Triggers with a delivery that failed in these 7 days: N**: once in these days a fire could not start its task, wake its Agent or reach the main assistant. It may have gone through since.
+
+The app's own **Nightly review** is not in this section: its week is **What it changed by itself**. So a Space whose only trigger is the nightly review shows no Triggers section, and a nightly review that could not start is listed with the triggers that have a problem. For triggers themselves, see [Triggers and running in the background](./triggers).
+
+## Messages
+
+Under the **Messages** heading is the week's reading, such as "Last 7 days · Questions: 5 · Deliveries: 12 · Failures: 1 · Asks per delivered run: 0.4". **Show** lists the messages: first every message still open, however old, then the ones handled in these 7 days, newest first in each group. A message that has a card in the strip above the conversation is not listed again: you handle it on its card.
+
+Each message starts with whether it is a **Question**, **Handed back** or **Did not finish**, then names the Agent or run, says when it came and which matter it belongs to (**Matter: …** opens that matter's board). An open question can be answered right here; one marked **Keeps working while it waits** means the Agent did not stop for your answer. A delivery shows where its work stands, with **Evidence**, and the latest one carries the verdict buttons. **Open** takes you to the conversation it came from.
+
+**Put away** closes a question you will not answer (if the Agent asked with a card, it is told the card was cancelled), and **Mark read** closes a delivery or failure you have seen. A handled message says how it ended: **Answered**, **Read**, **Put away**, **Ended unanswered** or **Replaced by a newer result**. Only the latest handled messages are listed, and the list says so when it leaves some out.
+
+## Good to know
+
+- The report belongs to the active Space, as what waits for you, matters and triggers do. Only the spend covers every Space on this computer, and the page says so.
+- A matter you closed stops waiting in the report too: a delivery it made in these 7 days still counts as delivered, but reads **Matter closed: reopen it to judge this** under What was delivered, without verdict buttons. Reopening the matter brings the buttons back.
+- **See the outside actions** in the main assistant's greeting, and **See in the weekly report** on the **Outside actions that cannot be taken back** line above the conversation, both open the report at **Actions that cannot be taken back**.
+
+## Related
+
+- [Waiting for you and deliveries](./needs-you): what waits for you, verdicts and evidence packs.
+- [The main assistant](./main-assistant): the greeting of the day says what happened since you last looked.
+- [Evolution: the lab and the nightly review](./evolution): where the changes in **What it changed by itself** come from.
+- [Triggers and running in the background](./triggers): the triggers in **Triggers**.
+- [Action log, undo and stopping](./action-log): the records behind **Actions that cannot be taken back**.

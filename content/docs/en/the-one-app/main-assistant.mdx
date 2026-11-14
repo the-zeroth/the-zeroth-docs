@@ -9,7 +9,7 @@ The main assistant is the conversation The One opens on, and the one place to br
 
 Every Space has its own main assistant: **Conversation** in the sidebar, **Main assistant** on the page. It is one permanent conversation that runs across days and across all your matters. There is no new chat to start and no session list to tidy up. Everything you ask lands in the same place, so the assistant can connect what you said last week with what you ask today.
 
-The assistant belongs to its Space. When you switch Space at the top of the sidebar, you switch to that Space's assistant, its matters, what waits for you and its morning report. If Agents are still at work, The One asks first, because switching stops them (**Stop and switch**).
+The assistant belongs to its Space. When you switch Space at the top of the sidebar, you switch to that Space's assistant, its matters, what waits for you and its weekly report. If Agents are still at work, The One asks first, because switching stops them (**Stop and switch**).
 
 The assistant is an Agent like the others. Its role, `main-assistant`, is under **Teams and tools › Roles**. It works with your default model (**Settings › Models and sign-in › Default model**) unless you give that role a model preset of its own in a Space of yours. Its conversation lives on the home page, not in All runs.
 
@@ -82,18 +82,20 @@ In a new Space where nothing was said yet, **How to start** sits above the box: 
 At the top of the sidebar are The One and the Space you are in; click the Space's name to switch to another. Below them come:
 
 - **Conversation**: back to this conversation. The number beside it is how many things wait for you.
+- **Get started**: only until a model is set up; see [Quick Start](../start/quick-start).
 - **Panorama**: what the working groups on every open matter, and their Agents, are doing now. While Agents are at work it says how many, quietly, such as **3 at work**. See [Panorama](./panorama).
-- **Start**: only until a model is set up; see [Quick Start](../start/quick-start).
-- **Matters**: the heading says how many are open (such as **All 4**) and opens the Matters overview; under it is each open matter. **New matter: tell the assistant**, under the list, brings you back here with the cursor in the composer. See [Matters and boards](./matters).
+- **Matters**: the heading says how many are open (such as **All 4**) and opens the Matters overview; under it is each open matter. **New matter: just ask**, under the list, brings you back here with the cursor in the composer. See [Matters and boards](./matters).
+- **Runs by itself**: the schedules and triggers that start work on time or when something new arrives; it opens the **Background & triggers** page under **Settings › Runs by itself**. Beside it, quietly, is how many are waiting (such as **2 waiting**), or **Paused** while every trigger is paused. See [Triggers and running in the background](./triggers).
+- **Weekly report**: a look back at the last 7 days: what was delivered, how much passed first time, how often you were asked, what it cost and what it changed by itself. See [Weekly report](./weekly).
 - **Teams and tools**: what each working group does and which matters it works for, and the Plugins, Skills, roles and models. See [Teams and tools](./capabilities).
 - **Apps**: only when a Plugin brings an app you can open; see [Plugins and Apps](./capabilities/plugins).
 - **Settings**: see [Settings](./settings).
 
-The Needs you page and the morning report are not in the sidebar: what waits for you is in the strip above the conversation, and the morning report opens from the day's greeting.
-
 ### The strip above the conversation
 
-When something waits for you, a strip above the conversation says how many (for example **3 waiting for you**), with a button for each of the first three and the rest under **N more**. A button takes you to that thing's card in the conversation, where you answer, judge or fix it on the spot. The strip's number is the one beside **Conversation** in the sidebar. See [Waiting for you, deliveries and the morning report](./needs-you#waiting-for-you).
+When something waits for you, a strip above the conversation says how many (for example **3 waiting for you**), with a button for each of the first three and the rest under **N more**. A button takes you to that thing's card in the conversation, where you answer, judge or fix it on the spot. The strip's number is the one beside **Conversation** in the sidebar. What waits for you is handled here and nowhere else; see [Waiting for you and deliveries](./needs-you#waiting-for-you).
+
+When an Agent's call really leaves this computer and cannot be taken back (it moved money, pushed code, deployed or published, or sent mail), a line under the strip says so: **Outside actions that cannot be taken back**, what was done and for which piece of work, and how to take it back when the tool said. **See the record** opens its entry in the action log, **See in the weekly report** opens the weekly report at **Actions that cannot be taken back**, and **Got it** puts the line away. It waits for nothing and tells no Agent; tests and rehearsals never show there. See [Action log, undo and stopping](./action-log).
 
 ### Searching the conversation
 
@@ -113,7 +115,11 @@ Looking at the conversation marks what the assistant handed back as read.
 
 ### The day's greeting
 
-When you open the app for the first time in a day, or come back to it on a new day after an hour or more away, and something happened that you have not seen, the main assistant greets you in the conversation: **Good morning** (or afternoon, or evening), what happened since you last looked, and how many things wait for you in the strip above. The greeting is the assistant's message at the time it greeted, so what you write next comes under it. **Open the morning report** opens the full report (see [The morning report](./needs-you#the-morning-report)), and **Got it** puts the greeting away for the day.
+When you open the app for the first time in a day, or come back to it on a new day after an hour or more away, and something happened that you have not seen, the main assistant greets you in the conversation: **Good morning** (or afternoon, or evening), what happened since you last looked, such as "Since you last looked: Delivered: 3, New questions for you: 1.", and how many things wait for you in the strip above. The greeting is the assistant's message at the time it greeted, so what you write next comes under it. For the greeting a day starts at 04:00: if you are still up after midnight, coming back to the window does not bring a new greeting, and what was done in the night is told in the morning's. Before 04:00 the greeting says **Good evening**.
+
+What the greeting tells that has a card is handled in the strip above. What has no card gets a link under the greeting: **See the outside actions**, when something left this computer for good, opens the [Weekly report](./weekly) at **Actions that cannot be taken back**, and **See the triggers**, when a trigger went wrong, opens the trigger settings. **Got it** puts the greeting away for the day.
+
+Two seconds of the greeting on screen, with the window in front, or **Got it**, count as having seen its news: the next greeting starts from there. If The One is running at 8:00, or the computer wakes after 8:00, and there is news you have not seen today, a system notification **Since you last looked** lists it, and a click opens this conversation with the same greeting. On a day you first open the app after 8:00, the greeting at opening has told the news already, and no notification follows.
 
 ## Writing to it
 
