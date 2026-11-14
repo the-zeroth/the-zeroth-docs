@@ -43,7 +43,7 @@ content/docs
 |   |   |                            waiting for you and the morning report, triggers,
 |   |   |                            evolution, action log, phone channel
 |   |   +-- capabilities/            Templates, roles, Skills and prompts, MCP, models,
-|   |   |                            Plugins, Atlas, Definition Spaces, memory
+|   |   |                            Plugins, Atlas, Spaces, memory
 |   |   `-- settings/                Settings, Model connections, All runs
 |   `-- multi-agent-architecture/    Concepts: overview, then in reading order
 |       +-- single-agent/            Model, tools and context; context and meditation;

@@ -42,7 +42,7 @@ content/docs
 |   |   +-- main-assistant.mdx …     主助手、事项、工作组、全景、等你和晨报、
 |   |   |                            触发器、进化、行动记录、随身通道
 |   |   +-- capabilities/            工作组模板、角色、技能与提示词、MCP、模型、
-|   |   |                            插件、总图、定义空间、记忆
+|   |   |                            插件、总图、空间、记忆
 |   |   `-- settings/                设置、模型连接、所有运行
 |   `-- multi-agent-architecture/    工程思想：总览，然后按阅读顺序
 |       +-- single-agent/            模型、工具和上下文；上下文与冥想；

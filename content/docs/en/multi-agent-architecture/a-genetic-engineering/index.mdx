@@ -3,7 +3,7 @@ title: A-Genetic Engineering
 description: How The One writes a multi-agent team down as a reusable, heritable gene, and how working groups, the main assistant and evolution express and improve it.
 ---
 
-**A-Genetic Engineering** is the name for how The One writes a multi-agent team down: in full, as files in a Definition Space that you can reuse, edit and pass on. [Prolifera Engineering](../prolifera-engineering) describes how the system **grows** while it works; A-Genetic Engineering describes what it grows **from**. The A stands for Agent: Agent-Genetic, abbreviated.
+**A-Genetic Engineering** is the name for how The One writes a multi-agent team down: in full, as files in a Space that you can reuse, edit and pass on. [Prolifera Engineering](../prolifera-engineering) describes how the system **grows** while it works; A-Genetic Engineering describes what it grows **from**. The A stands for Agent: Agent-Genetic, abbreviated.
 
 ## Two half-answers
 
@@ -16,7 +16,7 @@ Experience without structure drifts; structure without heredity dissolves.
 
 ## The genotype: what a Space writes down
 
-In The One, a team is written down **in full** in a Definition Space, and you find each part of it under **Teams and tools**, where each working group's card opens its template:
+In The One, a team is written down **in full** in a Space, and you find each part of it under **Teams and tools**, where each working group's card opens its template:
 
 - **Working-group templates** (`workflows/*.yaml`, the Graphs): nodes and edges. Each node binds a role and can add instructions for that node alone; each edge's text *is* the handoff instruction: when to hand off, what to pass, what the other side should produce. This is the team's **body plan**.
 - **Roles** (`agents/*.yaml`, the Agent presets): each member's instructions, its model preset or the default model, reasoning, built-in tools and MCP servers, Skills, prompts and Plugins, defined independently of every other member. These are the **cell types**.
@@ -65,7 +65,7 @@ Genes matter because they are passed on. A Space can be copied, exported, import
 - **Secrets** never travel.
 - **Models** stay on each computer too: roles name model presets, which live in the app, so a Space from elsewhere may need its roles pointed at your own presets.
 
-The official Space is the read-only baseline genome: in it, what the main assistant and the evolution lab find stays a proposal. Copy it into a Space of your own to breed variants; later updates to the official Space do not reach your copy by themselves. See [Definition Spaces](../../the-one-app/capabilities/definition-spaces).
+The official Space is the read-only baseline genome: in it, what the main assistant and the evolution lab find stays a proposal. Copy it into a Space of your own to breed variants; later updates to the official Space do not reach your copy by themselves. See [Spaces](../../the-one-app/capabilities/definition-spaces).
 
 ## Boundaries
 

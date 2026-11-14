@@ -17,11 +17,11 @@ A Plugin combines any number of five kinds of components:
 | Application | An app with its own screen, opened from Apps |
 | Connector | An online service the Plugin reaches with your API key or sign-in |
 
-Plugins live outside every Definition Space. They are installed on your computer, and a Space records only which Plugins its roles use and their settings that are not secret. That is why an exported or shared Space never contains a Plugin, only references to the ones it needs. For what lives in a Space and what lives on this computer, see [Definition Spaces](./definition-spaces).
+Plugins live outside every Space. They are installed on your computer, and a Space records only which Plugins its roles use and their settings that are not secret. That is why an exported or shared Space never contains a Plugin, only references to the ones it needs. For what lives in a Space and what lives on this computer, see [Spaces](./definition-spaces).
 
 ## The Plugin library
 
-Open **Teams and tools › Plugins**. Plugins and Definition Spaces share one page, titled **Extension Center**, and Plugins has two views:
+Open **Teams and tools › Plugins**. Plugins and Spaces share one page, titled **Extension Center**, and Plugins has two views:
 
 - **Plugin library**: official Plugins and Plugins others have shared. Each row shows the version and what the Plugin does; open one to see its components, the access it declares and its settings.
 - **Installed**: the Plugins on this computer, including the ones you made, with **Update** when the library has a newer release.
@@ -53,13 +53,13 @@ A Plugin's details hold two kinds of settings:
 - **Configure Plugin**: ordinary values such as models and endpoints.
 - **Plugin connections**: API tokens, OAuth sign-ins and shared accounts. Signing in opens your browser. Connections are kept on this computer; which one the active Space uses is chosen under **Current Space usage**, in a Space of your own.
 
-Keys and sign-ins are stored encrypted on this computer. They are never part of a Plugin package or a Definition Space. When an Agent needs a key to go on, it can ask you for it with a secure setup card: what you type there goes straight to protected storage, and the Agent only learns whether the connection is ready.
+Keys and sign-ins are stored encrypted on this computer. They are never part of a Plugin package or a Space. When an Agent needs a key to go on, it can ask you for it with a secure setup card: what you type there goes straight to protected storage, and the Agent only learns whether the connection is ready.
 
 The **Overview** of a Plugin's details has a **Runtime status** line for the active Space: **Ready**, **Action required** or **Unavailable**. A missing setting, or a sign-in or account still to choose, shows there, and it reads **Not used by this Space** when the active Space does not use the Plugin.
 
 ## Give a Plugin to a role
 
-Installing a Plugin does not run it. Choose **Add to Agent** in the Plugin's details to add the whole Plugin to a role without opening the role's editor, or pick it under **Plugins** in the editor itself (see [Roles](./roles)). Both work in a Space of your own: the official Space is read-only, so copy it first (see [Definition Spaces](./definition-spaces)). The main assistant can do this too, and it can make Plugins of its own from Skills, scripts and MCP servers.
+Installing a Plugin does not run it. Choose **Add to Agent** in the Plugin's details to add the whole Plugin to a role without opening the role's editor, or pick it under **Plugins** in the editor itself (see [Roles](./roles)). Both work in a Space of your own: the official Space is read-only, so copy it first (see [Spaces](./definition-spaces)). The main assistant can do this too, and it can make Plugins of its own from Skills, scripts and MCP servers.
 
 Many built-in roles already list official Plugins as optional; see "Used in the official Space by" in the table below. In a Space copied from the official one, you do not need to add those Plugins to these roles again once they are installed.
 

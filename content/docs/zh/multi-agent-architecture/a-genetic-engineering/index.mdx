@@ -3,7 +3,7 @@ title: A-Genetic Engineering（Agent 基因工程）
 description: The One 如何把一支多 Agent 团队完整写成可复用、可传承的基因，以及工作组、主助手和进化如何表达并改良它。
 ---
 
-**A-Genetic Engineering（Agent 基因工程）** 是对 The One 中“一支多 Agent 团队如何被写下来”的命名：完整地写成定义空间里的文件，可以复用、修改、传给别人。[Prolifera Engineering（增殖式工程）](../prolifera-engineering)描述系统在工作中如何**长出来**；A-Genetic Engineering 描述它依照**什么**长。A 即 Agent：Agent-Genetic 的缩写。
+**A-Genetic Engineering（Agent 基因工程）** 是对 The One 中“一支多 Agent 团队如何被写下来”的命名：完整地写成空间里的文件，可以复用、修改、传给别人。[Prolifera Engineering（增殖式工程）](../prolifera-engineering)描述系统在工作中如何**长出来**；A-Genetic Engineering 描述它依照**什么**长。A 即 Agent：Agent-Genetic 的缩写。
 
 ## 两个半成品
 
@@ -16,7 +16,7 @@ description: The One 如何把一支多 Agent 团队完整写成可复用、可�
 
 ## 基因型：空间里写下了什么
 
-在 The One 中，一支团队被**完整地**写进一个[定义空间](../../the-one-app/capabilities/definition-spaces)，每一部分都能在**团队与工具**里找到，每个工作组的卡片都能打开它的模板：
+在 The One 中，一支团队被**完整地**写进一个[空间](../../the-one-app/capabilities/definition-spaces)，每一部分都能在**团队与工具**里找到，每个工作组的卡片都能打开它的模板：
 
 - **工作组模板**（`workflows/*.yaml`，也就是 Graph）——节点与边。每个节点绑定一个角色，还可以只为这个节点追加指令；每条边的文字就是移交指令本身：何时移交、交出什么、期待对方产出什么。这是团队的**身体蓝图**。
 - **角色**（`agents/*.yaml`，也就是 Agent 预设）——每个成员的指令、所用的模型预设（或默认模型）、推理设置、内置工具与 MCP server、技能、提示词和插件，彼此独立定义。这是每一种**细胞类型**。
@@ -65,7 +65,7 @@ description: The One 如何把一支多 Agent 团队完整写成可复用、可�
 - **密钥**从不随行。
 - **模型**也留在各自的电脑上：角色写的是模型预设，而预设保存在应用里，所以从别处来的空间，可能要把角色改到你自己的预设上。
 
-官方空间是只读的基因组基线：在里面，主助手和进化实验室找到的改进只能留作提议。把它复制成你自己的空间，就能培育自己的变体；官方空间以后的更新不会自动进到副本里。见[定义空间](../../the-one-app/capabilities/definition-spaces)。
+官方空间是只读的基因组基线：在里面，主助手和进化实验室找到的改进只能留作提议。把它复制成你自己的空间，就能培育自己的变体；官方空间以后的更新不会自动进到副本里。见[空间](../../the-one-app/capabilities/definition-spaces)。
 
 ## 边界
 

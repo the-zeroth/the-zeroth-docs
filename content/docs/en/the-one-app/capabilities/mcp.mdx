@@ -33,7 +33,7 @@ When you save, The One discovers the server's tools; if that fails, the server i
 
 MCP servers that come with the Plugins this Space uses are listed here too, beside the Space's own. The Plugin owns them, so they cannot be changed or deleted on this page (see **MCP servers inside Plugins** below).
 
-The official Space is read-only. This page does not warn you first, but adding, saving, discovering tools or deleting there is refused with an error that asks you to copy the Space (see [Definition Spaces](./definition-spaces)).
+The official Space is read-only. This page does not warn you first, but adding, saving, discovering tools or deleting there is refused with an error that asks you to copy the Space (see [Spaces](./definition-spaces)).
 
 ![The External tools (MCP) page](/docs-assets/images/0.5/en/mcp-servers.png)
 
@@ -103,7 +103,7 @@ Panels are isolated: they cannot reach the app, your files or the app's tokens, 
 
 ## Secrets and sharing
 
-A server's settings are a file in the Space's `mcp_servers` folder. When you export or share the Space, values that may be secrets are removed from these files, so the person you share with fills in their own. Sign-in tokens never leave this computer. See [Definition Spaces](./definition-spaces).
+A server's settings are a file in the Space's `mcp_servers` folder. When you export or share the Space, values that may be secrets are removed from these files, so the person you share with fills in their own. Sign-in tokens never leave this computer. See [Spaces](./definition-spaces).
 
 Put a key a server needs straight into **Headers** or **Environment Variables**, or use an OAuth sign-in. The fields named after environment variables (**Environment Passthrough**, **Headers from Environment Variables**, **Bearer Token Environment Variable** and the two OAuth ones) read the environment of The One's own background process. In the desktop app that holds only a few system variables such as `HOME`, `PATH` and `LANG`; variables you export in a shell profile such as `~/.zshrc` never reach it.
 

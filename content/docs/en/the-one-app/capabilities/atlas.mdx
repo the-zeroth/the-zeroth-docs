@@ -3,7 +3,7 @@ title: Atlas
 description: Atlas draws your whole Space on one canvas, and its director changes templates, roles, prompts, Skills, external tools and Plugins from a plain request.
 ---
 
-**Atlas** draws your whole Definition Space on one canvas, so you can see how it fits together: which roles use which prompts, Skills and tools, which templates the roles work in, and which Plugins they rely on. The director at the bottom of the canvas turns a request in plain words into changes to the Space, made in front of you.
+**Atlas** draws your whole Space on one canvas, so you can see how it fits together: which roles use which prompts, Skills and tools, which templates the roles work in, and which Plugins they rely on. The director at the bottom of the canvas turns a request in plain words into changes to the Space, made in front of you.
 
 Open it with the **Atlas** tab above the lists of the editors for roles, prompts, Skills, external tools and templates; the page is titled **Definition Atlas**. With the developer view on, **Teams and tools** lists it too, under **In the developer view**.
 
@@ -25,10 +25,10 @@ The director writes and changes working-group templates, roles, prompts, Skills,
 
 The bar carries on your last Atlas conversation, so when you leave Atlas and come back, the director still knows where you were. **New chat** starts a fresh conversation; earlier ones stay under **Atlas Sessions** in All runs. See [All runs (developer view)](../settings/all-runs).
 
-The director is a run of the built-in `atlas` working-group template, called **Definitions studio**, which every Space carries (see [Definition Spaces](./definition-spaces)). You do not have to open Atlas to use it: ask the [main assistant](../main-assistant) for a new template or role, and it may make the change itself or give the work to the Definitions studio.
+The director is a run of the built-in `atlas` working-group template, called **Definitions studio**, which every Space carries (see [Spaces](./definition-spaces)). You do not have to open Atlas to use it: ask the [main assistant](../main-assistant) for a new template or role, and it may make the change itself or give the work to the Definitions studio.
 
 ## Changes stay safe
 
 The director changes the Space in one batch. It checks the whole Space before writing anything, and if the batch would break a reference, or the Space changed in the meantime, nothing is written. Every change it makes is recorded in **Settings › Data and undo › Action log**, where you can undo it. See [Action log, undo and stopping](../action-log).
 
-Atlas can show the official Space, but changes need a Space of your own: in the read-only official Space, the director's edits are refused. See [Definition Spaces](./definition-spaces).
+Atlas can show the official Space, but changes need a Space of your own: in the read-only official Space, the director's edits are refused. See [Spaces](./definition-spaces).
