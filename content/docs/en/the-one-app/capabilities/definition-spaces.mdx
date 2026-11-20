@@ -73,19 +73,20 @@ Only one Space is active at a time, and the app shows that Space's work:
 - matters, working groups and what waits for you;
 - triggers: another Space's triggers wait until you switch back to it, and then by default catch up once;
 - the weekly report and the nightly review;
-- the runs in All runs.
+- the runs in All runs;
+- your standing rules: each Space has its own, and the Agents of a Space see only that Space's (see [The main assistant](../main-assistant#your-standing-rules)).
 
 ## Switch, create, duplicate and delete
 
 - **Switch here**, or the switcher at the top of the sidebar, changes the active Space at once, without a restart. If Agents are still at work, The One says how many and offers **Stop and switch**: they all stop first, and the step each one is on is cut off, not finished.
 - **New Space** starts an empty Space with only what every Space carries (above).
-- **Duplicate** copies a Space together with its memory and its choice of Plugins.
+- **Duplicate** copies a Space together with its memory, its choice of Plugins and the standing rules you set for it.
 - **Edit** renames a Space of your own or changes its description.
-- **Delete** removes a Space of your own, with all of its definitions and memory, for good. The active Space and the official one cannot be deleted.
+- **Delete** removes a Space of your own, with all of its definitions, its memory and the standing rules you set for it, for good. The active Space and the official one cannot be deleted.
 
 ## Export and import
 
-**Export** packs a Space into a `.zerospace` file. Keys, tokens and passwords in its MCP settings are removed first. **Include agent memory** is on by default; turn it off to leave the memory out. See [Memory and recall](./memory).
+**Export** packs a Space into a `.zerospace` file. Keys, tokens and passwords in its MCP settings are removed first. **Include agent memory** is on by default; turn it off to leave the memory out. See [Memory and recall](./memory). Your standing rules never go with an export or a share.
 
 **Import** reads a `.zerospace` file and shows what is inside before anything is written: how many roles, prompts, templates, MCP servers and Skills it holds, which scripts its Agents could run after the import, which MCP servers would run a command on your computer or connect elsewhere, and anything that fails validation, which stops the import. When the Space contains scripts or local commands, the button reads **I trust the source. Import**: import only Spaces from sources you trust.
 
