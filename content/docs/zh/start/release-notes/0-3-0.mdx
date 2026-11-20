@@ -65,7 +65,7 @@ Graph 不再只是你事先画好的东西。在 0.3.0 中，Agent 可以在运�
 以前搭一套 Multi-Agent 系统，意味着手改 YAML。**Atlas** 把整个 Definition Space 变成一张可漫游的画布。
 
 - Prompt、Skill、MCP server、Agent、Graph 被铺在同一个空间里，带分层级缩放和血缘高亮，让你能看清谁引用了谁。
-- 一个浮动的**导演（director）**指令栏，让你用自然语言驱动一个 builder Agent——“加一个 reviewer”“把这段 prompt 拆开”——并实时看到它的计划与动作清单。
+- 一个浮动的**导演（director）指令栏**，让你用自然语言驱动一个 builder Agent——“加一个 reviewer”“把这段 prompt 拆开”——并实时看到它的计划与动作清单。
 - Definition 可以放进**文件夹**，这一组织既体现在编辑器侧栏里，也体现为画布上的分组区域。
 - 底层的 `definition_editor` 带有 dry-run 预览、非阻塞的语义警告（未知工具、缺失的 Skill、名字与文件名不一致），以及**不依赖 git 的版本、审计与回滚**——所以即使在没有 git 的环境里，Agent 对一个生产 Space 的改动也是安全、可回退的。
 
@@ -88,7 +88,7 @@ Default Space 现在由安装器托管，并且是**只读**的，每次启动�
 
 ### 推理过程，在每个 Provider 上都可见
 
-- 一个统一的**推理（Reasoning）**控制项（推理强度 + thinking 摘要详细度）出现在每个 Agent 和全局 Main Model 上，并且像 temperature 一样可继承。
+- 一个统一的**推理（Reasoning）控制项**（推理强度 + thinking 摘要详细度）出现在每个 Agent 和全局 Main Model 上，并且像 temperature 一样可继承。
 - thinking 现在会在**每一个** Provider 上流式呈现到 UI——Anthropic、OpenAI Responses 与 chat、Gemini、Codex——而不再只有 Anthropic。
 - Codex 与 Anthropic / Claude Code 的按 Provider 模型列表被补齐；上下文窗口现在按模型**和**连接共同解析，所以显示的上限和真实情况一致；新增的全局 **Main Model**（在顶栏设置、热更新、无需重启）会作为所有没有指定自己模型的 Agent 的兜底。
 
