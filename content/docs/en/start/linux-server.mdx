@@ -13,6 +13,12 @@ curl -fsSL https://updates.the-zeroth.com/server/linux/install.sh | sh
 
 The script checks the machine, downloads the latest release for it, verifies its sha256 and installs it. It needs Linux on x86_64 or arm64 with glibc 2.28 or later (Debian 10, Ubuntu 20.04, RHEL 8 and later) or musl 1.2.2 or later (Alpine 3.13 and later, where the script takes the musl package), plus `tar`, `gzip`, `sha256sum`, and `curl` or `wget`. Python and Node come inside the package, so the machine needs neither. On Alpine the bundled Node needs the system's libstdc++ from GCC 13: on Alpine 3.19 and later run `apk add libstdc++` first; on older Alpine releases Node cannot run and everything else works.
 
+Alpine comes without curl; use wget instead:
+
+```sh
+wget -qO- https://updates.the-zeroth.com/server/linux/install.sh | sh
+```
+
 As a normal user, the program goes to `~/.local/lib/the-one-server` and the command to `~/.local/bin/the-one-server`; as root, to `/opt/the-one-server` and `/usr/local/bin`. If the command's folder is not on your `PATH`, the script prints the line to add.
 
 The script takes options: `--version VERSION` installs a given version, `--archive FILE` installs a package you already have, and `--prefix` and `--bin-dir` choose the folders. Through the pipe, put them after `sh -s --`:
@@ -217,7 +223,7 @@ the-one-server plugins remove tavily-search
 
 `list`, `install` and `update` fetch the official catalog first; `--no-refresh` uses the one the server has. `plugins list --json` prints the list as JSON. Each change shows what it does and asks before applying it. `--yes` skips the question; without a terminal, the change needs it. When a Plugin runs programs, the summary says they run as the server's user. Once a Plugin is installed, Agents use it as they do on the desktop; see [Plugins and Apps](../the-one-app/capabilities/plugins).
 
-What a Plugin carries decides where it installs. A Plugin made only of Skills and connectors installs on any server: Tavily Search, the example above, is a single connector that lets web search use your own Tavily account. A Plugin that runs programs (MCP servers, scripts) installs only when it has a build for this machine, `linux-x86_64` or `linux-arm64`; `plugins list` says for each Plugin whether it runs here. Plugins that need a screen, such as Computer Use and OneCanvas, get no Linux build. The server downloads Plugins over HTTPS without going through a proxy, so a machine that reaches the internet only through a proxy cannot install them yet.
+What a Plugin carries decides where it installs. A Plugin made only of Skills and connectors installs on any server: Tavily Search, the example above, is a single connector that lets web search use your own Tavily account. A Plugin that runs programs (MCP servers, scripts) installs only when it has a build for this machine, `linux-x86_64` or `linux-arm64`; `plugins list` says for each Plugin whether it runs here. On Alpine and other musl systems only Plugins made of Skills and connectors work: these builds need glibc, and `plugins list` does not check for it. Plugins that need a screen, such as Computer Use and OneCanvas, get no Linux build. The server downloads Plugins over HTTPS without going through a proxy, so a machine that reaches the internet only through a proxy cannot install them yet.
 
 When an Agent needs a secret for a Plugin, such as an API key or an account, it asks you to enter it in the terminal, where the Agent never sees it:
 
