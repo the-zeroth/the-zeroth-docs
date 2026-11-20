@@ -39,11 +39,7 @@ curl -fsSL https://updates.the-zeroth.com/server/linux/install.sh | sh -s -- --v
 }
 ```
 
-`provider` 可以是 `anthropic`、`openai`、`openrouter`、`gemini` 或 `custom`。连接的 id 就是它的 `id`，没写时是供应商名。`custom` 连接要写 `base_url`，`api_family` 是 `openai-chat-completions`（默认）、`openai-responses` 或 `anthropic-messages` 之一。`"auth_type": "none"` 给不需要凭据的自定义服务用，比如同一台机器上的 Ollama、LM Studio 或 vLLM。环境变量和文件里有同一个 id 的连接时，以环境变量为准。服务器不需要 The Zeroth 账号，也没有官方连接：它用的模型都来自这些凭据。
-
-用 `--model` 指定模型，`--connection` 指定走哪个连接，`--effort` 指定推理强度（`none`、`minimal`、`low`、`medium`、`high`、`xhigh` 或 `max`）。这几项也可以写在 `THE_ONE_MODEL`、`THE_ONE_CONNECTION`、`THE_ONE_EFFORT` 里，或者写成 `~/.config/the-one-server/settings.json` 里的 `model`、`connection`、`effort`。命令行参数优先于环境变量，环境变量优先于文件。Agent 激活过的模型预设也优先于文件，直到命令行参数或环境变量指定了模型。
-
-模型 id 要写成所用连接的服务认的样子：OpenAI（包括用 ChatGPT 账号登录的连接）、Anthropic 和 Gemini 写不带前缀的 id，比如 `claude-sonnet-4-5`；OpenRouter 和自定义服务照它们自己的写法写，带斜杠的也照写。没指定连接时，先用凭据文件的 `default`，没有的话按模型 id 的前缀或连接的先后挑一个；有几个连接时，用 `--connection` 或 `default` 说清楚走哪一个。
+`provider` 可以是 `anthropic`、`openai`、`openrouter`、`gemini` 或 `custom`。连接的 id 就是它的 `id`，没写时是供应商名。`custom` 连接要写 `base_url`，`api_family` 是 `openai-chat-completions`（默认）、`openai-responses` 或 `anthropic-messages` 之一。`"auth_type": "none"` 给不需要凭据的自定义服务用，比如同一台机器上的 Ollama、LM Studio 或 vLLM。环境变量和文件里有同一个 id 的连接时，以环境变量为准。服务器不需要 The Zeroth 账号，也没有官方连接：它用的模型都来自这些凭据。用哪个模型，见下面的[选模型](#选模型)。
 
 Agent 看不到这些密钥：服务器只在内存里把它们交给后端，Agent 运行的命令的环境变量里也没有。
 
@@ -55,33 +51,95 @@ the-one-server login codex
 
 命令会打印 OpenAI 的登录链接，最多等 10 分钟。在任意一台电脑的浏览器里打开它。如果那台电脑不是这台服务器，要么先在那台电脑上运行 `ssh -L 1455:127.0.0.1:1455 <服务器>`，要么登录后把浏览器打不开的那个地址完整粘回命令里。登录以连接 `openai_codex` 存进凭据文件；文件里还没有 `default` 时，它就成了默认连接。
 
-启动服务器时用 `--model MODEL`，MODEL 是你的 ChatGPT 套餐在 Codex 里提供的模型 id，不带 `openai/` 前缀（命令最后打印的示例带着这个前缀，照这里写）；`openai_codex` 不是默认连接时再加 `--connection openai_codex`。已经在跑的服务器要停掉再启动，才会用上新的连接。
+然后用 `the-one-server model set main openai/MODEL` 把它选成主模型（见下面的[选模型](#选模型)），MODEL 是你的 ChatGPT 套餐在 Codex 里提供的模型 id；`openai/` 前缀写不写都行。`openai_codex` 不是默认连接时，再加 `--connection openai_codex`。已经在跑的服务器要停掉再启动，才会用上新的连接。
 
 给服务器单独登录一次，不要拷别的机器上的登录：两边各自刷新同一个登录时，会互相把对方挤下线。
+
+## 选模型
+
+和桌面版一样，服务器上有一个**主模型**，外加五个**能力槽**：`planning`（规划）、`coding`（编码）、`vision`（视觉）、`writing`（写作）和 `fast`（快速）。官方空间的角色按干的活绑这些槽；槽默认都跑在主模型上，各按自己的思考深度：`planning` 是 `high`，`coding` 是 `max`，`vision` 和 `writing` 是 `medium`，`fast` 是 `low`。所以选好主模型，每个团队就都能跑；想细分时，再给某个槽换一个模型，可以是别家的。见[模型](../the-one-app/capabilities/models)。
+
+先选主模型：
+
+```sh
+the-one-server model set main claude-sonnet-4-5 --effort medium
+```
+
+主模型和改过的槽都存在 `~/.config/the-one-server/settings.json` 里，只写连接的 id，不写密钥：
+
+```json
+{
+  "model": "claude-sonnet-4-5",
+  "effort": "medium",
+  "slots": {
+    "coding": {"effort": "xhigh"},
+    "writing": {"model": "claude-opus-5-5"}
+  }
+}
+```
+
+`model`、`effort` 和 `connection` 是主模型的，`connection` 可以不写（怎么选见下）。`slots` 里只有改过的槽：只写了 `effort` 的槽仍跑在主模型上，按这个深度；写了 `model` 的槽跑在自己的模型上。没写的槽跟随主模型，用出厂深度。
+
+`the-one-server model` 列出主模型和每个槽真正用的模型和深度，以及它是跟随主模型，还是有自己的模型：
+
+```
+main      claude-sonnet-4-5 · medium   (anthropic)
+planning  claude-sonnet-4-5 · high     (follows main)
+coding    claude-sonnet-4-5 · xhigh    (follows main; ships at max)
+vision    claude-sonnet-4-5 · medium   (follows main)
+writing   claude-opus-5-5 · medium     (own model, anthropic)
+fast      claude-sonnet-4-5 · low      (follows main)
+```
+
+`the-one-server model set main|SLOT [MODEL] [--effort E] [--connection C] [--follow-main]` 修改它们，只改你给出的项：
+
+```sh
+the-one-server model set writing claude-opus-5-5   # 写作换一个模型
+the-one-server model set coding --effort xhigh     # 只改深度，仍跟随主模型
+the-one-server model set writing --follow-main     # 回到跟随主模型，深度不变
+the-one-server model set coding --effort default   # 回到出厂深度（对 main 是模型自己的默认）
+```
+
+给了模型、没给 `--connection` 时，原来写的连接留着。跟随主模型的槽不能单独指定连接，要先给它一个自己的模型。槽名、深度或连接不对时什么都不写，退出码是 2。改好后它打印新的表；服务器在跑时，大约 10 秒内用上，不用重启。手改 `settings.json` 也一样生效。
+
+模型 id 照所用连接的服务的写法写。OpenAI（包括用 ChatGPT 账号登录的连接）、Anthropic 和 Gemini 用不带前缀的 id，比如 `claude-sonnet-4-5`；也可以带上这家的前缀，比如 `anthropic/claude-sonnet-4-5`，服务器发请求前会去掉它，前缀只用来选连接。OpenRouter 和自定义服务的 id 照它们自己的写法原样写，带斜杠的也照写。
+
+主模型走哪个连接：`--connection`（或 `THE_ONE_CONNECTION`）指定的，否则是 `settings.json` 里 `connection` 写的；都没有时，先用凭据文件的 `default`，再没有就按模型 id 的前缀或连接的先后挑一个。有几个连接时，用 `connection` 或 `default` 说清楚走哪一个。槽有自己的模型、又没写连接时，模型 id 的前缀是哪家、又配了这家的连接，就走这家的，否则走主模型的连接。
+
+### 只为一次运行换
+
+`start`、`serve` 和 `run` 的 `--model`、`--effort`、`--connection`（或环境变量 `THE_ONE_MODEL`、`THE_ONE_EFFORT`、`THE_ONE_CONNECTION`）只管这一次运行，盖过 `settings.json`；命令行参数又优先于环境变量。
+
+- `--model` 是这次运行的主模型，跟随主模型的槽跟着换，主模型写的深度照用。没给 `--connection` 时，`settings.json` 里写的连接照用；只有模型 id 的前缀是另一家、又配了这家的连接时，才改走这家的。比如 `settings.json` 写的是 Anthropic 的连接，`--model openai/gpt-6.2-sol` 就走 OpenAI 的连接。
+- `--effort` 是这次运行的思考深度：主模型，以及 `settings.json` 里没写深度的每个槽（有自己模型的也算），都按它跑；写了深度的槽仍按写的跑。不给 `--effort` 时，各槽用自己的深度。深度可以是 `none`、`minimal`、`low`、`medium`、`high`、`xhigh` 或 `max`。
+
+用 `--model` 或 `THE_ONE_MODEL` 起的服务器，这次运行的主模型一直是它们给的，`model set main` 要等它停掉再启动才用上；对槽的修改照样在 10 秒左右用上。
+
+Agent 也能改模型，比如你让主助手给写作换一个模型：主模型和槽的修改写进 `settings.json`，重启后照用；Agent 按名字存的配置在同一个文件夹的 `model-presets.json` 里。从有能力槽之前的版本升级时，Agent 以前激活的那套预设就是主模型：第一次 `start`、`model set` 或 Agent 改模型时，它被搬进 `settings.json`，只搬这一次。
 
 ## 启动、查看和停止
 
 ```sh
-the-one-server start --model claude-sonnet-4-5   # 在后台启动，就绪后才返回
-the-one-server status                           # 是否在跑、本机地址、模型、各服务是否健康
-the-one-server stop                             # 等服务器真的停下才返回
-the-one-server serve --model claude-sonnet-4-5   # 在前台运行，按 Ctrl-C 停
+the-one-server start    # 在后台启动，就绪后才返回
+the-one-server status   # 是否在跑、本机地址、主模型、各服务是否健康
+the-one-server stop     # 等服务器真的停下才返回
+the-one-server serve    # 在前台运行，按 Ctrl-C 停
 ```
 
-`start` 最多等 6 分钟，`stop` 最多等 1 分钟，都可以用 `--timeout` 改（单位是秒）。服务器已经在跑时，`start` 只说一声，不换模型；要换，先 `stop` 再 `start`。`status --json` 以 JSON 打印同样的内容，`serve --verbose` 把后端的输出也打印出来。后端的本机地址默认用一个空闲端口，`start`、`serve` 和 `run` 都可以用 `--port` 指定。
+`start` 最多等 6 分钟，`stop` 最多等 1 分钟，都可以用 `--timeout` 改（单位是秒）。还没选主模型时，`start` 和 `serve` 不启动，提示你用 `model set main` 选一个，或者加 `--model`。服务器已经在跑时，`start` 只说一声，不换模型；要换，用 `model set`（见[选模型](#选模型)）。`status --json` 以 JSON 打印同样的内容，`serve --verbose` 把后端的输出也打印出来。后端的本机地址默认用一个空闲端口，`start`、`serve` 和 `run` 都可以用 `--port` 指定。
 
-退出码：0 成功；1 失败，比如服务器没起来或没停下，登录或插件改动没完成；2 配置不对，比如缺凭据、没选模型、凭据文件权限不对；3 需要服务器在跑的命令（`status`、`sign-in`、`plugins`）发现它没在跑。
+退出码：0 成功；1 失败，比如服务器没起来或没停下，登录或插件改动没完成；2 配置不对，比如缺凭据、没选主模型、凭据文件权限不对，或者 `model set` 给的槽、深度或连接不对；3 需要服务器在跑的命令（`status`、`sign-in`、`plugins`）发现它没在跑。
 
 ### 作为服务运行
 
-用 systemd 跑 `serve`，让服务器一直运行。下面是一个用户服务的例子，写在 `~/.config/systemd/user/the-one-server.service`；把里面的模型换成你的：
+用 systemd 跑 `serve`，让服务器一直运行。先用 `model set main` 选好主模型，再写下面这个用户服务，放在 `~/.config/systemd/user/the-one-server.service`：
 
 ```ini
 [Unit]
 Description=The One server
 
 [Service]
-ExecStart=%h/.local/bin/the-one-server serve --model claude-sonnet-4-5
+ExecStart=%h/.local/bin/the-one-server serve
 KillMode=mixed
 Restart=on-failure
 RestartPreventExitStatus=2
@@ -96,7 +154,7 @@ systemctl --user enable --now the-one-server
 loginctl enable-linger "$USER"   # 退出登录后也继续运行；可能要加 sudo
 ```
 
-密钥放在凭据文件里，不要写进 unit 文件。`KillMode=mixed` 让停止信号只发给服务器本身：它收到 `SIGTERM` 后先存好刷新过的登录和插件配置，再自己关掉后端。后端崩溃后服务器最多重启它三次，再不行就以退出码 1 退出，由 systemd 重新启动它。`RestartPreventExitStatus=2` 让 systemd 不去重试配置问题。
+密钥放在凭据文件里，不要写进 unit 文件。`--model` 也别写进去：写了的话，它每次启动都盖过 `settings.json` 里的主模型，`model set main` 就不起作用了。`KillMode=mixed` 让停止信号只发给服务器本身：它收到 `SIGTERM` 后先存好刷新过的登录和插件配置，再自己关掉后端。后端崩溃后服务器最多重启它三次，再不行就以退出码 1 退出，由 systemd 重新启动它。`RestartPreventExitStatus=2` 让 systemd 不去重试配置问题。
 
 在 Docker 里运行时，用 `docker run --init` 启动容器。
 
@@ -106,7 +164,7 @@ loginctl enable-linger "$USER"   # 退出登录后也继续运行；可能要加
 the-one-server run "修好失败的测试，并说明原因" --workdir /srv/app
 ```
 
-`run` 把任务原样交给在这个文件夹里干活的工作组，等它交付；不写 `--workdir` 时用当前文件夹。服务器没在跑时，它会为这个任务先启动一个，做完再停掉（加 `--keep-server` 就留着）；`--model`、`--effort`、`--connection` 的用法和 `start` 一样。服务器在跑但用的是别的模型时，它会拒绝，不会悄悄换模型。
+`run` 把任务原样交给在这个文件夹里干活的工作组，等它交付；不写 `--workdir` 时用当前文件夹。服务器没在跑时，它会为这个任务先启动一个，做完再停掉（加 `--keep-server` 就留着）；`--model`、`--effort`、`--connection` 只管这一次运行，见[只为一次运行换](#只为一次运行换)。服务器在跑、而你给的这几项和它用的不一样时，它会拒绝，不会悄悄换模型。
 
 进度写到 stderr，每一步一行（`--quiet` 不写）。工作组交回后，还要等全队歇下来，`--idle` 秒（默认 60）里不再调用模型，才算交付，这样还在复核的 Agent 不会被打断。交付写到 stdout（`--json` 时改为打印 `run.json`），也写进文件夹里的 `.the-one/` 目录（`--out` 可以换地方）：
 
@@ -115,7 +173,7 @@ the-one-server run "修好失败的测试，并说明原因" --workdir /srv/app
 - `trajectory.json`：每个 Agent 看到了什么、做了什么；
 - `.gitignore`：让 git 忽略这个目录。
 
-团队的会话文件夹（它的笔记、清单和临时文件）在这个文件夹的 `sessions/` 下。每个任务都会成为一个独立的[事项](../the-one-app/matters)，以任务的第一行命名，做完就自动关上；`--matter MATTER_ID` 把它放到已有的事项上。这件事由命令自己跟着，所以工作组的提问和交付不会叫醒主助手。
+团队的会话文件夹（它的笔记、清单和临时文件）不在这个文件夹里，而在服务器的数据目录里（`~/.local/share/the-one-server/sessions/`），不会混进你的项目。每个任务都会成为一个独立的[事项](../the-one-app/matters)，以任务的第一行命名，做完就自动关上；`--matter MATTER_ID` 把它放到已有的事项上。这件事由命令自己跟着，所以工作组的提问和交付不会叫醒主助手（加 `--assistant` 时不一样，见下）。
 
 - `--team`：工作组模板的 id。默认是官方空间里做软件的模板 `polished_software_dev`；`deep_research` 做研究和综述。
 - `--on-question ask|answer|stop`：`ask` 在终端里问你，有终端时默认用它；`answer` 让工作组自己定，并在交付里说明定了什么，没有终端时默认用它；`stop` 结束这次运行。
@@ -123,6 +181,16 @@ the-one-server run "修好失败的测试，并说明原因" --workdir /srv/app
 - 任务写成 `-` 时从 stdin 读。
 
 运行结束时会冻结在原处，命令返回后工作组不会再动；按 Ctrl-C 也一样。退出码：0 交付了，1 失败，2 停在提问，3 超时，130 被打断。
+
+### 交给主助手
+
+```sh
+the-one-server run "修好失败的测试，并说明原因" --workdir /srv/app --assistant
+```
+
+加 `--assistant`，任务就不直接交给某个工作组，而是作为你的话交给这个空间的[主助手](../the-one-app/main-assistant)，和你在应用里对它说话一样：开哪个事项、交给哪个工作组都由它定，所以不能和 `--team`、`--matter` 一起用（退出码 1）。命令跟着主助手和它派了活的工作组，直到活交回、大家都歇下来；这句话是在纠正或补充上一份交付时，主助手把它转给原来的组，命令也跟着那个组。工作组的提问先到主助手那里：和你在应用里一样，只有它把问题留给你、或者没来得及答时，命令才照 `--on-question` 处理。
+
+交付是各组交回的全文，后面跟着主助手最后对你说的话；主助手没派活、自己答了的，它的回答就是交付。`run.json` 的 `team` 写着 `main_assistant`，`groups` 列出它派了活的每个组。收工时冻结的是这些组的运行，主助手的那段对话接着在。
 
 ## 需要登录的 MCP 服务器
 
@@ -178,7 +246,7 @@ the-one-server doctor
 | 内容 | 位置 |
 | --- | --- |
 | 数据：空间、运行和日志（`logs/`，留最近 20 个） | `~/.local/share/the-one-server`（`--data-dir`、`THE_ONE_SERVER_DATA_DIR`） |
-| 配置：凭据、模型设置和预设、插件配置、MCP 登录 | `~/.config/the-one-server`（`--config-dir`、`THE_ONE_SERVER_CONFIG_DIR`） |
+| 配置：凭据、模型设置（`settings.json`：主模型和能力槽）、按名字存的模型配置（`model-presets.json`）、插件配置、MCP 登录 | `~/.config/the-one-server`（`--config-dir`、`THE_ONE_SERVER_CONFIG_DIR`） |
 
 设置了 `XDG_DATA_HOME` 或 `XDG_CONFIG_HOME` 时，目录改为它下面的 `the-one-server`。`--data-dir`、`--config-dir` 和 `--credentials-file` 要写在命令前面，比如 `the-one-server --data-dir /srv/the-one start`，而且每条命令都要给同样的值；用环境变量更省事。
 

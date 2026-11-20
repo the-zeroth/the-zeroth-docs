@@ -39,11 +39,7 @@ The server reads model credentials from two places only, never from the command 
 }
 ```
 
-`provider` is `anthropic`, `openai`, `openrouter`, `gemini` or `custom`. A connection's id is its `id`, or its provider when it has none. A custom connection needs a `base_url`, and its `api_family` is `openai-chat-completions` (the default), `openai-responses` or `anthropic-messages`. `"auth_type": "none"` is for a custom server that takes no credentials, such as Ollama, LM Studio or vLLM on the same machine. When the environment and the file both have a connection with the same id, the environment's wins. The server needs no The Zeroth account and has no official connection: its models come from these credentials.
-
-Name the model with `--model`, the connection with `--connection` and the reasoning with `--effort` (`none`, `minimal`, `low`, `medium`, `high`, `xhigh` or `max`). The same settings can go in `THE_ONE_MODEL`, `THE_ONE_CONNECTION` and `THE_ONE_EFFORT`, or as `model`, `connection` and `effort` in `~/.config/the-one-server/settings.json`. A flag beats a variable, and a variable beats the file. A model preset an Agent has made active also beats the file, until a flag or a variable names a model.
-
-Write the model id the way the connection's service takes it: for OpenAI (including a ChatGPT sign-in), Anthropic and Gemini, the bare id without a provider prefix, such as `claude-sonnet-4-5`; for OpenRouter and custom servers, the id as the service names it, slash included. When no connection is named, the server uses the credentials file's `default`, or else picks one by the model id's prefix or by their order; with several connections, name the one to use with `--connection` or `default`.
+`provider` is `anthropic`, `openai`, `openrouter`, `gemini` or `custom`. A connection's id is its `id`, or its provider when it has none. A custom connection needs a `base_url`, and its `api_family` is `openai-chat-completions` (the default), `openai-responses` or `anthropic-messages`. `"auth_type": "none"` is for a custom server that takes no credentials, such as Ollama, LM Studio or vLLM on the same machine. When the environment and the file both have a connection with the same id, the environment's wins. The server needs no The Zeroth account and has no official connection: its models come from these credentials. Which model it uses is set as described in [Choose the models](#choose-the-models) below.
 
 Agents never see the keys: the server hands them to the backend in memory, and they are not in the environment of the commands Agents run.
 
@@ -55,33 +51,95 @@ the-one-server login codex
 
 This prints an OpenAI sign-in link and waits up to 10 minutes. Open the link in a browser on any computer. If that computer is not the server, either run `ssh -L 1455:127.0.0.1:1455 <server>` on it first, or, after signing in, paste the address the browser could not open back into the command. The sign-in is saved in the credentials file as the connection `openai_codex`, which becomes the default connection when the file names none.
 
-Start the server with `--model MODEL`, where MODEL is the id of a model your ChatGPT plan offers in Codex, without an `openai/` prefix (the example the command prints carries one; write it as here). Add `--connection openai_codex` when it is not the default connection. A server that is already running keeps its connections until you stop and start it.
+Then make it the main model with `the-one-server model set main openai/MODEL` (see [Choose the models](#choose-the-models) below), where MODEL is the id of a model your ChatGPT plan offers in Codex; the `openai/` prefix is optional. Add `--connection openai_codex` when it is not the default connection. A server that is already running keeps its connections until you stop and start it.
 
 Give the server a sign-in of its own rather than a copy of another machine's: when both refresh the same sign-in, each signs the other out.
+
+## Choose the models
+
+As on the desktop, the server has one **main model** and five **slots**: `planning`, `coding`, `vision`, `writing` and `fast`. The official Space's roles bind these slots by the work they do, and each slot runs on the main model at its own thinking depth: `high` for `planning`, `max` for `coding`, `medium` for `vision` and `writing`, and `low` for `fast`. So once you choose a main model, every team can run; to split the work further, give a slot a model of its own, from any provider. See [Models](../the-one-app/capabilities/models).
+
+Choose the main model first:
+
+```sh
+the-one-server model set main claude-sonnet-4-5 --effort medium
+```
+
+The main model and the slots you change are kept in `~/.config/the-one-server/settings.json`, which names connections by id and holds no key:
+
+```json
+{
+  "model": "claude-sonnet-4-5",
+  "effort": "medium",
+  "slots": {
+    "coding": {"effort": "xhigh"},
+    "writing": {"model": "claude-opus-5-5"}
+  }
+}
+```
+
+`model`, `effort` and `connection` belong to the main model; `connection` may be left out (how one is chosen is below). `slots` holds only the slots you changed: a slot with only an `effort` still runs on the main model, at that depth; a slot with a `model` runs on a model of its own. Slots not written there follow the main model at the depth they ship with.
+
+`the-one-server model` lists the model and depth the main model and each slot really run on, and whether a slot follows the main model or has a model of its own:
+
+```
+main      claude-sonnet-4-5 · medium   (anthropic)
+planning  claude-sonnet-4-5 · high     (follows main)
+coding    claude-sonnet-4-5 · xhigh    (follows main; ships at max)
+vision    claude-sonnet-4-5 · medium   (follows main)
+writing   claude-opus-5-5 · medium     (own model, anthropic)
+fast      claude-sonnet-4-5 · low      (follows main)
+```
+
+`the-one-server model set main|SLOT [MODEL] [--effort E] [--connection C] [--follow-main]` changes them, and only what you give:
+
+```sh
+the-one-server model set writing claude-opus-5-5   # give writing a model of its own
+the-one-server model set coding --effort xhigh     # change the depth only; it still follows main
+the-one-server model set writing --follow-main     # back to the main model, at the same depth
+the-one-server model set coding --effort default   # back to the depth it ships with (for main: the model's own)
+```
+
+A model given without `--connection` keeps the connection written before. A slot that follows the main model cannot name a connection of its own; give it a model first. A wrong slot, depth or connection writes nothing and exits with code 2. Once written, the command prints the new table, and a running server applies the change within about 10 seconds, without a restart. Editing `settings.json` by hand works the same way.
+
+Write the model id the way the connection's service takes it. For OpenAI (including a ChatGPT sign-in), Anthropic and Gemini, use the bare id, such as `claude-sonnet-4-5`, or add the provider's prefix, as in `anthropic/claude-sonnet-4-5`: the server drops it before sending the request, and uses it only to choose the connection. For OpenRouter and custom servers, write the id as the service names it, slash included.
+
+The main model runs on the connection that `--connection` (or `THE_ONE_CONNECTION`) names, or else the one `connection` names in `settings.json`. When neither does, the server uses the credentials file's `default`, or else picks one by the model id's prefix or by their order; with several connections, name the one to use with `connection` or `default`. A slot with a model of its own and no connection runs on the provider its model id's prefix names, when that provider has a connection, and otherwise on the main model's connection.
+
+### For one run only
+
+`--model`, `--effort` and `--connection` on `start`, `serve` and `run` (or the variables `THE_ONE_MODEL`, `THE_ONE_EFFORT` and `THE_ONE_CONNECTION`) apply to that run alone, over `settings.json`; a flag beats a variable.
+
+- `--model` is the run's main model, and the slots that follow the main model follow it; the main model's written depth still applies. Without `--connection`, the connection written in `settings.json` still applies, unless the model id's prefix names another provider that has a connection: with an Anthropic connection in `settings.json`, for example, `--model openai/gpt-6.2-sol` runs on the OpenAI connection.
+- `--effort` is the run's thinking depth: the main model, and every slot that `settings.json` gives no depth of its own (a slot with its own model too), run at it; a slot with a written depth keeps that. Without `--effort`, each slot runs at its own depth. The depths are `none`, `minimal`, `low`, `medium`, `high`, `xhigh` and `max`.
+
+A server started with `--model` or `THE_ONE_MODEL` keeps that main model for as long as it runs, so `model set main` applies only after you stop and start it; changes to the slots still apply within about 10 seconds.
+
+Agents can change the models too, for example when you ask the main assistant to give writing another model: changes to the main model and the slots go into `settings.json` and survive a restart, and configurations Agents save by name go into `model-presets.json` in the same folder. On an upgrade from a version before the slots, the preset an Agent had made active is the main model: the first `start`, `model set` or change by an Agent moves it into `settings.json`, once.
 
 ## Start, check and stop
 
 ```sh
-the-one-server start --model claude-sonnet-4-5   # in the background; returns once ready
-the-one-server status                           # running or not, its local address, the model, each service's health
-the-one-server stop                             # returns once the server has really stopped
-the-one-server serve --model claude-sonnet-4-5   # in the foreground, until Ctrl-C
+the-one-server start    # in the background; returns once ready
+the-one-server status   # running or not, its local address, the main model, each service's health
+the-one-server stop     # returns once the server has really stopped
+the-one-server serve    # in the foreground, until Ctrl-C
 ```
 
-`start` waits up to 6 minutes and `stop` up to 1 minute; `--timeout` changes either, in seconds. If the server is already running, `start` only says so and keeps its model; stop it first to change the model. `status --json` prints the same as JSON, and `serve --verbose` also prints the backend's output. The backend's local address takes a free port; `start`, `serve` and `run` take `--port` to choose one.
+`start` waits up to 6 minutes and `stop` up to 1 minute; `--timeout` changes either, in seconds. Without a main model, `start` and `serve` do not start and tell you to choose one with `model set main` or to pass `--model`. If the server is already running, `start` only says so and keeps its model; to change models, use `model set` (see [Choose the models](#choose-the-models)). `status --json` prints the same as JSON, and `serve --verbose` also prints the backend's output. The backend's local address takes a free port; `start`, `serve` and `run` take `--port` to choose one.
 
-Exit codes: 0 done; 1 failed, for example the server did not start or stop, or a sign-in or a Plugin change did not go through; 2 a configuration problem, such as missing credentials, no model chosen or a credentials file with the wrong mode; 3 a command that needs a running server (`status`, `sign-in`, `plugins`) found none.
+Exit codes: 0 done; 1 failed, for example the server did not start or stop, or a sign-in or a Plugin change did not go through; 2 a configuration problem, such as missing credentials, no main model chosen, a credentials file with the wrong mode, or a slot, depth or connection `model set` cannot use; 3 a command that needs a running server (`status`, `sign-in`, `plugins`) found none.
 
 ### Run it as a service
 
-Keep the server running with systemd through `serve`. Here is an example user service, in `~/.config/systemd/user/the-one-server.service`; put your own model in it:
+Keep the server running with systemd through `serve`. Choose the main model with `model set main` first, then write this user service in `~/.config/systemd/user/the-one-server.service`:
 
 ```ini
 [Unit]
 Description=The One server
 
 [Service]
-ExecStart=%h/.local/bin/the-one-server serve --model claude-sonnet-4-5
+ExecStart=%h/.local/bin/the-one-server serve
 KillMode=mixed
 Restart=on-failure
 RestartPreventExitStatus=2
@@ -96,7 +154,7 @@ systemctl --user enable --now the-one-server
 loginctl enable-linger "$USER"   # keeps it running after you log out; may need sudo
 ```
 
-Keep the keys in the credentials file rather than in the unit. `KillMode=mixed` sends the stop signal to the server alone: on `SIGTERM` it first saves refreshed sign-ins and Plugin settings, then stops its backend itself. After a crash the server restarts its backend up to three times; after that it exits with code 1 and systemd starts it again. `RestartPreventExitStatus=2` keeps systemd from retrying a configuration problem.
+Keep the keys in the credentials file rather than in the unit. Leave `--model` out of it too: there it would override the main model in `settings.json` at every start, and `model set main` would have no effect. `KillMode=mixed` sends the stop signal to the server alone: on `SIGTERM` it first saves refreshed sign-ins and Plugin settings, then stops its backend itself. After a crash the server restarts its backend up to three times; after that it exits with code 1 and systemd starts it again. `RestartPreventExitStatus=2` keeps systemd from retrying a configuration problem.
 
 In Docker, start the container with `docker run --init`.
 
@@ -106,7 +164,7 @@ In Docker, start the container with `docker run --init`.
 the-one-server run "Fix the failing tests and say what caused them" --workdir /srv/app
 ```
 
-`run` hands the task, word for word, to a working group in the folder, and waits for its delivery; without `--workdir` it uses the current folder. If no server is running, it starts one for the task and stops it afterwards (`--keep-server` leaves it running); `--model`, `--effort` and `--connection` work as they do for `start`. If one is running with another model, it refuses rather than switch.
+`run` hands the task, word for word, to a working group in the folder, and waits for its delivery; without `--workdir` it uses the current folder. If no server is running, it starts one for the task and stops it afterwards (`--keep-server` leaves it running); `--model`, `--effort` and `--connection` apply to that run alone, as described in [For one run only](#for-one-run-only). If a server is running with other settings than the ones you give, it refuses rather than switch.
 
 Progress goes to stderr, one line per step (`--quiet` leaves it out). Once the working group hands its work back, the command waits for the whole team to rest, with no model call for `--idle` seconds (60 by default), before it counts as delivered, so an Agent still reviewing is not cut off. The delivery goes to stdout (`--json` prints `run.json` instead) and into `.the-one/` in the folder (`--out` puts it elsewhere):
 
@@ -115,7 +173,7 @@ Progress goes to stderr, one line per step (`--quiet` leaves it out). Once the w
 - `trajectory.json`: what each Agent saw and did;
 - `.gitignore`: so git ignores the folder.
 
-The team's session folder, with its notes, lists and scratch files, is under `sessions/` in the folder. Each task becomes a [matter](../the-one-app/matters) of its own, named after its first line and closed once done; `--matter MATTER_ID` adds it to an existing one. The command follows that matter itself, so the working group's questions and deliveries do not wake the main assistant.
+The team's session folder, with its notes, lists and scratch files, is not in your folder but in the server's data folder (`~/.local/share/the-one-server/sessions/`), so none of it mixes with your project. Each task becomes a [matter](../the-one-app/matters) of its own, named after its first line and closed once done; `--matter MATTER_ID` adds it to an existing one. The command follows that matter itself, so the working group's questions and deliveries do not wake the main assistant (with `--assistant` this is different; see below).
 
 - `--team`: the working-group template, by id. The default is `polished_software_dev`, the official Space's template for software work; `deep_research` does research and synthesis.
 - `--on-question ask|answer|stop`: `ask` asks you in the terminal, the default when there is one. `answer` tells the working group to decide by itself and say what it decided in the delivery, the default otherwise. `stop` ends the run.
@@ -123,6 +181,16 @@ The team's session folder, with its notes, lists and scratch files, is under `se
 - `-` as the task reads it from stdin.
 
 When the run ends it is frozen where it stands, so the working group does nothing more after the command returns; Ctrl-C does the same. Exit codes: 0 delivered, 1 failed, 2 stopped at a question, 3 timed out, 130 interrupted.
+
+### Give it to the main assistant
+
+```sh
+the-one-server run "Fix the failing tests and say what caused them" --workdir /srv/app --assistant
+```
+
+With `--assistant`, the task does not go straight to a working group: it goes to the Space's [main assistant](../the-one-app/main-assistant) as your message, as if you said it in the app. The assistant decides which matter it belongs to and which working group does it, so `--assistant` does not go with `--team` or `--matter` (exit code 1). The command follows the assistant and the groups it gives work to until the work is handed back and they all rest; when your message corrects or adds to an earlier delivery, the assistant passes it to the same group, and the command follows that group. A group's questions reach the assistant first: as for you in the app, the command takes up a question, as `--on-question` says, only once the assistant leaves it to you or has not answered it in time.
+
+The delivery is each group's hand-back in full, followed by the assistant's last words to you; when the assistant gives the work to no group and answers itself, its answer is the delivery. In `run.json`, `team` reads `main_assistant` and `groups` lists every group it gave work to. When the command ends, it freezes those groups' runs; the assistant's own conversation goes on.
 
 ## MCP servers that need a sign-in
 
@@ -178,7 +246,7 @@ the-one-server doctor
 | What | Where |
 | --- | --- |
 | Data: Spaces, runs and logs (`logs/`, the latest 20 kept) | `~/.local/share/the-one-server` (`--data-dir`, `THE_ONE_SERVER_DATA_DIR`) |
-| Configuration: credentials, model settings and presets, Plugin settings, MCP sign-ins | `~/.config/the-one-server` (`--config-dir`, `THE_ONE_SERVER_CONFIG_DIR`) |
+| Configuration: credentials, model settings (`settings.json`: the main model and the slots), configurations saved by name (`model-presets.json`), Plugin settings, MCP sign-ins | `~/.config/the-one-server` (`--config-dir`, `THE_ONE_SERVER_CONFIG_DIR`) |
 
 When `XDG_DATA_HOME` or `XDG_CONFIG_HOME` is set, the folder is `the-one-server` inside it instead. `--data-dir`, `--config-dir` and `--credentials-file` go before the command, as in `the-one-server --data-dir /srv/the-one start`, and every command needs the same ones; the variables are simpler.
 
