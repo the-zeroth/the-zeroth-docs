@@ -12,7 +12,7 @@ Settings has six sections. Each opens on its first page, and a section with more
 | Section | Its pages |
 | --- | --- |
 | **General** | **General**, **Appearance** |
-| **Models and sign-in** | **Model connections**, **Default model** |
+| **Models and sign-in** | **Model connections**, **Models** |
 | **Runs by itself** | **Background & triggers** |
 | **Phone and other programs** | **Phone channel**, **Outside callers** |
 | **Data and undo** | **Action log**, **Storage**, **Memory recall** |
@@ -46,9 +46,9 @@ For a scheme of your own, choose **Customize** on a ready-made one, or **New fro
 
 The connections Agents send their model requests through: the official connection that comes with a The One membership, Sign in with ChatGPT, API keys for OpenAI, Anthropic and Google Gemini, and custom providers, including models on your own computer. See [Model connections](./api-configuration).
 
-### Default model
+### Models
 
-A **model preset** keeps a model, the connection it goes through and its reasoning together; Agents given no model of their own use the one marked **Global default**. See [Models](../capabilities/models).
+Choose a **main model**: the main assistant and roles with no model of their own work with it, and the five **slots** (**Planning**, **Coding**, **Vision**, **Writing** and **Fast**) run on it too, each at its own thinking depth; to split the work, give a slot a model of its own. Presets saved in earlier versions are listed at the bottom, under **Other saved model configurations**. See [Models](../capabilities/models).
 
 ## Runs by itself
 
@@ -126,4 +126,4 @@ Press **?** anywhere you are not typing, or Cmd+/ (Ctrl+/ on Windows), to see ev
 
 On macOS the app menu adds two more: Cmd+L opens the logs and Cmd+Shift+. stops all Agents.
 
-The list also covers the session and preset lists, the message box and answers, the review pane, and the editors and canvases.
+The list also covers the run lists and the editors' lists, the message box and answers, the review pane, and the editors and canvases.

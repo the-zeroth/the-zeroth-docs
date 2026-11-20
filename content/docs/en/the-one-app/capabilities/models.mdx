@@ -1,64 +1,90 @@
 ---
 title: Models
-description: Model presets keep a model, its connection, reasoning and speed together, as the global default or bound to a role, a template or a single run.
+description: One main model that the five slots (planning, coding, vision, writing, fast) run on at their own thinking depths, and how to give a slot a model of its own.
 ---
 
-A **model preset** is a named set of model settings: which model, the connection its requests go through, how much it reasons and how fast it is served. Every Agent works with the global default preset unless its role, its template or its run says otherwise.
+Every Agent in The One gets its model from the one **main model** you choose. The main assistant works with it directly, and the five **slots** that ship with the product, **Planning**, **Coding**, **Vision**, **Writing** and **Fast**, run on it too, each at its own thinking depth. Choose a main model and every working group can work; to split the work further, give a slot a model of its own, from any provider.
 
-Presets let you change the default for the whole app in one click, and still give a demanding role a stronger model or a quick check a cheaper one, without editing each Agent.
+The roles in a working group bind a slot by the work they do, not a particular model. So a model changes in one place: give **Writing** another model, and every role bound to it moves with it from its next turn, without editing the roles one by one.
 
 ## Where you set models
 
-- **The main assistant's composer.** The model button at the bottom of the composer, beside **Send**, shows the preset that is the global default. Open it to switch to another saved preset, or choose **Manage model presets** to edit them.
-- **Settings › Models and sign-in › Default model.** The same editor as a page. **Teams and tools › Models** opens it too.
-- To bind a preset to a role or a template, use that role's or template's editor (see [which model wins](#which-model-wins) below).
+- **Settings › Models and sign-in › Models.** The main model on top and the five slots below, each showing the model it runs on now and its depth; a slot that follows the main model says **Follows the main model**. **Teams and tools › Models** opens it too.
+- **The main assistant's composer.** The button at the bottom of the composer, beside **Send**, shows the main model and its thinking depth. Open it to change the main model's depth, or to run the main model on a model that a slot or a saved configuration uses, under **Run the main model on**; **Manage models** opens the same settings in a dialog.
+- To choose a slot for a role or a template, use that role's or template's editor (see [which model wins](#which-model-wins) below).
 
-When there is no model connection yet, or no default model, a line at the top of the window says so and links to the fix: **Add a connection** or **Set the default model**.
+When there is no model connection yet, or no main model, a line at the top of the window says so and links to the fix: **Add a connection** or **Set the main model**.
 
-![The model presets editor in Settings › Models and sign-in › Default model](/docs-assets/images/0.5/en/models-default-model.png)
+{/* screenshot pending: ![Settings › Models and sign-in › Models: the main model, and below it the five slots with the model and depth each runs on, one of them open](/docs-assets/images/0.5/en/models-main-model.png) */}
 
-## Make a preset
+## The main model
 
-The editor lists your **Saved presets** on the left; the default one carries a **Global default** badge. Choose **New preset**, then fill in:
+The main assistant, and every role bound to no slot and naming no model of its own, run on the main model; the slots follow it too, unless given a model of their own. Under **Main model**, choose:
 
-1. **Preset name**: anything that tells presets apart, such as "Everyday" or "Deep research". Two presets cannot share a name.
-2. **Model connection**: the connection its requests go through. You add connections in **Settings › Models and sign-in › Model connections**; see [Model connections](../settings/api-configuration).
-3. **Model**: pick one from the provider's model directory. **Refresh models** asks the provider for its current list, for example when a model has just come out. If the directory is empty or cannot be read, type the model ID yourself.
-4. **Reasoning (thinking)**: whether the model reasons before it answers, and how hard (**Effort**). The controls follow what the chosen model advertises: some models also offer a **Thinking summary** setting, a thinking token budget or a reasoning mode, and some always reason.
-5. **Advanced settings**: the **Speed / service tier**, such as **Fast (priority)** or **Flex**, which appears only when the provider's catalog offers it, and a model capacity override for providers that report no context size.
+1. **Model connection**: the connection its requests go through. You add connections in **Settings › Models and sign-in › Model connections**; see [Model connections](../settings/api-configuration).
+2. **Model**: pick one from the provider's model directory. **Refresh models** asks the provider for its current list, for example when a model has just come out. If the directory is empty or cannot be read, type the model ID yourself.
+3. **Thinking depth**: how hard the model thinks before it answers, from **Minimal** to **Maximum**, as far as the model offers them; or **Auto (the model's own default)**, which leaves it to the model.
+4. **Advanced settings**: under **More thinking options**, some models also offer a **Thinking summary** setting, a thinking token budget or a reasoning mode, and some always reason; **Speed / service tier** offers choices such as **Fast (priority)** or **Flex**, and appears only when the provider's catalog offers them; and a model capacity override, for providers that report no context size.
 
-Choose **Save preset**. The first preset you save becomes the global default by itself; to change the default later, select another preset and choose **Use as global default**. Changes apply from each Agent's next turn; a reply already being written finishes as it started. Renaming a preset keeps every binding, because bindings use the preset's ID, not its name.
+Choose **Save main model**. Roles and slots that follow the main model use it from their next turn; a reply already being written finishes as it started. **Source**, next to **Main model**, shows it read-only, as the app's preferences file stores it.
+
+While there is no main model yet (in **Get started** and on this page alike), the **Model** field already holds the flagship model of the provider you connected, as long as its model directory lists it, at **Medium** depth: choose **Save main model** as it is, or pick another. Switch the connection and the filled-in model follows it; once you pick or type a model yourself, it is left alone. A custom provider starts empty, so you pick the model yourself.
 
 There is no temperature setting: every request uses the provider's default. Older definitions that still name a temperature load as before, but the value is not sent.
 
-![The model menu under the main assistant's composer](/docs-assets/images/0.5/en/models-title-bar.png)
+{/* screenshot pending: ![The model menu under the main assistant's composer: the four thinking depths, Run the main model on, and Manage models](/docs-assets/images/0.5/en/models-composer-menu.png) */}
 
-## The global default
+## The slots
 
-The global default is the preset every role works with when it names no model of its own; in the official Space that includes the main assistant. Switch it from the model button under the main assistant's composer, or with **Use as global default** in the editor. The preset that is the default cannot be deleted; make another one the default first.
+The five slots ship with the product; you cannot add, rename or delete one. Each has a depth it ships with:
+
+| Slot | For | Ships at |
+| --- | --- | --- |
+| **Planning** | Leads, directors, reviewers, research and decisions | High |
+| **Coding** | Writing, changing, running and testing code | Maximum |
+| **Vision** | Seeing and making images, visual design, the look of interfaces | Medium |
+| **Writing** | Stories, scripts, copy and editing | Medium |
+| **Fast** | Running tools, assigned steps, low-judgment helpers | Low |
+
+A slot follows the main model by default: it runs on the main model's model, connection and service tier, but at its own depth. With the main model at **Medium**, for example, **Coding** thinks at **Maximum** on the same model and **Fast** at **Low**. The main model's depth does not reach the slots. The deeper the thinking, the longer the model takes and, as a rule, the more usage it spends; to spend less, turn down the slot you use most first.
+
+Choose **Change** at the right of a slot to:
+
+- Choose **Use another model** under **Model**, then a connection and a model, from any provider. Switch back to **Follows the main model** and the slot runs on the main model again, at the depth it has.
+- Pick another **Thinking depth**, or **As shipped (…)** to return to the depth it ships with.
+
+Choose **Save**. Every role bound to the slot follows from its next turn.
+
+The roles of the official Space already bind slots by the work they do: the Software team's lead binds **Coding**; the Research group's lead binds **Planning** and the member who searches for it binds **Fast**; the Design studio's roles bind **Vision**; the General group's assistant and the Definitions studio's director bind **Planning**. The main assistant binds no slot: it runs on the main model, at the main model's depth.
+
+A Space you copied from the official Space before 0.5.2 is not updated. Its roles bound no slot then, so in the copy they all run on the main model (apart from any you bound to a preset yourself). To split them by capability, choose slots for them in the role editor, or ask the main assistant to.
 
 ## Which model wins
 
 An Agent runs on the first of these that applies, in this order:
 
-1. **A choice for this run.** When the main assistant starts a new working group for a matter, it can pick presets for that run alone: one for the whole group, or one for a single node. An Agent that opens a sub-Graph can choose the same way, and an Agent that adds or clones an Agent in its run can pick a preset for that one Agent. Ask the main assistant to do a piece of work on another model and nothing else changes: not the template, not the roles. A group already at work keeps the models it has; to move work to other models, the main assistant has to give it to a new group.
-2. **The role.** In the role's editor, under **Model & Parameters**, pick a preset, keep **Use default model**, or configure a model separately. See [Roles](./roles).
-3. **The run's default, in the developer view.** In All runs, a run's **Default Model** button replaces the global default for the roles in that run that use the default model; Agents already at work switch from their next turn. See [All runs (developer view)](../settings/all-runs).
-4. **The template.** The model preset menu in the toolbar of the template editor sets a default for the roles in that template that have no model of their own. See [Working-group templates](./working-group-templates).
-5. **The global default**, for everything else.
+1. **A choice for this run.** When the main assistant starts a new working group for a matter, it can choose models for that run alone: a slot, the main model or a saved configuration, for the whole group or for one of its members. An Agent that opens a sub-Graph can choose the same way, and an Agent that adds or clones an Agent in its run can choose for that one Agent. Ask the main assistant to do a piece of work on another model and nothing else changes: not the template, not the roles. A group already at work keeps the models it has; to move work to other models, the main assistant has to give it to a new group.
+2. **The role.** In the role's editor, under **Model and parameters**, bind a slot or a saved configuration, keep **Use the main model** checked, or configure a model separately. See [Roles](./roles).
+3. **The run's session default model, in the developer view.** In All runs, a run's **Main model** button replaces the main model for that run alone. Agents whose roles name no model of their own switch from their next turn; those bound to a slot or to a model of their own are not changed. See [All runs (developer view)](../settings/all-runs).
+4. **The template.** The model menu in the toolbar of the template editor chooses a slot for the nodes in that template whose roles name no model of their own. See [Working-group templates](./working-group-templates).
+5. **The main model**, for everything else.
 
-When a preset itself changes, or another preset becomes the global default, the Agents that use it follow from their next turn, those already at work included.
+When the main model or a slot changes, the Agents that use it follow from their next turn, those already at work included.
 
-You can also ask the main assistant to do any of this: it can list and change presets, bind one to a role or a template, or run one piece of work on another model.
+You can also ask the main assistant to do any of this: it can say what the main model and each slot run on, change the main model, give a slot another model or depth, bind a slot to a role or a template, or run one piece of work on another model.
 
-## Presets live on this computer
+## Presets saved before
 
-Presets are stored on your computer, not in a Space (see [Spaces](./definition-spaces)). So even in the read-only official Space you can create, change and switch presets and the global default; only binding a preset to one of the official Space's roles or templates needs a copy of the Space. See [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).
+Before 0.5.2, models were named presets, one of which was the global default. After the upgrade, that global default is your main model, with the same model and depth. The presets you saved are listed under **Other saved model configurations** at the bottom of the page, together with configurations Agents saved for a run; open it to see the model and depth of each. Roles and runs that use them still run. To remove one, choose the bin icon beside it, then **Delete**: roles or runs still using it fail until you bind them to something else. The page no longer makes named presets: to split work by capability, use the slots above.
 
-A Space's roles and templates refer to a preset by its ID, and a preset refers to its connection without copying any key. A Space made on another computer can therefore name presets you do not have, and those roles cannot run until you bind them to one of yours or switch them to the default model. The **Check the Space's models** step of **Get started** lists them and offers **Use the default model**, and **New Graph** in All runs checks every role's model and connection before it starts a run.
+After the upgrade, the official Space's roles run at their slots' depths, **Maximum** for **Coding** for example, instead of all at the depth of your old global default. If that is too slow or spends too much, turn the slot's depth down.
 
-If you delete a preset, the roles and templates still bound to it need another one: The One reports the missing preset instead of quietly using a different model. Deleting a connection leaves the presets that use it as they are: Agents on those presets cannot reach a model until you pick another connection for the preset.
+## Model settings live on this computer
 
-**Source**, next to a preset's name in the editor, shows the preset read-only, as the app's preferences file stores it.
+The main model, the slots and the saved configurations are stored on your computer, not in a Space (see [Spaces](./definition-spaces)). So even in the read-only official Space you can change them; only binding a different slot to one of the official Space's roles or templates needs a copy of the Space. See [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).
+
+Roles and templates bind slots by name, so a Space carried to another computer runs on that computer's main model and slots. Roles that name a saved configuration or a particular connection are different: a Space made on another computer can name a configuration or connection you do not have, and those roles cannot run until you change them. The **Check the Space's models** step of **Get started** lists them and offers **Use the main model**, and **New Graph** in All runs checks every role's model and connection before it starts a run.
+
+Without a main model, a slot with no model of its own has nothing to run on, and the roles bound to it fail with a message telling you to choose a main model first. Deleting a connection leaves the main model, the slots and the configurations that use it as they are: Agents on them cannot reach a model until you pick another connection for them.
 
 For the providers you can connect and what the official model service costs, see [Models and Pricing](../../start/models-and-pricing).

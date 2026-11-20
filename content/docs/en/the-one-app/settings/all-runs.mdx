@@ -28,11 +28,11 @@ The main assistant's own conversation is not listed: it stays on the home page. 
 1. **Choose a blueprint**: the Graph to run. The software team, `polished_software_dev`, comes first, marked **Factory software team**.
 2. **Project and task**: the **Project root (optional)** is the folder the run works in; left unspecified, the run works in the app's data folder. The **Task (optional)** goes to the Graph's first Agent as your message and starts the run: with a task the button reads **Start task**, and Cmd/Ctrl+Enter does the same. With no task the button reads **Create Graph**, which only creates the run, and you write to an Agent yourself.
 
-**What it needs to run** checks everything the Graph names: models, connections, Agent presets, prompts, Skills, MCP servers and Plugins. It says which missing piece would stop the run from being created, which would make its model requests fail, and which the run can do without. You can create the run either way. A run starts from the Graph as last saved.
+**What it needs to run** checks everything the Graph names: models (the main model, slots, saved configurations or a model a role names itself), connections, roles, prompts, Skills, external tools and Plugins. It says which missing piece would stop the run from being created, which would make its model requests fail, and which the run can do without. You can create the run either way. A run starts from the Graph as last saved.
 
 A run started this way belongs to no matter: the task you write is its mission, you judge its deliveries in the **Mission** bar at the top of the run (below), and its questions and deliveries also wait in the strip above the conversation.
 
-![New Graph, with what the Graph needs to run](/docs-assets/images/0.5/en/all-runs-new-graph.png)
+{/* screenshot pending: ![New Graph, with what the Graph needs to run: the Models row naming the main model and the slots it uses, then connections and roles](/docs-assets/images/0.5/en/all-runs-new-graph.png) */}
 
 ## Reading a run
 
@@ -40,7 +40,7 @@ The header names the run, its state (such as **Executing**, **Waiting for wake-u
 
 - **Conversation** / **Theater**: one Agent's conversation, or the whole team at once.
 - **Freeze** / **Unfreeze** and **Cancel workflow**, described in [Freezing and stopping](#freezing-and-stopping).
-- **Session Default Model**: a model for this run only, used by the Agents that follow the default model.
+- **Main model**: opens **Session default model**, which replaces the main model for this run alone. Agents whose roles name no model of their own switch to the slot, saved configuration or model you choose there; those bound to a slot or to a model of their own are not changed.
 - **Run controls**: retries, recovery and the usage limit.
 - How many tokens the run has used so far.
 

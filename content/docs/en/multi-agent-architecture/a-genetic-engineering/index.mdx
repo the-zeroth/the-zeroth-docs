@@ -19,7 +19,7 @@ Experience without structure drifts; structure without heredity dissolves.
 In The One, a team is written down **in full** in a Space, and you find each part of it under **Teams and tools**, where each working group's card opens its template:
 
 - **Working-group templates** (`workflows/*.yaml`, the Graphs): nodes and edges. Each node binds a role and can add instructions for that node alone; each edge's text *is* the handoff instruction: when to hand off, what to pass, what the other side should produce. This is the team's **body plan**.
-- **Roles** (`agents/*.yaml`, the Agent presets): each member's instructions, its model preset or the default model, reasoning, built-in tools and MCP servers, Skills, prompts and Plugins, defined independently of every other member. These are the **cell types**.
+- **Roles** (`agents/*.yaml`): each member's instructions, the slot it binds by capability (or the main model, or a model of its own), reasoning, built-in tools and MCP servers, Skills, prompts and Plugins, defined independently of every other member. These are the **cell types**.
 - **Skills** and **Prompts**: written-down ways of working and shared instructions, mounted on whichever roles need them.
 - **Plugin references**: a role can name the Plugins it uses. The Space keeps only the reference; the Plugin itself is installed on each computer, outside every Space.
 - **Memory**: lessons and the reasons behind the Space's design, written by Agents and by the nightly review. Each turn, an Agent that holds the memory tools sees up to 20 entries, the ones most relevant to its latest messages. See [Memory and recall](../../the-one-app/capabilities/memory).
@@ -34,7 +34,7 @@ Genotype and phenotype come apart. The template is the genotype. When the **main
 
 Expression can continue inside a group: with `create_subgraph` an Agent runs another template as a sub-Graph of its group, and can open that part of the work as a sub-matter with its own board. Groups sleep, pause and end; the gene remains, and the next expression reproduces the structure and configuration verbatim. (Faithful means the *configuration* is reproduced, not the behaviour: model output is still stochastic, and one gene does not guarantee two identical runs.)
 
-The environment can change without touching the gene. The main assistant can give one group's run other models for that piece of work alone. Binding a model preset to a role or a template changes every later run, so it is kept for when that is the point.
+The environment can change without touching the gene. The main assistant can give one group's run other models for that piece of work alone. Binding a role or a template to another slot changes every later run, so it is kept for when that is the point.
 
 ## The main assistant is the genetic engineer
 
@@ -63,7 +63,7 @@ Genes matter because they are passed on. A Space can be copied, exported, import
 - **Memory** travels when you choose: export includes agent memory unless you untick it, and sharing leaves it out unless you tick **Include agent memory**.
 - **Plugins** travel as references; the computer that receives the Space installs them separately.
 - **Secrets** never travel.
-- **Models** stay on each computer too: roles name model presets, which live in the app, so a Space from elsewhere may need its roles pointed at your own presets.
+- **Models** stay on each computer too: roles name a slot (planning, coding…), and each computer's slots run on its own main model, so a Space from elsewhere runs as it is; only roles that name a saved configuration or a particular connection may need pointing at a model you have.
 
 The official Space is the read-only baseline genome: in it, what the main assistant and the evolution lab find stays a proposal. Copy it into a Space of your own to breed variants; later updates to the official Space do not reach your copy by themselves. See [Spaces](../../the-one-app/capabilities/definition-spaces).
 

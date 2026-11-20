@@ -23,17 +23,17 @@ Under **Inheritance**, pick another role and this one starts from it. Each part 
 
 ### Model
 
-Under **Model & Parameters** a role gets its model in one of three ways:
+Under **Model and parameters** a role gets its model in one of three ways:
 
-- **A model preset.** Pick a saved preset under **Model preset**: model, connection, reasoning and service tier come together. When the preset changes, the role follows from its next turn.
-- **Use default model.** The role follows the global default, which you set in **Settings › Models and sign-in › Default model** or from the model menu under the main assistant's composer. The editor shows the **Current default**.
-- **Its own settings.** Leave both off and set **Model connection**, **Speed / service tier**, **Model** and **Reasoning (thinking)** here.
+- **A slot.** Under **Model**, choose **Planning**, **Coding**, **Vision**, **Writing** or **Fast**; each shows the model and depth the slot runs on now. The role runs on that slot's model at its depth, and when the slot gets another model or depth in **Settings › Models and sign-in › Models**, the role follows from its next turn. The list also holds configurations saved earlier, which you can choose too.
+- **Use the main model.** Checked, the role follows the main model, with its model and thinking depth. The editor shows the **Current default** model.
+- **Its own settings.** Uncheck **Use the main model** and choose nothing under **Model**, then set **Model connection**, **Speed / service tier**, **Model** and **Reasoning (thinking)** here.
 
-How a role's own model ranks against a model chosen for one run, the template's default and the global default is explained in [Models](./models#which-model-wins).
+Binding a slot by capability means a model changes in one place: change the slot in Settings and every role bound to it follows; and the Space still runs when it moves to another computer. How a role's own model ranks against a model chosen for one run, the template's default and the main model is explained in [Models](./models#which-model-wins).
 
 **Composition & sources** sums up what the role is made of and where each part comes from: its own settings, or the role it inherits from. Select a line to jump to that part.
 
-![The Configuration tab of a team role](/docs-assets/images/0.5/en/roles-configuration.png)
+{/* screenshot pending: ![The Configuration tab of a team role, with a slot bound under Model and parameters](/docs-assets/images/0.5/en/roles-configuration.png) */}
 
 ## Prompts
 
