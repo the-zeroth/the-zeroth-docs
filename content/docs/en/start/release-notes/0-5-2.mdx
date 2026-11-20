@@ -1,0 +1,52 @@
+---
+title: The One 0.5.2 Release Notes
+description: 0.5.2 replaces model presets with one main model and five slots, gives the software team one lead who does the work, keeps the way you want work done, handles what waits in the conversation with a weekly report to look back, and makes the whole interface one size larger.
+---
+
+These notes cover The One 0.5.2 on macOS and the [Linux server](../linux-server) 0.5.2 released with it. It follows 0.5.1 and keeps its shape: one main assistant per Space, and matters worked by working groups.
+
+## Models
+
+- **Settings › Models** holds one **Main model** and five **Slots**: Planning, Coding, Vision, Writing and Fast. Roles in the official Space bind the slot for the capability they need; the main assistant and roles that bind no slot use the main model. See [Models](../../the-one-app/capabilities/models).
+- A slot follows the main model and runs the same model, at a depth of its own as shipped: Planning High, Coding Maximum, Vision and Writing Medium, Fast Low. The main model's depth does not reach the slots. To give one capability another model (another provider's too) or another depth, use its **Change**.
+- When you set up for the first time, the main model field starts on the connected provider's flagship model at Medium depth; save it as it is, or pick another.
+- Presets saved by name earlier still work. They are listed under the other saved model settings, where they can be deleted; the app no longer makes new ones.
+- gpt-6.2-sol and gpt-6.2-astra have list prices, so runs on them no longer count as $0.
+
+## The software team
+
+- The software team 7.0 is one lead: it works out what is wanted, settles on an approach, checks the result the way the person will meet it, and delivers. It does the work itself and hands parts to sub-agents only when you ask.
+- Handing work out uses the Codex collaboration protocol that GPT models know. The theater shows those steps in words, and a sub-agent's questions and answers read as going to its parent.
+- The main assistant routes work by what it takes, not by its field: work that is built, run or operated on your computer, folders or systems to reach a result that can be checked (code, scripts, services, data pipelines, analyses, models) goes to the software team.
+
+## The way you want work done
+
+- What you say about how you want work done ("run the tests before you deliver", for example) is kept as a standing rule of the Space, and every Agent of every later task sees it and follows it.
+- Your corrections are kept too; correcting something an existing rule covers gets that rule rewritten.
+- The rules are copied with the Space and deleted with it. See [Main assistant](../../the-one-app/main-assistant).
+
+## What waits and the weekly report
+
+- **Needs you** and the **Morning report** are gone: what waits for you is handled in the strip above the conversation alone, with its count beside **Conversation** in the sidebar, and the day's news comes in the main assistant's greeting.
+- A new **Weekly report** in the sidebar looks back over the last seven days: what the nightly reviews changed, each matter, what was delivered and what failed, actions that cannot be undone, the triggers, and the spend.
+- When an Agent does something outside that cannot be taken back (takes a payment, deploys or publishes a site, sends mail, pushes code), a system notification tells you at once, not at the next greeting.
+- **Runs by itself** sits at the foot of the sidebar and opens the schedule and trigger settings.
+
+## Look
+
+- The whole interface is one size larger: the smallest text goes from 12px to 13px, the conversation reads at 16px, and at 17px when the window is wider than 1640px.
+- A matter's page shows in its main column the working groups and Agents working on it now, drawn as the Panorama draws them; the working groups page moved into the Panorama.
+- A Space with nothing at work shows what came out, who stands by and how to start, instead of "none" in every panel.
+- The read-only Space that ships with the app shows as **Official** everywhere.
+- The first page of Get started lists its steps once, and setting up a model is one question.
+- English counts, commas and colons read as English; the editors' tabs, the Skill rail and the Panorama's flow no longer wrap, cut or overlap their words.
+
+## Linux server
+
+- `the-one-server run --assistant` gives the task to the Space's main assistant, which decides who does it, as when you tell the main assistant in the app.
+- The server runs the same main model and five slots as the desktop: `the-one-server model` shows them and `the-one-server model set` changes the main model (`main`) or a slot; `run --effort` sets the depth of the main model and of every slot without a depth of its own.
+- `run` prints a delivery whole when its stored copy was cut at a space.
+
+## Other changes
+
+- Commands an Agent runs no longer get the Python environment variables the app sets for its own services. In the packaged macOS app these kept an Agent's python3 from importing packages in your user folder, including ones pip had just installed.
