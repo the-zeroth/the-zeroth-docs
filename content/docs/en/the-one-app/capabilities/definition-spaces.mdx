@@ -1,11 +1,11 @@
 ---
 title: Spaces
-description: A Space holds a whole set of templates, roles, Skills and memory. Copy the official one, then switch, import, export and share Spaces.
+description: A Space holds a whole set of templates, roles, Skills and memory. Copy the official one, which keeps taking its updates, then switch, import, export and share.
 ---
 
 A **Space** is one complete set of what your Agents work with: working-group templates, roles, prompts, Skills, external tools (MCP), scripts, request templates and the Space's memory, together with the list of Plugins its roles use. You can keep as many Spaces as you like, for example one per client or kind of work, and they do not affect each other.
 
-Manage them on the **Spaces** page. The Space switcher at the top of the sidebar, beside **The One**, shows the active Space; pick another from its menu to switch. **Manage Spaces…** at the bottom of the menu opens the page. The page also sits beside **Plugins** in the Extension Center (**Teams and tools › Plugins**), and with the developer view on, **Teams and tools** lists it under **In the developer view**.
+Manage them on the **Spaces** page. The Space switcher at the top of the sidebar, beside **The One**, shows the active Space; pick another from its menu to switch. **Manage Spaces…** at the bottom of the menu opens the page, and so does **Manage Spaces** at the top of **Teams and tools**; in the Extension Center it sits beside **Plugins**.
 
 ![The Spaces page with the official Space and a copy](/docs-assets/images/0.5/en/definition-spaces-page.png)
 
@@ -21,7 +21,7 @@ Everything in a Space is a file in the Space's folder:
 Switching Spaces swaps that whole set. Other things belong to the computer and every Space shares them:
 
 - **The main model, the slots and the model connections** (see [Models](./models)). Roles and templates bind slots by name, so when you share a Space, its roles run on the other computer's main model and slots; a role that names a saved configuration or a particular connection needs the same one on the other computer.
-- **Installed Plugins**, the apps they bring, and their connections and keys (see [Plugins and Apps](./plugins)). Each Space chooses which Plugins it uses.
+- **The Plugin library**: the Plugins installed on this computer, the apps they bring, and their settings, connections and keys (see [Plugins and Apps](./plugins)). Every Space uses this one library, and a Space's roles name the Plugins they use.
 - **Settings › Data and undo › Action log**, which covers every Space so that undo can reach everything (see [Action log, undo and stopping](../action-log)).
 - A few more things span Spaces: the weekly report's spend is the total for every Space; **Pause all** on the triggers pauses every Space's triggers; and what earlier sessions concluded in a project folder can be found from any Space (see [Memory and recall](./memory)).
 
@@ -41,7 +41,7 @@ Every Space carries five built-in templates, with the roles, prompts and Skills 
 
 For the last two, see [Evolution: the lab and the nightly review](../evolution). Every Space also carries six built-in request templates, such as **Implement a feature**, **Diagnose and fix a problem** and **Create a plugin for The One**, which show in the composer's **Templates** menu.
 
-When you create, duplicate or import a Space, and each time the app starts, The One adds any of these that are missing. Files that are already there are never overwritten, so your changes to them stay; it also means later improvements to these built-ins do not reach the copies you already have. Built-in templates are not in the template list, so Teams and tools shows a card for one only while it works for a matter.
+When you create, duplicate or import a Space, and each time the app starts, The One adds any of these that are missing. Files that are already there are never overwritten, so your changes to them stay; it also means later improvements to these built-ins do not reach the copies you already have, except in a copy that follows the official Space (below). Built-in templates are not in the template list, so Teams and tools shows a card for one only while it works for a matter.
 
 A new, empty Space therefore starts with these five templates and nothing else, and with no external tool (MCP) servers. Until it has templates of its own, the main assistant gives ordinary work to the General group (`chat`).
 
@@ -51,17 +51,26 @@ The One comes with the official Space, listed as **Official**. It is read-only: 
 
 - templates, roles, prompts, Skills and external tools (MCP) can be read but not changed;
 - what the main assistant and the evolution lab find to improve stays a proposal (see [Evolution: the lab and the nightly review](../evolution));
-- Agents cannot write memory;
-- Plugins can be installed on this computer but do not reach the official Space: you cannot add them to its roles, and their tools and apps are not available there.
+- Agents cannot write memory.
 
-The main model and the slots are not affected: they live on this computer, and you can change them in the official Space too.
+The main model, the slots and Plugins are not affected, because they live on this computer: in the official Space you can still change models and install Plugins, and a Plugin its roles name works once installed. You just cannot add a Plugin to another role there.
 
-So make it your own. Three places copy it:
+So work in a copy of your own. A new install of The One starts in one, called **My Space**. If you upgraded from an earlier version and are still in the official Space, these places copy it:
 
 - **Copy the official Space and use it** in **Get started**, and **Duplicate to edit** in the notice at the top of the role, prompt and Skill editors, copy it and switch to the copy at once;
 - **Duplicate to edit** on the official Space's row of the Spaces page makes the copy; choose **Switch here** to start using it.
 
-You, the main assistant and the evolution lab can change the copy freely. The cost is that later updates to the official Space do not reach your copy by themselves; when you upgrade The One, new built-ins are still added (see above).
+You, the main assistant and the evolution lab can change the copy freely.
+
+### Following official updates
+
+A copy of the official Space made in the app, **My Space** included, follows the official Space: select it on the Spaces page and its details are marked **Follows official**, with a **Follows the official Space** section below. After you install a new version of The One, the next start compares each file:
+
+- Files you have not changed take the official version by themselves; files the official Space adds come in, and files it removes go.
+- Files you or your Agents changed keep your version, and the official version waits for you to choose. When some wait, the Space menu at the top of the sidebar says how many beside **Manage Spaces…**, such as **Official updates: 2**, and the **Follows the official Space** section lists each file: **See what differs** shows both sides, **Use the official one** takes the official version (**Remove it, as the official Space did** for a file it removed), and **Keep mine** keeps yours.
+- Each update is in the Space's change history and can be undone.
+
+**Stop following** asks first; once a copy stops following, later official updates no longer come into it, and it cannot follow again. Spaces copied before 0.5.3, imported Spaces and copies of a copy do not follow the official Space.
 
 Each Space in the list carries a badge: **Current** for the active one, **Read-only** or **Editable** for the others.
 
@@ -80,7 +89,7 @@ Only one Space is active at a time, and the app shows that Space's work:
 
 - **Switch here**, or the switcher at the top of the sidebar, changes the active Space at once, without a restart. If Agents are still at work, The One says how many and offers **Stop and switch**: they all stop first, and the step each one is on is cut off, not finished.
 - **New Space** starts an empty Space with only what every Space carries (above).
-- **Duplicate** copies a Space together with its memory, its choice of Plugins and the standing rules you set for it.
+- **Duplicate** copies a Space together with its memory and the standing rules you set for it. A copy of the official Space follows official updates; a copy of any other Space does not.
 - **Edit** renames a Space of your own or changes its description.
 - **Delete** removes a Space of your own, with all of its definitions, its memory and the standing rules you set for it, for good. The active Space and the official one cannot be deleted.
 
@@ -90,7 +99,7 @@ Only one Space is active at a time, and the app shows that Space's work:
 
 **Import** reads a `.zerospace` file and shows what is inside before anything is written: how many roles, prompts, templates, MCP servers and Skills it holds, which scripts its Agents could run after the import, which MCP servers would run a command on your computer or connect elsewhere, and anything that fails validation, which stops the import. When the Space contains scripts or local commands, the button reads **I trust the source. Import**: import only Spaces from sources you trust.
 
-A Space carries references to the Plugins its roles use, never the Plugins themselves. After an import, the Plugins page lists what the new Space's roles still need, so you can install the ones that run on your computer. See [Plugins and Apps](./plugins).
+A Space carries references to the Plugins its roles use, never the Plugins themselves. Once you use an imported Space, **Installed** in **Teams and tools › Plugins** lists at the top the Plugins its roles use that this computer cannot run yet, so you can install the ones that run here. See [Plugins and Apps](./plugins).
 
 ## Share on the website
 

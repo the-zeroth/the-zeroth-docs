@@ -1,0 +1,49 @@
+---
+title: The One 0.5.3 Release Notes
+description: 0.5.3 brings one Plugin library per computer for every Space, a browser of the Agents' own that you can watch and take over, and new installs in My Space.
+---
+
+These notes cover The One 0.5.3 on macOS and Windows. It follows 0.5.2 and keeps its shape: one main assistant per Space, and matters worked by working groups. There is no Linux server release this time; the [server](../linux-server) stays at 0.5.2.
+
+## Plugins
+
+- One Plugin library per computer: a Plugin is installed once and checked once, as it is installed, and every Space uses it from there; nothing is copied into Spaces. A Plugin that a role, template or Skill names works as soon as it is installed, in the read-only official Space too. See [Plugins and Apps](../../the-one-app/capabilities/plugins).
+- **Installed** in **Teams and tools › Plugins** lists that library: **Update**, switching back to the version this computer kept, **Remove local copy** and **Remove from this device**; above them, the Plugins the active Space names but cannot use yet; and **Open Plugins folder** at the top right.
+- Each install, update and removal is confirmed once in a system dialog that says what changes, how much is downloaded and which components run with your permissions. Then a progress panel at the top of the Plugins page follows it, with **Cancel**.
+- **Open in The One** on the website installs the Plugin on this computer, without asking which Space it goes to.
+- The Plugin library lists only the versions this version of The One can run.
+- Removing a Plugin deletes its files and frees the disk they took. An installed Plugin that no longer reads keeps only itself out: **Installed** shows it as a problem, with **Remove**.
+- A local copy is a Plugin folder in the Plugins folder, and it runs instead of the installed version in every Space; an Agent that changes an installed Plugin makes such a copy first. **Remove local copy** only moves the folder aside, and the installed version runs again.
+- A local copy's settings are one per computer: set them in any Space and every Space has them.
+- Before the main assistant gives a working group work, it checks the Plugins that group uses. When one is missing and the work needs it, it installs it and tells you in a line what and why. The accounts and keys a Plugin needs are still yours to give.
+- The first start after the upgrade moves the Plugins an earlier version installed into the library at the versions they had, without downloading again when their archives are still there; the old folders are kept for a week, then deleted.
+
+## The Agents' browser
+
+- Agents have a browser of their own: **Browser** in the sidebar, under **Panorama**, where the pages they open are real tabs in the app. You see what they click and fill in; as soon as you act in a tab, their current step stops and their next step is told you took over. See [Browser](../../the-one-app/browser).
+- Each Space has its own browser, whose sign-ins survive a restart; **Clear this Space's browser** deletes its cookies, site data and sign-ins.
+- The 14 roles of the official Space that use the web (in the Software team, Research group, Frontend design studio, 3D scene studio, Site launch team, Storefront studio and Product evaluation lab) use this browser now: they no longer bind the Chrome DevTools server, and those that bind the Computer Use Plugin keep it for work on the desktop.
+- The official Space's Chrome DevTools server is now **Your Chrome** and connects to the Chrome you are running (144 or later), so Agents can use your sign-ins there: open `chrome://inspect/#remote-debugging` in Chrome and turn on remote debugging, and Chrome asks you each time it connects.
+- When an Agent uses the browser, the requests a page sends that write to a site, such as a form it submits, are kept with the call in the action log; those sent while working on a matter are also listed under **Actions that cannot be taken back** in the weekly report.
+
+## Spaces
+
+- A new install of The One starts in **My Space**, a copy of the official Space: what the main assistant and the evolution lab improve takes effect there, and official updates still come in. An install already working in the official Space stays there.
+- From this version, a copy of the official Space made in the app follows official updates: files you have not changed update by themselves, and files you or your Agents changed keep your version while the official one waits on the Spaces page for **Use the official one** or **Keep mine**. **Stop following** cannot be undone. Copies made earlier, imported Spaces and copies of a copy do not follow. See [Spaces](../../the-one-app/capabilities/definition-spaces).
+
+## The conversation and the main assistant
+
+- What no longer needs you folds into one line: a run of working-group notices whose cards are all handled, with the assistant's bookkeeping between them, reads for example "General group on “Checkout redesign”: handed in 3, asked 2, all handled". Choose it to open the lines in place.
+- The lines of a matter you closed stay where they are, quieter, with a **Closed** tag that opens the matter.
+- The main assistant and the General group's assistant no longer carry every tool in each request: tools they rarely use, and the tools of external tools (MCP) and Plugins, are found by search when needed.
+
+## Look
+
+- **Get started** stays in the sidebar until you have been through it or choose **Hide Get started**; **Reopen Get started** in the **…** menu at the top left of the window brings it back.
+- **Teams and tools** names the Space in use at the top, beside **Manage Spaces**, then splits into **This Space’s teams** and **Shared by every Space**: Plugins, apps and models belong to this computer and every Space uses them. Each editor says which Space it is changing.
+- The Extension Center no longer has a Space switcher of its own.
+- Closed matters are easier to find: **Closed (N)** sits under the sidebar's list of matters, and closing one from the sidebar or the Panorama shows where it went, with **Reopen**. The sidebar's **Matters** heading says how many are open, and the close button is a check mark in a circle.
+- Matters that do not fit side by side on the Panorama wrap into rows instead of running off the right.
+- The sign-in page on first launch says what The One is for; its button reads **Sign in or sign up**, and signing up is free.
+- When you connect a custom service whose model list has a flagship model, or only one model, the main model field starts on it.
+- Closed matters in the Matters overview say when they closed, such as **Closed just now**.

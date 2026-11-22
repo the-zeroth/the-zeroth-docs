@@ -40,8 +40,8 @@ content/docs
 |   |   `-- release-notes/           One page per release line
 |   +-- the-one-app/                 Using The One
 |   |   +-- main-assistant.mdx …     Main assistant, matters, working groups, Panorama,
-|   |   |                            waiting for you and the morning report, triggers,
-|   |   |                            evolution, action log, phone channel
+|   |   |                            the browser, waiting for you, the weekly report,
+|   |   |                            triggers, evolution, action log, phone channel
 |   |   +-- capabilities/            Templates, roles, Skills and prompts, MCP, models,
 |   |   |                            Plugins, Atlas, Spaces, memory
 |   |   `-- settings/                Settings, Model connections, All runs

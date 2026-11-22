@@ -1,6 +1,6 @@
 ---
 title: Plugins and Apps
-description: Plugins add Skills, tools, service connections and apps to The One. Install them on this computer, then give them to roles in a Space of your own.
+description: Plugins add Skills, tools, service connections and apps to The One. One library per computer serves every Space, and each install or removal is confirmed once.
 ---
 
 A **Plugin** packages capabilities that Agents can use (Skills, scripts, MCP servers, apps and connections to online services) so that you can install, configure, share and give them to a role as one unit. Plugins are the only kind of extension in The One, and the apps some of them bring open from **Apps**.
@@ -17,63 +17,86 @@ A Plugin combines any number of five kinds of components:
 | Application | An app with its own screen, opened from Apps |
 | Connector | An online service the Plugin reaches with your API key or sign-in |
 
-Plugins live outside every Space. They are installed on your computer, and a Space records only which Plugins its roles use and their settings that are not secret. That is why an exported or shared Space never contains a Plugin, only references to the ones it needs. For what lives in a Space and what lives on this computer, see [Spaces](./definition-spaces).
+Plugins live outside every Space. They are installed in this computer's Plugin library, and a Space records only which Plugins its roles use and their settings that are not secret. That is why an exported or shared Space never contains a Plugin, only references to the ones it needs. For what lives in a Space and what lives on this computer, see [Spaces](./definition-spaces).
 
-## The Plugin library
+## One Plugin library per computer
 
-Open **Teams and tools › Plugins**. Plugins and Spaces share one page, titled **Extension Center**, and Plugins has two views:
+A Plugin is installed on this computer once and checked against the signed catalog once, as it is installed; nothing is copied into a Space:
 
-- **Plugin library**: official Plugins and Plugins others have shared. Each row shows the version and what the Plugin does; open one to see its components, the access it declares and its settings.
-- **Installed**: the Plugins on this computer, including the ones you made, with **Update** when the library has a newer release.
+- Every Space uses the Plugins in the library. A Plugin that a role, template or Skill names works as soon as it is installed, in the read-only official Space too.
+- An installed version is read-only. After an update, the previous version stays on this computer, so switching back is one step and downloads nothing.
+- Removing a Plugin from this computer deletes its files and frees the disk they took.
+- When an installed Plugin no longer reads (for example because its install record or files are damaged), only that Plugin is left out, and the others work as before; **Installed** shows it as a problem, with **Remove**, after which you can install it again. A local copy that does not read shows as a problem too, with **Open Plugins folder**.
 
-When a Plugin has several releases, its details let you pick the **Version**: the list marks the one **Recommended for this device** and the **Latest**, and a release with no package for this computer is marked **Unsupported on this device**.
+The first start after upgrading from 0.5.2 or earlier moves the Plugins installed before into the library at the versions they had, without downloading again when their archives are still there. The old folders are kept for a week, then deleted.
 
-![The Plugin library](/docs-assets/images/0.5/en/plugins-library.png)
+## The Plugins page
 
-## Install a Plugin
+Open **Teams and tools › Plugins**. Plugins and Spaces share one page, titled **Extension Center**, and the Plugins page has two tabs:
 
-Installing puts the Plugin on this computer, whichever Space is active. It is used once you give it to a role in a Space of your own (below).
+- **Plugin library**: official Plugins and Plugins shared by the community, one row per Plugin with its version and what it does. Only the versions this version of The One can run are listed.
+- **Installed**: the Plugins on this computer, local copies included (below). The ones the active Space uses are marked **Used by this Space**, and a row shows **Update** when the library has a newer version. **Open Plugins folder** at the top right opens the folder that holds the local copies.
 
-1. Choose **Install Plugin** on its row.
-2. **Review Plugin change plan** lists what will be installed, the permissions it asks for, and any settings it needs before it can run.
-3. Choose **Continue to confirmation**. The One asks you to confirm the changes and permissions in a window of its own, then installs the Plugin in the background.
+A row opens the Plugin's details, with **Overview**, **Components** and **Settings**. When a Plugin in the library has several versions, its details let you pick the **Version**: it starts on the newest one this computer can install, the list marks the one **Recommended for this device** and the **Latest**, and a version with no package for this computer is marked **Unsupported on this device**.
 
-When a Plugin cannot be installed, it says why: **Unavailable on this platform** means it has no package for this computer's platform, and a Plugin that needs a newer The One asks you in the plan to update The One first.
+{/* screenshot pending: ![The Plugins page of the Extension Center: the Plugin library and Installed tabs, one row per Plugin in the library with Install Plugin or Installed on the right](/docs-assets/images/0.5/en/plugins-library.png) */}
 
-On the website, **Open in The One** on a Plugin in the [Plugin catalog](https://the-zeroth.com/en/extensions) starts the same from your browser. The app first verifies the signed release, while nothing is installed yet, then asks which Space it goes to; only Spaces of your own can be chosen. Downloading it, approving full local access and writing to the Space are each confirmed separately.
+## Install, update and remove
+
+Choose **Install Plugin** on a Plugin's row in the library. The One first reads what the change would do, then asks you once in a system dialog: which version of which Plugin, which Plugins it needs that come along, which components are not for this computer and are left out, and how much is downloaded; when there are executable components, it says they run with your user permissions when an Agent uses them (**Full local access**). Installing checks and stores the Plugin files; it does not run Plugin code.
+
+Once you confirm, a panel at the top of the Plugins page follows the change: which component is downloading and how far along it is, with **Cancel**. When it is done, it gives each Plugin's result, such as **Installed 0.5.3**.
+
+Open a Plugin in **Installed** for the rest:
+
+- **Update** moves it to the newer version in the library.
+- **Switch back to …** (under **Settings**, for example **Switch back to 0.5.2**) returns to the version this computer kept, without a download.
+- **Remove from this device** (under **Settings**) deletes the Plugin. Agents that use it run without it until it is installed again; the roles, templates and references to it in your Spaces stay.
+
+Each of these is confirmed once in a system dialog too. When a version has no package for this computer, its details say so and ask you to choose another version.
+
+On the website, **Open in The One** on a Plugin in the [Plugin catalog](https://the-zeroth.com/en/extensions) starts the same from your browser: the app opens **Install extension**, which checks the signed release and the official catalog first (**Verify and continue**) while nothing is installed yet; **Install on this device** then asks once in the system dialog. The Plugin goes on this computer, and every Space can use it: there is no Space to choose.
 
 {/* screenshot pending: ![Installing a Plugin opened from the website](/docs-assets/images/0.5/en/plugins-install.png) */}
 
 A Plugin needs no Python or Node on your computer. The One builds a Python environment for it from the Plugin's own locked list of packages, and the first build can take a few minutes. Servers written for Node can run on the Node that comes with The One.
 
+## Local copies
+
+A local copy is a Plugin folder, with its `plugin.json`, in the Plugins folder. It runs as it is in every Space, with nothing to register; when a Plugin has a local copy, the local copy runs instead of the installed version.
+
+- An Agent that changes an installed Plugin first copies the installed version into the Plugins folder and changes the copy. A Plugin you or an Agent makes in the Plugins folder shows in **Installed** as a local copy too.
+- **Installed** marks a local copy **Local copy**; its details give its folder and the installed version it runs instead of. **Open folder** under **Settings** opens the folder in your file manager.
+- **Remove local copy** (under **Settings**) asks once in a system dialog, then moves the folder into the `plugins-removed` folder next to the Plugins folder: nothing is deleted, and you can move it back. The installed version runs again; when there is none, Agents that use the Plugin run without it.
+
 ## Settings and connections
 
-A Plugin's details hold two kinds of settings:
+A Plugin's **Settings** hold two kinds of settings:
 
-- **Configure Plugin**: ordinary values such as models and endpoints.
-- **Plugin connections**: API tokens, OAuth sign-ins and shared accounts. Signing in opens your browser. Connections are kept on this computer; which one the active Space uses is chosen under **Current Space usage**, in a Space of your own.
+- **Configure Plugin**: runtime values such as models and endpoints. They are kept on this computer, never in a Space, and every Space uses the same values, for local copies too.
+- **Plugin connections**: API tokens, OAuth sign-ins and shared accounts. Signing in opens your browser. Connections are kept on this computer and every Space can use them. **Current Space usage** shows which connection the active Space's roles use; it cannot be changed there. A role that names a connection uses that one; otherwise the connection in the `default` slot is used, or the only connection there is.
 
 Keys and sign-ins are stored encrypted on this computer. They are never part of a Plugin package or a Space. When an Agent needs a key to go on, it can ask you for it with a secure setup card: what you type there goes straight to protected storage, and the Agent only learns whether the connection is ready.
 
-The **Overview** of a Plugin's details has a **Runtime status** line for the active Space: **Ready**, **Action required** or **Unavailable**. A missing setting, or a sign-in or account still to choose, shows there, and it reads **Not used by this Space** when the active Space does not use the Plugin.
+A Plugin's **Overview** says whether the active Space uses it (**Used by this Space** or **Not used by this Space**). When it does, a **Runtime status** line reads **Ready**, **Action required** or **Unavailable**, and a missing setting, or a sign-in or account still to choose, shows there.
 
-## Give a Plugin to a role
+## Who uses a Plugin
 
-Installing a Plugin does not run it. Choose **Add to Agent** in the Plugin's details to add the whole Plugin to a role without opening the role's editor, or pick it under **Plugins** in the editor itself (see [Roles](./roles)). Both work in a Space of your own: the official Space is read-only, so copy it first (see [Spaces](./definition-spaces)). The main assistant can do this too, and it can make Plugins of its own from Skills, scripts and MCP servers.
+A Plugin that a role, template or Skill names works as soon as it is installed, in every Space. Many built-in roles already list official Plugins as optional; see "Used in the official Space by" in the table below. In the official Space and in Spaces copied from it, you do not need to add those Plugins to these roles once they are installed.
 
-Many built-in roles already list official Plugins as optional; see "Used in the official Space by" in the table below. In a Space copied from the official one, you do not need to add those Plugins to these roles again once they are installed.
+To give a Plugin to another role, choose **Add to a role** in the Plugin's details, pick the role and choose **Add Plugin**, without opening the role's editor; or pick it under **Plugins** in the editor itself (see [Roles](./roles)). Both work in a Space of your own: the official Space is read-only (see [Spaces](./definition-spaces)). The main assistant can do this too, and it can make Plugins of its own from Skills, scripts and MCP servers.
 
-When roles in your Space refer to Plugins you have not installed, for example after you import a Space, **Installed** says **Some Agents still need Plugin setup**. **Review all requirements** makes one change plan for every Plugin the Space's roles need and installs them together once you confirm; or install just the ones you need from the library, and let Plugins for roles you do not use wait.
+Before the main assistant gives a working group work, it checks whether the Plugins that group uses are on this computer. When one is missing and the work needs it, it installs it from the official catalog itself, through the same signature checks and without a dialog, and tells you in a line what and why; the call is recorded in the action log like any other. Its details then carry **Installed by an Agent**. The accounts and keys a Plugin needs are yours to give: the main assistant asks for them with a secure setup card. When this computer has no version of the Plugin that runs here, it tells you what the group does without it.
 
-To remove a Plugin from this computer, use **Uninstall Plugin** in its details. The roles, prompts and templates in your Spaces keep their references to it, and those references resolve to nothing until you install it again.
+When roles in the active Space use Plugins this computer cannot run yet, for example after you import a Space, **Installed** lists them at the top under **This Space names Plugins it cannot use yet**, each with the reason, and **Install Plugin** beside the ones that can be installed.
 
 ## Apps
 
-Once a Plugin brings an app you can open, **Apps** shows in the sidebar: it opens a quick menu of the apps your Plugins bring, and Cmd/Ctrl+Shift+A opens it from anywhere in the app. Double-click **Apps**, or choose **Manage all applications**, for the full list; **Teams and tools › Apps** opens it too.
+Once a Plugin brings an app you can open, **Apps** shows in the sidebar: it opens a quick menu of the apps your Plugins bring, and Cmd/Ctrl+Shift+A opens it from anywhere in the app. Double-click **Apps**, or choose **Manage all apps**, for the full list; **Teams and tools › Apps** opens it too.
 
 Apps follow the active Space: the list shows the apps of the Plugins that Space uses, and it changes when you switch Spaces.
 
-A click opens an app that can run inside The One, such as OneCanvas, as a tab in the workspace of the **All runs** page. **Other ways to open** lists the others the app supports: in an isolated web window, in the system browser, or as a native application. Closing an app's own window also stops the app.
+A click opens an app that can run inside The One, such as OneCanvas, as a tab in the workspace of the **All runs** page. An app's details list under **Ways to open** every way it supports: inside The One, in an isolated web window, in the system browser, or as a native app, with the default one marked **Default**. Closing an app's own window also stops the app.
 
 ![The Apps quick menu](/docs-assets/images/0.5/en/plugins-apps-menu.png)
 
@@ -85,9 +108,9 @@ As with every tool, what Agents do through a Plugin is recorded in **Settings �
 
 ## Make and share a Plugin
 
-In **Installed**, **Create Plugin** opens the Plugin's manifest, a JSON file in which you declare its Skills, scripts, MCP servers, apps and connectors by hand; it also needs a Space of your own. Asking the main assistant to build the Plugin is usually easier.
+A Plugin is a folder with a `plugin.json`. The easiest way to make one is to ask the main assistant: it builds the Plugin from Skills, scripts and MCP servers in the Plugins folder, where it is a local copy that every Space can use, and adds it to the roles that need it. A Plugin folder you put in the Plugins folder yourself shows in **Installed** too.
 
-To share a Plugin you made, choose **Share Plugin**, pick a visibility (**Public**, which is selected at first, listed after review; **Unlisted**, reachable by its link; or **Private**, visible only to your account) and add tags. Sharing needs you signed in to your The Zeroth account, and the visibility and tags apply only to the first share: later versions keep the settings on the website. The One packages, signs, uploads and submits it in one step. The names and descriptions of its settings are shared; your tokens, accounts and the values you entered are not. Follow the review with **Manage on website**.
+To share a Plugin you made, open it in **Installed** and choose **Share Plugin** under **Settings**, pick a visibility (**Public**, which is selected at first, listed after review; **Unlisted**, reachable by its link; or **Private**, visible only to your account) and add tags. Sharing needs you signed in to your The Zeroth account, and the visibility and tags apply only to the first share: later versions keep the settings on the website. The One packages, signs, uploads and submits it in one step. The names and descriptions of its settings are shared; your tokens, accounts and the values you entered are not. Follow the review with **Manage on website**.
 
 ## Official Plugins
 
@@ -104,5 +127,7 @@ To share a Plugin you made, choose **Share Plugin**, pick a visibility (**Public
 | Visual Check | Renders a web page, PDF or image to a screenshot, compares it with a reference, and marks and explains what differs | Frontend design studio, Image studio, Software team, Storefront studio |
 | Tavily Search | Lets the built-in web search use your own Tavily account; without it, web search uses your model provider's own | Works once installed with a key; no role needed |
 | Agent Room Channel | Lets **Settings › Phone and other programs › Phone channel** reach your Agents from your phone through Agent Room; see [Phone channel and outside callers](../remote) | The Phone channel uses it; no role needed |
+
+The roles of the groups that use Computer Use now look at web pages with the Agents' own [browser](../browser), which needs no Plugin; the Computer Use they bind is kept for work on the desktop.
 
 Computer Use and OneCanvas need a screen, so they have no build for the [Linux server](../../start/linux-server).

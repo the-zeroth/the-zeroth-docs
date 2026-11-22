@@ -9,7 +9,7 @@ This guide takes you from installing The One to your first matter: the main assi
 
 Download The One for macOS (Apple Silicon, macOS 15 or later) or Windows (x64) from the [download page](https://the-zeroth.com/en/download) and install it.
 
-The first time it opens, the window asks you to sign in: choose **Sign In**, sign in with your The Zeroth account in the browser, and come back to The One. Until a model is set up, the app opens **Get started**, which is in the sidebar too and walks you through the next steps; once you are set up, it leaves the sidebar.
+The first time it opens, the window asks you to sign in: choose **Sign in or sign up**, sign in with your The Zeroth account in the browser, and come back to The One. Without an account, sign up for free on the page that opens; it works without a membership too, with your own ChatGPT account or a model API key. Until a model is set up, the app opens on **Get started**, which is in the sidebar too and walks you through the next steps; it stays in the sidebar until you have been through it.
 
 The app opens in **Plain White**, the light look the screenshots here use; for the dark **Graphite**, or to follow the system, go to **Settings › General › Appearance**.
 
@@ -27,7 +27,7 @@ The main assistant and the working groups work with a model, so this comes first
 
 ## 3. Choose a main model
 
-Choose a **main model**: the main assistant works with it, and the five slots, **Planning**, **Coding**, **Vision**, **Writing** and **Fast**, run on it too, each at its own thinking depth, so every working group has a model. Once a service is connected, the **Model** field already holds that provider's flagship model, as long as its model directory lists it, at **Medium** depth: choose **Save main model** as it is, or pick another. A custom provider starts empty, so you pick the model yourself.
+Choose a **main model**: the main assistant works with it, and the five slots, **Planning**, **Coding**, **Vision**, **Writing** and **Fast**, run on it too, each at its own thinking depth, so every working group has a model. Once a service is connected, the **Model** field already holds that provider's flagship model, as long as its model directory lists it, at **Medium** depth: choose **Save main model** as it is, or pick another. A custom service (a relay, Ollama or LM Studio, for example) starts on one of those flagship models when it lists one, or on its only model; with several models and no flagship among them, the field stays empty and you pick the model yourself.
 
 You can change it any time from the model button under the main assistant's composer or in **Settings › Models and sign-in › Models**, where you can also give one slot a model of its own, for example **Writing** from another provider. See [Models](../the-one-app/capabilities/models).
 
@@ -37,11 +37,13 @@ Agents in a Space can name a model or a connection of their own, for example in 
 
 ## 5. Set up your own Space (recommended)
 
-You start in the official Space: the Space menu at the top of the sidebar lists it as **Official**, and the **Spaces** page marks it **Read-only**. Its working-group templates, roles and Skills are kept by The One and updated with new versions, so whatever the main assistant and the evolution lab find to improve stays a proposal there. Choose **Copy the official Space and use it** to work in a Space of your own, where their changes take effect and you can edit anything yourself. The cost is that later updates to the official Space do not reach your copy by themselves. To bring in a Space someone shared with you, choose **Import / manage Spaces**. See [Spaces](../the-one-app/capabilities/definition-spaces).
+The official Space is read-only: its working-group templates, roles and Skills are kept by The One and updated with new versions, so whatever the main assistant and the evolution lab find to improve stays a proposal there. A new install of The One starts in a Space of your own, **My Space**, a copy of the official Space: their changes take effect there, you can edit anything yourself, and later official updates still come in (files you have not changed update by themselves, files you changed keep your version, and the official version waits for you to choose). So this step starts out done, and **Make another copy** makes a second copy if you want one.
+
+If you upgraded from an earlier version and are still in the official Space (the Space menu at the top of the sidebar lists it as **Official**, and the **Spaces** page marks it **Read-only**), choose **Copy the official Space and use it** to work in a Space of your own. To bring in a Space someone shared with you, choose **Import / manage Spaces**. See [Spaces](../the-one-app/capabilities/definition-spaces).
 
 ## 6. Tell the main assistant the first thing
 
-The last step is **Ready to go**. It starts with the three things that are all you need: **Conversation**, where you tell the main assistant anything first; **Waiting for you**, the groups' deliveries and the questions only you can settle, in the strip above the conversation; and **Panorama**, to see who is working on each thing now and how far it is. Type what you want done and choose **Give it to the main assistant**: the app goes to the home page, where the main assistant answers. Or choose **Look at the home page first**. The home page is **Conversation** in the sidebar.
+The last step is **Ready to go**. It starts with the three things that are all you need: **Conversation**, where you tell the main assistant anything first; **Waiting for you**, the groups' deliveries and the questions only you can settle, in the strip above the conversation; and **Panorama**, to see who is working on each thing now and how far it is. Type what you want done and choose **Give it to the main assistant**: the app goes to the home page, where the main assistant answers. Or choose **Look at the home page first**. The home page is **Conversation** in the sidebar. Either way, **Get started** then leaves the sidebar; **Reopen Get started** in the **…** menu at the top left of the window brings it back. Once a model is set up, **Hide Get started** under the progress bar of the steps puts it away too.
 
 ![The last step of Get started](/docs-assets/images/0.5/en/quick-start-ready.png)
 
@@ -51,7 +53,7 @@ The last step is **Ready to go**. It starts with the three things that are all y
 - The matter's board fills as the group works: its questions and deliveries arrive as cards. Those that wait for you also show in the conversation, under the line that announces them; the strip above the conversation counts them (for example **2 waiting for you**), and so does the number beside **Conversation** in the sidebar. The main assistant answers the questions it can settle from what you already told it.
 - To see what every working group is doing right now, open **Panorama** in the sidebar; see [Panorama](../the-one-app/panorama).
 - When the group delivers, the main assistant checks the delivery against what you asked for and tells you the conclusion first. Judge it with **Accept**, **Rework** (your words go back to the group) or **Give up**.
-- When the work is done, close the matter: point at it in the sidebar and choose the close button at its right, or choose **Close matter** on its page. The work for it stops at the step it is at, and reopening the matter picks it up again. See [Matters and boards](../the-one-app/matters).
+- When the work is done, close the matter: point at it in the sidebar and choose the close button at its right (a check mark in a circle), or choose **Close matter** on its page. The work for it stops at the step it is at; the matter moves to **Closed** at the foot of the sidebar's list, and reopening it picks the work up again. See [Matters and boards](../the-one-app/matters).
 - The first time you open the app on a day, or come back to it on a new day after an hour or more away, the main assistant greets you in the conversation if there is news you have not seen, with what happened since you last looked. **Got it** puts the greeting away for the rest of the day.
 - To look back at what was delivered this week, how much passed first time, how often you were asked and what it cost, open **Weekly report** in the sidebar; see [Weekly report](../the-one-app/weekly).
 

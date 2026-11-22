@@ -27,6 +27,8 @@ A new matter gets a short title and an overview that says where the work should 
 
 In the same step, the assistant hands the work to a working group. The group starts at once, and the assistant stays free for you and your other matters. It picks the group from the Space's working-group templates: software work in a code project goes to the software team (`polished_software_dev`), whose lead and checkers turn your requirements into tests as it builds; research and studio work goes to the template made for it; other multi-step work goes to the **General group** (`chat`). Among the templates that fit, it prefers one that has done this kind of work well. It has a new template written (by the **Definitions studio**, `atlas`) only when none fits and the work will come back.
 
+Before it hands the work over, it also checks whether the Plugins that group uses are on this computer. When one is missing and the work needs it, it installs it from the official catalog itself and tells you in a line what and why; the accounts and keys a Plugin needs are yours to give, and it asks for them with a secure setup card. When this computer has no version of the Plugin that runs here, it tells you what the group does without it. See [Plugins and Apps](./capabilities/plugins).
+
 See [Working-group templates](./capabilities/working-group-templates), [Matters and boards](./matters) and [Working groups](./working-groups).
 
 ## Your words, as you said them
@@ -79,6 +81,8 @@ The assistant holds every control you have on a matter's page. When you ask, it 
 
 It has full authority over your work, including the sign-ins and saved keys on this computer and the spending the work needs. Nothing waits for your approval. It asks you only when it chooses to, for example when only you know something it needs. What keeps you in control is the record of everything Agents did and the undo that goes with it: see [Action log, undo and stopping](./action-log).
 
+It does not carry every tool in each request: the tools it rarely uses, and the tools of external tools (MCP) and Plugins, it finds by search when it needs them, and what it finds is ready to use at once.
+
 It can improve the Space itself too. Ask for a new template, role or Skill and it writes the definitions, itself or through the Definitions studio. Ask it to make the Space better at its own work and it opens the evolution matter (see [Evolution: the lab and the nightly review](./evolution)). Such changes take effect only in a Space of your own; in the read-only official Space they stay proposals. See [Spaces](./capabilities/definition-spaces).
 
 ## The home page
@@ -92,12 +96,13 @@ In a new Space where nothing was said yet, **How to start** sits above the box: 
 At the top of the sidebar are The One and the Space you are in; click the Space's name to switch to another. Below them come:
 
 - **Conversation**: back to this conversation. The number beside it is how many things wait for you.
-- **Get started**: only until a model is set up; see [Quick Start](../start/quick-start).
+- **Get started**: from your first use until you have been through it; after that only while no model is set up, or when **Reopen Get started** in the **…** menu at the top left of the window brings it back. See [Quick Start](../start/quick-start).
 - **Panorama**: what the working groups on every open matter, and their Agents, are doing now. While Agents are at work it says how many, quietly, such as **3 at work**. See [Panorama](./panorama).
-- **Matters**: the heading says how many are open (such as **All 4**) and opens the Matters overview; under it is each open matter. **New matter: just ask**, under the list, brings you back here with the cursor in the composer. See [Matters and boards](./matters).
+- **Browser**: the Agents' own browser, to watch what they do on the web and take over at any time. While an Agent uses it, it says **in use**. See [Browser](./browser).
+- **Matters**: the heading says how many are open (such as **4 open**) and opens the Matters overview; under it is each open matter. **New matter: just ask**, under the list, brings you back here with the cursor in the composer; while you have closed matters, **Closed (N)** comes under it. See [Matters and boards](./matters).
 - **Runs by itself**: the schedules and triggers that start work on time or when something new arrives; it opens the **Background & triggers** page under **Settings › Runs by itself**. Beside it, quietly, is how many are waiting (such as **2 waiting**), or **Paused** while every trigger is paused. See [Triggers and running in the background](./triggers).
 - **Weekly report**: a look back at the last 7 days: what was delivered, how much passed first time, how often you were asked, what it cost and what it changed by itself. See [Weekly report](./weekly).
-- **Teams and tools**: what each working group does and which matters it works for, and the Plugins, Skills, roles and models. See [Teams and tools](./capabilities).
+- **Teams and tools**: what this Space's working groups do, which matters they work for and what they are made of, and the Plugins, apps and models every Space shares. See [Teams and tools](./capabilities).
 - **Apps**: only when a Plugin brings an app you can open; see [Plugins and Apps](./capabilities/plugins).
 - **Settings**: see [Settings](./settings).
 
@@ -144,6 +149,10 @@ Two seconds of the greeting on screen, with the window in front, or **Got it**, 
 Your own words show as your messages, including what you send from your phone (marked **From your phone**). The assistant's replies show in full; what it did on the way folds into one line of plain words that opens into one line per step. When it asks you something, the question is marked **Waiting for your answer**, and **Reply to this** makes what you send next the answer. A line above the first message of each day names the day: **Today** or **Yesterday** with its date, and the date alone for earlier days.
 
 Messages that reached the assistant from elsewhere show as one line saying what happened, so they never mix with yours: a working group asked a question, handed something in, could not finish, keeps failing or stopped on a matter (**Open** goes to that matter), a trigger came due, or an outside program wrote. The line names the group in plain words, such as **Software team**. While the question or delivery it brought still waits for you, its card sits under the line, with the matter and the group it came from, and you answer or judge it there. Once it is handled, the card folds into one line where it was, saying what became of it: for example "You accepted delivery 1 of “Checkout redesign”" with **Look** for its evidence, or "The main assistant answered “Refund policy” for you" with the answer. On the latest delivery of a piece of work, **Change your mind** on that line brings back the verdicts it still allows.
+
+What no longer needs you folds away: a run of working-group notices whose cards are handled (or replaced by a newer delivery, or no longer asked), with the assistant's turns between them that said nothing to you (its bookkeeping on the matters), becomes one line, such as "General group on “Checkout redesign”: handed in 3, asked 2, all handled", with its first and last times. Choose the line and it opens in place into the lines it holds; choose it again to fold them. Nothing folds that still waits for you, that you handled since you opened the home page, that the assistant said to you, that is a reply that did not get through, a run of errors or a stop, or a day's first line and the greeting.
+
+The lines of a matter you closed stay where they are, quieter, with a **Closed** tag in place of **Open** that opens the matter; reopening the matter brings them back as they were.
 
 While the assistant is busy, a line above the composer says what it is doing (thinking, at work, compacting its history or trying again), and **Stop** interrupts it; while it rests, the line is gone. When a reply did not get through, the message says why in plain words, for example that the model is too busy or that the official connection's allowance is used up, and the line says when it tries again, with **Try now** to try at once. To talk to the assistant from your phone, see [Phone channel and outside callers](./remote).
 

@@ -28,7 +28,7 @@ The main assistant, and every role bound to no slot and naming no model of its o
 
 Choose **Save main model**. Roles and slots that follow the main model use it from their next turn; a reply already being written finishes as it started. **Source**, next to **Main model**, shows it read-only, as the app's preferences file stores it.
 
-While there is no main model yet (in **Get started** and on this page alike), the **Model** field already holds the flagship model of the provider you connected, as long as its model directory lists it, at **Medium** depth: choose **Save main model** as it is, or pick another. Switch the connection and the filled-in model follows it; once you pick or type a model yourself, it is left alone. A custom provider starts empty, so you pick the model yourself.
+While there is no main model yet (in **Get started** and on this page alike), the **Model** field already holds the flagship model of the provider you connected, as long as its model directory lists it, at **Medium** depth: choose **Save main model** as it is, or pick another. A custom service (a relay, Ollama, LM Studio and the like) starts on one of those flagship models when it lists one, or on its only model; with several models and no flagship among them, the field stays empty. Switch the connection and the filled-in model follows it; once you pick or type a model yourself, it is left alone. A custom provider starts empty, so you pick the model yourself.
 
 There is no temperature setting: every request uses the provider's default. Older definitions that still name a temperature load as before, but the value is not sent.
 

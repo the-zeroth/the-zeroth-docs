@@ -15,7 +15,8 @@ For each tool call it keeps:
 
 - which Agent and which run made it, and the tool and its arguments, with anything that looks like a key or password left out;
 - which files it created, modified or deleted, each with its version before and after;
-- which addresses it reached, and how it ended.
+- which addresses it reached, and how it ended;
+- when an Agent uses its own [browser](./browser), the requests the page sent during the step that write to a site, such as a submitted form: the method, the address with only the names of its query parameters, and the tab. Requests sent while you act in a tab are not recorded.
 
 A change found between two calls, such as a file you or another program edited, is recorded too, as a **change seen**, and can be undone like the rest. Calls you make yourself, through a Plugin's panel in a conversation or on a board, are recorded as yours.
 
@@ -62,7 +63,7 @@ The copies live in the app's trash for 7 days, then are removed automatically. W
 
 ### What undo does not cover
 
-- **Actions that left this computer**: payments, pushes, emails, publishes, deploys, remote commands and requests that sent data. They go ahead as usual and are marked on the run ("Happened outside this computer, cannot be undone"). When a payment, push, email, publish or deploy really happens, The One tells you at once: one system notification, and a line **Outside actions that cannot be taken back** under the strip above the conversation (see [The strip above the conversation](./main-assistant#the-strip-above-the-conversation)). The [Weekly report](./weekly) lists them under **Actions that cannot be taken back**. Tests and rehearsals are not told, and the weekly report only counts them.
+- **Actions that left this computer**: payments, pushes, emails, publishes, deploys, remote commands and requests that sent data, forms an Agent submitted in the browser included. They go ahead as usual and are marked on the run ("Happened outside this computer, cannot be undone"). When a payment, push, email, publish or deploy really happens, The One tells you at once: one system notification, and a line **Outside actions that cannot be taken back** under the strip above the conversation (see [The strip above the conversation](./main-assistant#the-strip-above-the-conversation)). The [Weekly report](./weekly) lists them under **Actions that cannot be taken back**. Tests and rehearsals are not told, and the weekly report only counts them.
 - **Dependency and cache folders**, such as `node_modules`, `.git` and `.venv`, and folders your `.gitignore` names, unless a command names a file in them.
 - **Your home folder itself, and the big folders right under it**, such as Documents, Desktop and Downloads: when a command runs in one of them, The One copies only the files the command names, not the whole folder.
 - **What an MCP tool writes elsewhere**: an MCP tool, including a call you make through a panel, gets copies only of the files its arguments name by full path. A payments Plugin's tools, for example, keep a ledger that is not copied: the calls are listed, but there is no file to put back.

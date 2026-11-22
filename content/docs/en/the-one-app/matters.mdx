@@ -16,7 +16,7 @@ A matter is not a single run. Several working groups can work on it at the same 
 
 ## Matters in the sidebar
 
-Open matters are listed under **Matters** in the sidebar, each with a dot in front. Those that wait for you come first, then those in trouble, then work going on, then delivered and quiet ones; within each, the most recently changed comes first. A matter that waits for you or ran into trouble has a second line saying what is up; the others keep to one line and show theirs when you hover. The **Matters** heading says how many are open, such as **All 4**, and opens the Matters overview (below).
+Open matters are listed under **Matters** in the sidebar, each with a dot in front. Those that wait for you come first, then those in trouble, then work going on, then delivered and quiet ones; within each, the most recently changed comes first. A matter that waits for you or ran into trouble has a second line saying what is up; the others keep to one line and show theirs when you hover. The **Matters** heading says how many are open, such as **4 open** (nothing while none is), and opens the Matters overview (below).
 
 That line says one of these, in the same words as in the Matters overview and on the [Panorama](./panorama):
 
@@ -34,11 +34,11 @@ That line says one of these, in the same words as in the Matters overview and on
 | **Always on · waits for its next trigger** | Nothing is going on now; its triggers bring the next work. |
 | **Not started yet** | No group has started on it. |
 
-Hover over a matter (or reach it with the keyboard) and an end button shows on its right; see [Closing and reopening](#closing-and-reopening) below. **New matter: tell the assistant**, under the list, takes you to the main assistant's composer. Closed matters leave the list; the Matters overview shows them under **Closed**. **Panorama**, above the matters, draws every open matter with its working groups on one page; see [Panorama](./panorama).
+Hover over a matter (or reach it with the keyboard) and an end button, a check mark in a circle, shows on its right; see [Closing and reopening](#closing-and-reopening) below. **New matter: just ask**, under the list, takes you to the main assistant's composer. Closed matters leave the list; while there are some, a quiet **Closed (N)** line under it opens the Matters overview on **Closed**. **Panorama**, above the matters, draws every open matter with its working groups on one page; see [Panorama](./panorama).
 
 ## The Matters overview
 
-The overview, titled **Matters**, lists every open matter, one line each: its dot and status line, the working groups on it in plain words (such as **Software team**) and when it last changed. The lines come in four parts: **Waiting for you**, **In progress** (including matters whose groups did not finish or keep hitting errors), **Scheduled** (matters whose triggers bring their work) and **The rest**. The filters at the top (**All**, **Waiting for you**, **In progress**, **Scheduled** and **Closed**) narrow the list to one part, or to the matters you closed, and **Search matters** finds a matter by its title or its one-line summary.
+The overview, titled **Matters**, lists every open matter, one line each: its dot and status line, the working groups on it in plain words (such as **Software team**) and when it last changed. The lines come in four parts: **Waiting for you**, **In progress** (including matters whose groups did not finish or keep hitting errors), **Scheduled** (matters whose triggers bring their work) and **The rest**. The filters at the top (**All**, **Waiting for you**, **In progress**, **Scheduled** and **Closed**) narrow the list to one part, or to the matters you closed; a closed matter says when it closed, such as **Closed just now**. **Search matters** finds a matter by its title or its one-line summary.
 
 At the top right, **New matter: tell the assistant** takes you to the main assistant's composer, and **Open one yourself** opens a matter by hand, for when you want to collect notes before you hand something over. Give it a **Title**, say **What it is and where it should get to**, choose **Open matter**, and you land on its board. The assistant sees it among its matters; tell it what to do with it.
 
@@ -146,12 +146,13 @@ Below the board, **Changes** counts the files the matter's working groups change
 Close a matter when you are done with it. There are two ways:
 
 - **Close matter**, at the top right of the matter's page, closes it with one press; hover it and it says what closing means.
-- In the sidebar or on the [Panorama](./panorama), hover over a matter (or reach it with the keyboard) and an end button shows on its right. It asks once more (**Close "…"?**), so a stray click does not stop a group's work. When things on the matter or its sub-matters still wait for you, the dialog says how many and names the first three: **Handle them first** takes you to the matter's page instead of closing it, **Close matter** closes it, and **Cancel** does nothing.
+- In the sidebar or on the [Panorama](./panorama), hover over a matter (or reach it with the keyboard) and an end button (a check mark in a circle) shows on its right. It asks once more (**Close "…"?**), so a stray click does not stop a group's work. When things on the matter or its sub-matters still wait for you, the dialog says how many and names the first three: **Handle them first** takes you to the matter's page instead of closing it, **Close matter** closes it, and **Cancel** does nothing. Once it is closed, a notice says which matter closed and where to find it, with **Reopen**.
 
 Once a matter is closed:
 
 - The work for it stops at the step it is at, and its triggers pause. A group at work on it finishes the step at hand and stops, and its card says **It paused when the matter was closed; reopen the matter and it goes on.**; the cadence card says **Paused with the matter**. A group that also serves other matters goes on with theirs.
-- It leaves the sidebar and the Panorama; find it in the Matters overview under **Closed**.
+- It leaves the sidebar's list and the Panorama for **Closed** at the foot of the sidebar, which is **Closed** in the Matters overview too. Closing it on its own page shows no notice; the page's header says it is closed.
+- Its lines in the main assistant's conversation stay where they are, quieter, with a **Closed** tag that opens the matter.
 - Its questions, deliveries and failures, and its sub-matters', stop waiting for you: they leave **Waiting for you** above the conversation, the board's **Waiting for you** and every count of what waits. The weekly report stops asking too: a delivery it made in the report's 7 days still counts as delivered but reads **Matter closed: reopen it to judge this**, without verdict buttons.
 
 Closing is not a verdict: its deliveries still wait for your verdict, and reopening the matter brings them back to what waits for you. Reopening also picks up where the work stopped: paused groups go on, and its triggers come back on, counting from now (fires missed while it was closed are not made up).

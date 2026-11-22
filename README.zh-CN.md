@@ -39,8 +39,8 @@ content/docs
 |   +-- start/                       快速入门、模型与价格、Linux 服务器、发布记录
 |   |   `-- release-notes/           每条版本线一页
 |   +-- the-one-app/                 使用 The One
-|   |   +-- main-assistant.mdx …     主助手、事项、工作组、全景、等你和晨报、
-|   |   |                            触发器、进化、行动记录、随身通道
+|   |   +-- main-assistant.mdx …     主助手、事项、工作组、全景、浏览器、等你、
+|   |   |                            周报、触发器、进化、行动记录、随身通道
 |   |   +-- capabilities/            工作组模板、角色、技能与提示词、MCP、模型、
 |   |   |                            插件、总图、空间、记忆
 |   |   `-- settings/                设置、模型连接、所有运行

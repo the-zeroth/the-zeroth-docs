@@ -19,7 +19,7 @@ Choose **Add Server**. The form, **Connect to Custom MCP**, starts with the **Na
 
 A STDIO server runs with your user account's rights: it can read and change files, use the network and start other programs. The page marks it **Full local access**; the environment settings only decide which values it receives and are not a sandbox.
 
-Once started, a STDIO server keeps running between calls, and every Agent and working group shares that one process: a server that keeps state shows the same state to all of them. Chrome DevTools in the official Space is the exception, with one process per working group (below); the form has no setting for this.
+Once started, a STDIO server keeps running between calls, and every Agent and working group shares that one process: a server that keeps state shows the same state to all of them. Chrome DevTools in Spaces copied before 0.5.3 is the exception, with one process per working group (below); the form has no setting for this.
 
 You do not need Node installed for servers started with `npx` or `node`: The One uses your computer's Node when there is one, and its own otherwise. On a Mac, commands installed with Homebrew, nvm or Volta are found even when you open the app from the Dock. Node is the only runtime The One brings: a server started with a command such as `uvx`, `python` or `docker` needs that command installed on your computer.
 
@@ -55,15 +55,17 @@ An Agent's call never opens a sign-in by itself. When a saved sign-in stops work
 
 ## The server in the official Space
 
-The official Space ships one server, **Chrome DevTools**: browser automation in the Google Chrome installed on your computer. Agents open and navigate pages, read them as text snapshots or screenshots, click and fill in forms, and read the console and network requests. Its package comes with The One, so it needs neither Node nor a download. Each working group gets a process and browser profile of its own, so one group never acts on another group's pages.
+The official Space ships one server, **Your Chrome**. It connects to the Google Chrome you are running (144 or later), so Agents can use the sites you are signed in to there, such as a Google account or your company's systems. Open `chrome://inspect/#remote-debugging` in Chrome and turn on remote debugging; Chrome then asks you each time it connects. Every working group shares the one connection, and there is no extension to install and nothing to pair. When Chrome is not running or remote debugging is off, the error the Agent gets says so, and it can tell you. Its package comes with The One, so it needs neither Node nor a download.
 
-Ten roles of the official Space that work in a browser use it: the software team's solution lead and developer, the three frontend studio roles, the Blender director and reviewer, the deep web researcher, and the product evaluation director and simulated users. Copying the official Space copies it too; a new, empty Space does not have it.
+In the official Space, the main assistant and the General group's assistant get every server, this one included. Other roles do not use it to browse: they use the Agents' own [browser](../browser), and the roles that used the Chrome DevTools server before 0.5.3 use the browser now. Copying the official Space copies the server too; a new, empty Space does not have it.
+
+Spaces copied before 0.5.3 do not follow official updates, so they keep the earlier **Chrome DevTools** server: it opens a Chrome of its own on your computer, with a process and browser profile per working group, so one group never acts on another group's pages, and the same roles as before use it.
 
 Controlling the desktop and other apps is not a server in the Space: it is the **Computer Use** Plugin.
 
 ## MCP servers inside Plugins
 
-Many tools come as Plugins that carry an MCP server, such as Blender Control, OneCanvas, Mailbox and Computer Use. Install the Plugin and, in a Space of your own, add it to a role: the server's launch settings come from the signed Plugin and its keys from the Plugin's own settings, so there is nothing to fill in on this page. These servers show in the list above, but you manage them from the Plugin. **Browse Plugins** opens the Plugin library ([Plugins and Apps](./plugins)).
+Many tools come as Plugins that carry an MCP server, such as Blender Control, OneCanvas, Mailbox and Computer Use. Install the Plugin, and the roles that name it use it, in every Space; to give it to another role, add it to that role in a Space of your own. The server's launch settings come from the signed Plugin and its keys from the Plugin's own settings, so there is nothing to fill in on this page. These servers show in the list above, but you manage them from the Plugin. **Browse Plugins** opens the Plugin library ([Plugins and Apps](./plugins)).
 
 Prefer a Plugin when a tool needs code, settings or keys you would otherwise set up again in every Space. Keep a server on this page when it belongs to this Space alone.
 
@@ -75,7 +77,7 @@ In the official Space and in your copies of it, the main assistant and the Gener
 
 ## How Agents use MCP tools
 
-- To keep each request short, an Agent first sees an MCP tool by name only. It finds tools with `search_tools` and loads a tool's full description and parameters with `load_tool`, ready from its next turn.
+- To keep each request short, an Agent first sees an MCP tool by name only. It finds tools with `search_tools` and loads a tool's full description and parameters with `load_tool`, ready from its next turn. The main assistant and the General group's assistant skip `load_tool`: the tools their `search_tools` finds (up to five at a time) are ready to call at once.
 - Besides tools, Agents can list and read a server's resources and use its prompts.
 - A server on the 2026-07-28 revision can ask a question in the middle of a call, for example to confirm an option. The Agent gets the question as the call's result and answers it. Servers on older revisions do not ask.
 - Tool cards label what a call may do, from hints the server gives: **Read-only** when the server marks the tool read-only; otherwise **Changes things**, plus **Reaches outside** unless the server says the tool stays local. The hints only describe: nothing is stopped or asked because of them. Read-only calls an Agent makes together run side by side.
