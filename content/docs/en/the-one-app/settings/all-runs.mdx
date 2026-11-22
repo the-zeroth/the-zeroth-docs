@@ -11,9 +11,9 @@ Open it with **Open all runs** in **Settings › Developer**, or, with the devel
 
 ## The run list
 
-The left column, **Workspace**, starts with **Talk to the main assistant** (back to the home page) and **New Graph**, and a search box for sessions and projects with filters for runtime status, **Pinned only** and **Include archived**. Below them:
+The left column, **Workspace**, starts with **Talk to the main assistant** (back to the home page) and **New run**, and a search box for sessions and projects with filters for runtime status, **Pinned only** and **Include archived**. Below them:
 
-- **Projects**: the project folders on your list, each with the runs that work in it; a sub-Graph sits under the run that started it. A folder you choose in New Graph joins the list. A project's row can start a new Graph in that project, delete every Graph under it, or take it off the list.
+- **Projects**: the project folders on your list, each with the runs that work in it; a sub-Graph sits under the run that started it. A folder you choose in New run joins the list. A project's row can start a new Graph in that project, delete every Graph under it, or take it off the list.
 - **Chat Assistants**: older chat sessions, shown only while there are some.
 - **Atlas Sessions**: your sessions with the Atlas; opening one takes you to the [Atlas](../capabilities/atlas).
 - **Unfiled**: runs whose folder is not on your list of projects, such as a working group's run in another folder, or a run given no folder that works in the app's data folder.
@@ -23,16 +23,16 @@ The main assistant's own conversation is not listed: it stays on the home page. 
 
 ## Starting a Graph yourself
 
-**New Graph** gives a task straight to one Graph, without the main assistant:
+**New run** gives a task straight to one Graph, without the main assistant:
 
-1. **Choose a blueprint**: the Graph to run. The software team, `polished_software_dev`, comes first, marked **Factory software team**.
-2. **Project and task**: the **Project root (optional)** is the folder the run works in; left unspecified, the run works in the app's data folder. The **Task (optional)** goes to the Graph's first Agent as your message and starts the run: with a task the button reads **Start task**, and Cmd/Ctrl+Enter does the same. With no task the button reads **Create Graph**, which only creates the run, and you write to an Agent yourself.
+1. **Choose a Graph**: the Graph to run. The software team, `polished_software_dev`, comes first, marked **Software team**.
+2. **Project and task**: the **Project root (optional)** is the folder the run works in; left unspecified, the run works in the app's data folder. The **Task (optional)** goes to the Graph's first Agent as your message and starts the run: with a task the button reads **Start task**, and Cmd/Ctrl+Enter does the same. With no task the button reads **Create run**, which only creates the run, and you write to an Agent yourself.
 
 **What it needs to run** checks everything the Graph names: models (the main model, slots, saved configurations or a model a role names itself), connections, roles, prompts, Skills, external tools and Plugins. It says which missing piece would stop the run from being created, which would make its model requests fail, and which the run can do without. You can create the run either way. A run starts from the Graph as last saved.
 
 A run started this way belongs to no matter: the task you write is its mission, you judge its deliveries in the **Mission** bar at the top of the run (below), and its questions and deliveries also wait in the strip above the conversation.
 
-{/* screenshot pending: ![New Graph, with what the Graph needs to run: the Models row naming the main model and the slots it uses, then connections and roles](/docs-assets/images/0.5/en/all-runs-new-graph.png) */}
+![New run, with what the chosen Graph needs to run: the Models row naming the slots it uses and the model each runs on, then connections and roles](/docs-assets/images/0.5/en/all-runs-new-graph.png)
 
 ## Reading a run
 

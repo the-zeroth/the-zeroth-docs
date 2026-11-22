@@ -8,7 +8,7 @@ Agents in The One pass work and information in several ways, each suited to a di
 ## Inside a working group
 
 1. **Handoff.** An Agent calls `handoff_work` to pass work, files or a request to an Agent it is connected to by an edge. The sender goes to sleep and the receiver wakes with what it was handed, and nothing else of the sender's context.
-2. **Parallel wake-up.** With `activate_node` an Agent wakes another Agent of the same working group with what it should do, and carries on itself without waiting for it. This is how the shipped team's checkers start alongside the lead when the work begins.
+2. **Parallel wake-up.** With `activate_node` an Agent wakes another Agent of the same working group with what it should do, and carries on itself without waiting for it. A lead can use it to have a member work beside it from the start.
 3. **Shared files.** The Agents of a group work in the same folder and read what the others wrote.
 4. **TaskBoard.** An Agent plans tasks in layers. Each task gets a worker and a reviewer (the reviewer is cloned from the Agent that started the board), the tasks of one layer run in parallel, and the Agent gets the results back when the layer is done.
 5. **Sub-Graph.** An Agent runs another template as a sub-Graph and acts as its human: the sub-Graph's questions come to it, and it answers with `reply_to_subgraph`.

@@ -34,7 +34,7 @@ The menu in the toolbar is the template's default model: a slot (or a configurat
 
 To delete a node or an edge, select it and choose the bin in the toolbar, or press Delete. A node goes with its edges, and the edge inspector also has **Delete Edge**. To delete a whole template, hover over it in the list, choose ✕ and confirm.
 
-The pencil next to the template's name edits its ID and description. **Start a task** runs the template once, outside any matter, the way **New Graph** does in All runs: handy for trying it out. The run opens in [All runs](../settings/all-runs).
+The pencil next to the template's name edits its ID and description. **Start a task** runs the template once, outside any matter, the way **New run** does in All runs: handy for trying it out. The run opens in [All runs](../settings/all-runs).
 
 ![The Graph editor with the frontend design studio's template: three nodes and the edges between them](/docs-assets/images/0.5/en/working-group-templates-editor.png)
 
@@ -56,7 +56,7 @@ If validation cannot run at all, for example because the app's backend does not 
 Edges are not a fixed pipeline. An edge from A to B is permission: it lets A hand work to B. When A does, A goes to sleep and B wakes with exactly what A sent, the handoff's content and files, and nothing else of A's context. Whether and when to hand off is the Agents' judgement during the run, or yours when you tell them.
 
 - Edges point one way. For B to hand its result back, add an edge from B to A as well.
-- Without an edge, A cannot hand work to B. A lead that holds the graph tools can still start any node to work beside it, and a lead with a TaskBoard sends tasks to worker nodes that have no edges at all. The `developer` node of `polished_software_dev` is such a worker. Agents can also add an edge while they run.
+- Without an edge, A cannot hand work to B. A lead that holds the graph tools can still start any node to work beside it, and a lead with a TaskBoard sends tasks to worker nodes that have no edges at all. The `researcher` node of `deep_research` is such a worker. Agents can also add an edge while they run.
 - The Agent that hands off sees, in its instructions, each node it may hand to, with that role's description and the edge's text.
 
 That last point is why the edge's text matters. The **Transition description (handoff instruction)** in the **Edge Inspector** is what the sending Agent reads at the moment of handoff, so write it in full: when to hand off, what to pass along, and what the other side should produce. For example: "Once the review passes, hand the full plan, the API contracts and the data model to the developer and ask for runnable code with tests." The more specific it is, the more accurately the two work together.
@@ -82,7 +82,7 @@ These templates are all in the list of templates. Five more are built in and not
 
 | Template | In the app | What it does |
 | --- | --- | --- |
-| `polished_software_dev` | **Software team** | A solution lead builds; checkers started beside it turn the request, the project's conventions, reported symptoms and the places where separately specified features meet into checks; a developer node takes TaskBoard tasks. |
+| `polished_software_dev` | **Software team** | One lead owns the work alone: it works out what is wanted, settles on an approach, does the work, checks the result the way the person will meet it, and delivers. It hands parts to sub-agents only when you ask. |
 | `deep_research` | **Research group** | Research and synthesis, with researcher branches on a TaskBoard for independent evidence. |
 | `frontend_design_studio` | **Frontend design studio** | Frontend design and build. A design director first sets the project's design system (your brand's or the project's own, otherwise adapted from a ready-made starter) and shows it on the canvas when OneCanvas is installed; an implementer builds only from it; an independent design reviewer checks that the pages keep to it. |
 | `image_generation_studio` | **Image studio** | Images with the Image Generation Plugin: a coordinator and a runner. |
@@ -99,8 +99,7 @@ These templates are all in the list of templates. Five more are built in and not
 The factory teams are built on a few principles. They are worth keeping when you design your own:
 
 - Start with one owner who has the tools the work needs. Add a node only for something the others cannot see or do: other inputs, a narrower context, a different model, or useful parallel work. Copies of one role given the same inputs make the same mistakes.
-- Start checkers at the beginning, beside the builder, so what they find arrives before the decisions it should shape.
-- Give a checker the request, the data and the interfaces, not the work it checks: a checker that reads the implementation inherits its mistakes.
+- Have the owner check its own result the way the person will meet it, through the real entry points, before it delivers. The Software team is one lead that works this way; the studios add an independent reviewer where a second look sees what the maker cannot, such as whether the pages keep to the design system.
 - Put a rule where it is used, in the handoff it governs or in a Skill (see [Skills and prompts](./skills-and-prompts)), not in a role's standing prompt, where it acts even when it does not apply.
 - The lead's path is the cost: every hop on it adds turns. The number of nodes is a result, not a goal.
 
