@@ -37,6 +37,8 @@ Each Space has its own browser, with its own cookies, site data and sign-ins, an
 
 While an Agent holds a tab for a step, the requests the page sends that write to a site (anything but GET, HEAD and OPTIONS, such as a submitted form) are kept with the call in the action log: the method, the address with only the names of its query parameters, and the tab. What a site received cannot be taken back, so these calls are marked as sending data over the network and listed under **Actions that cannot be taken back** in the weekly report. You are not told at once, because many pages keep sending statistics of their own. Requests sent while you act in a tab are yours and are not recorded. See [Action log, undo and stopping](./action-log).
 
+After a step, the browser waits at least a moment, and until the page is quiet, before it hands the step's result to the Agent. So a request the step sets off a little later, such as a form submitted just after a click, belongs to that step: the Agent sees the page after the submission, and the submission is kept with that call.
+
 ## Your own Chrome
 
 Google accounts cannot sign in inside this browser. To let Agents use the sign-ins of your own Chrome, such as a Google account or your company's systems, use **Your Chrome**, an external tool server in the official Space that connects to the Chrome you are running (144 or later). Open `chrome://inspect/#remote-debugging` in Chrome and turn on remote debugging; Chrome then asks you each time it connects. There is no extension to install and nothing to pair. When Chrome is not running or remote debugging is off, the Agent is told so and can tell you.

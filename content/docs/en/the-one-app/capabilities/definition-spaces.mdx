@@ -3,7 +3,7 @@ title: Spaces
 description: A Space holds a whole set of templates, roles, Skills and memory. Copy the official one, which keeps taking its updates, then switch, import, export and share.
 ---
 
-A **Space** is one complete set of what your Agents work with: working-group templates, roles, prompts, Skills, external tools (MCP), scripts, request templates and the Space's memory, together with the list of Plugins its roles use. You can keep as many Spaces as you like, for example one per client or kind of work, and they do not affect each other.
+A **Space** is one complete set of what your Agents work with: working-group templates, roles, prompts, Skills, external tools (MCP), scripts, request templates, a models file naming the models it was tuned for, and the Space's memory, together with the list of Plugins its roles use. You can keep as many Spaces as you like, for example one per client or kind of work, and they do not affect each other.
 
 Manage them on the **Spaces** page. The Space switcher at the top of the sidebar, beside **The One**, shows the active Space; pick another from its menu to switch. **Manage Spaces…** at the bottom of the menu opens the page, and so does **Manage Spaces** at the top of **Teams and tools**; in the Extension Center it sits beside **Plugins**.
 
@@ -15,12 +15,13 @@ Everything in a Space is a file in the Space's folder:
 
 - working-group templates, roles, prompts, Skills, the settings of external tools (MCP), and scripts;
 - request templates, the ones in the composer's **Templates** menu;
+- the models it was tuned for: the names and thinking depths of the main model and the slots, without connections or keys (see [Models](./models#a-space-names-its-models));
 - the Space's memory (see [Memory and recall](./memory));
 - which Plugins its roles use, and those Plugins' settings that are not secret.
 
 Switching Spaces swaps that whole set. Other things belong to the computer and every Space shares them:
 
-- **The main model, the slots and the model connections** (see [Models](./models)). Roles and templates bind slots by name, so when you share a Space, its roles run on the other computer's main model and slots; a role that names a saved configuration or a particular connection needs the same one on the other computer.
+- **The model connections, and this computer's main model and slots** (see [Models](./models)). This computer's main model and slots run where the Space names no model, or names one this computer cannot run. Roles and templates bind slots by name, so when you share a Space, its roles run on the other computer's main model and slots; a role that names a saved configuration or a particular connection needs the same one on the other computer.
 - **The Plugin library**: the Plugins installed on this computer, the apps they bring, and their settings, connections and keys (see [Plugins and Apps](./plugins)). Every Space uses this one library, and a Space's roles name the Plugins they use.
 - **Settings › Data and undo › Action log**, which covers every Space so that undo can reach everything (see [Action log, undo and stopping](../action-log)).
 - A few more things span Spaces: the weekly report's spend is the total for every Space; **Pause all** on the triggers pauses every Space's triggers; and what earlier sessions concluded in a project folder can be found from any Space (see [Memory and recall](./memory)).
@@ -50,10 +51,11 @@ A new, empty Space therefore starts with these five templates and nothing else, 
 The One comes with the official Space, listed as **Official**. It is read-only: the app refreshes it on every launch, so it always carries the current version's templates, roles and Skills, and nothing else can change it. While you work in it:
 
 - templates, roles, prompts, Skills and external tools (MCP) can be read but not changed;
+- the models it names (GPT-6.2 Sol) can be read but not changed either; where this computer can run them, the official Space runs on them (see [Models](./models#a-space-names-its-models));
 - what the main assistant and the evolution lab find to improve stays a proposal (see [Evolution: the lab and the nightly review](../evolution));
 - Agents cannot write memory.
 
-The main model, the slots and Plugins are not affected, because they live on this computer: in the official Space you can still change models and install Plugins, and a Plugin its roles name works once installed. You just cannot add a Plugin to another role there.
+Plugins and this computer's models are not affected, because they live on this computer: in the official Space you can still install Plugins and change this computer's main model and slots, and a Plugin its roles name works once installed. You just cannot add a Plugin to another role there.
 
 So work in a copy of your own. A new install of The One starts in one, called **My Space**. If you upgraded from an earlier version and are still in the official Space, these places copy it:
 

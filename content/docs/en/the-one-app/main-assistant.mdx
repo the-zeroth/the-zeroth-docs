@@ -11,7 +11,7 @@ Every Space has its own main assistant: **Conversation** in the sidebar, **Main 
 
 The assistant belongs to its Space. When you switch Space at the top of the sidebar, you switch to that Space's assistant, its matters, what waits for you and its weekly report. If Agents are still at work, The One asks first, because switching stops them (**Stop and switch**).
 
-The assistant is an Agent like the others. Its role, `main-assistant`, is under **Teams and tools › Roles**. It binds no slot: it works with your main model, at the main model's thinking depth (**Settings › Models and sign-in › Models**), unless you bind that role to a slot or give it a model of its own in a Space of yours. Its conversation lives on the home page, not in All runs.
+The assistant is an Agent like the others. Its role, `main-assistant`, is under **Teams and tools › Roles**. It binds no slot: it works with the main model, at the main model's thinking depth (**Settings › Models and sign-in › Models**; the Space's main model where the Space names one this computer can run), unless you bind that role to a slot or give it a model of its own in a Space of yours. Its conversation lives on the home page, not in All runs.
 
 Coming from 0.4 and wondering where your earlier sessions went? See the [0.5.0 release notes](../start/release-notes/0-5-0).
 
@@ -144,7 +144,7 @@ Two seconds of the greeting on screen, with the window in front, or **Got it**, 
 - Attach images or files with the paperclip (**Add image or file**), by dropping them on the conversation or by pasting. Images are compressed to fit 5 MB; other files can be up to 10 MB.
 - **Templates** inserts a request template from your Space for you to fill in, such as **Implement a feature**, **Diagnose and fix a problem** or **Review and verify work**.
 - While the overview is not open beside the conversation, **What it can do** sits beside **Templates**: it lists the kinds of work you can hand over, a line goes into the box when you pick it, and **All groups** opens Teams and tools.
-- The button beside **Send** shows the main model and its thinking depth. Open it to change the depth, or to run the main model on a model that a slot or a saved configuration uses; **Manage models** opens the full model settings. See [Models](./capabilities/models).
+- The button beside **Send** shows the main model and its thinking depth. Open it to change the depth, or to run the main model on a model that a slot or a saved configuration uses; **Manage models** opens the full model settings. Where the Space names a main model this computer can run, the button shows and changes the Space's main model, which cannot be changed in the read-only official Space. See [Models](./capabilities/models).
 
 Your own words show as your messages, including what you send from your phone (marked **From your phone**). The assistant's replies show in full; what it did on the way folds into one line of plain words that opens into one line per step. When it asks you something, the question is marked **Waiting for your answer**, and **Reply to this** makes what you send next the answer. A line above the first message of each day names the day: **Today** or **Yesterday** with its date, and the date alone for earlier days.
 

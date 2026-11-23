@@ -1,0 +1,26 @@
+---
+title: The One 0.5.4 Release Notes
+description: 0.5.4 lets a Space name the models it was tuned for, which run wherever this computer serves them, and no longer pairs a browser extension for a Plugin.
+---
+
+These notes cover The One 0.5.4 on macOS and Windows. It follows 0.5.3. There is no Linux server release this time; the [server](../linux-server) stays at 0.5.2.
+
+## A Space's models
+
+- A Space can name the models it was tuned for: the main model, and for each slot a model and thinking depth of its own. The Space keeps only the models' names and depths, such as `openai/gpt-6.2-sol`; connections and keys stay on each computer. The names go with a copy of the Space, and official updates bring them too. See [Models](../../the-one-app/capabilities/models#a-space-names-its-models).
+- A model the Space names runs on this computer when a connection here serves it: first the connection the Space names, then the official connection (members only), then the connection this computer's main model uses, a direct connection of the model's provider, and last any other OpenRouter connection; a custom service is used only when the Space names it. When none serves it, this computer's own model settings run.
+- The official Space names GPT-6.2 Sol: the main model at **Medium** depth, and the five slots following it at the depths they ship with. On a member's computer it runs on the official connection; otherwise on a ChatGPT sign-in, OpenAI or OpenRouter connection of this computer that serves it. Copies that follow official updates, such as **My Space**, carry the same file; one made by an earlier version receives it at the first start after the upgrade. So in those Spaces, as long as this computer can run GPT-6.2 Sol, the models you chose for this computer's main model and slots run elsewhere; to change them there, change the Space's models.
+- **Settings › Models and sign-in › Models** now starts with **This Space’s models**: the main model and the five slots, each with the model and depth the Space names and the connection it runs on here, or a note that this computer's model runs instead. Below, **This computer’s models** holds the main model, slots and saved configurations as before, used where the Space names no model or this computer cannot run it.
+- In a Space you can edit, **Change** changes the Space's models; each change is in the Space's change history and can be undone. **Stop naming models for this Space and use this computer’s** removes the Space's models file. The official Space is read-only, with **Duplicate to edit** above its models.
+- The model button by the main assistant's composer shows the main model that runs: the Space's where it names one, and changing the depth or the model there changes the Space's; in the official Space it cannot be changed. When the main assistant or the Definitions studio changes the main model or a slot, it changes the active Space's models too.
+
+## Browser
+
+- The app no longer pairs a browser extension for a Plugin, and no Plugin drives your browser through a paired extension; the **Browser extension requirements** section of a Plugin's details is gone. Agents use the web through the app's own browser, and from 0.5.0 the Computer Use Plugin is for desktop apps only. See [Browser](../../the-one-app/browser).
+- After an Agent's step in the browser, the browser waits at least a moment before it hands back the result: a request the step sets off a little later, such as a form submitted just after a click, belongs to that step, so the Agent sees the page after the submission and the submission is kept with that call.
+
+## Plugins
+
+- Hovering over **Plugins** in the Extension Center now reads “Install and manage the Plugins on this device, for every Space”. See [Plugins and Apps](../../the-one-app/capabilities/plugins).
+- On Windows, the Plugin library migration names the old folders it moved aside the same way as on other systems.
+- For Plugin developers: a component's `browser_extensions` is marked retired in the Plugin manifest format, and the app ignores it; Plugins that still declare it install and run as before.

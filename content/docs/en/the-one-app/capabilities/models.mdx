@@ -1,16 +1,18 @@
 ---
 title: Models
-description: One main model that the five slots (planning, coding, vision, writing, fast) run on at their own thinking depths, and how to give a slot a model of its own.
+description: The main model and the five slots that run on it at their own depths, and the models a Space names, which run wherever this computer serves them.
 ---
 
 Every Agent in The One gets its model from the one **main model** you choose. The main assistant works with it directly, and the five **slots** that ship with the product, **Planning**, **Coding**, **Vision**, **Writing** and **Fast**, run on it too, each at its own thinking depth. Choose a main model and every working group can work; to split the work further, give a slot a model of its own, from any provider.
 
 The roles in a working group bind a slot by the work they do, not a particular model. So a model changes in one place: give **Writing** another model, and every role bound to it moves with it from its next turn, without editing the roles one by one.
 
+A Space can decide the main model and the slots: it can name the models it was tuned for, and where this computer has a connection that serves them, that Space runs on them; where the Space names none, or this computer cannot run them, this computer's own settings run. The official Space names GPT-6.2 Sol. See [A Space names its models](#a-space-names-its-models) below.
+
 ## Where you set models
 
-- **Settings › Models and sign-in › Models.** The main model on top and the five slots below, each showing the model it runs on now and its depth; a slot that follows the main model says **Follows the main model**. **Teams and tools › Models** opens it too.
-- **The main assistant's composer.** The button at the bottom of the composer, beside **Send**, shows the main model and its thinking depth. Open it to change the main model's depth, or to run the main model on a model that a slot or a saved configuration uses, under **Run the main model on**; **Manage models** opens the same settings in a dialog.
+- **Settings › Models and sign-in › Models.** At the top, **This Space’s models** lists the main model and the five slots the active Space names, and where each runs on this computer (see [A Space names its models](#a-space-names-its-models)). Below it, **This computer’s models**: the main model on top and the five slots below, each showing its model and depth; a slot that follows the main model says **Follows the main model**. **Teams and tools › Models** opens it too.
+- **The main assistant's composer.** The button at the bottom of the composer, beside **Send**, shows the main model and its thinking depth. Open it to change the main model's depth, or to run the main model on a model that a slot or a saved configuration uses, under **Run the main model on**; **Manage models** opens the same settings in a dialog. Where the Space names a main model this computer can run, the button shows the Space's main model, and changing the depth or the model there changes the Space's; in the read-only official Space those choices are greyed out.
 - To choose a slot for a role or a template, use that role's or template's editor (see [which model wins](#which-model-wins) below).
 
 When there is no model connection yet, or no main model, a line at the top of the window says so and links to the fix: **Add a connection** or **Set the main model**.
@@ -18,6 +20,8 @@ When there is no model connection yet, or no main model, a line at the top of th
 ![Settings › Models and sign-in › Models: below the main model, the five slots with the model and depth each runs on; Planning is open and Writing runs on a model of its own](/docs-assets/images/0.5/en/models-main-model.png)
 
 ## The main model
+
+This section and the next are about the main model and the slots under **This computer’s models**; the ones a Space names are changed under **This Space’s models**, see [A Space names its models](#a-space-names-its-models).
 
 The main assistant, and every role bound to no slot and naming no model of its own, run on the main model; the slots follow it too, unless given a model of their own. Under **Main model**, choose:
 
@@ -59,6 +63,40 @@ The roles of the official Space already bind slots by the work they do: the Soft
 
 A Space you copied from the official Space before 0.5.2 is not updated. Its roles bound no slot then, so in the copy they all run on the main model (apart from any you bound to a preset yourself). To split them by capability, choose slots for them in the role editor, or ask the main assistant to.
 
+## A Space names its models
+
+A Space's roles, prompts and teams are tuned for a model, so a Space can name the models it uses: the main model, and for each slot a model and thinking depth of its own. They are written in `models/models.yaml` in the Space's folder, which holds only names and depths: a model is named with its provider, such as `openai/gpt-6.2-sol`, and a model chosen in Settings also notes the connection it was chosen on. Connections and keys are never written there; they stay on each computer. The file goes with a copy of the Space, and official updates bring it too.
+
+A model the Space names runs on this computer when a connection here serves it. Connections are tried in this order, and the first one that is usable (enabled, with a key or a sign-in, or a local service that needs neither) and serves the model is used:
+
+1. the connection the Space names;
+2. the official connection (members of The One only);
+3. the connection this computer's main model uses;
+4. a direct connection of the model's provider: OpenAI (an API key or a ChatGPT sign-in), Anthropic, Gemini or TypeSafe;
+5. any other OpenRouter connection.
+
+A custom service (a relay, Ollama, LM Studio and the like) is used only when the Space names it. When no connection serves it, this computer's own setting runs instead: when the Space's main model cannot run here, this computer's main model runs, and the same goes for each slot.
+
+A slot with no model of its own runs on the Space's main model, at the depth the Space gives it or else the depth it ships with; the model and depth chosen for that slot on this computer are not used then. When the Space's main model cannot run here, those slots run on this computer's too. A slot with a model of its own runs it if this computer can, whatever happens to the main model. Configurations saved by name, models chosen for a run and a model a role names for itself never look at the Space's models.
+
+A Space without the file, such as a new empty Space, or a copy made earlier that does not follow official updates, runs on this computer's models as before.
+
+### The official Space and its copies
+
+The official Space names the model it was tuned for, GPT-6.2 Sol: the main model `openai/gpt-6.2-sol` at **Medium** depth, and the five slots following it at the depths they ship with (**Planning** High, **Coding** Maximum, **Vision** Medium, **Writing** Medium, **Fast** Low). It names no connection, so on a member's computer it runs on the official connection; otherwise on a ChatGPT sign-in, OpenAI or OpenRouter connection of this computer that serves it; with none of them, the official Space runs on this computer's models.
+
+Copies that follow official updates, **My Space** included, carry the same file: a new install has it from the start, and a copy made by an earlier version receives it at the first start after the upgrade, like any other official update (see [Spaces](./definition-spaces#following-official-updates)). So in those Spaces, as long as this computer can run GPT-6.2 Sol, the models you chose for this computer's main model and slots run elsewhere; to run such a Space on other models, change the Space's models.
+
+### Seeing and changing them in Settings
+
+**This Space’s models**, at the top of **Settings › Models and sign-in › Models**, is about the active Space. The main model and the five slots each have a line with the model and thinking depth the Space names: one this computer runs says **Runs on “…”** below it, and a slot with no model of its own says **Follows the Space’s main model**; one this computer cannot run says that no connection here serves it and this computer's model runs, and that adding a model connection that serves it makes it run instead.
+
+- In a Space you can edit, choose **Change** on a line. For the main model, choose the model connection, the model and the thinking depth; for a slot, choose **Follows the Space’s main model** or **Use another model** (then a connection and a model), then a thinking depth, or **As shipped (…)** for the depth it ships with. Choose **Save**, and the Agents that follow it use it from their next turn.
+- Each change is one entry in the Space's change history and can be undone like any other change to its definitions.
+- When the Space names no models yet, this part says only that the Space names no models, so this computer's models run. **Choose models for this Space**, beside it, starts with the main model; the five slots then follow it at the depths they ship with.
+- **Stop naming models for this Space and use this computer’s**, at the bottom of this part, removes the Space's models file; from then on the Space runs on this computer's models.
+- The official Space is read-only: a notice above this part says its models are the official ones and that you copy it to change them, and **Duplicate to edit**, beside it, copies the official Space and switches to the copy. The copy carries the same models file, which you can change, and it still takes official updates.
+
 ## Which model wins
 
 An Agent runs on the first of these that applies, in this order:
@@ -69,9 +107,11 @@ An Agent runs on the first of these that applies, in this order:
 4. **The template.** The model menu in the toolbar of the template editor chooses a slot for the nodes in that template whose roles name no model of their own. See [Working-group templates](./working-group-templates).
 5. **The main model**, for everything else.
 
+Here, the main model and the slots are the Space's where the Space names them and this computer can run them, and this computer's otherwise.
+
 When the main model or a slot changes, the Agents that use it follow from their next turn, those already at work included.
 
-You can also ask the main assistant to do any of this: it can say what the main model and each slot run on, change the main model, give a slot another model or depth, bind a slot to a role or a template, or run one piece of work on another model.
+You can also ask the main assistant to do any of this: it can say what the main model and each slot run on, change the main model, give a slot another model or depth, bind a slot to a role or a template, or run one piece of work on another model. When it (or the Definitions studio's director) changes the main model or a slot, it changes the models the active Space names, and names them for a Space that names none yet; in the read-only official Space it cannot, so copy the Space first.
 
 ## Presets saved before
 
@@ -79,12 +119,12 @@ Before 0.5.2, models were named presets, one of which was the global default. Af
 
 After the upgrade, the official Space's roles run at their slots' depths, **Maximum** for **Coding** for example, instead of all at the depth of your old global default. If that is too slow or spends too much, turn the slot's depth down.
 
-## Model settings live on this computer
+## Model settings on this computer
 
-The main model, the slots and the saved configurations are stored on your computer, not in a Space (see [Spaces](./definition-spaces)). So even in the read-only official Space you can change them; only binding a different slot to one of the official Space's roles or templates needs a copy of the Space. See [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).
+**This computer’s models** (the main model, the slots and the saved configurations) are stored on your computer, not in a Space (see [Spaces](./definition-spaces)), so you can change them in any Space, the read-only official Space included. They run where the Space names no model, or names one this computer cannot run. Binding a different slot to one of the official Space's roles or templates, or changing the models the official Space names, needs a copy of the Space. See [What you can change in the official Space](../capabilities#what-you-can-change-in-the-official-space).
 
 Roles and templates bind slots by name, so a Space carried to another computer runs on that computer's main model and slots. Roles that name a saved configuration or a particular connection are different: a Space made on another computer can name a configuration or connection you do not have, and those roles cannot run until you change them. The **Check the Space's models** step of **Get started** lists them and offers **Use the main model**, and **New Graph** in All runs checks every role's model and connection before it starts a run.
 
-Without a main model, a slot with no model of its own has nothing to run on, and the roles bound to it fail with a message telling you to choose a main model first. Deleting a connection leaves the main model, the slots and the configurations that use it as they are: Agents on them cannot reach a model until you pick another connection for them.
+Without a main model on this computer, and with no main model of the Space that this computer can run, a slot with no model of its own has nothing to run on, and the roles bound to it fail with a message telling you to choose a main model first. Deleting a connection leaves this computer's main model, slots and configurations that use it as they are: Agents on them cannot reach a model until you pick another connection for them.
 
 For the providers you can connect and what the official model service costs, see [Models and Pricing](../../start/models-and-pricing).
